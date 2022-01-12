@@ -4,7 +4,7 @@
 
 
 @section('content')
-@section('title', "pro->name")
+@section('title', "GO-Print - About us")
 
 <section class="inner-section ad-details-part pt-3 mb-0 pb-0 ">
     <div class="container">

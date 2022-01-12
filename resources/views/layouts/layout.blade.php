@@ -34,11 +34,9 @@ if( request()->segment(1) != null){
     <link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/slick.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/bootstrap.min.css') }}">
 
-    @if (config('app.id') == "s")
-    <link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/main-s.css') }}">
-    @else
+ 
     <link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/main.css') }}">
-    @endif
+
 
 
     <link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/index.css') }}">
@@ -104,13 +102,13 @@ $key_word = trim($_GET['search']);
                     @endauth
                     @guest
 
-                    <a href="/register" class="header-user border rounded  text-primary border-primary mr-3  login-btn">
-                        <span class="login-btn pr-3 pl-3 pt-2 pb-2 d-block">Register</span>
+                    <a href="/register" class="header-user border rounded  text-white border-white mr-3  login-btn">
+                        <span class="login-btn pr-3 pl-3 pt-2 pb-2 d-block text-white" style="color: white!important">Register</span>
                     </a>
 
                     <a href="/login"
-                        class="header-widget header-user border rounded text-primary border-primary login-btn login-btn"><span
-                            class="login-btn pr-2 pt-2 pb-2  ">Sign in</span></a>
+                        class="header-widget header-user border rounded text-white border-white login-btn login-btn"><span
+                            class="login-btn pr-2 pt-2 pb-2  " style="color: white!important">Sign in</span></a>
                     @endguest
 
                     <a href="<?= URL::asset('/post-ad') ?>" class="btn btn-inline post-btn"><i
@@ -214,8 +212,7 @@ $key_word = trim($_GET['search']);
                     </div>
                 </div>
                 <div class="sidebar-footer">
-                    <p>All Rights Reserved By <a href="javascript:;">JO-Trace</a></p>
-                    <p>Developed By <a href="javascript:;">M. Muhindo</a></p>
+                    <p>All Rights Reserved By <a href="javascript:;">GO-Print</a></p> 
                 </div>
             </div>
         </div>
@@ -306,7 +303,7 @@ if(!Request::ajax()){
     "dashboard" != request()->segment(1) &&
     "post-ad" != request()->segment(1)
     )
-    <footer class="footer-part pt-4">
+    <footer class="footer-part pt-4 border-top border-primary">
         <div class="container">
 
             <div class="row pb-2 pb-md-4">
@@ -315,7 +312,7 @@ if(!Request::ajax()){
                         <ul class="footer-widget">
                             <li>
                                 <i class="fas fa-dollar-sign"></i>
-                                <a class="text-white" href="/sell-fast">How to sell on
+                                <a class="text-dark" href="/sell-fast">How to sell on
                                     <?= config('app.domain') ?>
                                 </a>
                             </li>
@@ -328,7 +325,7 @@ if(!Request::ajax()){
                         <ul class="footer-widget">
                             <li>
                                 <i class="fas fa-info-circle"></i>
-                                <a class="text-white" href="<?= URL::asset('/about') ?>">About us</a>
+                                <a class="text-dark" href="<?= URL::asset('/about') ?>">About us</a>
                             </li>
                         </ul>
                     </div>
@@ -339,7 +336,7 @@ if(!Request::ajax()){
                         <ul class="footer-widget">
                             <li>
                                 <i class="fas fa-address-book"></i>
-                                <a class="text-white" href="<?= URL::asset('/contact') ?>">Contact us</a>
+                                <a class="text-dark" href="<?= URL::asset('/contact') ?>">Contact us</a>
                             </li>
                         </ul>
                     </div>
@@ -350,7 +347,7 @@ if(!Request::ajax()){
                         <ul class="footer-widget">
                             <li>
                                 <i class="fas fa-store"></i>
-                                <a class="text-white" href="<?= URL::asset('/about') ?>">Download our App on
+                                <a class="text-dark" href="<?= URL::asset('/about') ?>">Download our App on
                                     Playstore</a>
                             </li>
                         </ul>
@@ -362,9 +359,7 @@ if(!Request::ajax()){
         <div class="footer-end">
             <div class="container">
                 <div class="footer-end-content">
-                    <p>All Copyrights Reserved &copy; 2022 - Developed by <a href="<?= config('app.developer_link') ?>">
-                            <?= config('app.developer_name') ?>
-                        </a></p>
+                    <p>All Copyrights Reserved &copy; 2022 </p>
                     <ul class="footer-social">
                         <li><a href="<?= config('app.facebook') ?>"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="<?= config('app.twitter') ?>"><i class="fab fa-twitter"></i></a></li>

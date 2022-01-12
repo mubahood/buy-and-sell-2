@@ -264,7 +264,7 @@ $cities = City::all();
 
                     </div>
                     <div class="col-3   d-none d-md-block">
-                        <a href="https://api.whatsapp.com/send?phone=+905538651740&text=hi, i have contact you from jotrace.com\n\n" target="_blank"><img class="img-fluid" src="{{url("assets/images/ad-1.jpeg")}}" alt="{{ $item->name
+                        <a href="https://api.whatsapp.com/send?phone=+905538651740&text=hi, i have contact you from goprint.ug\n\n" target="_blank"><img class="img-fluid" src="{{url("assets/images/ad-1.jpeg")}}" alt="{{ $item->name
                         }}"></a>
                     </div>
 

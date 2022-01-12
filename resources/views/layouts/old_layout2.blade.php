@@ -313,7 +313,7 @@ $id = Auth::id();
                 </div>
                 <div class="sidebar-footer">
                     <p>All Rights Reserved By <a href="#">Classicads</a></p>
-                    <p>Developed By <a href="https://themeforest.net/user/mironcoder">Mironcoder</a></p>
+                    {{-- <p>Developed By <a href="https://themeforest.net/user/mironcoder">Mironcoder</a></p> --}}
                 </div>
             </div>
         </div>

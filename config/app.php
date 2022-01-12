@@ -2,10 +2,10 @@
 
 return [
 
-    'id' => env('id', 'j'),
+    'id' => env('id', 's'),
     'currency' => env('currency', 'USD'),
-    'domain' => env('domain', 'jotrace.com'),
-    'address' => env('address', '1420 West Jalkuri Fatullah, <span>Narayanganj, BD</span>'),
+    'domain' => env('domain', 'goprint.ug'),
+    'address' => env('address', 'Shop no. 123, <span>Nasser Road, Kampala, Uganda</span>'),
     'phone_1' => env('phone_1', '+256783204665'),
     'phone_2' => env('phone_2', '+256706638494'),
     'developer_name' => env('developer_name', 'N. Sumayya'),
@@ -27,7 +27,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Jotrace.com'),
+    'name' => env('APP_NAME', 'Goprint.ug'),
 
     /*
     |--------------------------------------------------------------------------

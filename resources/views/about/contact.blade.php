@@ -4,7 +4,7 @@
 
 
 @section('content')
-@section('title', "pro->name")
+@section('title', "GO-Print - Contact us")
 
 <section class="inner-section ad-details-part pt-3 mb-0 pb-0 ">
     <div class="container">
@@ -20,13 +20,13 @@
                     <p>You can also call or email us any time.</p>
                     <br>
                     <p>
-                        EMAIL: <a href="mailto:info@jotrace.com">info@jotrace.com</a>
+                        EMAIL: <a href="mailto:info@goprint.ug">info@goprint.ug</a>
                     </p>
                     <p>
-                        TEL: <a href="tel:+905538651740">+905538651740</a>
+                        TEL: <a href="tel:+256755906818">+256755906818</a>
                     </p>
                     <p>
-                        WHATSAPP: <a href="tel:+905538651740">+905538651740</a>
+                        WHATSAPP: <a href="tel:+256755906818">+256755906818</a>
                     </p>
                     <br>
                 </div>

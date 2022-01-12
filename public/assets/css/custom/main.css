@@ -11,12 +11,13 @@
     --orange: #e86121;
     --yellow: #ffab10;
     --text: #707676;
-    --dark: #0d0633;
+    --dark: #149777;
     --border: #e8e8e8;
     --heading: black;
-    --primary: #0044bb;
-    --primary-light: #75a7ff;
-    --primary-hover: #0022aa;
+    --primary: #149777;
+    --secondary: #C94C3A;
+    --primary-light: #75ebcd;
+    --primary-hover: #149777;
     --view: #8edb04;
     --click: #01cbd5;
     --rating: #e8ce00;
@@ -26,7 +27,7 @@
     --facebook: #3b5998;
     --linkedin: #0e76a8;
     --twitter: #00acee;
-    --primary-bshadow: 0px 15px 35px 0px rgba(0, 0, 0, 0.1);
+    --primary-bshadow: 0px 15px 35px 0px rgba(98, 146, 146, 0.1);
     --primary-tshadow: 2px 3px 8px rgba(0, 0, 0, 0.1)
 }
 
@@ -2937,7 +2938,7 @@ textarea.form-control {
 
 .header-widget i:hover {
     color: var(--white);
-    background: var(--primary);
+    background-color: var(--secondary);
     text-shadow: var(--primary-tshadow)
 }
 
@@ -2968,7 +2969,7 @@ textarea.form-control {
     line-height: 20px;
     border-radius: 50%;
     color: var(--white);
-    background: var(--primary);
+    background-color: var(--secondary);
     border: 2px solid var(--white);
     text-shadow: var(--primary-tshadow);
     box-shadow: var(--primary-bshadow);
@@ -2993,6 +2994,7 @@ textarea.form-control {
 }
 
 .post-btn {
+    background-color: var(--secondary);
     width: 180px;
     padding: 12px 0px;
     margin-left: 20px
@@ -4076,12 +4078,13 @@ textarea.form-control {
 }
 
 .footer-part {
-    background: #080229;
-    padding: 100px 0px 0px
+    background: #F3F6F5;
+    padding: 100px 0px 0px;
+ 
 }
 
 .footer-content h3 {
-    color: #bbbbbb;
+    color: black;
     font-weight: 500;
     padding-bottom: 15px;
     margin-bottom: 25px;
@@ -4129,7 +4132,7 @@ textarea.form-control {
 }
 
 .footer-widget li a {
-    color: var(--gray);
+    color: black;
     transition: all linear .3s;
     -webkit-transition: all linear .3s;
     -moz-transition: all linear .3s;
@@ -4138,7 +4141,7 @@ textarea.form-control {
 }
 
 .footer-widget li a:hover {
-    color: var(--chalk);
+    color:  black;
     text-decoration: underline
 }
 
@@ -4209,7 +4212,7 @@ textarea.form-control {
 }
 
 .footer-option button:hover {
-    color: var(--chalk);
+    color: var(--wh);
     border: 1px solid var(--chalk)
 }
 
@@ -4218,7 +4221,7 @@ textarea.form-control {
 }
 
 .footer-end {
-    background: #0d0633
+    background: var(--dark)
 }
 
 .footer-end-content {
@@ -4226,11 +4229,12 @@ textarea.form-control {
     display: flex;
     align-items: center;
     justify-content: center;
-    justify-content: space-between
+    justify-content: space-between;
+    color: var(--white)
 }
 
 .footer-end-content p a {
-    color: var(--primary)
+    color: var(--white)
 }
 
 .footer-end-content p a:hover {
@@ -4249,7 +4253,7 @@ textarea.form-control {
     line-height: 40px;
     text-align: center;
     border-radius: 50%;
-    color: var(--gray);
+    color: var(--white);
     transition: all linear .3s;
     -webkit-transition: all linear .3s;
     -moz-transition: all linear .3s;
@@ -4716,4 +4720,4 @@ textarea.form-control {
 
 .border-primary-dashed{
     border: 1px dashed var(--primary);
-}
+} 
