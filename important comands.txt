@@ -1,0 +1,1 @@
+git rm /config/app.php --cached
