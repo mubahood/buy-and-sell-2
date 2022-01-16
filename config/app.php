@@ -3,7 +3,7 @@
 return [
 
     'id' => env('id', 's'),
-    'currency' => env('currency', 'USD'),
+    'currency' => env('currency', 'UGX'),
     'domain' => env('domain', 'goprint.ug'),
     'address' => env('address', 'Shop no. 123, <span>Nasser Road, Kampala, Uganda</span>'),
     'phone_1' => env('phone_1', '+256783204665'),

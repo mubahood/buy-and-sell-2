@@ -106,14 +106,14 @@ $cities = City::all();
         background-color: white;
     }
 </style>
-<section class="inner-section ad-list-part mt-2 mt-md-3  mb-0 mb-md-3">
-    <div class="container">
+<section class="inner-section ad-list-part mt-0   mb-0 mb-md-3 ">
+    <div class="container ">
 
         <div class="row content-reverse">
             <div class="col-lg-4 col-xl-3 d-none d-md-block">
                 <div class="row">
-                    <div class="col-md-6 col-lg-12 ">
-                        <div class="product-widget pr-4">
+                    <div class="col-md-6 col-lg-12 pt-4">
+                        <div class="product-widget pr-4 ">
                             <h6 class="product-widget-title">Categories</h6>
                             <form action="{{ $this_url }}" class="product-widget-form">
                                 <ul class="product-widget-list ">
@@ -149,6 +149,9 @@ $cities = City::all();
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-12">
+
+                        
+
                         <div class="product-widget">
                             <h6 class="product-widget-title">Top cities</h6>
                             <form class="product-widget-form">
@@ -167,18 +170,42 @@ $cities = City::all();
                             </form>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-            <div class="col-lg-10 col-xl-9 ">
+            <div class="col-lg-10 col-xl-9">
                 <div class="row">
                     <div class="col-12 col-md-12  ">
- 
+                        <div class="bg-primary row pt-5 pb-5 d-md-none">
+                            <div class="col-12">
+                                <div class="header-search pl-3">
+                                    <input name="search" type="search" value="{{$key_word}}"
+                                        placeholder="Search, Whatever you need...">
+                                    <button type="submit" title="Search Submit "><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-lg-12  pt-4 pl-1">
+                                <div class="header-filter mt-0  m-0 mb-2 ">
+                                    <div class="filter-action">
+                                        <a href="{{ url('products') }}" title="Clear search"
+                                            class="{{ $product_tab }}">Product
+                                            List</a>
+                                        <a href="{{ url('suppliers') }}" class="{{ $supplier_tab }} ml-2">Supplier
+                                            List</a>
+                                    </div>
+                                    <div class="header-filter" style="margin-bottom: -7px">
+                                        {{ $search_title }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                             <div class="row ad-standard pl-3"> 
                             @if ($show_products)
                             @foreach ($products as $item)
-                            <div class="col-6 col-md-12 col-lg-12 col-xl-12 pl-0">
+                            <div class="col-6 col-md-4  pl-2 mt-3" style="padding-right: 1.8rem;">
                                 <x-product3 :item="$item" />
                             </div>
                             @endforeach

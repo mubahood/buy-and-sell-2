@@ -4728,3 +4728,10 @@ textarea.form-control {
 .product-title{
     size: .2rem;
 }
+.p-0{
+    padding: 0%!important;
+}
+.product-title{
+    height: 1rem;
+    overflow-x: hidden!important;
+}
