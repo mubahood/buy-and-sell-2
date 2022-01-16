@@ -6,7 +6,7 @@
         <div class="product-content pt-2"> 
             <h5 class="product-title"><a href="ad-details-left.html">{{$item->name}}</a></h5> 
             <div class="product-info">
-                <h5 class="product-price">$1590<span>/per week</span></h5>
+                <h5 class="product-price">UX1590<span>/per week</span></h5>
                 <div class="product-btn"><a href="compare.html" title="Compare" class="fas fa-compress"></a><button
                         type="button" title="Wishlist" class="far fa-heart"></button></div>
             </div>
