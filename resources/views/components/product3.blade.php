@@ -14,7 +14,7 @@
                         @if ($item->fixed_price)
                             Fixed
                         @else
-                            Negotiable
+                            Negotiable.
                         @endif</span></h5>
             </div>
         </div>
