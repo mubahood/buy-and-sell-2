@@ -1,5 +1,5 @@
 <div class="row mb-0 border-bottom pb-2 pt-3 product-card-1 standard pl-2 pr-2 ml-md-2 mr-md-2">
-    <div class="col-4">
+    <div class="col-12 col-md-4 bg-success p-0">
         <a href="<?= URL::asset('/') ?>{{$item->slug}}">
             <img class="img-fluid" src={{$item->get_thumbnail()}} alt="product">
         </a>

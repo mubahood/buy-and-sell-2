@@ -171,15 +171,17 @@ $cities = City::all();
 
                 </div>
             </div>
-            <div class="col-lg-10 col-xl-9 p-0">
-                <div class="row p-0 m-0">
-                    <div class="col-12 col-md-12  p-0 m-0">
-                        <div class="row mb-0 border-bottom pb-2 pt-3 product-card-1 standard pl-2 pr-2 ml-md-2 mr-md-2 p-0 m-0"  >
+            <div class="col-lg-10 col-xl-9 ">
+                <div class="row">
+                    <div class="col-12 col-md-12  ">
+ 
+                            <div class="row ad-standard pl-3"> 
                             @if ($show_products)
                             @foreach ($products as $item)
-                            
+                            <div class="col-6 col-md-12 col-lg-12 col-xl-12 pl-0">
                                 <x-product3 :item="$item" />
-                             @endforeach
+                            </div>
+                            @endforeach
                             @endif
 
                             @if (!$show_products)

@@ -3,4 +3,5 @@
 ./config/admin.php
 ./config/app.php
 /config/app.php
-/config/admin.php
+/config/admin.php 
+/public/

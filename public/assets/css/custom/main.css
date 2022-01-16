@@ -4721,6 +4721,10 @@ textarea.form-control {
 .border-primary-dashed{
     border: 1px dashed var(--primary);
 } 
-.p-0{ 
+/* .p-0{ 
     padding:0%!important;
+} */
+
+.product-title{
+    size: .2rem;
 }
