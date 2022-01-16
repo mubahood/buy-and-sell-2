@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', config('app.domain')  )
+@section('title', config('app.domain') )
 
 @section('sidebar')
 @parent
@@ -108,6 +108,7 @@ $cities = City::all();
 </style>
 <section class="inner-section ad-list-part mt-2 mt-md-3  mb-0 mb-md-3">
     <div class="container">
+
         <div class="row content-reverse">
             <div class="col-lg-4 col-xl-3 d-none d-md-block">
                 <div class="row">
@@ -128,8 +129,7 @@ $cities = City::all();
                                     continue;
                                     }
                                     @endphp
-                                    <li class="product-widget-dropitem active"><button type="button"
-                                            class="product-widget-link active">
+                                    <li class="product-widget-dropitem active"><button type="button" class="product-widget-link active">
                                             <img width="20" src="{{url("storage/".$item->image)}}" alt="{{ $item->name
                                             }}">
                                             {{ $item->name }}
@@ -137,8 +137,7 @@ $cities = City::all();
                                         <ul class="product-widget-dropdown" style="display: block;">
                                             @foreach ($item->sub_categories as $sub_item)
                                             <li>
-                                                <a class="  {{ (strtolower($sub_item->slug) == $seg) ? ' text-primary ' : ' text-secondary ' }} "
-                                                    href="{{ url($sub_item->slug) }}">{{ $sub_item->name }}
+                                                <a class="  {{ (strtolower($sub_item->slug) == $seg) ? ' text-primary ' : ' text-secondary ' }} " href="{{ url($sub_item->slug) }}">{{ $sub_item->name }}
                                                     <span class="text-dark">({{count($sub_item->products)}})</span></a>
                                             </li>
                                             @endforeach
@@ -159,13 +158,9 @@ $cities = City::all();
 
                                     <li class="product-widget-item ">
                                         <div class="product-widget-checkbox"><input readonly {{ (strtolower($item->name)
-                                            == $seg) ? ' checked ' : ' ' }}
-                                            type="checkbox" id="chcek9">
-                                        </div><a href="{{ url($item->name) }}"
-                                            class="product-widget-label {{ (strtolower($item->name) == $seg) ? ' text-primary ' : ' text-secondary ' }} "
-                                            for="chcek9"><span class="product-widget-text">{{$item->name.",
-                                                ".$item->country->name}}</span><span
-                                                class="product-widget-number">({{count($item->products)}})</span></a>
+                                            == $seg) ? ' checked ' : ' ' }} type="checkbox" id="chcek9">
+                                        </div><a href="{{ url($item->name) }}" class="product-widget-label {{ (strtolower($item->name) == $seg) ? ' text-primary ' : ' text-secondary ' }} " for="chcek9"><span class="product-widget-text">{{$item->name.",
+                                                ".$item->country->name}}</span><span class="product-widget-number">({{count($item->products)}})</span></a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -176,39 +171,15 @@ $cities = City::all();
 
                 </div>
             </div>
-            <div class="col-lg-10 col-xl-9">
-                <div class="row">
-                    <div class="col-12 col-md-9 ">
-
-                        <div class="row ">
-                            <div class="col-lg-12  pt-0 pl-1">
-                                <div class="header-filter mt-0  m-0 mb-2 ">
-                                    <div class="filter-action">
-                                        <a href="{{ url('products') }}" title="Clear search"
-                                            class="{{ $product_tab }}">Product
-                                            List</a>
-                                        <a href="{{ url('suppliers') }}" class="{{ $supplier_tab }} ml-2">Supplier
-                                            List</a>
-                                    </div>
-                                    <div class="header-filter" style="margin-bottom: -7px">
-                                        {{ $search_title }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="row ad-standard ">
-
-
-
+            <div class="col-lg-10 col-xl-9 p-0">
+                <div class="row p-0 m-0">
+                    <div class="col-12 col-md-12  p-0 m-0">
+                        <div class="row mb-0 border-bottom pb-2 pt-3 product-card-1 standard pl-2 pr-2 ml-md-2 mr-md-2 p-0 m-0"  >
                             @if ($show_products)
                             @foreach ($products as $item)
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                <x-product2 :item="$item" />
-                            </div>
-                            @endforeach
+                            
+                                <x-product3 :item="$item" />
+                             @endforeach
                             @endif
 
                             @if (!$show_products)
@@ -263,10 +234,7 @@ $cities = City::all();
                         </div>
 
                     </div>
-                    <div class="col-3   d-none d-md-block">
-                        <a href="https://api.whatsapp.com/send?phone=+905538651740&text=hi, i have contact you from goprint.ug\n\n" target="_blank"><img class="img-fluid" src="{{url("assets/images/ad-1.jpeg")}}" alt="{{ $item->name
-                        }}"></a>
-                    </div>
+                     
 
                 </div>
             </div>
