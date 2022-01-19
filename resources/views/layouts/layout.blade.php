@@ -70,7 +70,10 @@ $key_word = trim($_GET['search']);
 
 <body>
     @if ("login" != request()->segment(1))
-    @if ("register" != request()->segment(1))
+    @if (
+        "register" != request()->segment(1) &&
+        "password-reset" != request()->segment(1) 
+    )
     <header class="header-part">
         <div class="container">
             <div class="header-content">

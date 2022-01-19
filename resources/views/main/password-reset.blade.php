@@ -18,51 +18,34 @@
                             alt="logo"></a><a href="{{ url('') }}"><i class="fas fa-home"></i></a></div>
                 <div class="user-form-category-btn">
                     <ul class="nav nav-tabs">
-                        <li><a href="#register-tab" class="nav-link active" data-toggle="tab">sign in</a></li>
+                        <li><a href="#register-tab" class="nav-link active" data-toggle="tab">Password Reset</a></li>
                     </ul>
                 </div>
                 <div class="tab-pane active" id="register-tab">
                     <div class="user-form-title">
-                        <h2>Login</h2>
-                        <p>Provide your credintials to login.</p>
+                        <h2>Password Reset</h2>
+                        <p>Provide your existing account's email address to where we should send your reset password link.</p>
                     </div>
 
 
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('password-reset') }}">
                         @csrf
 
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group"><input type="text" value="{{ old('phone_number') }}"
-                                        class="form-control" placeholder="Phone number" name="phone_number"><small
-                                        class="form-alert">Please follow this example
-                                        -
-                                        +90XXXXXXXXX</small>
-                                    @error('phone_number')
+                                <div class="form-group"><input type="email" value="{{ old('email') }}"
+                                        class="form-control" required placeholder="Enter your email address" name="email">
+                                    @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
 
                                 </div>
                             </div>
-                            <div class="col-12 pb-0 pb-0">
-                                <div class="form-group"><input type="password" class="form-control"
-                                        placeholder="Password" name="password"><button class="form-icon"><i
-                                            class="eye fas fa-eye"></i></button><small class="form-alert">Password must
-                                        be more than 6 characters</small>
-                                    @error('password')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-
-                                </div>
-                            </div>
-
-                            <span class="ml-md-3 mt-0 pt-0 mb-4">
-                                Did you forget your password? <a href="{{ route('password-reset') }}">Reset Password</a>
-                            </span>
-
+                             
+ 
                             <div class="col-12">
                                 <div class="form-group"><button type="submit" class="btn btn-inline"><i
-                                            class="fas fa-user-check"></i><span>Login</span></button></div>
+                                            class="fas fa-user-check"></i><span>SUBMIT</span></button></div>
                             </div>
                         </div>
                     </form>
