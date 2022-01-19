@@ -33,11 +33,8 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group"><input type="text" value="{{ old('phone_number') }}"
-                                        class="form-control" placeholder="Phone number" name="phone_number"><small
-                                        class="form-alert">Please follow this example
-                                        -
-                                        +90XXXXXXXXX</small>
+                                <div class="form-group"><input type="email" value="{{ old('phone_number') }}"
+                                        class="form-control" required placeholder="Email address" name="phone_number">
                                     @error('phone_number')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

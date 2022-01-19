@@ -69,6 +69,35 @@ class MainController extends Controller
     public function password_reset(Request  $request)
     {
 
+        if (
+            isset($_POST['key']) && 
+            isset($_POST['new_password'])  
+            ) {
+            $k = trim($_POST['key']);
+            $new_password = trim($_POST['new_password']);
+            if(strlen($k)>2){
+                $u = User::where('remember_token', $k)->first();
+                if($u!=null){
+                    $hash = password_hash($new_password,PASSWORD_DEFAULT);
+                    $u->password = $hash;
+                    $u->save();
+                    
+                    $_u['email'] = $u->email;
+                    $_u['password'] = $new_password;
+
+                    if (Auth::attempt($_u, true)) { 
+                        header("Location: ".url("dashboard"));
+                        die();
+                    } else {
+                        $errors['password'] = "Failed to log you in.";
+                        return redirect('login')
+                            ->withErrors($errors)
+                            ->withInput();
+                    }
+                }
+            }
+        }
+
         if (isset($_POST['email'])) {
             $email_address = trim($_POST['email']);
             $u = User::where("email", $email_address)->first();
@@ -101,13 +130,13 @@ class MainController extends Controller
                          'X-Mailer: PHP/' . phpversion(); 
 
             if (mail($email_address, "GO-PRINT PASSWORD RESET", $message, $headers)) {
+                return redirect('password-reset?success=success');
+                die();
                 dd("SUCCESS");
             } else {
-                dd("FAILED");
+                dd("FAILED to send email. Please try again.");
             }
 
-            dd($u);
-            dd("TIME TO GO WITH ==> " . $email_address);
 
             // /dd(password_hash("269435158522",PASSWORD_DEFAULT));
 
@@ -183,11 +212,6 @@ class MainController extends Controller
                     ->withErrors($errors)
                     ->withInput();
             }
-
-            $validated = $request->validate([
-                'phone_number' => 'required|max:15|min:10',
-                'password' => 'required|max:100|min:6',
-            ]);
 
 
             $u['name'] = "";
