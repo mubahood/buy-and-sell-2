@@ -93,11 +93,14 @@ class MainController extends Controller
             $url = url('reset-passwrd?key=' . $u->remember_token);
 
             // the message
-            $msg = "Hello,\nPlease click on link below to reset your password.\n\n{$url}";
-            $msg = wordwrap($msg, 70);
-            $headers = "From: mubs0x@gmail.com" . "\r\n";
+            $message = "Hello,\nPlease click on link below to reset your password.\n\n{$url}";
+            $message = wordwrap($message, 70); 
+              
+            $headers = 'From: mubs0x@gmail.com'       . "\r\n" .
+                         'Reply-To: mubs0x@gmail.com' . "\r\n" .
+                         'X-Mailer: PHP/' . phpversion(); 
 
-            if (mail($email_address, "GO-PRINT PASSWORD RESET", $msg, $headers)) {
+            if (mail($email_address, "GO-PRINT PASSWORD RESET", $message, $headers)) {
                 dd("SUCCESS");
             } else {
                 dd("FAILED");
