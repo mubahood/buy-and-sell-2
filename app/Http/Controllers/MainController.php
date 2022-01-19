@@ -90,14 +90,14 @@ class MainController extends Controller
             $faker = \Faker\Factory::create();
             $u->remember_token = $faker->regexify('[A-Za-z0-9]{50}');
             $u->save();
-            $url = url('reset-passwrd?key=' . $u->remember_token);
+            $url = url('password-reset?key=' . $u->remember_token);
 
             // the message
             $message = "Hello,\nPlease click on link below to reset your password.\n\n{$url}";
             $message = wordwrap($message, 70); 
               
-            $headers = 'From: mubs0x@gmail.com'       . "\r\n" .
-                         'Reply-To: mubs0x@gmail.com' . "\r\n" .
+            $headers = 'From: info@goprint.ug'       . "\r\n" .
+                         'Reply-To: info@goprint.ug' . "\r\n" .
                          'X-Mailer: PHP/' . phpversion(); 
 
             if (mail($email_address, "GO-PRINT PASSWORD RESET", $message, $headers)) {
