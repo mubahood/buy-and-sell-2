@@ -4,7 +4,7 @@
 
 
 @section('content')
-@section('title', "pro->name")
+@section('title', 'pro->name')
 
 <section class="inner-section ad-details-part pt-3 mb-0 pb-0 ">
     <div class="container">
@@ -65,8 +65,8 @@
                     </div>
 
                     <h1 class="text-center h2">Sell fast on @php
-                        echo config('app.name')
-                        @endphp</h1>
+                        echo config('app.name');
+                    @endphp</h1>
                     <p class="text-center">Below are some tips on how to post ads that
                         attract a lot of buyer interest.</p>
                     <p class="text-center"><a href="/rules">See our ad posting rules</a></p>
@@ -91,10 +91,12 @@
                                 <div class="col-md-9 pl-2">
                                     <h2 class="h6">Pick the right price</h2>
                                     <div>
-                                        <p class="sub--2zajV">Everything sells if the price is right! Browse similar ads
+                                        <p class="sub--2zajV">Everything sells if the price is right! Browse similar
+                                            ads
                                             on @php
-                                            echo config('app.name')
-                                            @endphp and choose a competitive price. In general, the lower the price,
+                                                echo config('app.name');
+                                            @endphp and choose a competitive price. In general, the lower
+                                            the price,
                                             the higher is the demand. If you are willing to negotiate, be sure to select
                                             the Negotiable option while posting the ad.</p>
                                     </div>
@@ -130,7 +132,8 @@
                                 <div class="col-md-9 pl-2">
                                     <h2 class="h6">Apply Ad Promotions!</h2>
                                     <div>
-                                        <p class="sub--2zajV">Now that you have created a great ad, it's time to show it
+                                        <p class="sub--2zajV">Now that you have created a great ad, it's time to
+                                            show it
                                             off! Apply Ad Promotions to get up to 10 times more views and interested
                                             buyers for your ad. The higher the demand, the better your chances of
                                             selling fast for the price that you want.</p>
@@ -167,7 +170,8 @@
                                 <div class="col-md-9 pl-2">
                                     <h2 class="h6">Add as much detail as you can</h2>
                                     <div>
-                                        <p class="sub--2zajV">Ads with clear details get more views! Include keywords
+                                        <p class="sub--2zajV">Ads with clear details get more views! Include
+                                            keywords
                                             and
                                             information that buyers will be interested in. Remember to be honest while
                                             providing these details.</p>
@@ -203,10 +207,10 @@
                                 <div class="col-md-9 pl-2">
                                     <h2 class="h6">Add as much detail as you can</h2>
                                     <div>
-                                        <p class="sub--2zajV">Ads with clear details get more views! Include keywords
-                                            and
-                                            information that buyers will be interested in. Remember to be honest while
-                                            providing these details.</p>
+                                        <p class="sub--2zajV">Now that you have created a great ad, it's time to
+                                            show it off! Apply Ad Promotions to get up to 10 times more views and
+                                            interested buyers for your ad. The higher the demand, the better your
+                                            chances of selling fast for the price that you want.</p>
                                     </div>
                                 </div>
                             </div>

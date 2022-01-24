@@ -315,7 +315,7 @@ if(!Request::ajax()){
                         <ul class="footer-widget">
                             <li>
                                 <i class="fas fa-dollar-sign"></i>
-                                <a class="text-dark" href="/sell-fast">How to sell on
+                                <a class="text-dark" href="{{ url('sell-fast') }}">How to sell on
                                     <?= config('app.domain') ?>
                                 </a>
                             </li>

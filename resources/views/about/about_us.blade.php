@@ -30,7 +30,7 @@
                     </p>
                     <br>
                     <p>
-                        It takes you less than 2 minutes to post an ad on config('app.name'). You can sign up for a free account
+                        It takes you less than 2 minutes to post an ad on {{ config('app.name') }}. You can sign up for a free account
                         and post ads easily every time.
                     </p>
                     <br>
@@ -39,7 +39,7 @@
                         echo config('app.name')
                         @endphp has the widest selection of popular second hand items all over Uganda, which
                         makes it easy to find exactly what you are looking for. So if you're looking for a car, mobile
-                        phone, house, computer or maybe a pet, you will find the best deal on config('app.name').
+                        phone, house, computer or maybe a pet, you will find the best deal on {{ config('app.name') }}.
                     </p>
                     <br>
                     <p class="text-left">
