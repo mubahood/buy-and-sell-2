@@ -34,6 +34,7 @@
                         and post ads easily every time.
                     </p>
                     <br>
+                    
                     <p>
                         @php
                         echo config('app.name')
