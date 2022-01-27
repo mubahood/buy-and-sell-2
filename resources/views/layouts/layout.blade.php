@@ -105,16 +105,16 @@ $key_word = trim($_GET['search']);
                     @endauth
                     @guest
 
-                    <a href="/register" class="header-user border rounded  text-white border-white mr-3  login-btn">
+                    <a href="{{ url("/register") }}" class="header-user border rounded  text-white border-white mr-3  login-btn">
                         <span class="login-btn pr-3 pl-3 pt-2 pb-2 d-block text-white" style="color: white!important">Register</span>
                     </a>
 
-                    <a href="/login"
+                    <a href="{{ url("/login") }}"
                         class="header-widget header-user border rounded text-white border-white login-btn login-btn"><span
                             class="login-btn pr-2 pt-2 pb-2  " style="color: white!important">Sign in</span></a>
                     @endguest
 
-                    <a href="<?= URL::asset('/post-ad') ?>" class="btn btn-inline post-btn"><i
+                    <a href="<?= url('/post-ad') ?>" class="btn btn-inline post-btn"><i
                             class="fas fa-plus-circle"></i><span>post ad</span></a>
                 </div>
             </div>

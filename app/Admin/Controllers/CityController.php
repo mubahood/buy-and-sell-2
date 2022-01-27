@@ -15,7 +15,7 @@ class CityController extends AdminController
      *
      * @var string
      */
-    protected $title = 'City';
+    protected $title = 'Areas';
 
     /**
      * Make a grid builder.

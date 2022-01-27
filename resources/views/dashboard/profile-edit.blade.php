@@ -53,7 +53,7 @@ if ($user_id < 0) { die('User not found.'); } $prof=Profile::where("user_id",$us
                         <input type="text" name="user_id" id="user_id" value="{{ $user_id }}" hidden>
                         <div class="adpost-card">
                             <div class="adpost-title">
-                                <h3>Create agent account - profile</h3>
+                                <h3>Creating profile</h3>
                             </div>
 
                             <div class="row">
@@ -135,10 +135,10 @@ if ($user_id < 0) { die('User not found.'); } $prof=Profile::where("user_id",$us
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="form-label">Country</label>
+                                    <div class="form-group"><label class="form-label">City/Division</label>
                                         <select name="country_id" required class="form-control  custom-select"
                                             id="countries">
-                                            <option selected>Select Country</option>
+                                            <option selected>Select City/Division</option>
                                             @foreach (Country::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -149,10 +149,10 @@ if ($user_id < 0) { die('User not found.'); } $prof=Profile::where("user_id",$us
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"><label for="city_id" class="form-label">City</label>
+                                    <div class="form-group"><label for="city_id" class="form-label">Area</label>
                                         <select name="city_id" class="form-control  custom-select" required
                                             id="city_id">
-                                            <option selected>Select city</option>
+                                            <option selected>Select Area</option>
                                             @foreach ($cities as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach

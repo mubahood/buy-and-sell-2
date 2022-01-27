@@ -33,7 +33,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group"><input type="email" value="{{ old('phone_number') }}"
+                                <div class="form-group"><input  value="{{ old('phone_number') }}"
                                         class="form-control" required placeholder="Email address" name="phone_number">
                                     @error('phone_number')
                                         <div class="alert alert-danger">{{ $message }}</div>

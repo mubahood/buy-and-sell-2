@@ -20,13 +20,13 @@
                     <p>You can also call or email us any time.</p>
                     <br>
                     <p>
-                        EMAIL: <a href="mailto:info@goprint.ug">info@goprint.ug</a>
+                        <i class="fas fa-envelope-open-text"></i> EMAIL: <a href="mailto:info@goprint.ug">info@goprint.ug</a>
                     </p>
                     <p>
-                        TEL: <a href="tel:+256755906818">+256755906818</a>
+                        <i class="fas fa-phone"></i> TEL: <a href="tel:+256755906818">+256755906818</a>
                     </p>
                     <p>
-                        WHATSAPP: <a href="tel:+256755906818">+256755906818</a>
+                        <i class="fas fa-whatsapp-square"></i> WHATSAPP: <a href="https://api.whatsapp.com/send?phone=+905538651740&text=hi,%20i%20have%20contact%20you%20from%20jotrace.com\n\n:+256755906818">+256 755 906818</a>
                     </p>
                     <br>
                 </div>
