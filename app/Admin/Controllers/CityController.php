@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Admin\Controllers;
-
-use App\models\City;
+ 
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -24,18 +23,10 @@ class CityController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new City());
+        $grid = new Grid(new \App\Models\City());
 
         $grid->column('id', __('Id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('country_id', __('Country id'));
         $grid->column('name', __('Name'));
-        $grid->column('longitude', __('Longitude'));
-        $grid->column('latitude', __('Latitude'));
-        $grid->column('details', __('Details'));
-        $grid->column('image', __('Image'));
-        $grid->column('listed', __('Listed'));
 
         return $grid;
     }
@@ -48,7 +39,7 @@ class CityController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(City::findOrFail($id));
+        $show = new Show(\App\Models\City::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('created_at', __('Created at'));
@@ -71,7 +62,7 @@ class CityController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new City());
+        $form = new Form(new \App\Models\City());
 
         $form->number('country_id', __('Country id'));
         $form->text('name', __('Name'));
