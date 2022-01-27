@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Admin\Controllers;
- 
-use App\models\Country;
+  
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -20,11 +19,12 @@ class CountryController extends AdminController
     /**
      * Make a grid builder.
      *
+     * \Faker\Factory::create();
      * @return Grid
      */
     protected function grid()
     {
-        $grid = new Grid(new Country());
+        $grid = new Grid(new \App\Models\Country );
 
         $grid->column('id', __('Id'));
         $grid->column('created_at', __('Created at'));
@@ -48,7 +48,7 @@ class CountryController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Country::findOrFail($id));
+        $show = new Show(\App\Models\Country::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('created_at', __('Created at'));
@@ -71,7 +71,7 @@ class CountryController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Country());
+        $form = new Form(new \App\Models\Country());
 
         $form->text('name', __('Name'));
         $form->text('longitude', __('Longitude'));
