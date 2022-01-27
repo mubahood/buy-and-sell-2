@@ -119,7 +119,7 @@ $message_link = "/messages/".$chat_thred;
                 <ul class="ad-details-specific">
                     <li>
                         <h6>Price:</h6>
-                        <p>${{ number_format($pro->price) }}
+                        <p>UGX {{ number_format($pro->price) }}
                             @if ($pro->fixed_price)
                             <small><i>Fixed price</i></small>
                             @else
