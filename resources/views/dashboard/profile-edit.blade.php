@@ -168,7 +168,7 @@ if ($user_id < 0) { die('User not found.'); } $prof=Profile::where("user_id",$us
                                 <div class="col-md-12">
                                     <div class="form-group">
 
-                                        {{ Form::label('location', 'Agent\'s address',['class' => "form-label",
+                                        {{ Form::label('location', 'Street/Biulding address',['class' => "form-label",
                                         'required' => 'required']) }}
                                         {{ Form::text('location', null,['class' => "form-control"]) }}
 
