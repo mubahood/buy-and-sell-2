@@ -130,7 +130,7 @@ $cities = City::all();
                                     }
                                     @endphp
                                     <li class="product-widget-dropitem active"><button type="button" class="product-widget-link active">
-                                            <img width="20" src="{{url("storage/".$item->image)}}" alt="{{ $item->name
+                                            <img width="20" src="{{url("".$item->image)}}" alt="{{ $item->name
                                             }}">
                                             {{ $item->name }}
                                         </button>
