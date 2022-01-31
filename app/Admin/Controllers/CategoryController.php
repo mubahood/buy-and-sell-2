@@ -44,7 +44,7 @@ class CategoryController extends AdminController
         })->sortable();
 
         $grid->image()->display(function ($src) {
-            $src =  URL::asset('storage') . "/" . $src;
+            $src =  URL::asset($src);
             return '<img width="20" src="' . $src . '" alt="' . $src . '">';
         });
 
