@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ApiProductsController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;//new staff
 
 
 Route::get('products', [ApiProductsController::class, 'index'] );
