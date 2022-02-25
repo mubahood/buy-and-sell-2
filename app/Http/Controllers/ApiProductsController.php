@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ApiProductsController
     
     public function banners(Request $request)
     {
-        $items = Product::paginate(100)->withQueryString()->items();
+        $items = Banner::paginate(100)->withQueryString()->items();
         return $items;
     }
 }
