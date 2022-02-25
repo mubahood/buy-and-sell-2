@@ -9,5 +9,5 @@ Route::get('products', [ApiProductsController::class, 'index'] );
 Route::get('banners', [ApiProductsController::class, 'banners'] );
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return $request->user();//simple love
 });  
