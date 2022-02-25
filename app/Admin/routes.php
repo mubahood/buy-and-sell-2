@@ -21,4 +21,5 @@ Route::group([
     $router->resource('countries', CountryController::class);
     $router->resource('cities', CityController::class);
     $router->resource('profiles', ProfileController::class);
+    $router->resource('banners', BannerlController::class);
 });
