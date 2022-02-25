@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Banner;
+use App\Models\Category;
+use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -29,8 +31,8 @@ class BannerlController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('section', __('Section'));
         $grid->column('position', __('Position'));
-        $grid->column('name', __('Title'));
-        $grid->column('sub_title', __('Sub title'));
+        $grid->column('name', __('Title'))->editable();
+        $grid->column('sub_title', __('Sub title'))->editable();
         $grid->column('type', __('Type'));
         $grid->column('category_id', __('Category id'));
         $grid->column('product_id', __('Product id'));
@@ -73,15 +75,29 @@ class BannerlController extends AdminController
     {
         $form = new Form(new Banner());
 
-        $form->text('section', __('Section'));
-        $form->text('position', __('Position'));
-        $form->text('name', __('Name'));
-        $form->text('sub_title', __('Sub title'));
-        $form->text('type', __('Type'));
-        $form->text('category_id', __('Category id'));
-        $form->text('product_id', __('Product id'));
-        $form->image('image', __('Image'));
-        $form->text('clicks', __('Clicks'));
+        $form->select('section', __('Section'))->options([
+            'Section #1' => 'Section #1',
+            'Section #2' => 'Section #2',
+            'Section #3' => 'Section #3',
+            'Section #4' => 'Section #4',
+        ])->required();
+        $form->text('position', __('Position'))->required();
+        $form->text('name', __('title'))->required();
+        $form->text('sub_title', __('Sub title'))->required();
+
+        $form->radio('type', __('Banner Type'))->options([
+            'Category' => 'Category',
+            'Product' => 'Product',
+        ])
+            ->when("Category", function ($form) {
+                $form->select('category_id', 'Select category')->options(Category::all()->pluck('name', 'id'))->default(0);
+            })
+            ->required()
+            ->when("Product", function ($form) {
+                $form->select('product_id', 'Select product')->options(Product::all()->pluck('name', 'id'))->default(0);
+            })
+            ->required();
+        $form->image('image', __('Image'))->required();
 
         return $form;
     }
