@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use phpDocumentor\Reflection\Types\This;
 use Psy\CodeCleaner\ValidConstructorPass;
 
 use function PHPUnit\Framework\fileExists;
@@ -13,6 +15,51 @@ use function PHPUnit\Framework\fileExists;
 class Product extends Model
 {
     use HasFactory;
+
+    public function getCityIdAttribute($value)
+    {
+        $city_id = (int)($value);
+
+        $city = City::find($city_id);
+        if($city == null){
+            return "-";
+        }
+        return $city->name;
+    }
+
+    public function getSubCategoryIdAttribute($value)
+    {
+        $id = (int)($value);
+
+        $cat = Category::find($id);
+        if($cat == null){
+            return "-";
+        }
+        return $cat->name;
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+ 
+
+    public function getQuantityAttribute($value)
+    {
+        return (int)($value);
+    }
+
+    public function getFixedPriceAttribute($value)
+    {
+        if ($value == null) {
+            return false;
+        }
+        if ($value == false) {
+            return false;
+        }
+        return true;
+    }
+
 
     public static function boot()
     {
@@ -127,5 +174,6 @@ class Product extends Model
         'status',
         'attributes',
         'images',
+        'city',
     ];
 }
