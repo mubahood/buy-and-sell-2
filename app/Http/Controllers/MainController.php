@@ -242,6 +242,9 @@ class MainController extends Controller
             $pro = new Profile();
             $pro->status = 0;
             $pro->user_id = $users->id;
+            $pro->save();
+
+                
             $credentials['email'] = $u['email'];
             $credentials['password'] = $request->input("password");
 
