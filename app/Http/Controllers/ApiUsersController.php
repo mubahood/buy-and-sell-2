@@ -30,7 +30,8 @@ class ApiUsersController
         ) {
             return Utils::response([
                 'status' => 0,
-                'message' => "You must provide Name, email and password."
+                'message' => "You must provide Name, email and password. {$request->name}",
+                'data' => $request
             ]);
         }
 
