@@ -49,11 +49,12 @@ class ApiUsersController
 
         $u['password'] = Hash::make($request->input("password"));
         $user = Administrator::create($u);
+        $_user = Administrator::find($user->id);
 
         return Utils::response([
             'status' => 1,
             'message' => "You must provide Name, email and password.",
-            'data' => $user
+            'data' => $_user
         ]); 
 
     }
