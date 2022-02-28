@@ -17,6 +17,23 @@ use function PHPUnit\Framework\fileExists;
 
 class Utils
 {
+    public static function response($data = [])
+    {
+        $resp['status'] = "1";
+        $resp['message'] = "Success";
+        $resp['data'] = null;
+        if (isset($data['status'])) {
+            $resp['status'] = $data['status']."";
+        }
+        if (isset($data['message'])) {
+            $resp['message'] = $data['message'];
+        }
+        if (isset($data['data'])) {
+            $resp['data'] = $data['data'];
+        }
+        return $resp;
+    }
+    
     public static function tell_status($status)
     {
         if (!$status)

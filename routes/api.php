@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\ApiProductsController;
+use App\Http\Controllers\ApiUsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;//new staff
 
 
 Route::get('products', [ApiProductsController::class, 'index'] );
 Route::get('banners', [ApiProductsController::class, 'banners'] );
+Route::get('users', [ApiUsersController::class, 'users'] );
+Route::post('users', [ApiUsersController::class, 'create_account'] );
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();//simple love
