@@ -28,9 +28,8 @@ class ProductController extends AdminController
      */
     protected function grid()
     {
-
-        /*
-
+        
+/*
         for ($j=0; $j < 1000; $j++) { 
             $cats = [];
             $users = [];

@@ -133,7 +133,7 @@ $message_link = "/messages/".$chat_thred;
                     </li>
                     <li>
                         <h6>location:</h6>
-                        <p>{{ $pro->country->name }}, {{ $pro->city->name }}</p>
+
                     </li>
                     @foreach ($attributes as $item)
                     @if ($item->type == "text" || $item->type == "textarea")
@@ -295,7 +295,7 @@ $message_link = "/messages/".$chat_thred;
                         <h4>Contact this Number</h4><button class="fas fa-times" data-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <h3 class="modal-number">{{$pro->user->profile->phone_number}} </h3>
+                        <h3 class="modal-number">{{$pro->user->phone_number}} </h3>
                     </div>
                 </div>
             </div>
@@ -315,8 +315,8 @@ $message_link = "/messages/".$chat_thred;
                     $profile_pic = "assets/images/avatar/03.jpg";
                     if($pro->user!= null){
                     if($pro->user->profile != null){
-                    if($pro->user->profile->profile_photo != null){
-                    $imgs = json_decode($pro->user->profile->profile_photo);
+                    if($pro->user->profile_photo != null){
+                    $imgs = json_decode($pro->user->profile_photo);
                     if($imgs->src){
                     $profile_pic = Utils::get_file_url($imgs->src);
                     }
@@ -326,15 +326,15 @@ $message_link = "/messages/".$chat_thred;
 
                     @endphp
                     <div class="col-2">
-                        <a href="/{{$pro->user->profile->username}}" class="author-img active">
+                        <a href="/{{$pro->user->username}}" class="author-img active">
                             <img height="50" width="50" class="rounded-circle" src="{{ $profile_pic }}"
                                 alt="avatar"></a>
                     </div>
                     <div class="col">
                         <div class="author-meta">
-                            <h4 class="p-0 m-0"><a class="title-1" href="/{{$pro->user->profile->username}}">
-                                    {{$pro->user->profile->first_name}}
-                                    {{$pro->user->profile->last_name}}
+                            <h4 class="p-0 m-0"><a class="title-1" href="/{{$pro->user->username}}">
+                                    {{$pro->user->first_name}}
+                                    {{$pro->user->last_name}}
                                 </a></h4>
                             <h5 class="subtitle-1 p-0 m-0">joined: {{$pro->user->created_at->diffForHumans()}}</h5>
                         </div>
@@ -368,12 +368,12 @@ $message_link = "/messages/".$chat_thred;
                         <button data-toggle="modal" data-target="#number"
                             class="common-card number p-2 pl-4 pr-4 bg-white border border-primary text-primary">
                             <h4 class="text-primary">
-                                ({{ Str::substr($pro->user->profile->phone_number,0,4) }}) Call Now
+                                ({{ Str::substr($pro->user->phone_number,0,4) }}) Call Now
                             </h4><i class="fas text-primary fa-phone"></i>
                         </button>
                     </div>
                     <div class="col-12 ">
-                        <a href="/{{$pro->user->profile->username}}"
+                        <a href="/{{$pro->user->username}}"
                             class="common-card number p-2 pl-4 pr-4 bg-white  border-primary-dashed text-primary">
                             <h4 class="text-primary">
                                 Visit Shop

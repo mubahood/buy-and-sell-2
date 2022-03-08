@@ -10,7 +10,9 @@ class ApiProductsController
 {
     public function index(Request $request)
     {
-        $items = Product::paginate(10)->withQueryString()->items();
+        $per_page = (int) ($request->per_page ? $request->per_page:15);
+
+        $items = Product::paginate($per_page)->withQueryString()->items();
         return $items;
     }
     

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -101,7 +102,7 @@ class Product extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Administrator::class,'user_id');
     }
 
 
@@ -146,11 +147,7 @@ class Product extends Model
                 $thumb = json_decode($this->thumbnail);
                 if (isset($thumb->thumbnail)) {
 
-                    $thumb->thumbnail = str_replace("public/", "", $thumb->thumbnail);
-                    $thumb->thumbnail = str_replace("storage/", "", $thumb->thumbnail);
-                    $thumb->thumbnail = str_replace("/storage", "", $thumb->thumbnail);
-                    $thumb->thumbnail = str_replace("/", "", $thumb->thumbnail);
-                    $thumbnail = URL::asset('storage/' . $thumb->thumbnail);
+                    $thumbnail = url($thumb->thumbnail);
                 }
             }
         }
@@ -164,8 +161,8 @@ class Product extends Model
             if (strlen($this->images) > 3) {
                 $images_json = json_decode($this->images);
                 foreach ($images_json as $key => $img) {
-                    $img->src = URL::asset('storage/' . str_replace("public/", "", $img->src));
-                    $img->thumbnail = URL::asset('storage/' . str_replace("public/", "", $img->thumbnail));
+                    $img->src = url($img->src);
+                    $img->thumbnail = url( $img->thumbnail);
                     $images[] = $img;
                 }
             }
