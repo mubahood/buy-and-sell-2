@@ -16,6 +16,9 @@ class Product extends Model
 {
     use HasFactory;
 
+ 
+
+
     public function getCityIdAttribute($value)
     {
         $city_id = (int)($value);
@@ -64,6 +67,16 @@ class Product extends Model
     public static function boot()
     {
         parent::boot();
+
+        self::creating(function($p){
+            $p->slug = Utils::make_slug($p->name);
+            $p->status = 1;
+
+
+            return $p;
+        });
+     
+
 
         static::deleting(function ($model) {
 
