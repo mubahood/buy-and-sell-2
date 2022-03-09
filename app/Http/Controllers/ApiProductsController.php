@@ -30,7 +30,14 @@ class ApiProductsController
 
         $_items = [];
         foreach ($items as $key => $value) {
-            $value->attributes;
+            $_attributes = $value->attributes;
+            $attributes = [];
+            foreach ($_attributes as $_key => $_value) {
+                $attributes[] = json_encode($_value);
+            }
+            $value->attributes = null;
+            unset($value->attributes);
+            $value->attributes =  $attributes;
             $_items[] = $value;
         }
         
