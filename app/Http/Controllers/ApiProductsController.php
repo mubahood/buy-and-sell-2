@@ -27,6 +27,14 @@ class ApiProductsController
     {
         $per_page = (int) ($request->per_page ? $request->per_page:1000);   
         $items = Category::paginate($per_page)->withQueryString()->items();
+
+        $_items = [];
+        foreach ($items as $key => $value) {
+            $value->attributes;
+            $_items[] = $value;
+        }
+        
+
         return $items;
     }
 }
