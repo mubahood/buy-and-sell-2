@@ -17,6 +17,32 @@ use function PHPUnit\Framework\fileExists;
 
 class Utils
 {
+    public static function get_locations()
+    {
+        $locations = [];
+ 
+        $countries = Country::all();
+
+
+        foreach ($countries as $key => $value) {
+            $value->parent_id = 0;
+            $value->type = 'main_location';
+            $locations[] = $value;
+        }
+
+        $cities = City::all();
+
+
+        foreach ($cities as $key => $value) {
+            $value->parent_id = $value->country_id;
+            $value->type = 'sub_location';
+            $locations[] = $value;
+        }
+
+
+        return $locations;    
+	
+    }
     public static function response($data = [])
     {
         $resp['status'] = "1";

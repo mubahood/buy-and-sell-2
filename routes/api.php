@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;//new staff
 Route::get('products', [ApiProductsController::class, 'index'] );
 Route::get('banners', [ApiProductsController::class, 'banners'] );
 Route::get('categories', [ApiProductsController::class, 'categories'] );
+Route::get('locations', [ApiProductsController::class, 'locations'] );
 Route::get('users', [ApiUsersController::class, 'users'] );
 Route::post('users', [ApiUsersController::class, 'create_account'] );
 

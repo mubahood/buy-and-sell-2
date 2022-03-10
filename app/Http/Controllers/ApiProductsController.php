@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Utils;
 use Illuminate\Http\Request;
 
 class ApiProductsController 
@@ -21,6 +22,11 @@ class ApiProductsController
     {
         $items = Banner::paginate(100)->withQueryString()->items();
         return $items;
+    }
+    
+    public function locations(Request $request)
+    {
+        return Utils::get_locations();
     }
     
     public function categories(Request $request)
