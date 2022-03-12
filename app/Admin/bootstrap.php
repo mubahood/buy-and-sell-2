@@ -18,9 +18,14 @@
  *
  */
 
+use Encore\Admin\Facades\Admin;
+
 // use Encore\Admin\Facades\Admin;
 
 // Admin::css('/assets/css.css');
+
+Admin::disablePjax();
+
 
 
 Encore\Admin\Form::forget(['map', 'editor']);

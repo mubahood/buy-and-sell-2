@@ -84,7 +84,9 @@ class ProductController extends AdminController
         }*/
 
         $grid = new Grid(new Product());
-        $grid->column('id', __('Id'));
+
+        $grid->disableRowSelector();
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('created_at', __('Created at')); 
         $grid->column('name', __('Name')); 
         $grid->column('user_id', __('User id'));
