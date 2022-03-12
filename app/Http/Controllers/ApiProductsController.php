@@ -18,10 +18,21 @@ class ApiProductsController
 
     public function create(Request $request)
     {
-        $images = Utils::upload_images($_FILES['images']);
 
-        echo "<pre>";
-        print_r($images);
+
+        if(isset($_FILES['images'])){
+            if($_FILES['images']!=null){
+                if(count($_FILES['images']) > 0){
+
+                    print_r($_FILES['images']);
+                    die();
+                    
+                    $images = Utils::upload_images($_FILES['images']);
+                }
+            }
+        }
+
+
   
         die("Time to create");
     }
