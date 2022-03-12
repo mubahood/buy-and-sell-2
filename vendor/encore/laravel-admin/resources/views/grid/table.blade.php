@@ -16,38 +16,24 @@
             @if ($grid->showTools() || $grid->showExportBtn() || $grid->showCreateBtn())
                 <div class="box-header with-border">
                     <div class="pull-right">
-                        {{-- {!! $grid->renderColumnSelector() !!} --}}
                         {{-- {!! $grid->renderExportButton() !!} --}}
                         {!! $grid->renderCreateButton() !!}
                     </div>
-                    {{-- @if ($grid->showTools())
-                        <div class="pull-left">
+                    @if ($grid->showTools())
+                        {{-- <div class="pull-left">
                             {!! $grid->renderHeaderTools() !!}
-                        </div>
-                    @endif --}}
+                        </div> --}}
+                    @endif
                 </div>
             @endif
-
         </div> 
     </div> 
 </div> 
-<div class="">
-
-
-
-
-
-    {!! $grid->renderFilter() !!}
-
-    {!! $grid->renderHeader() !!}
-
-    <!-- /.box-header -->
-
-    <div class="card mb-8">
-        <div class="card-body pt-0 pb-0 pl-0 pr-0 pt-0">
+<div class=" ">
+    <div class="card mb-0 mt-0 ">
+        <div class="card-body pl-0  tab-pane fade show active pb-10" >
             <div class="table-responsive">
-                <table class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9 "
-                    id="{{ $grid->tableID }}">
+                <table class="table table-row-bordered align-middle gy-4 gs-9" id="{{ $grid->tableID }}">
                     <thead>
                         <tr>
                             @foreach ($grid->visibleColumns() as $column)
@@ -61,7 +47,7 @@
                         {!! $grid->renderQuickCreate() !!}
                     @endif
 
-                    <tbody>
+                    <tbody class="fw-bold text-gray-800">
 
                         @if ($grid->rows()->isEmpty() && $grid->showDefineEmptyPage())
                             @include('admin::grid.empty-grid')
@@ -81,15 +67,16 @@
                     {!! $grid->renderTotalRow() !!}
 
                 </table>
-
             </div>
 
-        </div>
-    </div>
-    {!! $grid->renderFooter() !!}
+            <div class="box-footer clearfix">
+                {!! $grid->paginator() !!}
+            </div>
 
-    <div class="box-footer clearfix">
-        {!! $grid->paginator() !!}
+            {!! $grid->renderFooter() !!}
+
+        </div>
+   
     </div>
-    <!-- /.box-body -->
+
 </div>

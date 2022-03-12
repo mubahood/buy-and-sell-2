@@ -16,19 +16,8 @@ class File extends Field
      *
      * @var array
      */
-    protected static $css = [
-        '/vendor/laravel-admin/bootstrap-fileinput/css/fileinput.min.css?v=4.5.2',
-    ];
-
-    /**
-     * Js.
-     *
-     * @var array
-     */
-    protected static $js = [
-        '/vendor/laravel-admin/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js',
-        '/vendor/laravel-admin/bootstrap-fileinput/js/fileinput.min.js?v=4.5.2',
-    ];
+ 
+ 
 
     /**
      * Create a new File instance.

@@ -3,16 +3,7 @@
 
 
 @section('head')
-
-<link rel="stylesheet" href="{{ url('vendor/laravel-admin/bootstrap-fileinput/css/fileinput.min.css?v=4.5.2') }}">
-{{--
-<link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/ad-post.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/bootstrap-icons.min.css') }} " />
-<link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/fileinput.css') }} " /> --}}
-{{--
-<link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/fontawesome.css') }} " /> --}}
-{{--
-<link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/theme.css') }} " /> --}}
+ 
 
 @endsection
 

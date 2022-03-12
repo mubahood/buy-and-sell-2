@@ -9,29 +9,13 @@
 
 
   
-     
-    <link rel="stylesheet"
-        href="http://127.0.0.1:8000/vendor/laravel-admin/bootstrap-fileinput/css/fileinput.min.css?v=4.5.2">
-    <link rel="stylesheet" href="http://127.0.0.1:8000/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://127.0.0.1:8000/vendor/laravel-admin/font-awesome/css/font-awesome.min.css">
-
-
-
-    <script src="http://127.0.0.1:8000/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+ 
+ 
 </head>
 
 <body>
 
-    {{--
-    <link rel="stylesheet" href="{{ url('vendor/laravel-admin/bootstrap-fileinput/css/fileinput.min.css?v=4.5.2') }}">
-    <script src="{{ url('vendor/laravel-admin/bootstrap-fileinput/js/fileinput.min.js?v=4.5.2') }} "
-        type="text/javascript">
-    </script>
-    <script src="{{ url('vendor/laravel-admin/AdminLTE/bootstrap/js/bootstrap.min.js') }} " type="text/javascript">
-    </script>
-    --}}
-
-
+ 
 
 
 

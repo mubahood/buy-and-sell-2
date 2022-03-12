@@ -423,23 +423,7 @@ if(!Request::ajax()){
 
     <script>
         $(document).ready(function () {
-            /*$('.loading').hide();
-
-            $(document).on('pjax:send', function() {
-                $('.loading').show()
-                $('#pjax-container,.footer-part').hide()
-            })
-
-            $(document).on('pjax:complete', function() {
-              $('.loading').hide()
-              $('#pjax-container,.footer-part').show() 
-            })
-
-            $.pjax.defaults.timeout = 5000;
-            $.pjax.defaults.maxCacheLength = 0;
-            $(document).pjax('a:not(a[target="_blank"])', {
-                container: '#pjax-container'
-            }); */
+            ('.loading').hide(); 
         });
     </script>
 
