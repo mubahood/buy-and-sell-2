@@ -24,9 +24,10 @@ class ApiProductsController
             if($_FILES['images']!=null){
                 if(count($_FILES['images']) > 0){
 
+                    echo "<pre>";
                     print_r($_FILES['images']);
                     die();
-                    
+
                     $images = Utils::upload_images($_FILES['images']);
                 }
             }
