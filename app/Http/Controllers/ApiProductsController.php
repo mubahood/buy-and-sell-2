@@ -13,19 +13,46 @@ class ApiProductsController
     public function upload(Request $request)
     {
         return view('dashboard.upload');
-        
     }
 
     public function create(Request $request)
     {
 
 
-        if(isset($_FILES)){
-            if($_FILES!=null){
-                if(count($_FILES) > 0){
+        $raw_images = [];
+        $images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
 
                     echo "<pre>";
-                    print_r($_FILES);
+                    print_r($images);
                     die();
 
                     $images = Utils::upload_images($_FILES['images']);
@@ -33,8 +60,56 @@ class ApiProductsController
             }
         }
 
+        /*
 
-  
+        [upload_image_1] => Array
+        I/flutter (15204):         (
+        I/flutter (15204):             [name] => image_picker6417507787507506668.jpg.txt
+        I/flutter (15204):             [type] => application/octet-stream
+        I/flutter (15204):             [tmp_name] => /tmp/phpNuV8Fd
+        I/flutter (15204):             [error] => 0
+        I/flutter (15204):             [size] => 199947
+        I/flutter (15204):         )
+
+
+
+                (
+            [name] => Array
+                (
+                    [0] => course (3).png
+                    [1] => course (2).png
+                )
+
+            [type] => Array
+                (
+                    [0] => image/png
+                    [1] => image/png
+                )
+
+            [tmp_name] => Array
+                (
+                    [0] => /tmp/phpIh5Bw2
+                    [1] => /tmp/phpfZvIeB
+                )
+
+            [error] => Array
+                (
+                    [0] => 0
+                    [1] => 0
+                )
+
+            [size] => Array
+                (
+                    [0] => 560335
+                    [1] => 200914
+                )
+
+        )
+
+
+        */
+
+
         die("Time to create");
     }
     public function index(Request $request)
