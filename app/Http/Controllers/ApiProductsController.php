@@ -18,7 +18,9 @@ class ApiProductsController
     public function create(Request $request)
     {
 
-
+        
+        print_r($_POST["Advert's_title"]);
+        die();
         $raw_images = [];
         $images = [];
         if (isset($_FILES)) {
@@ -52,7 +54,8 @@ class ApiProductsController
                     $images['images'] = $raw_images;
 
                     $uploaded_images = Utils::upload_images($images['images']);
- 
+
+                    echo "<pre>";
                     print_r($uploaded_images);
                     die();
 
