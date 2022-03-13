@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Http\Request;
@@ -18,11 +20,68 @@ class ApiProductsController
     public function create(Request $request)
     {
 
-        
-        print_r($_POST["Advert's_title"]);
-        die();
-        $raw_images = [];
+
+        if (!isset($_POST['user_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        $p['sub_category_id'] = 1;
+        $p['user_id'] = trim($_POST['user_id']);
+        $p['category_id'] = 1;
+        $p['price'] = 1;
+        $p['country_id'] = 1;
+        $p['quantity'] = 1;
+        $p['status'] = 1;
+        $p['fixed_price'] = true;
+        $p['city_id'] = 1;
+        $p['name'] = trim($_POST["Advert's_title"]);
+        $p['slug'] = trim($_POST["Advert's_title"]);
+        $p['price'] = trim($_POST["Product_price"]);
+        $p['description'] = trim($_POST["Product_description"]);
+        $p['attributes'] = "[]";
+
+
+
+
+        if (isset($_POST["Category"])) {
+            if (strlen($_POST["Category"]) > 2) {
+                $cat = Category::where('name', trim($_POST["Category"]))->first();
+                if ($cat != null) {
+                    $p['category_id'] = $cat->id;
+                }
+            }
+        }
+
+        if (isset($_POST["Sub_Category"])) {
+            if (strlen($_POST["Sub_Category"]) > 2) {
+                $cat = Category::where('name', trim($_POST["Sub_Category"]))->first();
+                if ($cat != null) {
+                    $p['sub_category_id'] = $cat->id;
+                }
+            }
+        }
+
+        if (isset($_POST["District"])) {
+            if (strlen($_POST["District"]) > 2) {
+                $cat = Country::where('name', trim($_POST["District"]))->first();
+                if ($cat != null) {
+                    $p['country_id'] = $cat->id;
+                }
+            }
+        }
+
+        if (isset($_POST["Sub_county"])) {
+            if (strlen($_POST["Sub_county"]) > 2) {
+                $cat = City::where('name', trim($_POST["Sub_county"]))->first();
+                if ($cat != null) {
+                    $p['city_id'] = $cat->id;
+                }
+            }
+        }
+
+
         $images = [];
+        $uploaded_images = [];
         if (isset($_FILES)) {
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
@@ -54,67 +113,22 @@ class ApiProductsController
                     $images['images'] = $raw_images;
 
                     $uploaded_images = Utils::upload_images($images['images']);
-
-                    echo "<pre>";
-                    print_r($uploaded_images);
-                    die();
-
-
+ 
                 }
             }
         }
 
-        /*
 
-        [upload_image_1] => Array
-        I/flutter (15204):         (
-        I/flutter (15204):             [name] => image_picker6417507787507506668.jpg.txt
-        I/flutter (15204):             [type] => application/octet-stream
-        I/flutter (15204):             [tmp_name] => /tmp/phpNuV8Fd
-        I/flutter (15204):             [error] => 0
-        I/flutter (15204):             [size] => 199947
-        I/flutter (15204):         )
+ 
+        if($uploaded_images!= null && count($uploaded_images)>0 ){
+            $p['thumbnail'] = json_encode($uploaded_images[0]);
+            $p['images'] = json_encode($uploaded_images);
+        }
 
 
-
-                (
-            [name] => Array
-                (
-                    [0] => course (3).png
-                    [1] => course (2).png
-                )
-
-            [type] => Array
-                (
-                    [0] => image/png
-                    [1] => image/png
-                )
-
-            [tmp_name] => Array
-                (
-                    [0] => /tmp/phpIh5Bw2
-                    [1] => /tmp/phpfZvIeB
-                )
-
-            [error] => Array
-                (
-                    [0] => 0
-                    [1] => 0
-                )
-
-            [size] => Array
-                (
-                    [0] => 560335
-                    [1] => 200914
-                )
-
-        )
-
-
-        */
-
-
-        die("Time to create");
+        $pro = Product::create($p);
+        return Utils::response(['message' => 'User ID is required.', 'status' => 1, 'data' => $pro]);
+ 
     }
     public function index(Request $request)
     {
