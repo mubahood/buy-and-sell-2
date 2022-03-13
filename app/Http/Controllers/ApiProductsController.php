@@ -51,11 +51,12 @@ class ApiProductsController
 
                     $images['images'] = $raw_images;
 
-                    echo "<pre>";
-                    print_r($images);
+                    $uploaded_images = Utils::upload_images($images['images']);
+ 
+                    print_r($uploaded_images);
                     die();
 
-                    $images = Utils::upload_images($_FILES['images']);
+
                 }
             }
         }
