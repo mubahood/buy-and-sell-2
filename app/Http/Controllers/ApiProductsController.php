@@ -127,7 +127,7 @@ class ApiProductsController
 
 
         $pro = Product::create($p);
-        return Utils::response(['message' => 'User ID is required.', 'status' => 1, 'data' => $pro]);
+        return Utils::response(['message' => 'Product uploaded successfully.', 'status' => 1, 'data' => $pro]);
  
     }
     public function index(Request $request)
