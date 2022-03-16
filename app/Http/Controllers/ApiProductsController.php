@@ -133,8 +133,14 @@ class ApiProductsController
     public function index(Request $request)
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
+        $user_id = (int) ($request->user_id ? $request->user_id : 0);
 
-        $items = Product::paginate($per_page)->withQueryString()->items();
+        if($user_id>0){
+            $items = Product::where('user_id',$user_id)->paginate($per_page)->withQueryString()->items();
+        }else{
+            $items = Product::paginate($per_page)->withQueryString()->items();
+        }
+
         return $items;
     }
 
