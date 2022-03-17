@@ -119,6 +119,9 @@ class ApiProductsController
         }
 
 
+
+        return $uploaded_images;
+
  
         if($uploaded_images!= null && count($uploaded_images)>0 ){
             $p['thumbnail'] = json_encode($uploaded_images[0]);
