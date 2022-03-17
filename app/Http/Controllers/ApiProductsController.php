@@ -120,7 +120,7 @@ class ApiProductsController
 
 
 
-        return $uploaded_images;
+        return $_FILES;
 
  
         if($uploaded_images!= null && count($uploaded_images)>0 ){
