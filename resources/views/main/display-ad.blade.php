@@ -1,10 +1,9 @@
 @php
-die("romina");
 use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Support\Str;
 
-
+die("romina");
 $slug = request()->segment(1);
 $pro = Product::where('slug', $slug)->firstOrFail();
 if($pro){
