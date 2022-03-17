@@ -20,7 +20,6 @@ class ApiProductsController
     public function create(Request $request)
     {
 
-        return $_FILES;
 
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
@@ -114,7 +113,6 @@ class ApiProductsController
                     $images['images'] = $raw_images;
 
                     $uploaded_images = Utils::upload_images($images['images']);
- 
                 }
             }
         }
@@ -122,9 +120,7 @@ class ApiProductsController
 
 
 
-
- 
-        if($uploaded_images!= null && count($uploaded_images)>0 ){
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
             $p['thumbnail'] = json_encode($uploaded_images[0]);
             $p['images'] = json_encode($uploaded_images);
         }
@@ -132,16 +128,15 @@ class ApiProductsController
 
         $pro = Product::create($p);
         return Utils::response(['message' => 'Product uploaded successfully.', 'status' => 1, 'data' => $pro]);
- 
     }
     public function index(Request $request)
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
 
-        if($user_id>0){
-            $items = Product::where('user_id',$user_id)->paginate($per_page)->withQueryString()->items();
-        }else{
+        if ($user_id > 0) {
+            $items = Product::where('user_id', $user_id)->paginate($per_page)->withQueryString()->items();
+        } else {
             $items = Product::paginate($per_page)->withQueryString()->items();
         }
 
