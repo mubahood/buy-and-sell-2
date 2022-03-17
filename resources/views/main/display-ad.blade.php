@@ -3,7 +3,7 @@ use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Support\Str;
 
-die("romina");
+
 $slug = request()->segment(1);
 $pro = Product::where('slug', $slug)->firstOrFail();
 if($pro){
@@ -48,6 +48,10 @@ $message_link = "/messages/".$chat_thred;
 {{--
 <link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/ad-details.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/simple-lightbox.css') }}"> --}}
+
+@php
+    die("romina11");
+@endphp
 
 
 <div class="container"> 
