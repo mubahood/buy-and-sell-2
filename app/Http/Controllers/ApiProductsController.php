@@ -20,6 +20,7 @@ class ApiProductsController
     public function create(Request $request)
     {
 
+        return $_FILES;
 
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
@@ -120,7 +121,7 @@ class ApiProductsController
 
 
 
-        return $_FILES;
+
 
  
         if($uploaded_images!= null && count($uploaded_images)>0 ){
