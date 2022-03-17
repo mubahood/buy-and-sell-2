@@ -108,7 +108,7 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(category::class, "category_id");
+        return $this->belongsTo(Category::class, "category_id");
     }
 
     public function country()
@@ -129,7 +129,7 @@ class Product extends Model
 
     public function sub_category()
     {
-        return $this->belongsTo(category::class, "sub_category_id");
+        return $this->belongsTo(Category::class, "sub_category_id");
     }
 
     public function get_name_short($min_length = 50)
