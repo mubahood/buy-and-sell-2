@@ -44,7 +44,7 @@ class ApiProductsController
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
                     foreach ($_FILES as $img) {
-                        die($img);
+                        return $img;
                         if (
                             (isset($img['name'])) &&
                             (isset($img['type'])) &&
