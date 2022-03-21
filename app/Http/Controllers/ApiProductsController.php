@@ -34,9 +34,7 @@ class ApiProductsController
         $p->views = 0;
         $p->comments = 0;
         $p->text = 0;
-         /*
-         thumnnail	images	audio			
-         */
+  
 
         $images = [];
         $uploaded_images = [];
@@ -83,8 +81,18 @@ class ApiProductsController
 
 
 
-        return $uploaded_images;
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $p->thumnnail = json_encode($uploaded_images[0]);
+            $p->images = json_encode($uploaded_images);
+        }
 
+        $p->audio = "";
+ 
+        if($p->save()){
+            return Utils::response(['message' => 'Post create successfully.', 'status' => 1, 'data' => $p]);
+        }else{
+            return Utils::response(['message' => 'Failed to create post. Please try again.', 'status' => 0, 'data' => $p]);
+        }
         return 'create_post';
     }
 
