@@ -6,6 +6,8 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Http\Request;
@@ -15,6 +17,27 @@ class ApiProductsController
     public function upload(Request $request)
     {
         return view('dashboard.upload');
+    }
+
+    public function create_post(Request $request)
+    {
+        if (!isset($_POST['user_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+        $p = new Post();
+        $p->administrator_id = ((int)($_POST['user_id']));
+        $p->posted_by = ((int)($_POST['user_id']));
+        $p->post_category_id = ((int)($_POST['post_category_id']));
+        if($p->post_category_id <1 ){
+            $p->post_category_id = 1;
+        }
+        $p->views = 0;
+        $p->comments = 0;
+        $p->text = 0;
+         /*
+         thumnnail	images	audio			
+         */
+        return 'create_post';
     }
 
     public function create(Request $request)
@@ -129,6 +152,17 @@ class ApiProductsController
         $pro = Product::create($p);
         return Utils::response(['message' => 'Product uploaded successfully.', 'status' => 1, 'data' => $pro]);
     }
+
+    
+    public function post_categories(Request $request)
+    {
+        $per_page = (int) ($request->per_page ? $request->per_page : 15);
+        $items = PostCategory::paginate($per_page)->withQueryString()->items();
+
+        return $items;
+    } 
+
+    
     public function index(Request $request)
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
@@ -140,6 +174,19 @@ class ApiProductsController
             $items = Product::paginate($per_page)->withQueryString()->items();
         }
 
+        return $items;
+    } 
+
+
+    public function posts(Request $request)
+    {
+        $per_page = (int) ($request->per_page ? $request->per_page : 15);
+        $user_id = (int) ($request->user_id ? $request->user_id : 0);
+        if ($user_id > 0) {
+            $items = Post::where('administrator_id', $user_id)->paginate($per_page)->withQueryString()->items();
+        } else {
+            $items = Post::paginate($per_page)->withQueryString()->items();
+        }
         return $items;
     }
 

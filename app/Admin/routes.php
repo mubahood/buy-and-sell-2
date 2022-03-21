@@ -22,4 +22,5 @@ Route::group([
     $router->resource('cities', CityController::class);
     $router->resource('profiles', ProfileController::class);
     $router->resource('banners', BannerlController::class);
+    $router->resource('post-categories', PostCategoryController::class);
 });

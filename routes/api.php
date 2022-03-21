@@ -13,7 +13,13 @@ Route::get('banners', [ApiProductsController::class, 'banners'] );
 Route::get('categories', [ApiProductsController::class, 'categories'] );
 Route::get('locations', [ApiProductsController::class, 'locations'] );
 Route::get('users', [ApiUsersController::class, 'users'] );
-Route::post('users', [ApiUsersController::class, 'create_account'] );
+Route::post('users', [ApiUsersController::class, 'create_account'] ); 
+
+
+Route::get('posts', [ApiProductsController::class, 'posts'] );
+Route::get('post-categories', [ApiProductsController::class, 'post_categories'] );
+Route::post('posts', [ApiProductsController::class, 'create_post'] );
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();//simple love
