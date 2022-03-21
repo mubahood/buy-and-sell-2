@@ -561,6 +561,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
     public static $classMap = array (
         'App\\Admin\\Controllers\\AttributeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AttributeController.php',
         'App\\Admin\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AuthController.php',
+        'App\\Admin\\Controllers\\BannerlController' => __DIR__ . '/../..' . '/app/Admin/Controllers/BannerlController.php',
         'App\\Admin\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Admin/Controllers/CategoryController.php',
         'App\\Admin\\Controllers\\CityController' => __DIR__ . '/../..' . '/app/Admin/Controllers/CityController.php',
         'App\\Admin\\Controllers\\CountryController' => __DIR__ . '/../..' . '/app/Admin/Controllers/CountryController.php',
@@ -572,6 +573,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ApiProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiProductsController.php',
+        'App\\Http\\Controllers\\ApiUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiUsersController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Dashboard' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard.php',
         'App\\Http\\Controllers\\MainController' => __DIR__ . '/../..' . '/app/Http/Controllers/MainController.php',
@@ -585,6 +587,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\Attribute' => __DIR__ . '/../..' . '/app/Models/Attribute.php',
+        'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Chat' => __DIR__ . '/../..' . '/app/Models/Chat.php',
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',

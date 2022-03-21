@@ -29,8 +29,9 @@ class ProductController extends AdminController
     protected function grid()
     {
         
-/*
-        for ($j=0; $j < 1000; $j++) { 
+ /*
+        Product::truncate();
+        for ($j=0; $j < 100; $j++) { 
             $cats = [];
             $users = [];
             $cities = [];
@@ -64,9 +65,10 @@ class ProductController extends AdminController
     
             for ($i=0; $i < 10; $i++) { 
                 $img = json_decode("{}");
-                $img->src = 'temp/full/'.rand(1,15).".jpeg";
+                //$img->src = 'temp/full/'.rand(1,29).".jpeg";
                 $img->user_id =  1;
-                $img->thumbnail = 'thumbnail/full/'.rand(1,200).".webp";
+                $img->thumbnail = 'thumbnail/full/'.rand(1,29).".jpg";
+                $img->src = $img->thumbnail;
                 $images [] = $img;
             }
             $p->images = json_encode($images);
@@ -80,8 +82,9 @@ class ProductController extends AdminController
             $p->attributes = json_encode($atts);
             $p->sub_category_id = json_encode($cat->id);
             $p->fixed_price = true;
+            $p->status = 0;
             $p->save();
-        }*/
+        } */
 
         $grid = new Grid(new Product());
 

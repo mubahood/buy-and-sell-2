@@ -28,7 +28,7 @@
             @endif
         </div> 
     </div> 
-</div> 
+</div>  
 <div class=" ">
     <div class="card mb-0 mt-0 ">
         <div class="card-body pl-0  tab-pane fade show active pb-10" >

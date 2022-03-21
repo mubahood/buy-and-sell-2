@@ -4,6 +4,7 @@
    
 
     <section class="content">
+        
 
         @include('admin::partials.alerts')
         @include('admin::partials.exception')

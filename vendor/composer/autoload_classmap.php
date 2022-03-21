@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Admin\\Controllers\\AttributeController' => $baseDir . '/app/Admin/Controllers/AttributeController.php',
     'App\\Admin\\Controllers\\AuthController' => $baseDir . '/app/Admin/Controllers/AuthController.php',
+    'App\\Admin\\Controllers\\BannerlController' => $baseDir . '/app/Admin/Controllers/BannerlController.php',
     'App\\Admin\\Controllers\\CategoryController' => $baseDir . '/app/Admin/Controllers/CategoryController.php',
     'App\\Admin\\Controllers\\CityController' => $baseDir . '/app/Admin/Controllers/CityController.php',
     'App\\Admin\\Controllers\\CountryController' => $baseDir . '/app/Admin/Controllers/CountryController.php',
@@ -19,6 +20,7 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\ApiProductsController' => $baseDir . '/app/Http/Controllers/ApiProductsController.php',
+    'App\\Http\\Controllers\\ApiUsersController' => $baseDir . '/app/Http/Controllers/ApiUsersController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Dashboard' => $baseDir . '/app/Http/Controllers/Dashboard.php',
     'App\\Http\\Controllers\\MainController' => $baseDir . '/app/Http/Controllers/MainController.php',
@@ -32,6 +34,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Attribute' => $baseDir . '/app/Models/Attribute.php',
+    'App\\Models\\Banner' => $baseDir . '/app/Models/Banner.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Chat' => $baseDir . '/app/Models/Chat.php',
     'App\\Models\\City' => $baseDir . '/app/Models/City.php',
