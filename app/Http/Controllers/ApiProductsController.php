@@ -44,7 +44,7 @@ class ApiProductsController
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
                     foreach ($_FILES as $img) {
-                        return $img;
+
                         if (
                             (isset($img['name'])) &&
                             (isset($img['type'])) &&
@@ -59,6 +59,15 @@ class ApiProductsController
                                 (strlen($img['size']) > 0) &&
                                 ($img['error'] == 0)
                             ) {
+                                
+                                $name = trim($img['name']);
+                                if(str_contains($name,'image_')){
+                                 die("containes");   
+                                }else{
+                                    die("not containes");   
+
+                                }
+
                                 $raw_images['name'][] = $img['name'];
                                 $raw_images['type'][] = 'image/png';
                                 $raw_images['tmp_name'][] = $img['tmp_name'];
