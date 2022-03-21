@@ -87,7 +87,8 @@ class ApiProductsController
         }
 
         $p->audio = "";
- 
+        
+        die("good to save");
         if($p->save()){
             return Utils::response(['message' => 'Post create successfully.', 'status' => 1, 'data' => $p]);
         }else{
