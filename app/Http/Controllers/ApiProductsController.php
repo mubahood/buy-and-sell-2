@@ -33,7 +33,7 @@ class ApiProductsController
         }
         $p->views = 0;
         $p->comments = 0;
-        $p->text = 0;
+        $p->text = $_POST['post_category_id'];
   
 
         $images = [];
@@ -87,7 +87,6 @@ class ApiProductsController
         }
 
         $p->audio = "";
-        die($p);
  
         if($p->save()){
             return Utils::response(['message' => 'Post create successfully.', 'status' => 1, 'data' => $p]);
