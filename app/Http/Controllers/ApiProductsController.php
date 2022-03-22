@@ -28,13 +28,13 @@ class ApiProductsController
         $p->administrator_id = ((int)($_POST['user_id']));
         $p->posted_by = ((int)($_POST['user_id']));
         $p->post_category_id = ((int)($_POST['post_category_id']));
-        if($p->post_category_id <1 ){
+        if ($p->post_category_id < 1) {
             $p->post_category_id = 1;
         }
         $p->views = 0;
         $p->comments = 0;
         $p->text = $_POST['text'];
-  
+
 
         $images = [];
         $uploaded_images = [];
@@ -57,17 +57,15 @@ class ApiProductsController
                                 (strlen($img['size']) > 0) &&
                                 ($img['error'] == 0)
                             ) {
-                                
+
                                 $name = trim($img['name']);
-                                if(str_contains($name,'image_')){
+                                if (str_contains($name, 'image_')) {
                                     $raw_images['name'][] = $img['name'];
                                     $raw_images['type'][] = 'image/png';
                                     $raw_images['tmp_name'][] = $img['tmp_name'];
                                     $raw_images['error'][] = $img['error'];
                                     $raw_images['size'][] = $img['size'];
-                                } 
-
-                                
+                                }
                             }
                         }
                     }
@@ -87,10 +85,10 @@ class ApiProductsController
         }
 
         $p->audio = "";
- 
-        if($p->save()){
+
+        if ($p->save()) {
             return Utils::response(['message' => 'Post create successfully.', 'status' => 1, 'data' => $p]);
-        }else{
+        } else {
             return Utils::response(['message' => 'Failed to create post. Please try again.', 'status' => 0, 'data' => $p]);
         }
         return 'create_post';
@@ -209,16 +207,16 @@ class ApiProductsController
         return Utils::response(['message' => 'Product uploaded successfully.', 'status' => 1, 'data' => $pro]);
     }
 
-    
+
     public function post_categories(Request $request)
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
         $items = PostCategory::paginate($per_page)->withQueryString()->items();
 
         return $items;
-    } 
+    }
 
-    
+
     public function index(Request $request)
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
@@ -231,11 +229,26 @@ class ApiProductsController
         }
 
         return $items;
-    } 
+    }
 
 
     public function posts(Request $request)
     {
+        // $p = new Post();
+        // $p->administrator_id = 1;
+        // $p->post_category_id = 1;
+        // $p->posted_by = 1;
+        // $p->views = 5;
+        // $p->comments = 2;
+        // $p->text = "Another Simple post title";
+        // $p->thumnnail = "";
+        // $p->images = "";
+        // $p->audio = "";
+        // $p->save();
+
+        // die();
+
+
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
         if ($user_id > 0) {
