@@ -33,7 +33,7 @@ class ApiProductsController
         }
         $p->views = 0;
         $p->comments = 0;
-        $p->text = $_POST['text'];
+        $p->text = "text";
   
 
         $images = [];
