@@ -32,9 +32,10 @@ class ApiProductsController
             $p->post_category_id = 1;
         }
         $p->views = 0;
+        $p->images = "";
+        $p->audio = "";
         $p->comments = 0;
         $p->text = $_POST['text'];
-
 
         $images = [];
         $uploaded_images = [];
@@ -95,7 +96,7 @@ class ApiProductsController
             $p->images = json_encode($uploaded_images);
         }
 
-        $p->audio = "";
+
 
         if ($p->save()) {
             return Utils::response(['message' => 'Post create successfully.', 'status' => 1, 'data' => $p]);
