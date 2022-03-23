@@ -80,9 +80,10 @@ class ApiProductsController
                         }
                     }
 
-                    $images['images'] = $raw_images;
-
-                    $uploaded_images = Utils::upload_images($images['images']);
+                    if(isset($raw_images)){
+                        $images['images'] = $raw_images;
+                        $uploaded_images = Utils::upload_images($images['images']);
+                    }
                 }
             }
         }
