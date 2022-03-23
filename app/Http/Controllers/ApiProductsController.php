@@ -49,9 +49,7 @@ class ApiProductsController
                             };
                         }
                     }
-
-                    die($p->audio);
-
+                    
                     foreach ($_FILES as $img) {
 
                         if (
