@@ -41,6 +41,15 @@ class ApiProductsController
         if (isset($_FILES)) {
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
+
+                    if(isset($_FILES['audio'])){
+                        if($_FILES['audio']!=null){
+                            print_r($_FILES['audio']);
+                        }
+                    }
+
+                    die();
+
                     foreach ($_FILES as $img) {
 
                         if (

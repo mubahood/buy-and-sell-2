@@ -26,4 +26,15 @@ class Post extends Model
     }
     
     
+    public function getPostCategoryIdAttribute($v)
+    {
+
+        $cat = PostCategory::find($v);
+        if($cat!=null){
+            return $cat->name;
+        }
+        return env('APP_NAME');
+    }
+    
+    
 }
