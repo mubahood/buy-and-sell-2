@@ -48,6 +48,7 @@ class ApiProductsController
                                 $p->audio = Utils::upload_file($_FILES['audio']);
                             };
                         }
+                        unset($_FILES['audio']);
                     }
                     
                     foreach ($_FILES as $img) {
