@@ -167,6 +167,16 @@ class Utils
 
         return $slug;
     }
+    
+    
+    public static function upload_file($file){
+        if(!isset($file['tmp_name'])){
+            return "";
+        }
+
+        $path = Storage::putFile('/public/storage', $file['tmp_name']); 
+        return $path;
+    }
     public static function upload_images($files)
     {
 

@@ -44,11 +44,13 @@ class ApiProductsController
 
                     if(isset($_FILES['audio'])){
                         if($_FILES['audio']!=null){
-                            print_r($_FILES['audio']);
+                            if(isset($_FILES['audio']['tmp_name'])){
+                                $p->audio = Utils::upload_file($_FILES['audio']);
+                            };
                         }
                     }
 
-                    die();
+                    die($p->audio);
 
                     foreach ($_FILES as $img) {
 
