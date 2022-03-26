@@ -55,8 +55,9 @@ class ApiChatsController
     public function index(Request $request)
     {
         $per_page = 1000;
-        $thread = (int) ($request->thread ? $request->thread : 0);
-        if ($thread < 1) {
+        $thread = (String) ($request->thread ? $request->thread : "");
+        $thread = trim($thread);
+        if (strlen($thread) < 1) {
             return [];
         }
         $_items = Chat::where('thread', $thread)->paginate($per_page)->withQueryString()->items();
