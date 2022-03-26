@@ -17,7 +17,7 @@ Route::get('users', [ApiUsersController::class, 'users']);
 Route::post('users', [ApiUsersController::class, 'create_account']);
 Route::get('chats', [ApiChatsController::class, 'index']);
 Route::post('chats', [ApiChatsController::class, 'send_message']); 
-Route::get('threads', [ApiChatsController::class, 'threads']); 
+Route::post('threads', [ApiChatsController::class, 'threads']); 
 
 
 Route::get('posts', [ApiProductsController::class, 'posts']);
