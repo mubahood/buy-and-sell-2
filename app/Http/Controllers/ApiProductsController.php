@@ -229,6 +229,15 @@ class ApiProductsController
     }
 
 
+    public function post_comments(Request $request)
+    {
+        $post_id = (int) ($request->per_page ? $request->post_id : 0);
+        $items = PostComment::paginate($per_page)->withQueryString()->items();
+
+        return $items;
+    }
+
+
     public function index(Request $request)
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 15);
