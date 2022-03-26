@@ -17,30 +17,7 @@ use Illuminate\Support\Facades\DB;
 class ApiChatsController
 {
 
-    /*
-
-    id	
-    created_at	
-    updated_at	
-    body	
-    sender	
-    receiver	
-    product_id	
-    thread	
-    received	
-    seen	
-    type	
-    receiver_pic	
-    sender_pic	
-    receiver_name	
-    sender_name	
-    contact	
-    gps	
-    file	
-    image
-    audio	
-
-*/
+ 
 
     public function send_message(Request $request)
     {

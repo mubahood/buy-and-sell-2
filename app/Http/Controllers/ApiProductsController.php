@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\PostComment;
 use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Http\Request;
@@ -231,6 +232,7 @@ class ApiProductsController
 
     public function post_comments(Request $request)
     {
+        $per_page = 1000;
         $post_id = (int) ($request->per_page ? $request->post_id : 0);
         $items = PostComment::paginate($per_page)->withQueryString()->items();
 
