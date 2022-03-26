@@ -59,7 +59,13 @@ class ApiChatsController
         if ($thread < 1) {
             return [];
         }
-        $items = Chat::where('thread', $thread)->paginate($per_page)->withQueryString()->items();
+        $_items = Chat::where('thread', $thread)->paginate($per_page)->withQueryString()->items();
+
+        $items = [];
+        foreach ($_items as $key => $value) {
+            $value->file = "0";
+            $items[] = $value;
+        }
         return $items;
     }
 
@@ -83,6 +89,7 @@ class ApiChatsController
                 ->where('sender', '!=', $user_id)
                 ->where('seen', false)
                 ->count();
+            $c->file = "1";
             $chats[] = $c;
         }
         return $chats;
