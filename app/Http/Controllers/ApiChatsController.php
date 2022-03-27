@@ -82,8 +82,8 @@ class ApiChatsController
 
 
             if($value->receiver == $user_id){
-                $value->seen = true;
-                $value->received = true;
+                $value->seen = 1;
+                $value->received = 1;
                 $value->update();
             }
 
