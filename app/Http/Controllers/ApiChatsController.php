@@ -56,16 +56,44 @@ class ApiChatsController
     {
         $per_page = 1000;
         $thread = (String) ($request->thread ? $request->thread : "");
+        $user_id = (String) ($request->user_id ? $request->user_id : "");
+        $unread = (String) ($request->user_id ? $request->unread : "");
         $thread = trim($thread);
+        $unread = trim($unread);
+        $received = false;
+        if($unread != "1"){
+            $received = false;
+        }else{
+            $received = true;
+        }
+        $user_id = trim($user_id);
         if (strlen($thread) < 1) {
             return [];
         }
-        $_items = Chat::where('thread', $thread)->paginate($per_page)->withQueryString()->items();
+        $_items = Chat::where([
+            'thread' => $thread,
+            'received' => $received,
+        ])->paginate($per_page)->withQueryString()->items();
 
         $items = [];
         foreach ($_items as $key => $value) {
             $value->file = "0";
-            $items[] = $value;
+            
+
+
+            if($value->receiver == $user_id){
+                $value->seen = true;
+                $value->received = true;
+                $value->update();
+            }
+
+            if($received == 1){
+                if($value->receiver == $user_id){
+                    $items[] = $value;
+                }
+            }else{
+                $items[] = $value;
+            }
         }
         return $items;
     }
