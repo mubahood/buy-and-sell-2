@@ -20,6 +20,7 @@ Route::post('threads', [ApiChatsController::class, 'threads']);
 
 Route::get('users', [ApiUsersController::class, 'users']);
 Route::post('users-update', [ApiUsersController::class, 'update']);
+Route::post('users-login', [ApiUsersController::class, 'login']);
 
 Route::get('posts', [ApiProductsController::class, 'posts']);
 Route::get('post-categories', [ApiProductsController::class, 'post_categories']);
