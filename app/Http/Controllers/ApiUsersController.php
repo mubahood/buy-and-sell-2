@@ -55,7 +55,7 @@ class ApiUsersController
                 'message' => "Wrong password.",
                 'data' => null
             ]);
-        }
+        } 
         
         if ($u == null) {
             return Utils::response([
@@ -143,6 +143,24 @@ class ApiUsersController
         unset($u->status);
         unset($u->linkedin);
 
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    if(isset($_FILES['profile_pic'])){
+                        if($_FILES['profile_pic']!=null){
+                            if(isset($_FILES['profile_pic']['tmp_name'])){
+                                $u->avatar = Utils::upload_file($_FILES['profile_pic']);
+                            };
+                        }
+                        unset($_FILES['audio']);
+                    }
+                }
+            }
+        }
+
+        return $u->avatar;
+        
         $u->save();
 
         return Utils::response([
