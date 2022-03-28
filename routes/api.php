@@ -13,12 +13,13 @@ Route::get('products', [ApiProductsController::class, 'index']);
 Route::get('banners', [ApiProductsController::class, 'banners']);
 Route::get('categories', [ApiProductsController::class, 'categories']);
 Route::get('locations', [ApiProductsController::class, 'locations']);
-Route::get('users', [ApiUsersController::class, 'users']);
 Route::post('users', [ApiUsersController::class, 'create_account']);
 Route::post('get-chats', [ApiChatsController::class, 'index']);
 Route::post('chats', [ApiChatsController::class, 'send_message']); 
 Route::post('threads', [ApiChatsController::class, 'threads']); 
 
+Route::get('users', [ApiUsersController::class, 'users']);
+Route::patch('users', [ApiUsersController::class, 'update']);
 
 Route::get('posts', [ApiProductsController::class, 'posts']);
 Route::get('post-categories', [ApiProductsController::class, 'post_categories']);
