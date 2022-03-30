@@ -16,8 +16,7 @@ class ApiUsersController
 {
     public function index(Request $request)
     {
-        $per_page = (int) ($request->per_page ? $request->per_page : 300);
-        $items = Administrator::paginate($per_page)->withQueryString()->items();
+        $items = Administrator::paginate(10)->withQueryString()->items();
         return $items;
     }
 
@@ -33,31 +32,31 @@ class ApiUsersController
                 'data' => null
             ]);
         }
-
+        
         $email = (string) ($request->email ? $request->email : "");
         $password = (string) ($request->password ? $request->password : "");
 
-        $_u = Administrator::where('username', $email)->get();
+        $_u = Administrator::where('username',$email)->get();
         $u = null;
-        if (isset($_u[0])) {
+        if(isset($_u[0])){
             $u = $_u[0];
         }
 
-        if ($u == null) {
-            $_u = Administrator::where('email', $email)->get();
-            if (isset($_u[0])) {
+        if($u == null){
+            $_u = Administrator::where('email',$email)->get();
+            if(isset($_u[0])){
                 $u = $_u[0];
             }
         }
 
-        if (password_verify($password, $u->password)) {
+        if(password_verify($password,$u->password)){
             return Utils::response([
                 'status' => 0,
                 'message' => "Wrong password.",
                 'data' => null
             ]);
-        }
-
+        } 
+        
         if ($u == null) {
             return Utils::response([
                 'status' => 0,
@@ -65,7 +64,7 @@ class ApiUsersController
                 'data' => null
             ]);
         }
-
+        
         return Utils::response([
             'status' => 1,
             'message' => "Logged successfully.",
@@ -148,9 +147,9 @@ class ApiUsersController
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
 
-                    if (isset($_FILES['profile_pic'])) {
-                        if ($_FILES['profile_pic'] != null) {
-                            if (isset($_FILES['profile_pic']['tmp_name'])) {
+                    if(isset($_FILES['profile_pic'])){
+                        if($_FILES['profile_pic']!=null){
+                            if(isset($_FILES['profile_pic']['tmp_name'])){
                                 $u->avatar = Utils::upload_file($_FILES['profile_pic']);
                             };
                         }
@@ -159,7 +158,7 @@ class ApiUsersController
                 }
             }
         }
-
+ 
 
         $u->save();
 
@@ -187,7 +186,7 @@ class ApiUsersController
 
 
         $u['name'] = $request->input("name");
-        $u['username'] = $request->input("email") . rand(10000, 1000000);
+        $u['username'] = $request->input("email");
 
         $old_user = Administrator::where('username', $u['username'])->first();
         if ($old_user) {
