@@ -3377,9 +3377,9 @@
                                     </div>
                                     <!--end::Section-->
                                     <!--begin::Illustration-->
-                                    <div class="text-center px-4">
+                                    {{-- <div class="text-center px-4">
                                         <img class="mw-100 mh-200px" alt="image" src="assets/media/illustrations/sketchy-1/1.png" />
-                                    </div>
+                                    </div> --}}
                                     <!--end::Illustration-->
                                 </div>
                                 <!--end::Wrapper-->

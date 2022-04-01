@@ -59,7 +59,7 @@ trait HasAssets
      */
     public static $baseCss = [
 
- 
+        'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
         'assets/plugins/global/plugins.bundle.css',
         'assets/css/style.bundle.css',
         'assets/plugins/custom/fullcalendar/fullcalendar.bundle.css',
