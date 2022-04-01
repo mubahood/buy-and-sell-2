@@ -252,7 +252,7 @@ class ApiProductsController
             //$items = Product::paginate($per_page)->orderBy('id', 'DESC')->withQueryString()->items();
         }
 
-        return count($items);
+        return $items;
     }
 
 
