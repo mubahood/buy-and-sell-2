@@ -57,10 +57,6 @@ class CategoryController extends AdminController
 
  
 
-        $grid->image()->display(function ($src) {
-            $src =  URL::asset('/public/storage/'.$src);
-            return '<img width="20" src="' . $src . '" alt="' . $src . '">';
-        });
 
         //$grid->column('description', __('Description'));
         //$grid->column('slug', __('Slug'));

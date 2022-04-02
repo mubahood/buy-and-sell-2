@@ -8,10 +8,14 @@ $sub_title = $has_sub_title ? $sub_title : '';
 
 ?><div class="d-flex align-items-center">
     <div class="me-5 position-relative">
-        @if ($has_image)
+        @if ($has_image) 
+
+        <div class="symbol symbol-35px me-4">
             <div class="symbol symbol-35px symbol-circle">
-                <img alt="Pic" src="{{$image}}" />
-            </div>
+                <img alt="Pic" src="{{$image}}" /> 
+            </div> 
+        </div>
+ 
         @else
             <div class="symbol symbol-40px symbol-circle">
                 <span

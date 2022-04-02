@@ -1,46 +1,71 @@
 <div class="grid-dropdown-actions dropdown">
-    <a href="#" style="padding: 0 10px;" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-ellipsis-v"></i>
-    </a>
-    <ul class="dropdown-menu" style="min-width: 70px !important;box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);border-radius:0;left: -65px;top: 5px;">
 
-        @foreach($default as $action)
-            <li>{!! $action->render() !!}</li>
-        @endforeach
 
-        @if(!empty($custom))
+    <div class="me-0">
+        <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end">
+            <i class="bi bi-three-dots fs-3"></i>
+        </button>
+        <!--begin::Menu 3-->
+        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3"
+            data-kt-menu="true">
 
-            @if(!empty($default))
+
+            @foreach ($default as $action)
+                <div class="my-menu-item">
+                    {!! $action->render() !!}
+                </div>
+            @endforeach
+            @if (!empty($custom))
+
+            @if (!empty($default))
                 <li class="divider"></li>
             @endif
 
-            @foreach($custom as $action)
-                <li>{!! $action->render() !!}</li>
+            @foreach ($custom as $action)
+                    <div class="my-menu-item">
+                        {!! $action->render() !!}
+                    </div>
             @endforeach
         @endif
+
+        </div>
+        <!--end::Menu 3-->
+    </div>
+
+
+    <style>
+   
+        .my-menu-item a {
+            display: block;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            flex: 0 0 100%;
+            padding: .65rem 1rem;
+            transition: none;
+            outline: 0 !important
+        }
+
+        .my-menu-item a:hover{
+            background-color: rgb(230, 230, 230);
+        }
+
+    </style>
+
+ 
+    <ul class="dropdown-menu"
+        style="min-width: 70px !important;box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);border-radius:0;left: -65px;top: 5px;">
+
+        @foreach ($default as $action)
+            <li>{!! $action->render() !!}</li>
+        @endforeach
+
+        
     </ul>
 </div>
 
-<script>
-    $('.table-responsive').on('shown.bs.dropdown', function(e) {
-        var t = $(this),
-            m = $(e.target).find('.dropdown-menu'),
-            tb = t.offset().top + t.height(),
-            mb = m.offset().top + m.outerHeight(true),
-            d = 20;
-        if (t[0].scrollWidth > t.innerWidth()) {
-            if (mb + d > tb) {
-                t.css('padding-bottom', ((mb + d) - tb));
-            }
-        } else {
-            t.css('overflow', 'visible');
-        }
-    }).on('hidden.bs.dropdown', function() {
-        $(this).css({
-            'padding-bottom': '',
-            'overflow': ''
-        });
-    });
-</script>
+ 
 
 @yield('child')
