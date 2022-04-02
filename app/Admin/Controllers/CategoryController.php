@@ -28,20 +28,29 @@ class CategoryController extends AdminController
     {
         $grid = new Grid(new Category());
 
+        $grid->disableRowSelector();
+        
         $grid->column('id', __('Id'))->sortable();
         //$grid->column('created_at', __('Created at'));
         //$grid->column('updated_at', __('Updated at'));
-        $grid->column('name', __('Name'))->sortable();
-        $grid->parent()->display(function ($category_id) {
-            $cat = Category::find($category_id);
+        $grid->column('name', __('Name'))->display(function ($name) {
+
+            $cat = Category::find($this->parent);
+            $cat_name = "";
             if (!$cat) {
-                return "-";
-            }
-            if (!isset($cat->name)) {
-                return "-";
-            }
-            return $cat->name;
+                $cat_name = "";
+            }else if (isset($cat->name)) {
+                $cat_name = $cat->name;
+            } 
+
+            return view('components.symbol-image-text',[
+                'title' => $this->name,
+                'sub_title' => $cat_name,
+                'image' => $this->image,
+            ]);;
         })->sortable();
+
+ 
 
         $grid->image()->display(function ($src) {
             $src =  URL::asset($src);
