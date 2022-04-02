@@ -45,20 +45,20 @@ class CategoryController extends AdminController
 
             $src = "";
             if($this->image!=null && strlen($this->image)>2){
-                $src =  URL::asset($this->image);
+                $src =  URL::asset('storage/'.$this->image);
             }
 
             return view('components.symbol-image-text',[
                 'title' => $this->name,
                 'sub_title' => $cat_name,
                 'image' => $src,
-            ]);;
+            ]);; 
         })->sortable();
 
  
 
         $grid->image()->display(function ($src) {
-            $src =  URL::asset($src);
+            $src =  URL::asset('storage/'.$src);
             return '<img width="20" src="' . $src . '" alt="' . $src . '">';
         });
 
