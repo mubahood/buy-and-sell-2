@@ -12,7 +12,7 @@
                     $item->city->name</span><span><i
                         class="fas fa-clock"></i>{{$item->created_at}}</span></div>
             <div class="product-info border-0 mt-0 p-0 ">
-                <h5 class="product-price h6">{{ config('app.currency') }} {{number_format($item->price)}}<span>/@if ($item->fixed_price)
+                <h5 class="product-price h6">{{ config('app.currency') }} {{($item->price)}}<span>/@if ($item->fixed_price)
                         Fixed
                         @else
                         Negotiable

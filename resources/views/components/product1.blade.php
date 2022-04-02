@@ -18,7 +18,7 @@
                 {{$item->city->name}}</span><span><i
                     class="fas fa-clock"></i>{{$item->created_at->diffForHumans()}}</span></div>
         <div class="product-info">
-            <h5 class="product-price">${{ number_format($item->price,0) }}<span>/@if ($item->fixed_price)
+            <h5 class="product-price">${{ ($item->price,0) }}<span>/@if ($item->fixed_price)
                     Fixed
                     @else
                     Negotiable

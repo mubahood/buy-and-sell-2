@@ -209,7 +209,7 @@ $message_link = "/messages/".$chat_thred;
                     <ul class="ad-details-specific">
                         <li>
                             <h6>Price:</h6>
-                            <p>UGX {{ number_format($pro->price) }}
+                            <p>UGX {{ ($pro->price) }}
                                 @if ($pro->fixed_price)
                                 <small><i>Fixed price</i></small>
                                 @else
@@ -234,7 +234,7 @@ $message_link = "/messages/".$chat_thred;
                         @elseif($item->type == "number")
                         <li>
                             <h6>{{ $item->name }}: </h6>
-                            <p>{{ number_format($item->value,0) }} {{$item->units}}</p>
+                            <p>{{ ($item->value,0) }} {{$item->units}}</p>
                         </li>
                         @elseif($item->type == "select")
                         <li>

@@ -10,7 +10,7 @@
                 <h2 class="m-0 h6  border-0 pl-2 pr-2 product-title" style="font-size: .8rem; border:none!important; ">{{ $item->name }}</h2>
             </a> 
             <div class="product-info  mt-0 p-0 border-0 ">
-                <h5 class="product-price h6 border-0 pl-2 pr-2">{{ config('app.currency') }} {{ number_format($item->price) }}<span>  
+                <h5 class="product-price h6 border-0 pl-2 pr-2">{{ config('app.currency') }} {{ ($item->price) }}<span>  
             </div>
         </div>
     </div>

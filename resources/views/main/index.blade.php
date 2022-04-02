@@ -74,7 +74,8 @@ $conds['city_id'] = $city->id;
 
 }
 
-$products = Product::where($conds)->orderBy('id','desc')->paginate(10)->withQueryString();
+$per_page = 21;
+$products = Product::where($conds)->orderBy('id','desc')->paginate($per_page)->withQueryString();
 
 }
 } else {
