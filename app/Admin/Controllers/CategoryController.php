@@ -43,10 +43,15 @@ class CategoryController extends AdminController
                 $cat_name = $cat->name;
             } 
 
+            $src = "";
+            if($this->image!=null && strlen($this->image)>2){
+                $src =  URL::asset($this->image);
+            }
+
             return view('components.symbol-image-text',[
                 'title' => $this->name,
                 'sub_title' => $cat_name,
-                'image' => $this->image,
+                'image' => $src,
             ]);;
         })->sortable();
 

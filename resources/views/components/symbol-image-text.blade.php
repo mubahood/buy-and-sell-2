@@ -10,7 +10,7 @@ $sub_title = $has_sub_title ? $sub_title : '';
     <div class="me-5 position-relative">
         @if ($has_image)
             <div class="symbol symbol-35px symbol-circle">
-                <img alt="Pic" src="assets/media/avatars/300-9.jpg" />
+                <img alt="Pic" src={{$image}} />
             </div>
         @else
             <div class="symbol symbol-40px symbol-circle">
