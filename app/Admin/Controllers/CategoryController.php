@@ -45,7 +45,7 @@ class CategoryController extends AdminController
 
             $src = "";
             if($this->image!=null && strlen($this->image)>2){
-                $src =  URL::asset('storage/'.$this->image);
+                $src =  URL::asset('/public/storage/'.$this->image);
             }
 
             return view('components.symbol-image-text',[
@@ -58,7 +58,7 @@ class CategoryController extends AdminController
  
 
         $grid->image()->display(function ($src) {
-            $src =  URL::asset('storage/'.$src);
+            $src =  URL::asset('/public/storage/'.$src);
             return '<img width="20" src="' . $src . '" alt="' . $src . '">';
         });
 
