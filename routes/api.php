@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route; //new staff
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::get('upload', [ApiProductsController::class, 'upload']);
 Route::get('products', [ApiProductsController::class, 'index']);
+Route::post('delete-product', [ApiProductsController::class, 'delete']);
 Route::get('banners', [ApiProductsController::class, 'banners']);
 Route::get('categories', [ApiProductsController::class, 'categories']);
 Route::get('locations', [ApiProductsController::class, 'locations']);

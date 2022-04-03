@@ -15,11 +15,31 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
+    public function delete(Request $request)
+    {
+        $id = (int) ($request->id ? $request->id : 0);
+        if($id<1){
+            return Utils::response(['message' => 'Poduct ID is required.', 'status' => 0]);
+        }
+
+        $pro = Product::find($id);
+
+        if($pro == null){
+            return Utils::response(['message' => "Poduct with ID  {$id} no found.", 'status' => 0]);
+        }
+        $pro->delete();
+
+        return Utils::response(['message' => "Poduct  #{$id} deleted successfully.", 'status' => 1]);
+    }
     public function upload(Request $request)
     {
         return view('dashboard.upload');
     }
 
+    public function delete_post(Request $request){
+        return "delete_post";
+    }
+    
     public function create_post(Request $request)
     {
         if (!isset($_POST['user_id'])) {
