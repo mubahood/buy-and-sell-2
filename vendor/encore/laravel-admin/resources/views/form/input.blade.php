@@ -1,8 +1,9 @@
-<div class="{{$viewClass['form-group']}} {!! !$errors->has($errorKey) ? '' : 'has-error' !!} fv-row mb-3 mb-md-6 ">
+<div class="{{$viewClass['form-group']}} {!! !$errors->has($errorKey) ? '' : 'has-error' !!} mb-4 mb-md-2 ">
 
-    <label for="{{$id}}" class="{{$viewClass['label']}} control-label d-flex align-items-center fs-5 fw-bold mb-2">{{$label}}</label>
+    <label for="{{$id}}" class="{{$viewClass['label']}} control-label d-flex align-items-center fs-5 fw-bold">{{$label}}</label>
 
-    <div class="{{$viewClass['field']}} ">
+    {{-- {{$viewClass['field']}} --}}
+    <div class=" ">
 
         @include('admin::form.error')
 
@@ -12,7 +13,7 @@
             <span class="input-group-addon">{!! $prepend !!}</span>
             @endif --}}
 
-            <input  class="form-control form-control-lg form-control-solid" {!! $attributes !!} />
+            <input  class="form-control" {!! $attributes !!} />
 
             {{-- @if ($append)
                 <span class="input-group-addon clearfix">{!! $append !!}</span>
