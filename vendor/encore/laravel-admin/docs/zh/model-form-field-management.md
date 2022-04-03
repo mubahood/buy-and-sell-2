@@ -81,7 +81,7 @@ EOT;
 ```php
 <div class="form-group {!! !$errors->has($label) ?: 'has-error' !!}">
 
-    <label for="{{$id}}" class="col-sm-2 control-label">{{$label}}</label>
+    <label for="{{$id}}" class="control-label">{{$label}}</label>
 
     <div class="{{$viewClass['field']}}">
 
@@ -152,7 +152,7 @@ class CKEditor extends Field
 ```php
 <div class="form-group {!! !$errors->has($errorKey) ?: 'has-error' !!}">
 
-    <label for="{{$id}}" class="col-sm-2 control-label">{{$label}}</label>
+    <label for="{{$id}}" class="control-label">{{$label}}</label>
 
     <div class="col-sm-6">
 
@@ -245,7 +245,7 @@ EOT;
 
 <div class="form-group {!! !$errors->has($label) ?: 'has-error' !!}">
 
-    <label for="{{$id}}" class="col-sm-2 control-label">{{$label}}</label>
+    <label for="{{$id}}" class="control-label">{{$label}}</label>
 
     <div class="col-sm-6">
 

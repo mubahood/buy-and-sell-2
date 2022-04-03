@@ -66,7 +66,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://127.0.0.1:8000/'),
+    'url' => env('APP_URL', 'https://farmers.ugnews24.info/'),
 
     'asset_url' => env('ASSET_URL', null),
 

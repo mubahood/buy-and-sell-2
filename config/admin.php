@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\URL;
-
 return [
 
     /*
+    # #
+    # # romina love  
     |--------------------------------------------------------------------------
     | Laravel-admin name
     |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ return [
     | login page.
     |
     */
-    'name' => 'The National Seed Tracking & Tracing System Uganda',
+    'name' => 'JO-Trace',
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<img width="100%" src="/assets/images/stts/logos/logo_top.png" alt="Admin logo">',
+    'logo' => '<b>JO-Trace</b> admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -33,10 +33,10 @@ return [
     |
     | The logo of all admin pages when the sidebar menu is collapsed. You can
     | also set it as an image by using a `img` tag, eg
-    | '<img src="assets/images/stts/bg/bg-1.jpg" alt="Admin logo">'.
+    | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>STTS</b>',
+    'logo-mini' => '<b>JO-Trace</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => 'The National Seed Tracking & Tracing System Uganda',
+    'title' => 'Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,7 +159,7 @@ return [
 
         // Image and file upload path under the disk above.
         'directory' => [
-            'image' => '/',
+            'image' => '/storage',
             'file'  => 'files',
         ],
     ],
@@ -211,7 +211,7 @@ return [
     */
     'operation_log' => [
 
-        'enable' => false,
+        'enable' => true,
 
         /*
          * Only logging allowed methods in the list
@@ -225,7 +225,7 @@ return [
          * or specific method to path like: get:admin/auth/logs.
          */
         'except' => [
-            env('ADMIN_ROUTE_PREFIX', 'admin') . '/auth/logs*',
+            env('ADMIN_ROUTE_PREFIX', 'admin').'/auth/logs*',
         ],
     ],
 
@@ -251,7 +251,7 @@ return [
     | Set a default avatar for newly created users.
     |
     */
-    'default_avatar' => 'vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg',
+    'default_avatar' => '/vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg',
 
     /*
     |--------------------------------------------------------------------------
@@ -301,8 +301,7 @@ return [
     | This value is used to set the background image of login page.
     |
     */
-    'login_background_image' => url( '/assets/images/stts/bg/bg-1.jpg'),
-    'login_background_image_2' =>  url('/assets/images/stts/bg/bg-2.jpeg'),
+    'login_background_image' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -351,7 +350,9 @@ return [
     'minify_assets' => [
 
         // Assets will not be minified.
-        'excepts' => [],
+        'excepts' => [
+
+        ],
 
     ],
 
@@ -360,7 +361,7 @@ return [
     | Enable/Disable sidebar menu search
     |--------------------------------------------------------------------------
     */
-    'enable_menu_search' => false,
+    'enable_menu_search' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -406,47 +407,6 @@ return [
     |
     */
     'extensions' => [
-        'chartjs' => [
-        
-            // Set to `false` if you want to disable this extension
-            'enable' => true,
-        ],
-        'latlong' => [
 
-            // Whether to enable this extension, defaults to true
-            'enable' => true,
-
-            // Specify the default provider
-            'default' => 'google',
-
-            // According to the selected provider above, fill in the corresponding api_key
-            'providers' => [
-
-                'google' => [
-                    'api_key' => 'AIzaSyAcctJQgkbQQI37Ae_2rAeck-l6nyDRQj0',
-                ],
-
-                'yandex' => [
-                    'api_key' => '',
-                ],
-
-                'baidu' => [
-                    'api_key' => 'xck5u2lga9n1bZkiaXIHtMufWXQnVhdx',
-                ],
-
-                'tencent' => [
-                    'api_key' => 'VVYBZ-HRJCX-NOJ4Z-ZO3PU-ZZA2J-QPBBT',
-                ],
-
-                'amap' => [
-                    'api_key' => '3693fe745aea0df8852739dac08a22fb',
-                ],
-            ]
-        ],
-        'media-manager' => [
-            // Select a local disk that you configured in `config/filesystem.php`
-            'disk' => 'admin',
-            'allowed_ext' => 'jpg,jpeg,png,pdf,doc,docx,zip'
-        ],
     ],
 ];

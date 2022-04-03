@@ -64,6 +64,7 @@ trait HasAssets
         'assets/css/style.bundle.css',
         'assets/plugins/custom/fullcalendar/fullcalendar.bundle.css',
         'assets/plugins/custom/datatables/datatables.bundle.css',
+        'assets/css/css.css',
 
 /*
 

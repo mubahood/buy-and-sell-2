@@ -34,7 +34,7 @@ $slug = request()->segment(2);
                     @if (!$tabObj->isEmpty())
                         @include('admin::form.tab', compact('tabObj'))
                     @else
-                        <div class="fields-group">
+                        <div class="fields-group row ">
 
                             @if ($form->hasRows())
                                 @foreach ($form->getRows() as $row)

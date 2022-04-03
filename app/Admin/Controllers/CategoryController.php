@@ -29,7 +29,7 @@ class CategoryController extends AdminController
         $grid = new Grid(new Category());
 
         $grid->disableRowSelector();
-        
+
         $grid->column('id', __('Id'))->sortable();
         //$grid->column('created_at', __('Created at'));
         //$grid->column('updated_at', __('Updated at'));
@@ -39,23 +39,23 @@ class CategoryController extends AdminController
             $cat_name = "";
             if (!$cat) {
                 $cat_name = "";
-            }else if (isset($cat->name)) {
+            } else if (isset($cat->name)) {
                 $cat_name = $cat->name;
-            } 
-
-            $src = "";
-            if($this->image!=null && strlen($this->image)>2){
-                $src =  URL::asset('/public/storage/'.$this->image);
             }
 
-            return view('components.symbol-image-text',[
+            $src = "";
+            if ($this->image != null && strlen($this->image) > 2) {
+                $src =  URL::asset('/public/storage/' . $this->image);
+            }
+
+            return view('components.symbol-image-text', [
                 'title' => $this->name,
                 'sub_title' => $cat_name,
                 'image' => $src,
-            ]);; 
+            ]);;
         })->sortable();
 
- 
+
 
 
         //$grid->column('description', __('Description'));
@@ -94,24 +94,45 @@ class CategoryController extends AdminController
      */
     protected function form()
     {
+
+        return view('admin.forms.category');
         $form = new Form(new Category());
 
-        $form->setWidth(8, 4);
-        $form->radio('has_parent', __("Has parent category?"))
-            ->required()
-            ->options([
-                "0" => "No",
-                "1" => "Yes"
-            ])
-            ->when("1", function ($form) {
-                $form->select('parent', 'Parent category')->options(Category::where('parent', '<', 1)->get()->pluck('name', 'id'))->default(0);
-            });
+
+        // $form->radio('has_parent', __("Has parent category?"))
+        //     ->required()
+        //     ->options([
+        //         "0" => "No",
+        //         "1" => "Yes"
+        //     ])
+        //     ->when("1", function ($form) {
+
+        //     });
 
 
-        $form->text('name', __('Category Name'))->required();
-        $form->textarea('description', __('Description'))->required()->default('Buy and sell all kinds of ... in Uganda');
-        $form->text('slug', __('Slug'))->readonly();
-        $form->image('image', __('Image'));
+        $form->column(4, function ($form) {
+            $form->select('parent', 'Parent category')->options(Category::where('parent', '<', 1)->get()->pluck('name', 'id'))->default(0);
+        });
+
+        $form->column(4, function ($form) {
+            $form->text('name', __('Category Name'))->required();
+        });
+
+        $form->column(4, function ($form) {
+            $form->text('slug', __('Slug'))->readonly();
+        });
+
+        $form->column(12, function ($form) {
+            $form->textarea('description', __('Description'))->required()->default('Buy and sell all kinds of ... in Uganda');
+        });
+ 
+                
+        $form->column(6, function ($form) {
+            $form->image('image', __('Image'));
+        });
+                
+/*
+
         $form->hasMany('attributes', __('Click on "New" to add category attributes'), function (NestedForm $form) {
 
             $form->text('name', __('Name'))->rules('required');
@@ -121,7 +142,6 @@ class CategoryController extends AdminController
             $options["select"] = "select";
             $options["radio"] = "radio";
             $options["checkbox"] = "checkbox";
-            //$form->select('type')->options(['', 'text', 'textarea', 'number', 'select', 'radio', 'checkbox'])->rules('required');
             $form->select('type')->options($options)->rules('required');
 
             $form->tags('options', __('Options'));
@@ -131,7 +151,7 @@ class CategoryController extends AdminController
                 '0' => 'No',
                 '1' => 'Yes',
             ])->required();
-        });
+        }); */
 
 
         return $form;

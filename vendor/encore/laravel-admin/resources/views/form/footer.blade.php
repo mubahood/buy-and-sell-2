@@ -1,44 +1,31 @@
-<div class="card-footer">
+<div class="box-footer">
 
     {{ csrf_field() }}
 
-    {{-- <div class="col-md-{{$width['label']}}">
-    </div> --}}
+    <div class="col-md-{{$width['label']}}">
+    </div>
 
-    <div class="row">
+    <div class="col-md-{{$width['field']}}">
 
-        @if (in_array('submit', $buttons))
+        @if(in_array('submit', $buttons))
+        <div class="btn-group pull-right">
+            <button type="submit" class="btn btn-primary">{{ trans('admin.submit') }}</button>
+        </div>
 
-
-            <div class="col-7 form-check form-check-custom form-check-solid">
-                @foreach ($submit_redirects as $value => $redirect)
-                    @if (in_array($redirect, $checkboxes))
-
-                  
-                        <label class="form-check-label" style="margin: 5px 10px 5px 10px;">                            
-
-
-                            <input type="radio" class="form-check-input" name="after-save" value="{{ $value }}"
-                            {{ $default_check == $redirect ? 'checked' : '' }}>
-
-                            {{ trans("admin.{$redirect}") }}
-
-                        </label>
-                    @endif
-                @endforeach
-
-            </div>
-
-            <div class="col">
-                <button type="submit" class="btn btn-primary">{{ trans('admin.submit') }}</button>
-            </div>
+        @foreach($submit_redirects as $value => $redirect)
+            @if(in_array($redirect, $checkboxes))
+            <label class="pull-right" style="margin: 5px 10px 0 0;">
+                <input type="checkbox" class="after-submit" name="after-save" value="{{ $value }}" {{ ($default_check == $redirect) ? 'checked' : '' }}> {{ trans("admin.{$redirect}") }}
+            </label>
+            @endif
+        @endforeach
 
         @endif
 
-        {{-- @if (in_array('reset', $buttons))
+        @if(in_array('reset', $buttons))
         <div class="btn-group pull-left">
             <button type="reset" class="btn btn-warning">{{ trans('admin.reset') }}</button>
         </div>
-        @endif --}}
+        @endif
     </div>
 </div>

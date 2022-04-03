@@ -33,20 +33,20 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => $_SERVER['DOCUMENT_ROOT'].'/storage',
-            'url' => env('APP_URL') . '/storage',
+            'root' => $_SERVER['DOCUMENT_ROOT'].'/',
+            'url' => env('APP_URL') . '/',
             'visibility' => 'public',
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => $_SERVER['DOCUMENT_ROOT'].'public/storage',
-            'url' => env('APP_URL') . 'public/storage',
+            'root' => $_SERVER['DOCUMENT_ROOT'].'/public/storage',
+            'url' => env('APP_URL') . '',
             'visibility' => 'public',
         ],
 
         's3' => [
-            'driver' => 's3',
+            'driver' => 's3' , 
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
@@ -57,10 +57,12 @@ return [
         ],
         'admin' => [
             'driver' => 'local',
-            'root' => $_SERVER['DOCUMENT_ROOT'].'/public/storage',
-            'url' => env('APP_URL') . '/public/storage',
+            'root' => $_SERVER['DOCUMENT_ROOT'].'/storage',
+            'url' => env('APP_URL') . '',
             'visibility' => 'public',
         ],
+
+
     ],
 
     /*
