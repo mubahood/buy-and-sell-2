@@ -367,8 +367,8 @@ class Utils
         $image->preserve_time = true;
         $image->handle_exif_orientation_tag = true;
 
-        $width = 380;
-        $heigt = 220;
+        $width = 220;
+        $heigt = 380;
         if (isset($params['width'])) {
             $width = $params['width'];
         }
