@@ -11,8 +11,14 @@ class Checkbox extends MultipleSelect
     protected $canCheckAll = false;
 
     protected $groups = null;
- 
- 
+
+    protected static $css = [
+        '/vendor/laravel-admin/AdminLTE/plugins/iCheck/all.css',
+    ];
+
+    protected static $js = [
+        '/vendor/laravel-admin/AdminLTE/plugins/iCheck/icheck.min.js',
+    ];
 
     /**
      * @var string
@@ -60,7 +66,7 @@ class Checkbox extends MultipleSelect
      *
      * @return $this
      */
-    public function groups($groups = [])
+    public function groups(array $groups = [])
     {
         $this->groups = $groups;
 

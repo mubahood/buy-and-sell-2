@@ -13,7 +13,19 @@ class Select extends Field
 {
     use CanCascadeFields;
 
- 
+    /**
+     * @var array
+     */
+    protected static $css = [
+        '/vendor/laravel-admin/AdminLTE/plugins/select2/select2.min.css',
+    ];
+
+    /**
+     * @var array
+     */
+    protected static $js = [
+        '/vendor/laravel-admin/AdminLTE/plugins/select2/select2.full.min.js',
+    ];
 
     /**
      * @var array

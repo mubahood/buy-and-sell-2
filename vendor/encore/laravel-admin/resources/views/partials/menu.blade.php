@@ -1,110 +1,35 @@
-<?php
-$expanded = '';
-$segments = request()->segments();
-$seg = end($segments);
-$seg = strtolower($seg);
-//"active show"
-?>
-@if (Admin::user()->visible(\Illuminate\Support\Arr::get($item, 'roles', [])) && Admin::user()->can(\Illuminate\Support\Arr::get($item, 'permission')))
-    @if (!isset($item['children']))
-        @php
-            $active_item = '';
-            if (strtolower($item['uri']) == $seg) {
-                $active_item = '  show active ';
-            }
-        @endphp
-
-
-
-
-
-        <div class="menu-item">
-            @if (url()->isValidUrl($item['uri']))
-                <a class="menu-link {{ $active_item }}" href="{{ $item['uri'] }}" target="_blank">
-                @else
-                    <a class="menu-link {{ $active_item }}" href="{{ admin_url($item['uri']) }}">
+@if(Admin::user()->visible(\Illuminate\Support\Arr::get($item, 'roles', [])) && Admin::user()->can(\Illuminate\Support\Arr::get($item, 'permission')))
+    @if(!isset($item['children']))
+        <li>
+            @if(url()->isValidUrl($item['uri']))
+                <a href="{{ $item['uri'] }}" target="_blank">
+            @else
+                 <a href="{{ admin_url($item['uri']) }}">
             @endif
-
-
-            <span class="menu-icon">
-                <i class="fa {{ $item['icon'] }}"></i>
-            </span>
-            <span class="menu-title">
+                <i class="fa {{$item['icon']}}"></i>
                 @if (Lang::has($titleTranslation = 'admin.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
                     <span>{{ __($titleTranslation) }}</span>
                 @else
                     <span>{{ admin_trans($item['title']) }}</span>
                 @endif
-            </span>
             </a>
-        </div>
+        </li>
     @else
-        @php
-            $expanded = '';
-            foreach ($item['children'] as $value) {
-                if (strtolower($value['uri']) == $seg) {
-                    $expanded = ' here active show ';
-                    break;
-                }
-            }
-        @endphp
-
-        <div data-kt-menu-trigger="click" class="menu-item {{ $expanded }} menu-accordion">
-            <span class="menu-link">
-                <span class="menu-icon">
-                    <i class="fa {{ $item['icon'] }}"></i>
-                </span>
-                <span class="menu-title">
-                    @if (Lang::has($titleTranslation = 'admin.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
-                        <span>{{ __($titleTranslation) }}</span>
-                    @else
-                        <span>{{ admin_trans($item['title']) }}</span>
-                    @endif
-                </span>
-                <span class="menu-arrow"></span>
-            </span>
-
-
-
-            <div class="menu-sub menu-sub-accordion  {{ $expanded }}">
-
-
-
-
-                @foreach ($item['children'] as $item)
-                    @php
-                        $active_item = '';
-                        if (strtolower($item['uri']) == $seg) {
-                            $active_item = '    active ';
-                        }
-                    @endphp
-
-                    <div class="menu-item   ">
-                        @if (url()->isValidUrl($item['uri']))
-                            <a class="menu-link {{ $active_item }} " href="{{ $item['uri'] }}" target="_blank">
-                            @else
-                                <a class="menu-link {{ $active_item }} " href="{{ admin_url($item['uri']) }}">
-                        @endif
-
-                        <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
-                        </span>
-                        <span class="menu-title">
-                            @if (Lang::has($titleTranslation = 'admin.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
-                                <span>{{ __($titleTranslation) }}</span>
-                            @else
-                                <span>{{ admin_trans($item['title']) }}</span>
-                            @endif
-                        </span>
-                        </a>
-                    </div>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa {{ $item['icon'] }}"></i>
+                @if (Lang::has($titleTranslation = 'admin.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
+                    <span>{{ __($titleTranslation) }}</span>
+                @else
+                    <span>{{ admin_trans($item['title']) }}</span>
+                @endif
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @foreach($item['children'] as $item)
+                    @include('admin::partials.menu', $item)
                 @endforeach
-
-
-            </div>
-        </div>
-
-
-
+            </ul>
+        </li>
     @endif
 @endif

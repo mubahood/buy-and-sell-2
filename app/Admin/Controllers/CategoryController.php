@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\URL;
 
 class CategoryController extends AdminController
 {
+
+    function __construct()
+    {
+        if(isset($_POST['name'])){ 
+            die("time to upload shit");
+        }
+    }
+
     /**
      * Title for current resource.
      *
@@ -95,8 +103,10 @@ class CategoryController extends AdminController
     protected function form()
     {
 
-        return view('admin.forms.category');
         $form = new Form(new Category());
+
+        return view('admin.forms.category');
+
 
 
         // $form->radio('has_parent', __("Has parent category?"))

@@ -90,7 +90,7 @@ Create a view file `resources/views/admin/php-editor.blade.php`:
 
 <div class="form-group {!! !$errors->has($label) ?: 'has-error' !!}">
 
-    <label for="{{$id}}" class="control-label">{{$label}}</label>
+    <label for="{{$id}}" class="col-sm-2 control-label">{{$label}}</label>
 
     <div class="col-sm-6">
 
@@ -159,7 +159,7 @@ Add blade file `resources/views/admin/ckeditor.blade.php` for view `admin.ckedit
 ```php
 <div class="form-group {!! !$errors->has($errorKey) ?: 'has-error' !!}">
 
-    <label for="{{$id}}" class="control-label">{{$label}}</label>
+    <label for="{{$id}}" class="col-sm-2 control-label">{{$label}}</label>
 
     <div class="col-sm-6">
 

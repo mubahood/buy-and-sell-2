@@ -1,4 +1,4 @@
-{{-- <div class="box-header with-border {{ $expand?'':'hide' }} filter-box" id="{{ $filterID }}">
+<div class="box-header with-border {{ $expand?'':'hide' }} filter-box" id="{{ $filterID }}">
     <form action="{!! $action !!}" class="form-horizontal" pjax-container method="get">
 
         <div class="row">
@@ -13,7 +13,9 @@
                 </div>
             </div>
             @endforeach
-        </div> 
+        </div>
+        <!-- /.box-body -->
+
         <div class="box-footer">
             <div class="row">
                 <div class="col-md-{{ $layout->columns()->first()->width() }}">
@@ -33,4 +35,4 @@
         </div>
 
     </form>
-</div> --}}
+</div>
