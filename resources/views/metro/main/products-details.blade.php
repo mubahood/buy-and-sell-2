@@ -5,6 +5,8 @@ use App\Models\Utils;
 use Illuminate\Support\Str;
 use App\Models\Category;
 
+
+
 $slug = request()->segment(1);
 $pro = Product::where('slug', $slug)->firstOrFail();
 if ($pro) {
@@ -51,7 +53,7 @@ $first_seen = false;
     <script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
 @endsection
 
-
+<h1>{{ __('name') }}</h1>
 
 <div class="row  mt-5">
     <div class="col-md-4 bg-white py-5 ">
