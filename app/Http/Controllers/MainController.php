@@ -16,7 +16,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('main.index');
+        return view('metro.main.index');
+        //return view('metro.index');
     }
 
     public function slugSwitcher(Request  $request)
@@ -61,7 +62,7 @@ class MainController extends Controller
 
         $pro = Product::where('slug', $seg)->first();
         if ($pro) {
-            return view('main.display-ad');
+            return view('metro.main.products-details');
         }
         return view('main.index');
     }

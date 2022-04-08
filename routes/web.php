@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Middleware\Authenticate;
 
 Route::get('/', [MainController::class, 'index']);
+
 Route::get('/about', [MainController::class, 'about']);
 Route::get('/register', [MainController::class, 'register'])->name("register");
 Route::match(['get', 'post'],'/password-reset', [MainController::class, 'password_reset'])->name("password-reset");
@@ -23,11 +24,7 @@ Route::get('/logout', [Dashboard::class, 'logout'])->middleware(Authenticate::cl
 Route::match(['get', 'post'], '/messages/', [Dashboard::class, 'messages'])->name("messages")->middleware(Authenticate::class);
 Route::match(['get', 'post'], '/messages/{thread}', [Dashboard::class, 'messages'])->name("messages")->middleware(Authenticate::class);
 Route::match(['get', 'post'], 'test/{id}', [MainController::class, 'test']);
-Route::match(['get', 'post'], 'test', [
-    'before' => 'csrf',
-
-    MainController::class, 'test'
-]);
+Route::match(['get', 'post'], 'test', [ 'before' => 'csrf', MainController::class, 'test' ]);
 Route::get('/sell-fast', [MainController::class, 'sell_fast']);
 Route::get('/contact', [MainController::class, 'contact']);
 

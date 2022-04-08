@@ -19,49 +19,32 @@ class Product extends Model
 
  
 
-
-    public function getCityIdAttribute($value)
-    {
-        $city_id = (int)($value);
-
-        $city = City::find($city_id);
-        if($city == null){
-            return "-";
-        }
-        return $city->name;
-    }
-
-    public function getSubCategoryIdAttribute($value)
-    {
-        $id = (int)($value);
-
-        $cat = Category::find($id);
-        if($cat == null){
-            return "-";
-        }
-        return $cat->name;
-    }
-
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->diffForHumans();
     }
- 
+
 
     public function getQuantityAttribute($value)
     {
         return (int)($value);
     }
 
+
+    public function getPriceAttribute($value)
+    {
+        return number_format((int)($value));
+    }
+
     public function getFixedPriceAttribute($value)
     {
         if ($value == null) {
-            return false;
+            return "Negotiable";
         }
         if ($value == false) {
-            return false;
+            return "Negotiable";
         }
-        return true;
+        return "Fixed price";
     }
 
 
@@ -69,14 +52,14 @@ class Product extends Model
     {
         parent::boot();
 
-        self::creating(function($p){
+        self::creating(function ($p) {
             $p->slug = Utils::make_slug($p->name);
             $p->status = 1;
 
 
             return $p;
         });
-     
+
 
 
         static::deleting(function ($model) {
@@ -102,7 +85,7 @@ class Product extends Model
 
     public function user()
     {
-        return $this->belongsTo(Administrator::class,'user_id');
+        return $this->belongsTo(Administrator::class, 'user_id');
     }
 
 
@@ -141,7 +124,7 @@ class Product extends Model
     }
     public function get_thumbnail()
     {
-        $thumbnail = "";
+        $thumbnail = "no_image.jpg";
         if ($this->thumbnail != null) {
             if (strlen($this->thumbnail) > 3) {
                 $thumb = json_decode($this->thumbnail);
@@ -162,7 +145,7 @@ class Product extends Model
                 $images_json = json_decode($this->images);
                 foreach ($images_json as $key => $img) {
                     $img->src = url($img->src);
-                    $img->thumbnail = url( $img->thumbnail);
+                    $img->thumbnail = url($img->thumbnail);
                     $images[] = $img;
                 }
             }
@@ -170,6 +153,130 @@ class Product extends Model
         return $images;
     }
 
+
+    protected $appends = [
+        'seller_name',
+        'category_name',
+        'city_name',
+    ];
+
+    public function getCityNameAttribute($value)
+    {
+        $city_id = (int)($this->city_id);
+        $city = City::find($city_id);
+        if ($city == null) {
+            return "-";
+        }
+        $c = $city->country;
+        if($c!=null){
+            return $c->name.", ".$city->name;
+        }
+        return $city->name;
+    }
+
+
+    public function getCategoryNameAttribute()
+    {
+
+        $name = "-";
+        $cat = Category::find($this->category_id);
+        if ($cat == null) {
+            return "-";
+        }else {
+            if(
+                isset($cat->parent) &&
+                ($cat->parent > 0 ) 
+            ){
+                $name = $cat->name;
+                $_cat = Category::find($cat->parent);
+                if($_cat != null){
+                    $name = $_cat->name.", ".$cat->name;
+                }
+            }
+        }
+        return $name;
+    }
+
+    public function getSellerNameAttribute()
+    {
+        $u = Administrator::find($this->user_id);
+        if ($u == null) {
+            $u = new Administrator();
+        }
+        if ($u->company_name == null || (strlen($u->company_name) < 2)) {
+            return $u->name;
+        } else {
+            return $u->company_name;
+        }
+    }
+
+    public function getNatureofOfferAttribute($val)
+    {
+        
+        if($val == null || strlen($val)<2){
+            return "For sale";
+        }else{
+            return "For hire";
+        }
+    }
+    
+    public function init_attributes(){
+
+        $attributes = json_decode($this->attributes['attributes']);
+        if($attributes == null){
+            $attributes = [];
+        }
+        $att = new Attribute();
+        $att->type = 'text';
+        $att->name = 'Nature of offer';
+        $att->units = '';
+        $att->value = $this->nature_of_offer;; 
+        $attributes[] = $att;
+
+
+        $att = new Attribute();
+        $att->type = 'text';
+        $att->name = 'Quantity available';
+        $att->units = '';
+        $att->value = $this->quantity;; 
+        $attributes[] = $att;
+ 
+ 
+        $att = new Attribute();
+        $att->type = 'text';
+        $att->name = 'Category';
+        $att->units = '';
+        $att->value = $this->category_name;; 
+        $attributes[] = $att;
+
+
+        $att = new Attribute();
+        $att->type = 'text';
+        $att->name = 'Location';
+        $att->units = '';
+        $att->value = $this->city_name;
+        $attributes[] = $att; 
+
+
+        $att = new Attribute();
+        $att->type = 'text';
+        $att->name = 'Offered by';
+        $att->units = '';
+        $att->value = $this->seller_name;
+        $attributes[] = $att; 
+
+
+        $att = new Attribute();
+        $att->type = 'text';
+        $att->name = 'Posted';
+        $att->units = '';
+        $att->value = $this->created_at;
+        $attributes[] = $att; 
+
+        $this->attributes['attributes'] =  json_encode($attributes);
+
+    }
+    
     protected $fillable = [
         'name',
         'user_id',

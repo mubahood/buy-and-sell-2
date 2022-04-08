@@ -29,6 +29,10 @@ class Attribute extends Model
         parent::boot();
 
         self::creating(function ($model) {
+            if($model->units == null){
+                $model->units = "";
+            }
+            return $model;
         });
 
         self::created(function ($model) {
