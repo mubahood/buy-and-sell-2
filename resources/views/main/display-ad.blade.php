@@ -3,14 +3,14 @@ use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Support\Str;
 use App\Models\Category;
-
+use App\Models\Chat;
 
 $slug = request()->segment(1);
 $pro = Product::where('slug', $slug)->firstOrFail();
-if($pro){
-if(!$pro->user){
-dd("User not found.");
-}
+if ($pro) {
+    if (!$pro->user) {
+        dd('User not found.');
+    }
 }
 $products = [];
 $conds['category_id'] = $pro->category->id;
@@ -23,19 +23,19 @@ $url = $_SERVER['REQUEST_URI'];
 $is_logged_in = false;
 
 $user = Auth::user();
-$message_link = "/login";
-$message_text = "Start converstion";
-if($user!=null){
-if(isset($user->id)){
-$is_logged_in = true;
-if($pro->user_id == $user->id){
-$message_link = "javascript:;";
-$message_text = "This is your product.";
-}else{
-$chat_thred = Utils::get_chat_thread($user->id,$pro->user_id,$pro->id);
-$message_link = "/messages/".$chat_thred;
-}
-}
+$message_link = '/login';
+$message_text = 'Start converstion';
+if ($user != null) {
+    if (isset($user->id)) {
+        $is_logged_in = true;
+        if ($pro->user_id == $user->id) {
+            $message_link = 'javascript:;';
+            $message_text = 'This is your product.';
+        } else {
+            $chat_thred = Chat::get_chat_thread_id($user->id, $pro->user_id, $pro->id);
+            $message_link = '/messages/' . $chat_thred;
+        }
+    }
 }
 
 @endphp
@@ -46,34 +46,33 @@ $message_link = "/messages/".$chat_thred;
 
 @section('content')
 @section('title', $pro->name)
-{{--
-<link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/ad-details.css') }}">
+{{-- <link rel="stylesheet" href="{{ URL::asset('/assets/css/custom/ad-details.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('/assets/css/vendor/simple-lightbox.css') }}"> --}}
 
 
-<div class="container"> 
+<div class="container">
     <div class="row">
         <div class="col-lg-8">
             <div class="pt-3">
                 <div class="ad-details-slider-group ">
                     <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
-                         <ol class="carousel-indicators"> 
+                        <ol class="carousel-indicators">
                             <?php
-                                    $first_seen = false;
-                                    $active = "";
-                                    $counter_1 = -1; 
-                                ?>
+                            $first_seen = false;
+                            $active = '';
+                            $counter_1 = -1;
+                            ?>
                             @foreach ($images as $img)
-                            @php
-                            $active = "";
-                            $counter_1++;
-                            if(!$first_seen){
-                            $active = " active ";
-                            $first_seen = true;
-                            }
-                            @endphp
-                            <li data-target="#carouselExampleIndicators  <?= $active ?> "
-                                data-slide-to="<?= $counter_1 ?>" class="active"></li>
+                                @php
+                                    $active = '';
+                                    $counter_1++;
+                                    if (!$first_seen) {
+                                        $active = ' active ';
+                                        $first_seen = true;
+                                    }
+                                @endphp
+                                <li data-target="#carouselExampleIndicators  <?= $active ?> "
+                                    data-slide-to="<?= $counter_1 ?>" class="active"></li>
                             @endforeach
 
                         </ol>
@@ -81,23 +80,22 @@ $message_link = "/messages/".$chat_thred;
                         <?php $first_seen = false; ?>
                         <div class="carousel-inner slider-arrow">
                             @foreach ($images as $img)
-                            @php
-                            $active = "";
-                            if(!$first_seen){
-                            $active = " active ";
-                            $first_seen = true;
-                            }
-                            @endphp
+                                @php
+                                    $active = '';
+                                    if (!$first_seen) {
+                                        $active = ' active ';
+                                        $first_seen = true;
+                                    }
+                                @endphp
 
 
-                            <div class="carousel-item  <?= $active ?>  ">
-                                <a class="d-block w-100" href="#" href="#" data-toggle="modal"
-                                    data-target=".image-modal">
-                                    <img class="d-block w-100" src="{{$img->thumbnail}}" alt="details"
-                                        alt="First slide">
-                                </a>
-                            </div>
-
+                                <div class="carousel-item  <?= $active ?>  ">
+                                    <a class="d-block w-100" href="#" href="#" data-toggle="modal"
+                                        data-target=".image-modal">
+                                        <img class="d-block w-100" src="{{ $img->thumbnail }}" alt="details"
+                                            alt="First slide">
+                                    </a>
+                                </div>
                             @endforeach
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
@@ -120,11 +118,11 @@ $message_link = "/messages/".$chat_thred;
                 <ul class="ad-details-specific">
                     <li>
                         <h6>Price:</h6>
-                        <p>UGX {{ ($pro->price) }}
+                        <p>UGX {{ $pro->price }}
                             @if ($pro->fixed_price)
-                            <small><i>Fixed price</i></small>
+                                <small><i>Fixed price</i></small>
                             @else
-                            <small><i>Negotiable</i></small>
+                                <small><i>Negotiable</i></small>
                             @endif
                         </p>
                     </li>
@@ -137,45 +135,45 @@ $message_link = "/messages/".$chat_thred;
 
                     </li>
                     @foreach ($attributes as $item)
-                    @if ($item->type == "text" || $item->type == "textarea")
-                    <li>
-                        <h6>{{ $item->name }}:</h6>
-                        <p>{{ $item->value }} {{$item->units}}</p>
-                    </li>
-                    @elseif($item->type == "number")
-                    <li>
-                        <h6>{{ $item->name }}: </h6>
-                        <p>{{ ($item->value) }} {{$item->units}}</p>
-                    </li>
-                    @elseif($item->type == "select")
-                    <li>
-                        <h6>{{ $item->name }}: </h6>
-                        <p>{{ $item->value }} {{$item->units}}</p>
-                    </li>
-                    @elseif($item->type == "radio")
-                    <li>
-                        <h6>{{ $item->name }}: </h6>
-                        <p>{{ $item->value }} {{$item->units}}</p>
-                    </li>
-                    @elseif($item->type == "checkbox")
-                    <li>
-                        <h6 class="mr-3">{{ $item->name }}: </h6>
-                        <p> @php
-                            if($item->value){
-                            $i = 0;
-                            foreach ($item->value as $key => $value) {
-                            $i++;
-                            echo $value;
-                            if($i != count($item->value)){
-                            echo ", ";
-                            }else {
-                            echo $value.".";
-                            }
-                            }
-                            }
-                            @endphp {{$item->units}}</p>
-                    </li>
-                    @endif
+                        @if ($item->type == 'text' || $item->type == 'textarea')
+                            <li>
+                                <h6>{{ $item->name }}:</h6>
+                                <p>{{ $item->value }} {{ $item->units }}</p>
+                            </li>
+                        @elseif($item->type == 'number')
+                            <li>
+                                <h6>{{ $item->name }}: </h6>
+                                <p>{{ $item->value }} {{ $item->units }}</p>
+                            </li>
+                        @elseif($item->type == 'select')
+                            <li>
+                                <h6>{{ $item->name }}: </h6>
+                                <p>{{ $item->value }} {{ $item->units }}</p>
+                            </li>
+                        @elseif($item->type == 'radio')
+                            <li>
+                                <h6>{{ $item->name }}: </h6>
+                                <p>{{ $item->value }} {{ $item->units }}</p>
+                            </li>
+                        @elseif($item->type == 'checkbox')
+                            <li>
+                                <h6 class="mr-3">{{ $item->name }}: </h6>
+                                <p> @php
+                                    if ($item->value) {
+                                        $i = 0;
+                                        foreach ($item->value as $key => $value) {
+                                            $i++;
+                                            echo $value;
+                                            if ($i != count($item->value)) {
+                                                echo ', ';
+                                            } else {
+                                                echo $value . '.';
+                                            }
+                                        }
+                                    }
+                                @endphp {{ $item->units }}</p>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
@@ -296,7 +294,7 @@ $message_link = "/messages/".$chat_thred;
                         <h4>Contact this Number</h4><button class="fas fa-times" data-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <h3 class="modal-number">{{$pro->user->phone_number}} </h3>
+                        <h3 class="modal-number">{{ $pro->user->phone_number }} </h3>
                     </div>
                 </div>
             </div>
@@ -307,37 +305,37 @@ $message_link = "/messages/".$chat_thred;
             <div class="common-card p-0">
                 <div class="border-bottom pl-3 pr-3 pt-3 pb-2">
                     <h5 class="card-title ">@php
-                        echo config('app.currency')
-                        @endphp {{($pro->price)}}</h5>
+                        echo config('app.currency');
+                    @endphp {{ $pro->price }}</h5>
                 </div>
 
                 <div class="row pl-3 pt-2">
                     @php
-                    $profile_pic = "assets/images/avatar/03.jpg";
-                    if($pro->user!= null){
-                    if($pro->user->profile != null){
-                    if($pro->user->profile_photo != null){
-                    $imgs = json_decode($pro->user->profile_photo);
-                    if($imgs->src){
-                    $profile_pic = Utils::get_file_url($imgs->src);
-                    }
-                    }
-                    }
-                    }
-
+                        $profile_pic = 'assets/images/avatar/03.jpg';
+                        if ($pro->user != null) {
+                            if ($pro->user->profile != null) {
+                                if ($pro->user->profile_photo != null) {
+                                    $imgs = json_decode($pro->user->profile_photo);
+                                    if ($imgs->src) {
+                                        $profile_pic = Utils::get_file_url($imgs->src);
+                                    }
+                                }
+                            }
+                        }
+                        
                     @endphp
                     <div class="col-2">
-                        <a href="/{{$pro->user->username}}" class="author-img active">
+                        <a href="/{{ $pro->user->username }}" class="author-img active">
                             <img height="50" width="50" class="rounded-circle" src="{{ $profile_pic }}"
                                 alt="avatar"></a>
                     </div>
                     <div class="col">
                         <div class="author-meta">
-                            <h4 class="p-0 m-0"><a class="title-1" href="/{{$pro->user->username}}">
-                                    {{$pro->user->first_name}}
-                                    {{$pro->user->last_name}}
+                            <h4 class="p-0 m-0"><a class="title-1" href="/{{ $pro->user->username }}">
+                                    {{ $pro->user->first_name }}
+                                    {{ $pro->user->last_name }}
                                 </a></h4>
-                            <h5 class="subtitle-1 p-0 m-0">joined: {{$pro->user->created_at->diffForHumans()}}</h5>
+                            <h5 class="subtitle-1 p-0 m-0">joined: {{ $pro->user->created_at->diffForHumans() }}</h5>
                         </div>
                     </div>
                 </div>
@@ -348,33 +346,33 @@ $message_link = "/messages/".$chat_thred;
                         </a>
                     </div>
                     @section('mobile-nav')
-                    <div class="row  p-0 m-0 pt-2 pb-2 pl-1 pr-1" style="width: 100%">
-                        <div class="col-6   p-1 m-0">
-                            <a href="{{ $message_link }}" class="common-card number p-1  pl-3 pr-3 m-0 bg-primary">
-                                <h4 class="text-white">Chat</h4><i class="fas text-white fa-envelope"></i>
-                            </a>
+                        <div class="row  p-0 m-0 pt-2 pb-2 pl-1 pr-1" style="width: 100%">
+                            <div class="col-6   p-1 m-0">
+                                <a href="{{ $message_link }}" class="common-card number p-1  pl-3 pr-3 m-0 bg-primary">
+                                    <h4 class="text-white">Chat</h4><i class="fas text-white fa-envelope"></i>
+                                </a>
+                            </div>
+                            <div class="col-6 p-1 m-0" style="width: 100%">
+                                <button data-toggle="modal" data-target="#number"
+                                    class="common-card number p-0 m-0 p-1  pl-3 pr-3 bg-white border border-primary text-primary">
+                                    <h4 class="text-primary p-0 m-0">
+                                        Call
+                                    </h4><i class="fas text-primary fa-phone"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-6 p-1 m-0" style="width: 100%">
-                            <button data-toggle="modal" data-target="#number"
-                                class="common-card number p-0 m-0 p-1  pl-3 pr-3 bg-white border border-primary text-primary">
-                                <h4 class="text-primary p-0 m-0">
-                                    Call
-                                </h4><i class="fas text-primary fa-phone"></i>
-                            </button>
-                        </div>
-                    </div>
 
                     @endsection
                     <div class="col-12 ">
                         <button data-toggle="modal" data-target="#number"
                             class="common-card number p-2 pl-4 pr-4 bg-white border border-primary text-primary">
                             <h4 class="text-primary">
-                                ({{ Str::substr($pro->user->phone_number,0,4) }}) Call Now
+                                ({{ Str::substr($pro->user->phone_number, 0, 4) }}) Call Now
                             </h4><i class="fas text-primary fa-phone"></i>
                         </button>
                     </div>
                     <div class="col-12 ">
-                        <a href="/{{$pro->user->username}}"
+                        <a href="/{{ $pro->user->username }}"
                             class="common-card number p-2 pl-4 pr-4 bg-white  border-primary-dashed text-primary">
                             <h4 class="text-primary">
                                 Visit Shop
@@ -408,9 +406,9 @@ $message_link = "/messages/".$chat_thred;
 <div class="container mb-4">
     <h5 class="card-title p-0 m-0 ">Similar items</h5>
     @foreach ($products as $item)
-    <div class="col-md-8 pl-0 pr-0">
-        <x-product2 :item="$item" />
-    </div>
+        <div class="col-md-8 pl-0 pr-0">
+            <x-product2 :item="$item" />
+        </div>
     @endforeach
 </div>
 
@@ -434,20 +432,20 @@ $message_link = "/messages/".$chat_thred;
                     <ol class="carousel-indicators">
                         <?php
                         $first_seen = false;
-                        $active = "";
-                        $counter_1 = -1; 
-                    ?>
+                        $active = '';
+                        $counter_1 = -1;
+                        ?>
                         @foreach ($images as $img)
-                        @php
-                        $active = "";
-                        $counter_1++;
-                        if(!$first_seen){
-                        $active = " active ";
-                        $first_seen = true;
-                        }
-                        @endphp
-                        <li data-target="#carouselExampleIndicators1  <?= $active ?> " data-slide-to="<?= $counter_1 ?>"
-                            class="active"></li>
+                            @php
+                                $active = '';
+                                $counter_1++;
+                                if (!$first_seen) {
+                                    $active = ' active ';
+                                    $first_seen = true;
+                                }
+                            @endphp
+                            <li data-target="#carouselExampleIndicators1  <?= $active ?> "
+                                data-slide-to="<?= $counter_1 ?>" class="active"></li>
                         @endforeach
 
                     </ol>
@@ -455,19 +453,18 @@ $message_link = "/messages/".$chat_thred;
                     <?php $first_seen = false; ?>
                     <div class="carousel-inner slider-arrow">
                         @foreach ($images as $img)
-                        @php
-                        $active = "";
-                        if(!$first_seen){
-                        $active = " active ";
-                        $first_seen = true;
-                        }
-                        @endphp
+                            @php
+                                $active = '';
+                                if (!$first_seen) {
+                                    $active = ' active ';
+                                    $first_seen = true;
+                                }
+                            @endphp
 
 
-                        <div class="carousel-item  <?= $active ?>  ">
-                            <img class="d-block w-100" src="{{$img->src}}" alt="details" alt="First slide">
-                        </div>
-
+                            <div class="carousel-item  <?= $active ?>  ">
+                                <img class="d-block w-100" src="{{ $img->src }}" alt="details" alt="First slide">
+                            </div>
                         @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
@@ -492,6 +489,6 @@ $message_link = "/messages/".$chat_thred;
 
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-    let $gallery = new SimpleLightbox('.slider-arrow a', {});
-});
+        let $gallery = new SimpleLightbox('.slider-arrow a', {});
+    });
 </script>

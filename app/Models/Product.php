@@ -85,7 +85,7 @@ class Product extends Model
 
     public function user()
     {
-        return $this->belongsTo(Administrator::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 
@@ -199,9 +199,9 @@ class Product extends Model
 
     public function getSellerNameAttribute()
     {
-        $u = Administrator::find($this->user_id);
+        $u = User::find($this->user_id);
         if ($u == null) {
-            $u = new Administrator();
+            $u = new User();
         }
         if ($u->company_name == null || (strlen($u->company_name) < 2)) {
             return $u->name;

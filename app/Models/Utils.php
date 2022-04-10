@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Encore\Admin\Auth\Database\Administrator;
 use Hamcrest\Arrays\IsArray;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -132,7 +131,7 @@ class Utils
         ) {
             return 'Sender or receiver was not set.';
         }
-        
+
         if (
             ($receiver < 1) ||
             ($product_id < 1) ||
@@ -140,24 +139,24 @@ class Utils
         ) {
             return 'Sender or receiver or product id were not set.';
         }
-        
+
         if (
             $receiver ==  $sender
         ) {
             return 'Sender and receiver cannot be the same.';
         }
-        $sender_user = Administrator::find($sender);
-        if($sender_user == null){
+        $sender_user = User::find($sender);
+        if ($sender_user == null) {
             return "Sender not found";
         }
 
-        $receiver_user = Administrator::find($receiver);
-        if($receiver_user == null){
+        $receiver_user = User::find($receiver);
+        if ($receiver_user == null) {
             return "Receiver not found";
         }
 
         $product = Product::find($product_id);
-        if($product == null){
+        if ($product == null) {
             return "Product not found";
         }
 
@@ -165,7 +164,7 @@ class Utils
         $chat->sender = $sender;
         $chat->receiver = $receiver;
         $chat->product_id = $product_id;
-        $chat->body = isset($msg['body']) ?$msg['body']: "";
+        $chat->body = isset($msg['body']) ? $msg['body'] : "";
         $chat->thread = "";
         $chat->received = false;
         $chat->seen = false;
@@ -180,49 +179,13 @@ class Utils
         $chat->image = "";
         $chat->audio = "";
 
-        $chat->thread = Utils::get_chat_thread($chat->sender,$chat->receiver,$chat->product_id);
+        $chat->thread = Chat::get_chat_thread_id($chat->sender, $chat->receiver, $chat->product_id);
 
-        if(!$chat->save()){
+        if (!$chat->save()) {
             return "Failed to save message.";
         }
 
         return null;
-    }
-
-    public static function get_chat_thread($sender, $receiver, $product)
-    {
-        if ($sender == $receiver) {
-            return null;
-        }
-        $thread = $sender . "-" . $receiver . "-" . $product;
-
-        $results = DB::select(
-            'select * from chats where 
-                (sender = :sender AND
-                receiver = :receiver AND
-                product_id = :product)
-                OR 
-                (sender = :_receiver AND
-                receiver = :_sender AND
-                product_id = :_product) 
-                ',
-            [
-                'sender' => $sender,
-                'receiver' => $receiver,
-                'product' => $product,
-                '_sender' => $sender,
-                '_receiver' => $receiver,
-                '_product' => $product
-            ]
-        );
-        if (
-            $results != null &&
-            !empty($results)
-        ) {
-            $thread = $results[0]->thread;
-        }
-
-        return $thread;
     }
 
     public static function get_file_url($link)

@@ -18,7 +18,7 @@ class Dashboard extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        return view('metro.dashboard.index');
     }
 
     public function logout()

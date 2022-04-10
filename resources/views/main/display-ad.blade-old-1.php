@@ -1,6 +1,7 @@
 @php
 use App\Models\Product;
 use App\Models\Utils;
+use App\Models\Chat;
 use Illuminate\Support\Str;
 
 
@@ -27,7 +28,7 @@ if($pro->user_id == $user->id){
 $message_link = "javascript:;";
 $message_text = "This is your product.";
 }else{
-$chat_thred = Utils::get_chat_thread($user->id,$pro->user_id,$pro->id);
+$chat_thred = Chat::Chat::get_chat_thread_id($user->id,$pro->user_id,$pro->id);
 $message_link = "/messages/".$chat_thred;
 }
 }
@@ -48,8 +49,7 @@ $message_link = "/messages/".$chat_thred;
     <div class="container">
 
         <!-- Large modal -->
-        <div class="modal image-modal" style="background-color: #424E4E;" tabindex="-1" role="dialog"
-            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal image-modal" style="background-color: #424E4E;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
 
@@ -69,10 +69,10 @@ $message_link = "/messages/".$chat_thred;
 
 
                                 <?php
-                        $first_seen = false;
-                        $active = "";
-                        $counter_1 = -1; 
-                    ?>
+                                $first_seen = false;
+                                $active = "";
+                                $counter_1 = -1;
+                                ?>
                                 @foreach ($images as $img)
                                 @php
                                 $active = "";
@@ -82,8 +82,7 @@ $message_link = "/messages/".$chat_thred;
                                 $first_seen = true;
                                 }
                                 @endphp
-                                <li data-target="#carouselExampleIndicators1  <?= $active ?> "
-                                    data-slide-to="<?= $counter_1 ?>" class="active"></li>
+                                <li data-target="#carouselExampleIndicators1  <?= $active ?> " data-slide-to="<?= $counter_1 ?>" class="active"></li>
                                 @endforeach
 
                             </ol>
@@ -101,19 +100,16 @@ $message_link = "/messages/".$chat_thred;
 
 
                                 <div class="carousel-item  <?= $active ?>  ">
-                                    <img class="d-block w-100" src="{{$img->thumbnail}}" alt="details"
-                                        alt="First slide">
+                                    <img class="d-block w-100" src="{{$img->thumbnail}}" alt="details" alt="First slide">
                                 </div>
 
                                 @endforeach
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button"
-                                data-slide="prev">
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button"
-                                data-slide="next">
+                            <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -146,9 +142,9 @@ $message_link = "/messages/".$chat_thred;
 
 
                                 <?php
-                                    $first_seen = false;
-                                    $active = "";
-                                    $counter_1 = -1; 
+                                $first_seen = false;
+                                $active = "";
+                                $counter_1 = -1;
                                 ?>
                                 @foreach ($images as $img)
                                 @php
@@ -159,8 +155,7 @@ $message_link = "/messages/".$chat_thred;
                                 $first_seen = true;
                                 }
                                 @endphp
-                                <li data-target="#carouselExampleIndicators  <?= $active ?> "
-                                    data-slide-to="<?= $counter_1 ?>" class="active"></li>
+                                <li data-target="#carouselExampleIndicators  <?= $active ?> " data-slide-to="<?= $counter_1 ?>" class="active"></li>
                                 @endforeach
 
                             </ol>
@@ -178,28 +173,23 @@ $message_link = "/messages/".$chat_thred;
 
 
                                 <div class="carousel-item  <?= $active ?>  ">
-                                    <a class="d-block w-100" href="#" href="#" data-toggle="modal"
-                                        data-target=".image-modal">
-                                        <img class="d-block w-100" src="{{$img->thumbnail}}" alt="details"
-                                            alt="First slide">
+                                    <a class="d-block w-100" href="#" href="#" data-toggle="modal" data-target=".image-modal">
+                                        <img class="d-block w-100" src="{{$img->thumbnail}}" alt="details" alt="First slide">
                                     </a>
                                 </div>
 
                                 @endforeach
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                data-slide="prev">
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                data-slide="next">
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <div class="cross-vertical-badge ad-details-badge"><i
-                                class="fas fa-clipboard-check"></i><span>ZOOM</span></div>
+                        <div class="cross-vertical-badge ad-details-badge"><i class="fas fa-clipboard-check"></i><span>ZOOM</span></div>
                     </div>
                 </div>
                 <div class="common-card">
@@ -274,7 +264,7 @@ $message_link = "/messages/".$chat_thred;
                     </div>
                     <p class="ad-details-desc">{{ $pro->category->description }}</p>
                 </div>
-                 <div class="common-card" id="review">
+                <div class="common-card" id="review">
                     <div class="card-header">
                         <h5 class="card-title">reviews (@php
                             echo count($pro->reviews)
@@ -288,9 +278,7 @@ $message_link = "/messages/".$chat_thred;
                                 <div class="review-user">
                                     <div class="review-head">
                                         <div class="review-profile">
-                                            <a href="#" class="review-avatar"><img
-                                                    src="<?= URL::asset('assets/') ?>/images/avatar/03.jpg"
-                                                    alt="review"></a>
+                                            <a href="#" class="review-avatar"><img src="<?= URL::asset('assets/') ?>/images/avatar/03.jpg" alt="review"></a>
                                             <div class="review-meta">
                                                 <h6><a href="#">{{$item->user->email}}
                                                         -</a><span>{{$item->created_at->diffForHumans()}}</span></h6>
@@ -328,10 +316,8 @@ $message_link = "/messages/".$chat_thred;
 
                                         <P class="text-left mb-2">You need to be loggedin in order to submit your review
                                             about this product.</P>
-                                        <a href="register" class="btn btn-inline mt-4 mb-2 post-btn"><i
-                                                class="fas fa-plus-circle"></i><span>CREATE ACCOUNT</span></a>
-                                        <a href="login" class="btn btn-inline mt-4 mb-2 post-btn"><i
-                                                class="fas fa-plus-circle"></i><span>LOGIN</span></a>
+                                        <a href="register" class="btn btn-inline mt-4 mb-2 post-btn"><i class="fas fa-plus-circle"></i><span>CREATE ACCOUNT</span></a>
+                                        <a href="login" class="btn btn-inline mt-4 mb-2 post-btn"><i class="fas fa-plus-circle"></i><span>LOGIN</span></a>
 
 
                                     </div>
@@ -350,8 +336,7 @@ $message_link = "/messages/".$chat_thred;
                                 </div>
                                 <div class="form-group"><input type="email" class="form-control" placeholder="Email">
                                 </div>
-                                <div class="form-group"><select name="reason" required
-                                        class="form-control custom-select">
+                                <div class="form-group"><select name="reason" required class="form-control custom-select">
                                         <option></option>
                                         <option value="Qoute">Qoute</option>
                                         <option value="Product quality">product quality</option>
@@ -364,19 +349,16 @@ $message_link = "/messages/".$chat_thred;
                                 <input value="4" type="radio" name="rating" id="star-2"><label for="star-2"></label>
                                 <input value="3" type="radio" name="rating" id="star-3"><label for="star-3"></label>
                                 <input value="2" type="radio" name="rating" id="star-4"><label for="star-4"></label>
-                                <input value="1" type="radio" required name="rating" id="star-5"><label
-                                    for="star-5"></label>
+                                <input value="1" type="radio" required name="rating" id="star-5"><label for="star-5"></label>
                             </div>
-                            <div class="form-group"><textarea required name="comment" class="form-control"
-                                    placeholder="Describe"></textarea>
-                            </div><button type="submit" class="btn btn-inline review-submit"><i
-                                    class="fas fa-tint"></i><span>drop your
+                            <div class="form-group"><textarea required name="comment" class="form-control" placeholder="Describe"></textarea>
+                            </div><button type="submit" class="btn btn-inline review-submit"><i class="fas fa-tint"></i><span>drop your
                                     review</span></button>
                         </form>
 
                         @endauth
                     </div>
-                </div>  
+                </div>
             </div>
 
             <div class="modal" id="number">
@@ -418,8 +400,7 @@ $message_link = "/messages/".$chat_thred;
                         @endphp
                         <div class="col-2">
                             <a href="/{{$pro->user->profile->username}}" class="author-img active">
-                                <img 
-                                    height="50" width="50" class="rounded-circle" src="{{ $profile_pic }}" alt="avatar"></a>
+                                <img height="50" width="50" class="rounded-circle" src="{{ $profile_pic }}" alt="avatar"></a>
                         </div>
                         <div class="col">
                             <div class="author-meta">
@@ -428,24 +409,24 @@ $message_link = "/messages/".$chat_thred;
                                         {{$pro->user->profile->last_name}}
                                     </a></h4>
                                 <h5 class="subtitle-1 p-0 m-0">joined: {{$pro->user->created_at->diffForHumans()}}</h5>
-                            </div> 
-                        </div> 
+                            </div>
+                        </div>
                     </div>
                     <div class="row pl-3 pr-3 pt-2">
-                        <div class="col-12 "> 
+                        <div class="col-12 ">
                             <a href="{{ $message_link }}" class="common-card number p-2 pl-4 pr-4 bg-primary">
                                 <h4 class="text-white">Send Message</h4><i class="fas text-white fa-envelope"></i>
                             </a>
                         </div>
-                        <div class="col-12 "> 
+                        <div class="col-12 ">
                             <button data-toggle="modal" data-target="#number" class="common-card number p-2 pl-4 pr-4 bg-white border border-primary text-primary">
                                 <h4 class="text-primary">
                                     ({{ Str::substr($pro->user->profile->phone_number,0,4) }}) Call Now
                                 </h4><i class="fas text-primary fa-phone"></i>
                             </button>
                         </div>
-                        <div class="col-12 "> 
-                            <a href="/{{$pro->user->profile->username}}"   class="common-card number p-2 pl-4 pr-4 bg-white  border-primary-dashed text-primary">
+                        <div class="col-12 ">
+                            <a href="/{{$pro->user->profile->username}}" class="common-card number p-2 pl-4 pr-4 bg-white  border-primary-dashed text-primary">
                                 <h4 class="text-primary">
                                     Visit Shop
                                 </h4><i class="fas text-primary fa-eye"></i>
@@ -454,8 +435,8 @@ $message_link = "/messages/".$chat_thred;
                     </div>
 
                 </div>
- 
- 
+
+
 
 
                 <div class="common-card p-0">
@@ -475,12 +456,12 @@ $message_link = "/messages/".$chat_thred;
         </div>
     </div>
 </section>
- 
+
 @endsection
 
 
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-    let $gallery = new SimpleLightbox('.slider-arrow a', {});
-});
+        let $gallery = new SimpleLightbox('.slider-arrow a', {});
+    });
 </script>

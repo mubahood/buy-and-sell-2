@@ -4,8 +4,7 @@ use App\Models\Attribute;
 use App\Models\Utils;
 use Illuminate\Support\Str;
 use App\Models\Category;
-
-
+use App\Models\Chat;
 
 $slug = request()->segment(1);
 $pro = Product::where('slug', $slug)->firstOrFail();
@@ -31,8 +30,8 @@ $url = $_SERVER['REQUEST_URI'];
 $is_logged_in = false;
 
 $user = Auth::user();
-$message_link = '/login';
-$message_text = 'Start converstion';
+$message_link = url('/register');
+$message_text = 'send message';
 if ($user != null) {
     if (isset($user->id)) {
         $is_logged_in = true;
@@ -40,8 +39,8 @@ if ($user != null) {
             $message_link = 'javascript:;';
             $message_text = 'This is your product.';
         } else {
-            $chat_thred = Utils::get_chat_thread($user->id, $pro->user_id, $pro->id);
-            $message_link = '/messages/' . $chat_thred;
+            $chat_thred = Chat::get_chat_thread_id($user->id, $pro->user_id, $pro->id);
+            $message_link = url('dashboard/chats/' . $chat_thred);
         }
     }
 }
@@ -183,13 +182,22 @@ $first_seen = false;
                     Show Phone Number
                 </a>
                 <div class="separator my-5"></div>
-                <a href="#" class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
-                        class="las la-wallet fs-2 me-2"></i>
-                    SEND MESSAGE</a>
+                @if ($is_logged_in)
+                    <a href="{{ $message_link }}"
+                        class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
+                            class="las la-wallet fs-2 me-2"></i>
+                        {{ $message_text }}</a>
+                @else
+                    <a href="{{ url('register') }}"
+                        class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
+                            class="las la-wallet fs-2 me-2"></i>
+                        SEND MESSAGE</a>
+                @endif
+
             </div>
         </div>
 
-        <div class="card shadow-sm mt-5 card-p-3"> 
+        <div class="card shadow-sm mt-5 card-p-3">
             <div class="card-body">
                 <ul class="list-group">
                     <li class="list-group-item active bg-dark border-dark">Stay safe!</li>
