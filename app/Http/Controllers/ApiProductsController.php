@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostComment;
@@ -15,16 +16,57 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
+    public function upload_temp_file(Request $request)
+    {
+
+        
+
+        if (
+            isset($_FILES['file']) &&
+            isset($_GET['user_id']) &&
+            isset($_FILES['file']['error']) &&
+            ($_FILES['file']['error'] == 0)
+        ) {
+
+
+            $img = $_FILES['file'];
+            $raw_images = [];
+            $raw_images['name'][] = $img['name'];
+            $raw_images['type'][] = 'image/png';
+            $raw_images['tmp_name'][] = $img['tmp_name'];
+            $raw_images['error'][] = $img['error'];
+            $raw_images['size'][] = $img['size'];
+
+            $data = Utils::upload_images($raw_images);
+            $user_id = $_GET['user_id'];
+            if(
+                isset($data[0]) &&
+                isset($data[0]['src']) &&
+                isset($data[0]['thumbnail']) &&
+                isset($data[0]['user_id']) 
+            ){
+                $img = $data[0];
+                $new_img = new Image();
+                $new_img->src = $img['src'];
+                $new_img->user_id = $user_id;
+                $new_img->thumbnail = $img['thumbnail']; 
+                $new_img->name = 'temp';
+                $new_img->save(); 
+            }
+            die("1");
+        }
+        die("0");
+    }
     public function delete(Request $request)
     {
         $id = (int) ($request->id ? $request->id : 0);
-        if($id<1){
+        if ($id < 1) {
             return Utils::response(['message' => 'Poduct ID is required.', 'status' => 0]);
         }
 
         $pro = Product::find($id);
 
-        if($pro == null){
+        if ($pro == null) {
             return Utils::response(['message' => "Poduct with ID  {$id} no found.", 'status' => 0]);
         }
         $pro->delete();
@@ -36,10 +78,11 @@ class ApiProductsController
         return view('dashboard.upload');
     }
 
-    public function delete_post(Request $request){
+    public function delete_post(Request $request)
+    {
         return "delete_post";
     }
-    
+
     public function create_post(Request $request)
     {
         if (!isset($_POST['user_id'])) {
@@ -64,15 +107,15 @@ class ApiProductsController
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
 
-                    if(isset($_FILES['audio'])){
-                        if($_FILES['audio']!=null){
-                            if(isset($_FILES['audio']['tmp_name'])){
+                    if (isset($_FILES['audio'])) {
+                        if ($_FILES['audio'] != null) {
+                            if (isset($_FILES['audio']['tmp_name'])) {
                                 $p->audio = Utils::upload_file($_FILES['audio']);
                             };
                         }
                         unset($_FILES['audio']);
                     }
-                    
+
                     foreach ($_FILES as $img) {
 
                         if (
@@ -102,7 +145,7 @@ class ApiProductsController
                         }
                     }
 
-                    if(isset($raw_images)){
+                    if (isset($raw_images)) {
                         $images['images'] = $raw_images;
                         $uploaded_images = Utils::upload_images($images['images']);
                     }

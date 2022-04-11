@@ -173,7 +173,7 @@ if ($edit_item == null) {
                     <div class="card-header">
                         <h2 class="card-title">Create</h2>
                     </div>
-                    @csrf
+                     
                     <div class="card-body">
                         @include('metro.components.input-select', [
                             'label' => 'Parent',

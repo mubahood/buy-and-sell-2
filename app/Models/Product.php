@@ -17,7 +17,7 @@ class Product extends Model
 {
     use HasFactory;
 
- 
+
 
     public function getCreatedAtAttribute($value)
     {
@@ -36,16 +36,7 @@ class Product extends Model
         return number_format((int)($value));
     }
 
-    public function getFixedPriceAttribute($value)
-    {
-        if ($value == null) {
-            return "Negotiable";
-        }
-        if ($value == false) {
-            return "Negotiable";
-        }
-        return "Fixed price";
-    }
+   
 
 
     public static function boot()
@@ -55,8 +46,7 @@ class Product extends Model
         self::creating(function ($p) {
             $p->slug = Utils::make_slug($p->name);
             $p->status = 1;
-
-
+            
             return $p;
         });
 
@@ -168,8 +158,8 @@ class Product extends Model
             return "-";
         }
         $c = $city->country;
-        if($c!=null){
-            return $c->name.", ".$city->name;
+        if ($c != null) {
+            return $c->name . ", " . $city->name;
         }
         return $city->name;
     }
@@ -182,15 +172,15 @@ class Product extends Model
         $cat = Category::find($this->category_id);
         if ($cat == null) {
             return "-";
-        }else {
-            if(
+        } else {
+            if (
                 isset($cat->parent) &&
-                ($cat->parent > 0 ) 
-            ){
+                ($cat->parent > 0)
+            ) {
                 $name = $cat->name;
                 $_cat = Category::find($cat->parent);
-                if($_cat != null){
-                    $name = $_cat->name.", ".$cat->name;
+                if ($_cat != null) {
+                    $name = $_cat->name . ", " . $cat->name;
                 }
             }
         }
@@ -210,27 +200,18 @@ class Product extends Model
         }
     }
 
-    public function getNatureofOfferAttribute($val)
+
+    public function init_attributes()
     {
-        
-        if($val == null || strlen($val)<2){
-            return "For sale";
-        }else{
-            return "For hire";
-        }
-    }
-    
-    public function init_attributes(){
 
         $attributes = json_decode($this->attributes['attributes']);
-        if($attributes == null){
+        if ($attributes == null) {
             $attributes = [];
         }
         $att = new Attribute();
         $att->type = 'text';
         $att->name = 'Nature of offer';
         $att->units = '';
-        $att->value = $this->nature_of_offer;; 
         $attributes[] = $att;
 
 
@@ -238,15 +219,15 @@ class Product extends Model
         $att->type = 'text';
         $att->name = 'Quantity available';
         $att->units = '';
-        $att->value = $this->quantity;; 
+        $att->value = $this->quantity;;
         $attributes[] = $att;
- 
- 
+
+
         $att = new Attribute();
         $att->type = 'text';
         $att->name = 'Category';
         $att->units = '';
-        $att->value = $this->category_name;; 
+        $att->value = $this->category_name;;
         $attributes[] = $att;
 
 
@@ -255,7 +236,7 @@ class Product extends Model
         $att->name = 'Location';
         $att->units = '';
         $att->value = $this->city_name;
-        $attributes[] = $att; 
+        $attributes[] = $att;
 
 
         $att = new Attribute();
@@ -263,7 +244,7 @@ class Product extends Model
         $att->name = 'Offered by';
         $att->units = '';
         $att->value = $this->seller_name;
-        $attributes[] = $att; 
+        $attributes[] = $att;
 
 
         $att = new Attribute();
@@ -271,12 +252,19 @@ class Product extends Model
         $att->name = 'Posted';
         $att->units = '';
         $att->value = $this->created_at;
-        $attributes[] = $att; 
+        $attributes[] = $att;
 
         $this->attributes['attributes'] =  json_encode($attributes);
-
     }
-    
+
+    public function get_price(){
+        return ((int)( str_replace(',','',$this->price) ));
+    }
+
+    public function get_quantity(){
+        return ((int)( str_replace(',','',$this->quantity) ));
+    }
+
     protected $fillable = [
         'name',
         'user_id',

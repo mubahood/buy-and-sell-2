@@ -4,6 +4,7 @@ $_hint = isset($hint) && !empty($hint) ? $hint : '';
 $_required = isset($required) && !empty($required) ? $required : '';
 $_attributes = isset($attributes) && !empty($attributes) ? $attributes : [];
 $_value = isset($value) && !empty($value) ? $value : '';
+$_classes = isset($classes) && !empty($classes) ? $classes : '';
 
 $_name = $_attributes['name']; 
 $_id = $_name;
@@ -15,17 +16,16 @@ if(
 ){
     $_value = old($_name);
 }
-
-//$_id = 'metro_' . rand(100000000, 10000000000);
-
+ 
 @endphp
 <div class="form-group">
 
     @if (!empty($label))
         <label for="{{ $_id }}"
-            class="form-label fw-bolder text-dark fs-6 {{ $_required }}">{{ $_label }}</label>
+            class="form-label fw-normal text-dark fs-3  p-0 m-0 {{ $_required }}">{{ $_label }}</label>
     @endif
-    <input id="{{ $_id }}" class="form-control form-control form-control-solid"
+    {{-- form-control-solid --}}
+    <input id="{{ $_id }}" class="form-control form-control {{ $_classes }}"
         @foreach ($_attributes as $key => $value) {{ $key . '=' . $value }} @endforeach {{ $_required }}
         value="{{ $_value }}" />
     @error($_name)
@@ -34,7 +34,7 @@ if(
 
 
     @if (!empty($_hint))
-        <div class="text-muted mt-2">{{ $_hint }}</div>
+        <div class="text-muted mt-09">{{ $_hint }}</div>
     @endif
 
 </div>

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route; //new staff
 
 
 Route::post('products', [ApiProductsController::class, 'create']);
+Route::post('upload-temp-file', [ApiProductsController::class, 'upload_temp_file']);
+Route::post('products', [ApiProductsController::class, 'create']);
 Route::get('upload', [ApiProductsController::class, 'upload']);
 Route::get('products', [ApiProductsController::class, 'index']);
 Route::post('delete-product', [ApiProductsController::class, 'delete']);

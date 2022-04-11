@@ -236,6 +236,7 @@ class Utils
 
         $uploaded_images = array();
         if (isset($files['name'])) {
+            
             for ($i = 0; $i < count($files['name']); $i++) {
                 if (
                     isset($files['name'][$i]) &&
@@ -243,7 +244,7 @@ class Utils
                     isset($files['tmp_name'][$i]) &&
                     isset($files['error'][$i]) &&
                     isset($files['size'][$i])
-                ) {
+                ) { 
                     $img['name'] = $files['name'][$i];
                     $img['type'] = $files['type'][$i];
                     $img['tmp_name'] = $files['tmp_name'][$i];
@@ -296,7 +297,7 @@ class Utils
                     $uploaded_images[] = $ready_image;
                 }
             }
-        }
+        } 
 
         return $uploaded_images;
     }

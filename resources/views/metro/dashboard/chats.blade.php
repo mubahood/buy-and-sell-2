@@ -20,16 +20,14 @@ if ($id != null) {
         } else {
             $product_id = $product->id;
             $chat_is_enabled = '';
-            
 
             $_ids = $vals = explode('-', $id);
-            if(isset($_ids[0]) && $_ids[1]){
-                if( ((int)($_ids[0])) == ((int)($u->id))){
+            if (isset($_ids[0]) && $_ids[1]) {
+                if (((int) $_ids[0]) == ((int) $u->id)) {
                     $receiver_id = $_ids[1];
-                }else{
+                } else {
                     $receiver_id = $_ids[0];
                 }
-
             }
         }
 
@@ -70,7 +68,6 @@ $chat_threads = Chat::get_chat_threads($u->id);
                         data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                         data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header"
                         data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
-
                         @foreach ($chat_threads as $thread)
                             <a href="{{ url('/dashboard/chats/' . $thread->thread) }}"
                                 class="d-flex flex-stack py-4 bg-hover-light">
@@ -262,7 +259,7 @@ $chat_threads = Chat::get_chat_threads($u->id);
                         <!--end::Message(template for in)-->
 
                         @foreach ($chat_thread as $c)
-                            @if ( ((int)($c->sender)) != $u->id)
+                            @if (((int) $c->sender) != $u->id)
                                 <div class="d-flex justify-content-start mb-10">
                                     <div class="d-flex flex-column align-items-start">
                                         <div class="d-flex align-items-center mb-2">
@@ -350,7 +347,7 @@ $chat_threads = Chat::get_chat_threads($u->id);
     <script>
         $(document).ready(function() {
 
-       
+
 
 
             "use strict";
@@ -364,19 +361,19 @@ $chat_threads = Chat::get_chat_threads($u->id);
                         var sender_id = "{{ $u->id }}";
                         var receiver_id = "{{ $receiver_id }}";
                         var product_id = "{{ $product_id }}";
-                        
+
 
                         $.post(url, {
-                                'sender' : sender_id,
-                                'receiver' : receiver_id,
-                                'product_id' : product_id,
-                                'body' : n.value,
+                                'sender': sender_id,
+                                'receiver': receiver_id,
+                                'product_id': product_id,
+                                'body': n.value,
                             },
                             function(data) {
 
                             });
 
- 
+
                         var o, a = t.querySelector('[data-kt-element="template-out"]'),
                             l = t.querySelector('[data-kt-element="template-in"]');
                         (o = a.cloneNode(!0)).classList.remove("d-none"), o.querySelector(

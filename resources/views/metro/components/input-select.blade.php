@@ -8,7 +8,7 @@ $_options = isset($options) && !empty($options) ? $options : [];
 //$_id = 'metro_' . rand(100000000, 10000000000);
 $_name = $_attributes['name'];
 $_id = $_name;
-
+$_classes = isset($classes) && !empty($classes) ? $classes : '';
 
 if(
     old($_name) != null  &&
@@ -23,10 +23,10 @@ if(
 
     @if (!empty($label))
         <label for="{{ $_id }}"
-            class="form-label fw-bolder text-dark fs-6 {{ $_required }}">{{ $_label }}</label>
+            class="form-label fw-normal text-dark fs-3  p-0 m-0 {{ $_required }}">{{ $_label }}</label>
     @endif
 
-    <select id="{{ $_id }}" class="form-select form-control form-select-solid" data-control="select2"
+    <select id="{{ $_id }}" class="form-select form-control form-control-sm {{$_classes}}" data-control="select2"
         data-placeholder="Select an option"
         @foreach ($_attributes as $key => $value) {{ $key . '=' . $value }} @endforeach {{ $_required }}
         value="{{ old($_name) }}">

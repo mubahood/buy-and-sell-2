@@ -5,9 +5,15 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardMenuControler;
 use App\Http\Controllers\DashboardChatsControler;
+use App\Http\Controllers\DashboardProductsControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UsersController;
 use App\Http\Middleware\Authenticate;
+
+
+Route::resource('users', UsersController::class);
+
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/register', [AuthController::class, 'register'])->name("register");
@@ -15,6 +21,7 @@ Route::post('/register', [AuthController::class, 'store']);
 Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard")->middleware(Authenticate::class);
 Route::resource('/dashboard/menu', DashboardMenuControler::class)->middleware(Authenticate::class);
 Route::resource('/dashboard/chats', DashboardChatsControler::class)->middleware(Authenticate::class);
+Route::resource('/dashboard/products', DashboardProductsControler::class)->middleware(Authenticate::class);
 
 Route::get('/about', [MainController::class, 'about']);
 //Route::get('/register', [MainController::class, 'register'])->name("register");
@@ -39,7 +46,7 @@ Route::get('/contact', [MainController::class, 'contact']);
 
 Route::match(['get', 'post'], '/{id}', [MainController::class, 'slugSwitcher']);
 
-    
+
     /*Route::get('/', function () {
     return view('welcome');
 });*/
