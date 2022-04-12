@@ -16,15 +16,67 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
+    public function logout()
+    {
+        die("logout...");
+    }
+
     public function index()
     {
         die("listing...");
         return view('metro.auth.register');
     }
 
+    public function login()
+    {
+        return view('metro.auth.login');
+    }
+
     public function register()
     {
         return view('metro.auth.register');
+    }
+
+    public function do_login(Request $request)
+    {
+
+        $this->validate($request, [
+            'email' => 'required|max:100|min:3',
+            'password_1' => 'required|max:200|min:4',
+        ]);
+
+
+        $password = $request->password_1;
+        $email = $request->email;
+
+
+        $old_user = User::where('email', $email)->first();
+        if ($old_user == null) {
+            $old_user = User::where('username', $email)->first();
+        }
+
+        if ($old_user  == null) {
+            $errors['email'] = "Account with email address you provided does not exist.";
+            return redirect('login')
+                ->withErrors($errors)
+                ->withInput();
+            die();
+        }
+
+
+
+        $_u['username'] = $email;
+        $_u['password'] = $password;
+
+        if (Auth::attempt($_u, true)) {
+            return redirect('dashboard');
+        } else {
+            $errors['password_1'] = "You entered a wrong password.";
+            return redirect('login')
+                ->withErrors($errors)
+                ->withInput();
+        }
+        die();
     }
 
     public function store(Request $request)

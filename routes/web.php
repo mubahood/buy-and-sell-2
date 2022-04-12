@@ -12,12 +12,19 @@ use App\Http\Controllers\UsersController;
 use App\Http\Middleware\Authenticate;
 
 
-Route::resource('users', UsersController::class);
 
+
+Route::resource('dashboard/users', UsersController::class)->middleware(Authenticate::class);
 
 Route::get('/', [MainController::class, 'index']);
+Route::get('/banner/{id}', [MainController::class, 'index']);
+Route::get('dashboard/profile', [UsersController::class, 'edit'])->middleware(Authenticate::class);
 Route::get('/register', [AuthController::class, 'register'])->name("register");
 Route::post('/register', [AuthController::class, 'store']);
+Route::get('/login', [AuthController::class, 'login'])->name("register");
+Route::post('/login', [AuthController::class, 'do_login']);
+
+
 Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard")->middleware(Authenticate::class);
 Route::resource('/dashboard/menu', DashboardMenuControler::class)->middleware(Authenticate::class);
 Route::resource('/dashboard/chats', DashboardChatsControler::class)->middleware(Authenticate::class);
@@ -26,7 +33,7 @@ Route::resource('/dashboard/products', DashboardProductsControler::class)->middl
 Route::get('/about', [MainController::class, 'about']);
 //Route::get('/register', [MainController::class, 'register'])->name("register");
 Route::match(['get', 'post'], '/password-reset', [MainController::class, 'password_reset'])->name("password-reset");
-Route::match(['get', 'post'], '/login', [MainController::class, 'login'])->name("login");
+//Route::match(['get', 'post'], '/login', [MainController::class, 'login'])->name("login");
 //Route::post('/register', [MainController::class, 'register'])->name("register");
 
 Route::get('/complete-profile-request', [Dashboard::class, 'complete_profile_request'])->name("complete_profile_request")->middleware(Authenticate::class);

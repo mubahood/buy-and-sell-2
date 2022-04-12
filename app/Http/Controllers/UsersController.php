@@ -11,7 +11,9 @@ class UsersController extends Controller
     {
         return $dataTable->render('users');
     }
-}
 
- 
- 
+    public function edit()
+    {
+        return  view('metro.dashboard.users-create');
+    }
+}

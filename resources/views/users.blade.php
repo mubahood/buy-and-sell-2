@@ -1,7 +1,11 @@
 @extends('metro.layout.layout-dashboard')
 
 @section('dashboard-content')
-    {!! $dataTable->table() !!}
+    <div class="card">
+        <div class="card-body">
+            {!! $dataTable->table() !!}
+        </div>
+    </div>
 @endsection
 
 @section('footer')

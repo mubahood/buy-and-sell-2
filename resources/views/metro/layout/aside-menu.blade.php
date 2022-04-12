@@ -1,5 +1,9 @@
 <?php
 use App\Models\MenuItem;
+$u = auth()->user();
+if ($u == null) {
+    $u = new User();
+}
 
 $menu_items = MenuItem::where([])
     ->orderBy('order', 'Asc')
@@ -49,17 +53,22 @@ $menu_items = MenuItem::where([])
 
                 @foreach ($menu_items as $item)
                     @if ($item->parent_id < 1)
+                        @php
+                            if ($u->user_type != 'admin') {
+                                if ($item->role != 'both' && $item->accept != 'user') {
+                                    continue;
+                                }
+                            }
+                        @endphp
+
                         @if (count($item->kids) > 0)
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                                 <span class="menu-link">
                                     <span class="menu-icon">
                                         {!! $item->icon !!}
                                     </span>
 
-                                    
-
-                                    
 
 
                                     <span class="menu-title">{{ $item->title }}</span>
@@ -79,8 +88,17 @@ $menu_items = MenuItem::where([])
                                 </div>
                             </div>
                         @else
+                            @php
+                                $active = '';
+                                $_seg = request()->segment(2);
+                                if ($item->uri == '/dashboard/') {
+                                    $active = ' active ';
+                                } elseif (strpos($item->uri, $_seg)) {
+                                    $active = ' active ';
+                                }
+                            @endphp
                             <div class="menu-item">
-                                <a class="menu-link" href="{{ url($item->uri) }}">
+                                <a class="menu-link {{ $active }}" href="{{ url($item->uri) }}">
                                     <span class="menu-icon">
                                         {!! $item->icon !!}
                                     </span>
@@ -94,10 +112,9 @@ $menu_items = MenuItem::where([])
         </div>
     </div>
     <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-        <a href="../../demo1/dist/documentation/getting-started.html" class="btn btn-custom btn-primary w-100"
-            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
-            title="200+ in-house components and 3rd-party plugins">
-            <span class="btn-label">Docs &amp; Components</span>
+        <a href="javascript:;" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover"
+            data-bs-dismiss-="click" title="200+ in-house components and 3rd-party plugins">
+            <span class="btn-label">Help &amp; Support</span>
             <span class="svg-icon btn-icon svg-icon-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path opacity="0.3"

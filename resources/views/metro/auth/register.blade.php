@@ -8,7 +8,7 @@
         <div class="mb-10 text-center">
             <h1 class="text-dark mb-3">Create an Account</h1>
             <div class="text-gray-400 fw-bold fs-4">Already have an account?
-                <a href="../../demo1/dist/authentication/layouts/basic/sign-in.html" class="link-primary fw-bolder">Sign in
+                <a href="{{ url('login') }}" class="link-primary fw-bolder">Sign in
                     here</a>
             </div>
         </div>

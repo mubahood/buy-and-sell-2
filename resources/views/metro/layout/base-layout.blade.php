@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 
 <head>
     <title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp;
@@ -26,6 +26,17 @@
 
 
     @yield('header')
+
+    <style>
+        .my-active-menu {
+            border-bottom: var(--bs-blue) 5px solid;
+            background-color: rgb(235, 235, 235);
+        }
+        .menu-link{
+            border-radius: 0px!important;
+        }
+
+    </style>
 </head>
 
 @yield('base-content')

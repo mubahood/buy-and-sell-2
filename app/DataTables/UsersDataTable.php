@@ -14,6 +14,8 @@ class UsersDataTable extends DataTable
     /**
      * Build DataTable class.
      *
+     * 
+     * 
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
@@ -48,6 +50,7 @@ class UsersDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
+                    ->addTableClass(' align-middle table-row-dashed fs-6 gy-5')
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
@@ -59,19 +62,19 @@ class UsersDataTable extends DataTable
 
     /**
      * Get columns.
-     *
+     * 
      * @return array
      */
     protected function getColumns()
     {
         return [
+            Column::make('id')->title('ID'),
             Column::computed('action')
                   ->exportable(false)
-                  ->printable(false)
+                  ->printable(false) 
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];
