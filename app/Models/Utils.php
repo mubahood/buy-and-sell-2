@@ -236,6 +236,8 @@ class Utils
 
         $uploaded_images = array();
         if (isset($files['name'])) {
+            ini_set('memory_limit', '512M');
+
             
             for ($i = 0; $i < count($files['name']); $i++) {
                 if (
