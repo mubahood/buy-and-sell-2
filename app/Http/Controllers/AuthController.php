@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Utils;
 use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,69 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+    public function update_profile(Request $r)
+    {
+        $id = ((int)($r->id));
+        if ($id < 1) {
+            dd("creating");
+        }
+
+        $u = new User();
+        if ($id > 0) {
+            $u = User::find($id);
+        }
+        if ($u == null) {
+            dd("user not found.");
+        }
+
+
+        if (isset($_FILES['avatar'])) {
+
+            $img = $_FILES['avatar'];
+            if ($img['error'] == 0) {
+                $raw_images = [];
+                $raw_images['name'][] = $img['name'];
+                $raw_images['type'][] = 'image/png';
+                $raw_images['tmp_name'][] = $img['tmp_name'];
+                $raw_images['error'][] = $img['error'];
+                $raw_images['size'][] = $img['size'];
+
+                $temp_img = Utils::upload_images($raw_images);
+                if ($temp_img != null) {
+                    if (isset($temp_img[0])) {
+                        $u->avatar = $temp_img[0]['src'];
+                    }
+                }
+            }
+        }
+
+
+        $u->name = $r->name;
+        if ($u->email == null) {
+            $u->email = $u->username;
+        }
+        if ($u->username == null) {
+            $u->username = $u->email;
+        }
+
+        $u->last_name = $r->name;
+        $u->phone_number = $r->phone_number;
+        $u->company_name = $r->company_name;
+        $u->category_id = $r->category_id;
+        $u->services = $r->services;
+        $u->sub_county = $r->sub_county;
+        $u->address = $r->address;
+        $u->facebook = $r->facebook;
+        $u->twitter = $r->twitter;
+        $u->whatsapp = $r->whatsapp;
+        $u->youtube = $r->youtube;
+        $u->instagram = $r->instagram;
+        $u->linkedin = $r->linkedin;
+        $u->about = $r->about;
+        $u->save();
+        return redirect('dashboard');
+    }
 
     public function logout()
     {

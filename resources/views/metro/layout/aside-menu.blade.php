@@ -92,7 +92,7 @@ $menu_items = MenuItem::where([])
                                 $active = '';
                                 $_seg = request()->segment(2);
                                 if ($item->uri == '/dashboard/') {
-                                    $active = ' active ';
+                                    //$active = ' active ';
                                 } elseif (strpos($item->uri, $_seg)) {
                                     $active = ' active ';
                                 }

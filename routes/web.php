@@ -21,6 +21,7 @@ Route::get('/banner/{id}', [MainController::class, 'index']);
 Route::get('dashboard/profile', [UsersController::class, 'edit'])->middleware(Authenticate::class);
 Route::get('/register', [AuthController::class, 'register'])->name("register");
 Route::post('/register', [AuthController::class, 'store']);
+Route::post('dashboard/profile', [AuthController::class, 'update_profile']);
 Route::get('/login', [AuthController::class, 'login'])->name("register");
 Route::post('/login', [AuthController::class, 'do_login']);
 

@@ -55,7 +55,7 @@ class User extends Authenticatable
 
         self::created(function ($model) {
             $pro['user_id'] = $model->id;
-            Profile::create($pro);
+            //Profile::create($pro);
         });
 
         self::updating(function ($model) {
@@ -98,10 +98,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
+    
 
     /**
      * The attributes that should be cast.

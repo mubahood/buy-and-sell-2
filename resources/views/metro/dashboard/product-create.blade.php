@@ -391,7 +391,7 @@ $item->description = '<b>Simple Bold</b><span class="bg-danger">red</span><span 
                                             'required' => 'required',
                                             'value' => $item->city_id,
                                             'options' => $_locations,
-                                            'hint' => 'Whare is this product?',
+                                            'hint' => 'Where is this product?',
                                             'classes' => ' form-select-sm mb-0 ',
                                             'attributes' => [
                                                 'name' => 'city_id',
