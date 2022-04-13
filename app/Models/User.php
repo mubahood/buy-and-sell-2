@@ -97,8 +97,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    
+ 
+    public function getAvatarAttribute()
+    {
+       return url('storage/'.$this->avatar);
+    }
 
     /**
      * The attributes that should be cast.
