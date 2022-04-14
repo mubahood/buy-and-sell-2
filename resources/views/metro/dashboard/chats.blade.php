@@ -48,7 +48,7 @@ $chat_threads = Chat::get_chat_threads($u->id);
         <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
             <div class="card card-flush">
                 <div class="card-header pt-7" id="kt_chat_contacts_header">
-                    <form class="w-100 position-relative" autocomplete="off">
+                    {{-- <form class="w-100 position-relative" autocomplete="off">
                         <span
                             class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -61,7 +61,8 @@ $chat_threads = Chat::get_chat_threads($u->id);
                         </span>
                         <input type="text" class="form-control form-control-solid px-15" name="search" value=""
                             placeholder="Search by username or email..." />
-                    </form>
+                    </form> --}}
+                    <h3 class="card-title">My chats</h3>
                 </div>
                 <div class="card-body pt-5" id="kt_chat_contacts_body">
                     <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true"
@@ -99,98 +100,111 @@ $chat_threads = Chat::get_chat_threads($u->id);
             <!--begin::Messenger-->
             <div class="card" id="kt_chat_messenger">
                 <!--begin::Card header-->
-                <div class="card-header" id="kt_chat_messenger_header">
-                    <!--begin::Title-->
-                    <div class="card-title">
-                        <!--begin::User-->
-                        <div class="d-flex justify-content-center flex-column me-3">
-                            <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian
-                                Cox => {{ count($chat_thread) }} <=< /a>
-                                    <!--begin::Info-->
-                                    <div class="mb-0 lh-1">
-                                        <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                                        <span class="fs-7 fw-bold text-muted">Active</span>
-                                    </div>
-                                    <!--end::Info-->
-                        </div>
-                        <!--end::User-->
-                    </div>
-                    <!--end::Title-->
-                    <!--begin::Card toolbar-->
-                    <div class="card-toolbar">
-                        <!--begin::Menu-->
-
-                        <div class="me-n3">
-                            <button class="btn btn-sm btn-icon btn-active-light-primary" data-kt-menu-trigger="click"
-                                data-kt-menu-placement="bottom-end">
-                                <i class="bi bi-three-dots fs-2"></i>
-                            </button>
-                            <!--begin::Menu 3-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3"
-                                data-kt-menu="true">
-                                <!--begin::Heading-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Contacts</div>
-                                </div>
-                                <!--end::Heading-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_users_search">Add Contact</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link flex-stack px-3" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_invite_friends">Invite Contacts
-                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                                            title="Specify a contact email to send an invitation"></i></a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3" data-kt-menu-trigger="hover"
-                                    data-kt-menu-placement="right-start">
-                                    <a href="#" class="menu-link px-3">
-                                        <span class="menu-title">Groups</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                                title="Coming soon">Create Group</a>
+                @if (count($chat_thread) > 0)
+                    <div class="card-header" id="kt_chat_messenger_header">
+                        <!--begin::Title-->
+                        <div class="card-title">
+                            <!--begin::User-->
+                            <div class="d-flex justify-content-center flex-column me-3">
+                                <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian
+                                    Cox => {{ count($chat_thread) }} <=< /a>
+                                        <!--begin::Info-->
+                                        <div class="mb-0 lh-1">
+                                            <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
+                                            <span class="fs-7 fw-bold text-muted">Active</span>
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                                title="Coming soon">Invite Members</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                                title="Coming soon">Settings</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3 my-1">
-                                    <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                        title="Coming soon">Settings</a>
-                                </div>
-                                <!--end::Menu item-->
+                                        <!--end::Info-->
                             </div>
-                            <!--end::Menu 3-->
+                            <!--end::User-->
                         </div>
-                        <!--end::Menu-->
+                        <!--end::Title-->
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <!--begin::Menu-->
+
+                            <div class="me-n3">
+                                <button class="btn btn-sm btn-icon btn-active-light-primary" data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-three-dots fs-2"></i>
+                                </button>
+                                <!--begin::Menu 3-->
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3"
+                                    data-kt-menu="true">
+                                    <!--begin::Heading-->
+                                    <div class="menu-item px-3">
+                                        <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Contacts</div>
+                                    </div>
+                                    <!--end::Heading-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="#" class="menu-link px-3" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_users_search">Add Contact</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="#" class="menu-link flex-stack px-3" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_invite_friends">Invite Contacts
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                                title="Specify a contact email to send an invitation"></i></a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3" data-kt-menu-trigger="hover"
+                                        data-kt-menu-placement="right-start">
+                                        <a href="#" class="menu-link px-3">
+                                            <span class="menu-title">Groups</span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <!--begin::Menu sub-->
+                                        <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
+                                                    title="Coming soon">Create Group</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
+                                                    title="Coming soon">Invite Members</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
+                                                    title="Coming soon">Settings</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu sub-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3 my-1">
+                                        <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
+                                            title="Coming soon">Settings</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu 3-->
+                            </div>
+                            <!--end::Menu-->
+                        </div>
+                        <!--end::Card toolbar-->
                     </div>
-                    <!--end::Card toolbar-->
-                </div>
+                @else
+                    <div class="row justify-content-md-center py-15 ">
+
+                        <div class="col-5">
+                            <img class="img-fluid" src="{{ url('assets/images/no-chats.svg') }}" alt="">
+                            <h3 class="fw-normal text-center pt-10">You have not salected any chat ads.</h3>
+                            <p class="fw-light text-center pt-5">Browse products, go to single product page and start a
+                                chat!</p>
+                        </div>
+
+                    </div>
+                @endif
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body" id="kt_chat_messenger_body">
