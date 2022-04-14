@@ -2,6 +2,7 @@
 //most latest change
 namespace App\Http\Controllers;
 
+use App\DataTables\ProductsDataTable;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Utils;
@@ -16,9 +17,14 @@ use Illuminate\Support\Str;
 
 class Dashboard extends Controller
 {
-    public function index()
+    public function index(ProductsDataTable $dataTable)
     {
-        return view('metro.dashboard.index');
+        $u = Auth::user();
+        if ($u->user_type != 'admin') {
+            return $dataTable->render('metro.dashboard.products');
+        } else {
+            return view('metro.dashboard.index');
+        }
     }
 
     public function logout()
@@ -110,7 +116,7 @@ class Dashboard extends Controller
 
             if ($request->has("category_id")) {
                 $cat = (int)($request->input("category_id"));
-                if($cat>0){
+                if ($cat > 0) {
                     $profile->category_id = $request->input("category_id");
                 }
             }
@@ -147,8 +153,8 @@ class Dashboard extends Controller
                     $profile->cover_photo = json_encode($images[0]);
                 }
             }
- 
-            $profile->save(); 
+
+            $profile->save();
             $errors['success'] = "Account was updated successfully!";
             return redirect()->intended('profile')->withErrors($errors);
         }
@@ -197,7 +203,7 @@ class Dashboard extends Controller
 
             $pro['attributes'] = json_encode($attr_nodes);
             $images = Utils::upload_images($_FILES['images']);
-            
+
 
             $pro['images'] = "[]";
             $pro['thumbnail'] = "";

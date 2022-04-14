@@ -173,7 +173,7 @@ if ($edit_item == null) {
                     <div class="card-header">
                         <h2 class="card-title">Create</h2>
                     </div>
-                     
+
                     <div class="card-body">
                         @include('metro.components.input-select', [
                             'label' => 'Parent',
@@ -194,8 +194,6 @@ if ($edit_item == null) {
                                 'type' => 'text',
                             ],
                         ])
-
-
                         <br>
                         @include('metro.components.input-text', [
                             'label' => 'Icon',
@@ -215,6 +213,18 @@ if ($edit_item == null) {
                             'attributes' => [
                                 'name' => 'uri',
                                 'type' => 'text',
+                            ],
+                        ])
+                        <br>@include('metro.components.input-select', [
+                            'label' => 'Role',
+                            'value' => $edit_item->role,
+                            'options' => [
+                                'admin' => 'Admin',
+                                'user' => 'User',
+                                'all' => 'All',
+                            ],
+                            'attributes' => [
+                                'name' => 'role',
                             ],
                         ])
 

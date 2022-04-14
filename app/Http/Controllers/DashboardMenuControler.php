@@ -55,6 +55,7 @@ class DashboardMenuControler extends Controller
                 $item->title = $r->title;
                 $item->uri = $r->uri;
                 $item->icon = $r->icon;
+                $item->role = $r->role;
                 $item->save();
             }
 
@@ -65,6 +66,7 @@ class DashboardMenuControler extends Controller
             $item->parent_id = $r->parent_id;
             $item->title = $r->title;
             $item->uri = $r->uri;
+            $item->role = $r->role;
             $item->icon = $r->icon;
             $item->save();
             return redirect('dashboard/menu');

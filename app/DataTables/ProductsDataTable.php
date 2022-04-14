@@ -117,11 +117,9 @@ class ProductsDataTable extends DataTable
             ->minifiedAjax()
             ->dom('Bfrtip')
             ->orderBy(0)
-            ->buttons(
-                Button::make('create'),
+            ->buttons( 
                 Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
+                Button::make('print'), 
             )->addTableClass(' table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer');
     }
 

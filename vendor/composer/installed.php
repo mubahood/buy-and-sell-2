@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '12cf668f8594eb723e1529b73b05e71d915bc728',
+        'reference' => '1849a3d9b8287e8b0b0ad025937dc15e80b9ac27',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -17,6 +17,15 @@
             'install_path' => __DIR__ . '/../asm89/stack-cors',
             'aliases' => array(),
             'reference' => '73e5b88775c64ccc0b84fb60836b30dc9d92ac4a',
+            'dev_requirement' => false,
+        ),
+        'barryvdh/laravel-snappy' => array(
+            'pretty_version' => 'v1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../barryvdh/laravel-snappy',
+            'aliases' => array(),
+            'reference' => '2c18a3602981bc6f25b32908cf8aaa05952ab2f7',
             'dev_requirement' => false,
         ),
         'brick/math' => array(
@@ -433,6 +442,15 @@
                 0 => 'v8.83.7',
             ),
         ),
+        'knplabs/knp-snappy' => array(
+            'pretty_version' => 'v1.4.1',
+            'version' => '1.4.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../knplabs/knp-snappy',
+            'aliases' => array(),
+            'reference' => '5126fb5b335ec929a226314d40cd8dad497c3d67',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -454,7 +472,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '12cf668f8594eb723e1529b73b05e71d915bc728',
+            'reference' => '1849a3d9b8287e8b0b0ad025937dc15e80b9ac27',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -910,8 +928,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
