@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Utils;
-use Encore\Admin\Auth\Database\Administrator;
+//use Encore\Admin\Auth\Database\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class ApiUsersController
 {
     public function index(Request $request)
     {
-        $items = Administrator::paginate(10)->withQueryString()->items();
+        $items = User::paginate(10)->withQueryString()->items();
         return $items;
     }
 
@@ -36,14 +36,14 @@ class ApiUsersController
         $email = (string) ($request->email ? $request->email : "");
         $password = (string) ($request->password ? $request->password : "");
 
-        $_u = Administrator::where('username',$email)->get();
+        $_u = User::where('username',$email)->get();
         $u = null;
         if(isset($_u[0])){
             $u = $_u[0];
         }
 
         if($u == null){
-            $_u = Administrator::where('email',$email)->get();
+            $_u = User::where('email',$email)->get();
             if(isset($_u[0])){
                 $u = $_u[0];
             }
@@ -89,7 +89,7 @@ class ApiUsersController
 
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
         $email = (string) ($request->email ? $request->email : "");
-        $u = Administrator::find($user_id);
+        $u = User::find($user_id);
         if ($u == null) {
             return Utils::response([
                 'status' => 0,
@@ -98,7 +98,7 @@ class ApiUsersController
             ]);
         }
 
-        $_u = Administrator::where('email', $email)->get();
+        $_u = User::where('email', $email)->get();
         if (isset($_u['0'])) {
             if ($_u['0']->id != $u->id) {
                 return Utils::response([
@@ -188,7 +188,7 @@ class ApiUsersController
         $u['name'] = $request->input("name");
         $u['username'] = $request->input("email");
 
-        $old_user = Administrator::where('username', $u['username'])->first();
+        $old_user = User::where('username', $u['username'])->first();
         if ($old_user) {
             return Utils::response([
                 'status' => 0,
@@ -197,8 +197,8 @@ class ApiUsersController
         }
 
         $u['password'] = Hash::make($request->input("password"));
-        $user = Administrator::create($u);
-        $_user = Administrator::find($user->id);
+        $user = User::create($u);
+        $_user = User::find($user->id);
 
         return Utils::response([
             'status' => 1,

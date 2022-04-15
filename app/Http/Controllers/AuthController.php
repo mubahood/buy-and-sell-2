@@ -7,7 +7,6 @@ use App\Models\ProductReview;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Utils;
-use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
