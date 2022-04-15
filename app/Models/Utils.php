@@ -306,8 +306,10 @@ class Utils
 
     public static function create_thumbail($params = array())
     {
+        ini_set('memory_limit', '-1');
+
         if (
-            !isset($params['source']) ||
+            !isset($params['source']) || 
             !isset($params['target'])
         ) {
             return [];
@@ -323,7 +325,7 @@ class Utils
 
 
 
-        $image->jpeg_quality = 100;
+ 
         if (isset($params['quality'])) {
             $image->jpeg_quality = $params['quality'];
         }
@@ -333,21 +335,50 @@ class Utils
         $image->preserve_time = true;
         $image->handle_exif_orientation_tag = true;
 
+        $img_size = getimagesize($image->source_path); // returns an array that is filled with info
+        
         $width = 220;
         $heigt = 380;
+        
+        if(isset($img_size[0]) && isset($img_size[1])){
+            $width = $img_size[0];
+            $heigt = $img_size[1];
+        } 
+        $width = (0.72)  * $heigt;
+    
+
         if (isset($params['width'])) {
             $width = $params['width'];
         }
+
         if (isset($params['heigt'])) {
             $width = $params['heigt'];
         }
-
+        
+        $image->jpeg_quality = 50; 
+        $image->jpeg_quality = Utils::get_jpeg_quality(filesize($image->source_path));
         if (!$image->resize($width, $heigt, ZEBRA_IMAGE_CROP_CENTER)) {
-
             return $image->source_path;
         } else {
-
             return $image->target_path;
         }
+    }
+
+    public static function get_jpeg_quality($_size)
+    {   
+        $size = ($_size/1000000);
+        $qt = 50;
+        if($size>5){
+            $qt = 30;
+        }else if($size>4){
+            $qt = 40;
+        }else if($size>2){
+            $qt = 50;
+        }else if($size>1){
+            $qt = 60;
+        }else {
+            $qt = 70;
+        }
+        return $qt;
     }
 }

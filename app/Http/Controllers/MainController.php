@@ -6,16 +6,45 @@ use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
+/*
+ if(isset($img_size[0]) && isset($img_size[1])){
+            $width = $img_size[0];
+            $heigt = $img_size[1];
+        }*/
 
 class MainController extends Controller
 {
     public function index()
     {
+
+
+
+        // $size = filesize('public/test/1.jpeg');
+        // $size = ($size/1000000)." MB";
+        // echo '<h5>'.$size.'</h5>';
+
+        // $thumbnail = Utils::create_thumbail(
+        //     array(
+        //         "source" => 'public/test/1.jpeg',
+        //         "target" => 'public/test/'.rand(1000,100000).'2.jpg',
+        //     )
+        // );
+
+
+
+        // $size = filesize($thumbnail);
+        // $size = ($size/1000000)." MB";
+        // echo '<h5>'.$size.'</h5>';
+
+        // echo('<img width="400" src="public/test/1.jpeg"/> <br> <br>');
+        // echo('<img width="400" src="'.$thumbnail.'" />');
+
+        // die("");
         return view('metro.main.index');
         //return view('metro.index');
     }
