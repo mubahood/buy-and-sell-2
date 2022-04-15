@@ -14,12 +14,13 @@ class ProductsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
-     *
+     * 
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
+
         return datatables()
         ->eloquent($query)
         ->rawColumns(['nature_of_offer', 'price','quantity',
