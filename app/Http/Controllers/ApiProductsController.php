@@ -279,7 +279,8 @@ class ApiProductsController
         }
 
 
-        $pro = Product::create($p);
+        $_pro = Product::create($p);
+        $pro = Product::find($_pro->id);
         return Utils::response(['message' => 'Product uploaded successfully.', 'status' => 1, 'data' => $pro]);
     }
 
