@@ -272,8 +272,7 @@ class ApiProductsController
 
 
 
-        print_r($uploaded_images);
-        die("here");
+
         if ($uploaded_images != null && count($uploaded_images) > 0) {
             $p['thumbnail'] = json_encode($uploaded_images[0]);
             $p['images'] = json_encode($uploaded_images);
