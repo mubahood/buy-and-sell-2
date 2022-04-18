@@ -45,14 +45,31 @@ if ($user != null) {
     }
 }
 $first_seen = false;
+
+
+
+
+
+$products = [];
+$products = Product::all();
+
+$recomended = [];
+foreach ($products as $key => $pro) {
+ 
+    if (count($recomended) < 6) {
+        $recomended[] = $pro;
+        continue;
+    }
+}
+
+
 @endphp
 @extends('metro.layout.layout-main')
 @section('main-content')
 @section('footer')
     <script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
 @endsection
-
-<h1>{{ __('name') }}</h1>
+  
 
 <div class="row  mt-5">
     <div class="col-md-4 bg-white py-5 ">
@@ -177,8 +194,8 @@ $first_seen = false;
             <div class="card-body py-5">
                 Offered by: <b>{{ $pro->seller_name }}</b>
                 <div class="separator my-5"></div>
-                <a href="#"
-                    class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-primary btn-lg rounded-0 d-block">
+                <a data-bs-toggle="modal" data-bs-target="#kt_modal_1"
+                    class="btn btn-block btn-outline btn-outline-dashed btn-outline-danger btn-active-light-primary btn-lg rounded-0 d-block">
                     Show Phone Number
                 </a>
                 <div class="separator my-5"></div>
@@ -220,12 +237,48 @@ $first_seen = false;
 
 
 </div>
+
+<div class="modal fade" tabindex="-1" id="kt_modal_1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Contact {{$pro->seller_name}}</h5>
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x"></span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <p>{{ $pro->seller_phone }}</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row bg-white mt-5 py-5">
     <div class="col-12">
         <h2>Description</h2>
-        {{ $pro->description }}
+        <?php echo str_replace($pro->description) ?>
     </div>
 </div>
+
+
+<h2 class="my-6 h1 fw-bold">You may also like</h2>
+<div class="row mt-2">
+    @foreach ($recomended as $item)
+        <div class="col-6 col-md-2">
+            @include('metro.components.product-item', [
+                'item' => $item,
+            ])
+        </div>
+    @endforeach
+</div>
+
+
 
 <style>
     .fslightbox-absoluted {
