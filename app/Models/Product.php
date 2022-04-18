@@ -146,6 +146,7 @@ class Product extends Model
 
     protected $appends = [
         'seller_name',
+        'seller_phone',
         'category_name',
         'city_name',
     ];
@@ -199,6 +200,20 @@ class Product extends Model
             return $u->company_name;
         }
     }
+  
+    public function getSellerPhoneAttribute()
+    {
+        $u = User::find($this->user_id);
+        if ($u == null) {
+            $u = new User();
+        }
+ 
+        if ($u->phone_number != null || (strlen($u->phone_number) > 2)) {
+            return $u->phone_number;
+        } else {
+            return "-";
+        }
+    }
 
 
     public function init_attributes()
@@ -212,6 +227,7 @@ class Product extends Model
         $att->type = 'text';
         $att->name = 'Nature of offer';
         $att->units = '';
+        $att->value = $this->nature_of_offer;
         $attributes[] = $att;
 
 
@@ -219,7 +235,10 @@ class Product extends Model
         $att->type = 'text';
         $att->name = 'Quantity available';
         $att->units = '';
-        $att->value = $this->quantity;;
+        $att->value = $this->quantity;
+        if($att->value == 0){
+            $att->value = 1;
+        }
         $attributes[] = $att;
 
 
@@ -245,7 +264,6 @@ class Product extends Model
         $att->units = '';
         $att->value = $this->seller_name;
         $attributes[] = $att;
-
 
         $att = new Attribute();
         $att->type = 'text';

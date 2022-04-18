@@ -22,7 +22,7 @@ class Dashboard extends Controller
         $u = Auth::user();
         if ($u->user_type != 'admin') {
             return $dataTable->render('metro.dashboard.products');
-        } else {
+        } else { 
             return view('metro.dashboard.index');
         }
     }

@@ -106,12 +106,12 @@ $chat_threads = Chat::get_chat_threads($u->id);
                         <div class="card-title">
                             <!--begin::User-->
                             <div class="d-flex justify-content-center flex-column me-3">
-                                <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian
-                                    Cox => {{ count($chat_thread) }} <=< /a>
+                                <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">
+                                    Chatting with {{ $product->seller_name }} </a>
                                         <!--begin::Info-->
                                         <div class="mb-0 lh-1">
                                             <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                                            <span class="fs-7 fw-bold text-muted">Active</span>
+                                            <span class="fs-7 fw-bold text-muted">About - {{ $product->name }}</span>
                                         </div>
                                         <!--end::Info-->
                             </div>
@@ -137,53 +137,29 @@ $chat_threads = Chat::get_chat_threads($u->id);
                                     <!--end::Heading-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-bs-toggle="modal"
+                                        <a href="javascript:;" class="menu-link px-3" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_users_search">Add Contact</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="#" class="menu-link flex-stack px-3" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_invite_friends">Invite Contacts
+                                        <a href="javascript:;" class="menu-link flex-stack px-3" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_invite_friends">Clear chat
                                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
                                                 title="Specify a contact email to send an invitation"></i></a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
-                                    <div class="menu-item px-3" data-kt-menu-trigger="hover"
-                                        data-kt-menu-placement="right-start">
-                                        <a href="#" class="menu-link px-3">
-                                            <span class="menu-title">Groups</span>
-                                            <span class="menu-arrow"></span>
-                                        </a>
-                                        <!--begin::Menu sub-->
-                                        <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                                    title="Coming soon">Create Group</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                                    title="Coming soon">Invite Members</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                                    title="Coming soon">Settings</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu sub-->
-                                    </div>
+                                   
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3 my-1">
-                                        <a href="#" class="menu-link px-3" data-bs-toggle="tooltip"
-                                            title="Coming soon">Settings</a>
+                                        <a href="javascript:;" class="menu-link px-3" data-bs-toggle="tooltip"
+                                            title="Coming soon">Report user</a>
+                                    </div>
+                                    <div class="menu-item px-3 my-1">
+                                        <a href="javascript:;" class="menu-link px-3" data-bs-toggle="tooltip"
+                                            title="Coming soon">Block user</a>
                                     </div>
                                     <!--end::Menu item-->
                                 </div>
