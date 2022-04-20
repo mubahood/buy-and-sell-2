@@ -308,8 +308,13 @@ class ApiProductsController
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 200);
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
+        $s = trim((String) ($request->s ? $request->s : ""));
 
-        if ($user_id > 0) {
+
+        
+        if (!empty($s)) {
+            $items = Product::where('name', 'like', "%".$s."%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
+        }else if ($user_id > 0) {
             $items = Product::where('user_id', $user_id)->orderBy('id', 'DESC')->paginate($per_page)->withQueryString()->items();
         } else {
             $items = Product::where([])->orderBy('id', 'DESC')->paginate($per_page)->withQueryString()->items();
