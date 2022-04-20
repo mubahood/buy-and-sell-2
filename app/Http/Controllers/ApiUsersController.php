@@ -16,7 +16,8 @@ class ApiUsersController
 {
     public function index(Request $request)
     {
-        $items = User::paginate(10)->withQueryString()->items();
+        $per_page = isset($request->per_page)? $request->per_page:1000;
+        $items = User::paginate($per_page)->withQueryString()->items();
         return $items;
     }
 
