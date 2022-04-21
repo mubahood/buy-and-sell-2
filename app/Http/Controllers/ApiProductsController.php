@@ -19,7 +19,7 @@ class ApiProductsController
     public function upload_temp_file(Request $request)
     {
 
-        
+
 
         if (
             isset($_FILES['file']) &&
@@ -39,19 +39,19 @@ class ApiProductsController
 
             $data = Utils::upload_images($raw_images);
             $user_id = $_GET['user_id'];
-            if(
+            if (
                 isset($data[0]) &&
                 isset($data[0]['src']) &&
                 isset($data[0]['thumbnail']) &&
-                isset($data[0]['user_id']) 
-            ){
+                isset($data[0]['user_id'])
+            ) {
                 $img = $data[0];
                 $new_img = new Image();
                 $new_img->src = $img['src'];
                 $new_img->user_id = $user_id;
-                $new_img->thumbnail = $img['thumbnail']; 
+                $new_img->thumbnail = $img['thumbnail'];
                 $new_img->name = 'temp';
-                $new_img->save(); 
+                $new_img->save();
             }
             die("1");
         }
@@ -308,13 +308,17 @@ class ApiProductsController
     {
         $per_page = (int) ($request->per_page ? $request->per_page : 200);
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
-        $s = trim((String) ($request->s ? $request->s : ""));
+        $s = trim((string) ($request->s ? $request->s : ""));
+        $cat_id = (int) ($request->cat_id ? $request->cat_id : 0);
 
 
-        
-        if (!empty($s)) {
-            $items = Product::where('name', 'like', "%".$s."%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
-        }else if ($user_id > 0) {
+        if ($cat_id) {
+            $items = Product::where('category_id', $cat_id)
+                ->whereOr('sub_category_id', $cat_id)
+                ->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
+        } else if (!empty($s)) {
+            $items = Product::where('name', 'like', "%" . $s . "%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
+        } else if ($user_id > 0) {
             $items = Product::where('user_id', $user_id)->orderBy('id', 'DESC')->paginate($per_page)->withQueryString()->items();
         } else {
             $items = Product::where([])->orderBy('id', 'DESC')->paginate($per_page)->withQueryString()->items();
