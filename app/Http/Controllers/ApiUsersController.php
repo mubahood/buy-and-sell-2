@@ -16,8 +16,14 @@ class ApiUsersController
 {
     public function index(Request $request)
     {
+        $user_id = (int) ($request->user_id ? $request->user_id : 0);
         $per_page = isset($request->per_page)? $request->per_page:1000;
-        $items = User::paginate($per_page)->withQueryString()->items();
+
+        if($user_id>0){
+            $items = User::where('id', $user_id)->paginate($per_page)->withQueryString()->items();
+        }else{
+            $items = User::paginate($per_page)->withQueryString()->items();
+        }
         return $items;
     }
 
