@@ -42,7 +42,7 @@ class DashboardMenuControler extends Controller
             return 0;
         }
 
-        if (isset($_POST['edit'])) {
+        if (isset($_POST['edit'])) { 
             $id = (int)($r->edit);
             if ($id == 0) {
                 die("new");
@@ -75,22 +75,21 @@ class DashboardMenuControler extends Controller
 
         if (isset($_POST['_order'])) {
             $items = json_decode($r->_order);
+            
             foreach ($items as $parent_key => $parent) {
                 $p = MenuItem::find($parent->id);
-                $order = 0;
+                
 
                 if ($p != null) {
-                    $p->order = $order;
+                    $p->order = $parent_key;
                     $p->parent_id = 0;
                     $p->save();
-                    $order++;
 
                     if (isset($parent->children) && ($parent->children != null)  && (!empty($parent->children))) {
                         foreach ($parent->children as $kid_key => $kid) {
                             $k = MenuItem::find($kid->id);
                             if ($k != null) {
-                                $order++;
-                                $k->order = $order;
+                                $k->order = $parent_key;
                                 $k->parent_id = $p->id;
                                 $k->save();
                             }

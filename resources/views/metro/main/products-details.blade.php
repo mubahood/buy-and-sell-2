@@ -262,7 +262,7 @@ foreach ($products as $key => $pro) {
 <div class="row bg-white mt-5 py-5">
     <div class="col-12">
         <h2>Description</h2>
-        <?php echo str_replace($pro->description) ?>
+        <?php echo ($pro->description) ?>
     </div>
 </div>
 

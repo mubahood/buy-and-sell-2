@@ -1,23 +1,23 @@
 <?php
-use App\Models\MenuItem;
+use App\Models\Category;
 $_options = [];
-$menus = MenuItem::where([])
+$menus = Category::where([])
     ->orderBy('order', 'Asc')
     ->get();
 foreach ($menus as $key => $value) {
-    $parent_id = (int) $value->parent_id;
-    if ($parent_id < 1) {
-        $_options[$value->id] = $value->title;
+    $parent = (int) $value->parent;
+    if ($parent < 1) {
+        $_options[$value->id] = $value->name;
     }
 }
 
-$edit_item = new MenuItem();
+$edit_item = new Category();
 $id = ((int) Request::segment(3));
 if ($id > 0) {
-    $edit_item = MenuItem::find($id);
+    $edit_item = Category::find($id);
 }
 if ($edit_item == null) {
-    $edit_item = new MenuItem();
+    $edit_item = new Category();
 }
 
 ?>@extends('metro.layout.layout-dashboard')
@@ -32,16 +32,13 @@ if ($edit_item == null) {
         $(document).ready(function() {
 
 
-
-
-
             $('.delete').click(function(e) {
 
                 var id = e.currentTarget.dataset.id;
                 e.preventDefault();
 
                 Swal.fire({
-                    title: 'Are you sure you want to delete this item?',
+                    name: 'Are you sure you want to delete this item?',
                     text: "You won't be able to revert this action!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -56,7 +53,7 @@ if ($edit_item == null) {
                             'Item has been deleted.',
                             'success'
                         ).then((r) => {
-                                window.location.reload();
+                                window.Category.reload();
                             }
 
                         )
@@ -65,7 +62,7 @@ if ($edit_item == null) {
             });
 
             function delete_item(id) {
-                var url = "{{ url('/dashboard/menu') }}";
+                var url = "{{ url('/dashboard/categories') }}";
                 var token = "{{ csrf_token() }}";
                 $.post(url, {
                         _token: token,
@@ -79,17 +76,17 @@ if ($edit_item == null) {
 
             $("#menu-tree-save").click(function() {
                 var serialize = $('#menu-tree').nestable('serialize');
-                var url = "{{ url('/dashboard/menu') }}";
+                var url = "{{ url('/dashboard/categories') }}";
                 var token = "{{ csrf_token() }}";
 
                 $.post(url, {
                         _token: token,
                         _order: JSON.stringify(serialize)
                     },
-                    function(data) { 
-                        toastr.success('Save succeeded !');
-                        window.location.reload();
+                    function(data) {
+                        console.log(data);
                         //$.pjax.reload('#pjax-container');
+                        toastr.success('Save succeeded !');
                     });
             });
 
@@ -104,26 +101,26 @@ if ($edit_item == null) {
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="caord-header">
-                    <h2 class="card-title">Menu items</h2>
-                </div> 
+                <div class="card-header">
+                    <h2 class="card-title">Categories</h2>
+                </div>
                 <div class="card-body">
                     <div id="menu-tree" class="dd">
                         <ol class="dd-list">
                             @foreach ($menus as $item)
-                                @if (((int) $item->parent_id) < 1)
+                                @if (((int) $item->parent) < 1)
                                     <li class="dd-item" data-id="{{ $item->id }}">
                                         <div class="dd-handle d-flex justify-content-between align-items-center">
-                                            <span>{{ $item->title }}</span>
+                                            <span>{{ $item->name }}</span>
                                             <span>
                                                 <a class="dd-nodrag"
-                                                    href="{{ url('dashboard/menu/' . $item->id) }}">Edit</a>
+                                                    href="{{ url('dashboard/categories/' . $item->id) }}">Edit</a>
                                                 <a class="dd-nodrag text-danger delete" data-id="{{ $item->id }}"
                                                     href="#">Delete</a>
                                             </span>
                                         </div>
                                         @php
-                                            $kids = MenuItem::where('parent_id', $item->id)->get();
+                                            $kids = Category::where('parent', $item->id)->get();
                                         @endphp
                                         @if (count($kids) > 0)
                                             <ol class="dd-list">
@@ -131,10 +128,10 @@ if ($edit_item == null) {
                                                     <li class="dd-item" data-id="{{ $kid->id }}">
                                                         <div
                                                             class=" dd-handle d-flex justify-content-between align-items-center">
-                                                            <span>{{ $kid->title }}</span>
+                                                            <span>{{ $kid->name }}</span>
                                                             <span>
                                                                 <a class="dd-nodrag"
-                                                                    href="{{ url('dashboard/menu/' . $kid->id) }}">Edit</a>
+                                                                    href="{{ url('dashboard/categories/' . $kid->id) }}">Edit</a>
                                                                 <a class="dd-nodrag text-danger  delete"
                                                                     data-id="{{ $item->id }}" href="#">Delete</a>
                                                             </span>
@@ -160,14 +157,14 @@ if ($edit_item == null) {
         </div>
 
         <div class="col-md-6">
-            <form id="widget-form-62518c21c450d" method="POST" action="{{ url('dashboard/menu') }}"
+            <form enctype="multipart/form-data" method="POST" action="{{ url('dashboard/categories') }}"
                 class="form-horizontal" accept-charset="UTF-8">
                 @csrf
 
                 @if ($id > 0)
                     <input type="hidden" value="{{ $id }}" name="edit">
                 @else
-                    <input type="hidden" value="{{ $id }}" name="create">
+                    <input type="hidden" value="{{ $id }}" name="create" value="create">
                 @endif
                 <div class="card shadow-sm ">
                     <div class="card-header">
@@ -176,57 +173,57 @@ if ($edit_item == null) {
 
                     <div class="card-body">
                         @include('metro.components.input-select', [
-                            'label' => 'Parent',
-                            'value' => $edit_item->parent_id,
+                            'label' => 'Parent Category',
+                            'value' => $edit_item->parent,
                             'options' => $_options,
                             'attributes' => [
-                                'name' => 'parent_id',
+                                'name' => 'parent',
                                 'type' => 'text',
                             ],
                         ])
                         <br>
                         @include('metro.components.input-text', [
-                            'label' => 'Title',
+                            'label' => 'Name',
                             'required' => 'required',
-                            'value' => $edit_item->title,
+                            'value' => $edit_item->name,
                             'attributes' => [
-                                'name' => 'title',
+                                'name' => 'name',
                                 'type' => 'text',
                             ],
-                        ])
-                        <br>
-                        @include('metro.components.input-text', [
-                            'label' => 'Icon',
-                            'required' => 'required',
-                            'value' => $edit_item->icon,
-                            'attributes' => [
-                                'name' => 'icon',
-                                'type' => 'text',
-                            ],
-                        ])
+                        ]) 
 
-                        <br>
                         @include('metro.components.input-text', [
-                            'label' => 'Slug',
+                            'label' => 'Description',
                             'required' => 'required',
-                            'value' => $edit_item->uri,
+                            'classes' => 'mt-4',
+                            'value' => $edit_item->description,
                             'attributes' => [
-                                'name' => 'uri',
+                                'name' => 'description',
                                 'type' => 'text',
                             ],
                         ])
-                        <br>@include('metro.components.input-select', [
-                            'label' => 'Role',
-                            'value' => $edit_item->role,
-                            'options' => [
-                                'admin' => 'Admin',
-                                'user' => 'User',
-                                'all' => 'All',
-                            ],
-                            'attributes' => [
-                                'name' => 'role',
-                            ],
-                        ])
+                        
+                        
+                        <div class="image-input image-input-empty image-input-outline mb-3 mt-5" data-kt-image-input="true"
+                        style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                        <label for="avatar" class="mb-2">Thumbnail</label>
+                        <div class="image-input-wrapper w-150px h-150px"></div>
+                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                            <i class="bi bi-pencil-fill fs-7"></i>
+                            <input id="avatar" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                            <input type="hidden" name="avatar_remove" />
+                        </label>
+                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                    </div>
+
 
                     </div>
                     <div class="card-footer">

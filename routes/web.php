@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardCategoriesControler;
 use App\Http\Controllers\DashboardMenuControler;
 use App\Http\Controllers\DashboardChatsControler;
 use App\Http\Controllers\DashboardProductsControler;
@@ -24,6 +25,7 @@ Route::post('/register', [AuthController::class, 'store']);
 Route::post('dashboard/profile', [AuthController::class, 'update_profile']);
 Route::get('/login', [AuthController::class, 'login'])->name("login");
 Route::post('/login', [AuthController::class, 'do_login']);
+Route::resource('/dashboard/categories', DashboardCategoriesControler::class)->middleware(Authenticate::class);
 
 
 Route::get('/dashboard', [Dashboard::class, 'index'])->name("dashboard")->middleware(Authenticate::class);
