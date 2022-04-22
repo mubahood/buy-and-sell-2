@@ -62,9 +62,24 @@ $menu_items = MenuItem::where([])
                         @endphp
 
                         @if (count($item->kids) > 0)
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+                            @php
+                                
+                                $show = '';
+                                $_seg = request()->segment(2);
+                                
+                                foreach ($item->kids as $_kid) {
+                                    if (strpos($_kid->uri, $_seg)) {
+                                        $show = ' show ';
+                                    }
+                                }
+                            @endphp
 
-                                <span class="menu-link">
+                            <div data-kt-menu-trigger="click"
+                                class="menu-item menu-accordion menu-item {{ $show }}">
+
+
+
+                                <span class="menu-link ">
                                     <span class="menu-icon">
                                         {!! $item->icon !!}
                                     </span>
@@ -76,8 +91,17 @@ $menu_items = MenuItem::where([])
                                 </span>
                                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                                     @foreach ($item->kids as $kid)
+                                        @php
+                                            $active = '';
+                                            $_seg = request()->segment(2);
+                                            
+                                            if (strpos($kid->uri, $_seg)) {
+                                                $active = ' active ';
+                                            }
+                                        @endphp
+
                                         <div class="menu-item">
-                                            <a class="menu-link" href="{{ url($kid->uri) }}">
+                                            <a class="menu-link {{ $active }}" href="{{ url($kid->uri) }}">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
