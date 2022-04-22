@@ -120,8 +120,7 @@ class ApiUsersController
         $u->email = $u->email;
         $u->username = $u->email;
 
-        $u->name = (string) ($request->name ? $request->name : "");
-        $u->username = (string) ($request->email ? $request->email : "");
+        $u->name = (string) ($request->name ? $request->name : ""); 
         $u->company_name = (string) ($request->company_name ? $request->company_name : "");
         $u->phone_number = (string) ($request->phone_number ? $request->phone_number : "");
         $u->address = (string) ($request->address ? $request->address : "");
