@@ -51,6 +51,10 @@ class User extends Authenticatable
         parent::boot();
 
         self::creating(function ($model) {
+            if($model->email!=null){
+                $model->username = $model->email;
+            }
+            return $model;
         });
 
         self::created(function ($model) {
