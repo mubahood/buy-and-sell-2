@@ -252,10 +252,10 @@ class Utils
                     $img['tmp_name'] = $files['tmp_name'][$i];
                     $img['error'] = $files['error'][$i];
                     $img['size'] = $files['size'][$i];
-
-
                     $path = Storage::putFile('/public/storage', $img['tmp_name']);
-
+                    
+                    dd($path);
+                    
                     $path_not_optimized =  "./" . $path;
                     $file_name = str_replace("public/storage/", "", $path);
                     $file_name = str_replace("public/", "", $file_name);

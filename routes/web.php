@@ -11,12 +11,14 @@ use App\Http\Controllers\DashboardProductsControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BannersController;
 use App\Http\Middleware\Authenticate;
 
 
 
 
 Route::resource('dashboard/users', UsersController::class)->middleware(Authenticate::class);
+Route::resource('dashboard/banners', BannersController::class)->middleware(Authenticate::class);
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/banner/{id}', [MainController::class, 'index']);

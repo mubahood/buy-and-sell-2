@@ -7,9 +7,9 @@ use App\DataTables\UsersDataTable;
 
 class UsersController extends Controller
 {
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('users');
+        return  view('metro.dashboard.users');
     }
 
     public function edit()

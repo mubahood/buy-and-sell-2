@@ -57,7 +57,7 @@ class DashboardCategoriesControler extends Controller
                 $item->name = $r->name;
                 $item->description = $r->description;
     
-                if (isset($_FILES['avatar'])) {
+                if (isset($_FILES['avatar'])) { 
                     
                     $img = $_FILES['avatar'];
                     $raw_images = [];
@@ -68,7 +68,7 @@ class DashboardCategoriesControler extends Controller
                     $raw_images['error'][] = $img['error'];
                     $raw_images['size'][] = $img['size'];
     
-                    $temp_img = Utils::upload_images($raw_images);
+                    $temp_img = Utils::upload_images($raw_images); 
                     if ($temp_img != null) {
                         if (isset($temp_img[0])) {
                             $item->image = $temp_img[0]['src'];

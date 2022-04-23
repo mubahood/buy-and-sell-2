@@ -14,7 +14,7 @@ use Psy\CodeCleaner\ValidConstructorPass;
 use function PHPUnit\Framework\fileExists;
 
 class Product extends Model
-{
+{ 
     use HasFactory;
 
 
@@ -190,7 +190,7 @@ class Product extends Model
 
     public function getSellerNameAttribute()
     {
-        $u = User::find($this->user_id);
+        $u = User::find($this->user_id); 
         if ($u == null) {
             $u = new User();
         }

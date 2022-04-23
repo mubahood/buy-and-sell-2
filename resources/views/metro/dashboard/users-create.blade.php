@@ -22,7 +22,7 @@ foreach ($cats as $key => $cat) {
 }
 
 $_locations = [];
-$countries = Country::where([])
+$countries = Country::where([]) 
     ->orderBy('name', 'Asc')
     ->get();
 foreach ($countries as $key => $c) {
