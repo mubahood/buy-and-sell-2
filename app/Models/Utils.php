@@ -252,9 +252,14 @@ class Utils
                     $img['tmp_name'] = $files['tmp_name'][$i];
                     $img['error'] = $files['error'][$i];
                     $img['size'] = $files['size'][$i];
-                    $path = Storage::putFile('/public/storage', $img['tmp_name']);
-                    
-                    dd($path);
+                    $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
+
+                    $path = 'public/storage/' . time() . "-" .Utils:: make_slug($img['name']).".".$ext;
+
+                    $res = move_uploaded_file($img['tmp_name'], $path);
+                    if(!$res){
+                        continue; 
+                    } 
                     
                     $path_not_optimized =  "./" . $path;
                     $file_name = str_replace("public/storage/", "", $path);

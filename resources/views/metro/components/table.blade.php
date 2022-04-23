@@ -1,6 +1,8 @@
 @php
 $rows = isset($rows) && !empty($rows) ? $rows : [];
 $head = isset($head) && !empty($head) ? $head : [];
+$delete_link = isset($delete_link) && !empty($delete_link) ? $delete_link : '';
+
 @endphp
 
 @section('tools')
@@ -29,9 +31,12 @@ $head = isset($head) && !empty($head) ? $head : [];
                         $id = 0;
                     @endphp
                     <tr>
-                        @foreach ($r as $d)
+                        @foreach ($r as $k => $d) 
                             @php
-                                if ($id == 0) {
+                                if ( $k == 'edit_link') {
+                                    continue;
+                                }
+                                if ($id == 0 || $k == 'edit_link') {
                                     $id = $d;
                                     continue;
                                 }
@@ -50,20 +55,23 @@ $head = isset($head) && !empty($head) ? $head : [];
 
                                     @if (isset($view_link))
                                         <div class="menu-item px-3">
-                                            <a href="{{ $view_link }}/{{$r[0]}}" class="menu-link px-3">View</a>
+                                            <a href="{{ $view_link }}/{{ $r[0] }}"
+                                                class="menu-link px-3">View</a>
                                         </div>
                                     @endif
 
 
-                                    @if (isset($edit_link))
+                                    @if (isset( $r['edit_link'] ))
                                         <div class="menu-item px-3">
-                                            <a href="{{ $edit_link }}/{{$r[0]}}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ $r['edit_link'] }}"
+                                                class="menu-link px-3">Edit</a>
                                         </div>
                                     @endif
 
-                                    @if (isset($delete_link))
+                                    @if (strlen($delete_link) > 3)
                                         <div class="menu-item px-3">
-                                            <a href="{{ $delete_link }}/{{$r[0]}}" class="menu-link px-3 text-danger">Delete</a>
+                                            <a data-id="{{ $r[0] }}" href="#"
+                                                class="menu-link px-3 text-danger delete">Delete</a>
                                         </div>
                                     @endif
 
@@ -87,6 +95,50 @@ $head = isset($head) && !empty($head) ? $head : [];
             s.keyup(function(e) {
                 t.DataTable().search(e.target.value).draw();
             });
+
+
+
+            $('.delete').click(function(e) {
+
+                var id = e.currentTarget.dataset.id;
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'Are you sure you want to delete this item?',
+                    text: "You won't be able to revert this action!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        delete_item(id) 
+                        Swal.fire(
+                            'Deleted!',
+                            'Item has been deleted.',
+                            'success'
+                        ).then((r) => {
+                                window.location.reload();
+                            }
+
+                        )
+                    }
+                })
+            });
+
+            function delete_item(id) {
+                var url = "{{ $delete_link }}";
+                var token = "{{ csrf_token() }}";
+                $.post(url, {
+                        _token: token,
+                        'delete': id
+                    },
+                    function(data) {
+
+                    });
+            }
+
         });
     </script>
 @endsection

@@ -19,7 +19,7 @@ if ($id > 0) {
 if ($edit_item == null) {
     $edit_item = new Category();
 }
-
+ 
 ?>@extends('metro.layout.layout-dashboard')
 
 @section('header')
@@ -205,7 +205,7 @@ if ($edit_item == null) {
                         
                         
                         <div class="image-input image-input-empty image-input-outline mb-3 mt-5" data-kt-image-input="true"
-                        style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                        style="background-image: url({{ url('storage/'.$edit_item->image) }})">
                         <label for="avatar" class="mb-2">Thumbnail</label>
                         <div class="image-input-wrapper w-150px h-150px"></div>
                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
