@@ -18,6 +18,8 @@ $conds['category_id'] = $pro->category->id;
 $products = Product::where($conds)->paginate(4);
 
 $images = $pro->get_images();
+$description = $pro->description;
+
 
 $pro->init_attributes();
 $attributes = json_decode($pro->attributes);
@@ -86,7 +88,7 @@ foreach ($products as $key => $pro) {
                     @endphp
                     <div class="carousel-item  <?= $active ?>  ">
 
-                        <a class="d-block overlay" data-fslightbox="gallery" href="{{ $img->thumbnail }}">
+                        <a class="d-block overlay" data-fslightbox="gallery" href="{{ $img->src }}">
                             <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded">
                                 <img class="d-block w-100" src="{{ $img->thumbnail }}" alt="Product photo">
                             </div>
@@ -262,9 +264,9 @@ foreach ($products as $key => $pro) {
 <div class="row bg-white mt-5 py-5">
     <div class="col-12">
         <h2>Description</h2>
-        <?php echo ($pro->description) ?>
+        {!! $description !!}
     </div>
-</div>
+</div> 
 
 
 <h2 class="my-6 h1 fw-bold">You may also like</h2>

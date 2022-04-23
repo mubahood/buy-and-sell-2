@@ -114,13 +114,13 @@ class Product extends Model
     }
     public function get_thumbnail()
     {
-        $thumbnail = "no_image.png";
+
+        $thumbnail = url( 'no_image.png');
         if ($this->thumbnail != null) {
             if (strlen($this->thumbnail) > 3) {
                 $thumb = json_decode($this->thumbnail);
                 if (isset($thumb->thumbnail)) {
-
-                    $thumbnail = url($thumb->thumbnail);
+                    $thumbnail = url( '/storage/'.$thumb->thumbnail);
                 }
             }
         }
@@ -134,8 +134,8 @@ class Product extends Model
             if (strlen($this->images) > 3) {
                 $images_json = json_decode($this->images);
                 foreach ($images_json as $key => $img) {
-                    $img->src = url($img->src);
-                    $img->thumbnail = url($img->thumbnail);
+                    $img->src = url('/storage/'.$img->src);
+                    $img->thumbnail = url( '/storage/'.$img->thumbnail);
                     $images[] = $img;
                 }
             }
@@ -146,7 +146,7 @@ class Product extends Model
 
     protected $appends = [
         'seller_name',
-        'seller_phone',
+        'seller_phone', 
         'category_name',
         'city_name',
     ];

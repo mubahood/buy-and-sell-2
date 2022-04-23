@@ -33,9 +33,9 @@ $delete_link = isset($delete_link) && !empty($delete_link) ? $delete_link : '';
                     <tr>
                         @foreach ($r as $k => $d) 
                             @php
-                                if ( $k == 'edit_link') {
+                                if ( $k == 'edit_link' || $k == 'view_link') {
                                     continue;
-                                }
+                                } 
                                 if ($id == 0 || $k == 'edit_link') {
                                     $id = $d;
                                     continue;
@@ -52,10 +52,12 @@ $delete_link = isset($delete_link) && !empty($delete_link) ? $delete_link : '';
                                 </button>
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                     data-kt-menu="true">
+ 
 
-                                    @if (isset($view_link))
+
+                                    @if (isset( $r['view_link'] ))
                                         <div class="menu-item px-3">
-                                            <a href="{{ $view_link }}/{{ $r[0] }}"
+                                            <a href="{{ $r['view_link'] }}"
                                                 class="menu-link px-3">View</a>
                                         </div>
                                     @endif

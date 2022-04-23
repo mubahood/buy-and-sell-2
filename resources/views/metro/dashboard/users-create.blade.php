@@ -15,14 +15,12 @@ $cats = Category::where([])
 foreach ($cats as $key => $cat) {
     $parent = (int) $cat->parent;
     if ($parent < 1) {
-        foreach ($cat->sub_categories as $_key => $sub_cat) {
-            $_categories[$sub_cat->id] = $cat->name . ' - ' . $sub_cat->name;
-        }
+        $_categories[$cat->id] = $cat->name;
     }
 }
 
 $_locations = [];
-$countries = Country::where([]) 
+$countries = Country::where([])
     ->orderBy('name', 'Asc')
     ->get();
 foreach ($countries as $key => $c) {
@@ -66,7 +64,7 @@ $item = $u;
                     <!--begin::Card title-->
                     <div class="card-title">
                         <h2>Your Logo</h2>
-                    </div>
+                    </div>  
                     <!--end::Card title-->
                 </div>
                 <!--end::Card header-->
@@ -74,7 +72,7 @@ $item = $u;
                 <div class="card-body text-center pt-0">
                     <!--begin::Image input-->
                     <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
-                        style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                        style="background-image: url({{ $u->avatar }})">
                         <!--begin::Preview existing avatar-->
                         <div class="image-input-wrapper w-150px h-150px"></div>
                         <!--end::Preview existing avatar-->
@@ -191,7 +189,7 @@ $item = $u;
                                 <div class="mb-3 row">
                                     <div class="col-md-4">
                                         @include('metro.components.input-text', [
-                                            'label' => 'Farm/Group/Enterprise name',
+                                            'label' => 'Business name',
                                             'required' => 'required',
                                             'classes' => ' form-control-sm mb-0 ',
                                             'value' => $item->company_name,
@@ -246,9 +244,9 @@ $item = $u;
                                 <div class="mb-3 row">
 
 
-                                    <div class="col-md-4 mt-5">
+                                    <div class="col-md-6 mt-5">
                                         @include('metro.components.input-select', [
-                                            'label' => 'Farm/emterprise Location',
+                                            'label' => 'Business Location',
                                             'required' => 'required',
                                             'value' => $item->sub_county,
                                             'options' => $_locations,
@@ -260,7 +258,7 @@ $item = $u;
                                         ])
                                     </div>
 
-                                    <div class="col-md-8 mt-5">
+                                    <div class="col-md-6 mt-5">
                                         @include('metro.components.input-text', [
                                             'label' => 'Address line',
                                             'required' => 'required',
@@ -438,9 +436,9 @@ $item = $u;
     <script>
         $description_field = $("#kt_ecommerce_add_product_description");
         $description = $("#description");
-
+ 
         function logSubmit(event) {
-            $description.val($description_field.html());
+            $description.val( $description_field[0].firstChild.innerHTML );
         }
 
         const form = document.getElementById('form');

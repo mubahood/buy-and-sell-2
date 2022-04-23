@@ -28,20 +28,32 @@ class DashboardProductsControler extends Controller
         return view('metro.dashboard.product-create');
     }
 
+    public function edit()
+    {
+        return view('metro.dashboard.product-create');
+    }
+
     public function show()
     {
         return view('metro.dashboard.chats');
     }
 
     public function store(Request $r)
-    {
-
-
-        if (isset($_POST['task'])) {
-            $task = trim($_POST['task']);
+    { 
+        if (isset($_POST['delete'])) {
+            $id = (int)($r->delete);
+            $item = Product::find($id);
+            if ($item != null) {
+                $item->delete();
+                return true;
+            }
+            return 0;
         }
 
-
+        
+        if (isset($_POST['task'])) {
+            $task = trim($_POST['task']);
+        } 
 
         if ($task == 'create') {
             $pro = new Product();
@@ -98,20 +110,63 @@ class DashboardProductsControler extends Controller
             $pro->save();
             return redirect('dashboard/products');
             die();
-        }
-
-
-        die("posting...");
-
-        die("time to stire shit");
-        if (isset($_POST['delete'])) {
-            $id = (int)($r->delete);
-            $item = MenuItem::find($id);
-            if ($item != null) {
-                $item->delete();
-                return true;
+        }else if ($task == 'edit') {
+            $id = $r->id;
+            $pro = Product::find($id);
+            if($pro == null){
+                dd("Product not found.");
             }
-            return 0;
+
+            $u = Auth::user();
+            $pro->name = $r->name;
+            $pro->category_id = $r->category_id;
+            $pro->sub_category_id = $r->category_id;
+            $pro->nature_of_offer = $r->nature_of_offer;
+            $pro->price = $r->price;
+            $pro->fixed_price = $r->fixed_price;
+            $pro->quantity = $r->quantity;
+            $pro->city_id = $r->city_id;
+            $pro->description = trim($r->description);
+            $pro->attributes = '[]';
+            $task = "";
+            $images = Image::where(['name' => 'temp', 'user_id' => $u->id])->get();
+
+            
+            if (isset($_FILES['avatar'])) {
+
+                $img = $_FILES['avatar'];
+                $raw_images = [];
+                $raw_images['name'][] = $img['name'];
+                $raw_images['type'][] = 'image/png';
+                $raw_images['tmp_name'][] = $img['tmp_name'];
+                $raw_images['error'][] = $img['error'];
+                $raw_images['size'][] = $img['size'];
+
+                $temp_img = Utils::upload_images($raw_images);
+                if ($temp_img != null) {
+                    if (isset($temp_img[0])) {
+                        $pro->thumbnail = json_encode($temp_img[0]);
+                    }
+                }
+            }
+
+            if (isset($images[0])) {
+                if (strlen($pro->thumbnail) < 3) {
+                    $pro->thumbnail = json_encode($images[0]);
+                }
+                $pro->images = json_encode($images);
+                foreach ($images as $key => $im) {
+                    $im->delete();
+                }
+            }
+
+            if (strlen($pro->thumbnail) < 3) {
+                die("You must upload atleast one image.");
+            }
+
+            $pro->save();
+
+            return redirect('dashboard/products');
         }
 
         if (isset($_POST['edit'])) {

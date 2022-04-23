@@ -65,7 +65,7 @@ if ($edit_item == null) {
                         ])
                         <br>
                         @include('metro.components.input-text', [
-                            'label' => 'Description', 
+                            'label' => 'Description',
                             'classes' => 'mt-1',
                             'value' => $edit_item->description,
                             'attributes' => [

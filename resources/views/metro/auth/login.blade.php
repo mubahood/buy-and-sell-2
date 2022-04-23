@@ -6,9 +6,9 @@
     >
     @csrf
         <div class="mb-10 text-center">
-            <h1 class="text-dark mb-3">Sign in</h1>
-            <div class="text-gray-400 fw-bold fs-4">Don't have account?
-                <a href="{{ url('login') }}" class="link-primary fw-bolder">Register
+            <h1 class="fw-100  fs-1">Login to your dashboard</h1>
+            <div class="text-gray-400 fw-bold fs-6 mt-10">Don't have account?
+                <a href="{{ url('register') }}" class="link-primary fw-bolder">Register
                     here</a>
             </div>
         </div>
@@ -48,7 +48,7 @@
         </div> --}}
         <div class="text-center">
             <button type="submit" class="btn btn-lg btn-primary">
-                <span class="indicator-label">Submit</span>
+                <span class="indicator-label">Login</span>
             </button>
         </div>
     </form>

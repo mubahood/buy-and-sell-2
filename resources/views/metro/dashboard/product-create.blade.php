@@ -13,12 +13,7 @@ $cats = Category::where([])
     ->orderBy('name', 'Asc')
     ->get();
 foreach ($cats as $key => $cat) {
-    $parent = (int) $cat->parent;
-    if ($parent < 1) {
-        foreach ($cat->sub_categories as $_key => $sub_cat) {
-            $_categories[$sub_cat->id] = $cat->name . ' - ' . $sub_cat->name;
-        }
-    }
+    $_categories[$cat->id] = $cat->name;
 }
 
 $_locations = [];
@@ -32,9 +27,21 @@ foreach ($countries as $key => $c) {
 }
 
 $chat_threads = Chat::get_chat_threads($u->id);
+$thumbnail = url( 'no_image.png');
 
 $item = new Product();
-
+$id = ((int) Request::segment(3));
+$is_edit = false;
+if ($id > 0) {
+    $item = Product::find($id);
+}
+if ($item == null || $item->id < 1) {
+    $item = new Product();
+    $is_edit = false;
+} else {
+    $thumbnail = $item->get_thumbnail();
+    $is_edit = true;
+}
 
 ?>@extends('metro.layout.layout-dashboard')
 @section('header')
@@ -44,23 +51,26 @@ $item = new Product();
         enctype="multipart/form-data">
         @csrf
 
-        <input type="hidden" name="task" value="create">
+        @if ($is_edit)
+            <input type="hidden" name="task" value="edit">
+            <input type="hidden" name="id" value="{{ $id }}">
+        @else
+            <input type="hidden" name="task" value="create">
+        @endif
+
 
         <div class="row">
-            <div class="col-md-3">
-
-
-
+            <div class="col-md-3">                
                 <div class="d-flex flex-column   ">
                     <div class="card card-flush py-4">
                         <div class="card-header">
                             <div class="card-title">
-                                <h2>Thumbnail</h2>
+                                <h2>Product Thumbnail</h2> 
                             </div>
                         </div>
                         <div class="card-body text-center pt-0">
                             <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
-                                style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                                style="background-image: url({{$thumbnail}})">
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                     data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -213,7 +223,7 @@ $item = new Product();
                                                 @include(
                                                     'metro.components.input-select',
                                                     [
-                                                        'label' => 'Product category',
+                                                        'label' => 'Specialized category',
                                                         'value' => $item->category_id,
                                                         'required' => 'required',
                                                         'options' => $_categories,
@@ -528,10 +538,8 @@ $item = new Product();
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Enter the product dimensions in centimeters
                                                     (cm).
-                                                </div>
-                                                <!--end::Description-->
-                                            </div>
-                                            <!--end::Input group-->
+                                                </div> 
+                                            </div> 
                                         </div>
                                         <!--end::Shipping form-->
                                     </div>
@@ -642,7 +650,7 @@ $item = new Product();
         $description = $("#description");
 
         function logSubmit(event) {
-            $description.val($description_field.html());
+            $description.val( $description_field[0].firstChild.innerHTML );
         }
 
         const form = document.getElementById('form');

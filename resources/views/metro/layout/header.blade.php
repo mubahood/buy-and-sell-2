@@ -879,23 +879,15 @@ foreach ($banners_all as $key => $value) {
                         <div class="menu-item px-5">
                             <a href="{{ url('dashboard/products') }}" class="menu-link px-5">
                                 <span class="menu-text">My Products</span>
-                                <span class="menu-badge">
-                                    <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
-                                </span>
                             </a>
                         </div>
-                        <div class="menu-item px-5">
-                            <a href="javascript:;" class="menu-link px-5">My Gardens</a>
-                        </div>
+
                         <div class="separator my-2"></div>
                         <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
                             <a href="#" class="menu-link px-5">
                                 <span class="menu-title position-relative">Language
                                     <span
                                         class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                        <img class="w-15px h-15px rounded-1 ms-2"
-                                            src="{{ url('/') }}/assets/media/flags/united-states.svg"
-                                            alt="" /></span></span>
                             </a>
                             <!--begin::Menu sub-->
                             <div class="menu-sub menu-sub-dropdown w-175px py-4">
