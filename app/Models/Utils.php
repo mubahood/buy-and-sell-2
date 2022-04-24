@@ -238,7 +238,7 @@ class Utils
         if (isset($files['name'])) {
             ini_set('memory_limit', '512M');
 
-            
+
             for ($i = 0; $i < count($files['name']); $i++) {
                 if (
                     isset($files['name'][$i]) &&
@@ -246,7 +246,7 @@ class Utils
                     isset($files['tmp_name'][$i]) &&
                     isset($files['error'][$i]) &&
                     isset($files['size'][$i])
-                ) { 
+                ) {
                     $img['name'] = $files['name'][$i];
                     $img['type'] = $files['type'][$i];
                     $img['tmp_name'] = $files['tmp_name'][$i];
@@ -256,46 +256,29 @@ class Utils
 
 
 
-                    $path = 'public/storage/' . time() . "-" .Utils:: make_slug($img['name']).".".$ext;
+                    $file_name = time() . "-" . Utils::make_slug($img['name']) . "." . $ext;
+                    $path = 'public/storage/' . $file_name;
 
                     $res = move_uploaded_file($img['tmp_name'], $path);
-                    if(!$res){
-                        continue; 
-                    } 
+                    if (!$res) {
+                        continue;
+                    }
 
-                    
-                    $path_not_optimized =  "./" . $path;
-                    $file_name = str_replace("public/storage/", "", $path);
-                    $file_name = str_replace("public/", "", $file_name);
-                    $file_name = str_replace("storage/", "", $file_name);
-                    $file_name = str_replace("storage/", "", $file_name);
-                    $file_name = str_replace("public", "", $file_name);
-                    $file_name = str_replace("/", "", $file_name);
 
-                    $path_optimized = "./public/storage/thumb_" . $file_name; 
+
+                    $thumn_name = 'thumb_' . $file_name;
+                    $path_optimized = 'public/storage/'.$thumn_name;
 
                     $thumbnail = Utils::create_thumbail(
                         array(
-                            "source" => $path_not_optimized,
+                            "source" => "./".$path,
                             "target" => $path_optimized,
                         )
                     );
 
-
-
-                    if (strlen($thumbnail) > 3) {
-                        $thumbnail = str_replace("public/storage/", "", $thumbnail);
-                        $thumbnail = str_replace("storage/", "", $thumbnail);
-                        $thumbnail = str_replace("/storage", "", $thumbnail);
-                        $thumbnail = str_replace("storage", "", $thumbnail);
-                        $thumbnail = str_replace("public/", "", $thumbnail);
-                        $thumbnail = str_replace("public", "", $thumbnail);
-                        $thumbnail = str_replace("./", "", $thumbnail);
-                    } else {
-                        $thumbnail = $file_name;
-                    }
+ 
                     $ready_image['src'] = $file_name;
-                    $ready_image['thumbnail'] = $thumbnail;
+                    $ready_image['thumbnail'] = $thumn_name;
 
                     $ready_image['user_id'] = Auth::id();
                     if (!$ready_image['user_id']) {
@@ -307,7 +290,7 @@ class Utils
                     $uploaded_images[] = $ready_image;
                 }
             }
-        } 
+        }
 
         return $uploaded_images;
     }
@@ -317,7 +300,7 @@ class Utils
         ini_set('memory_limit', '-1');
 
         if (
-            !isset($params['source']) || 
+            !isset($params['source']) ||
             !isset($params['target'])
         ) {
             return [];
@@ -333,7 +316,7 @@ class Utils
 
 
 
- 
+
         if (isset($params['quality'])) {
             $image->jpeg_quality = $params['quality'];
         }
@@ -344,16 +327,16 @@ class Utils
         $image->handle_exif_orientation_tag = true;
 
         $img_size = getimagesize($image->source_path); // returns an array that is filled with info
-        
+
         $width = 220;
         $heigt = 380;
-        
-        if(isset($img_size[0]) && isset($img_size[1])){
+
+        if (isset($img_size[0]) && isset($img_size[1])) {
             $width = $img_size[0];
             $heigt = $img_size[1];
-        } 
+        }
         $width = (0.72)  * $heigt;
-    
+
 
         if (isset($params['width'])) {
             $width = $params['width'];
@@ -362,8 +345,8 @@ class Utils
         if (isset($params['heigt'])) {
             $width = $params['heigt'];
         }
-        
-        $image->jpeg_quality = 50; 
+
+        $image->jpeg_quality = 50;
         $image->jpeg_quality = Utils::get_jpeg_quality(filesize($image->source_path));
         if (!$image->resize($width, $heigt, ZEBRA_IMAGE_CROP_CENTER)) {
             return $image->source_path;
@@ -373,18 +356,18 @@ class Utils
     }
 
     public static function get_jpeg_quality($_size)
-    {   
-        $size = ($_size/1000000);
+    {
+        $size = ($_size / 1000000);
         $qt = 50;
-        if($size>5){
+        if ($size > 5) {
             $qt = 30;
-        }else if($size>4){
+        } else if ($size > 4) {
             $qt = 40;
-        }else if($size>2){
+        } else if ($size > 2) {
             $qt = 50;
-        }else if($size>1){
+        } else if ($size > 1) {
             $qt = 60;
-        }else {
+        } else {
             $qt = 70;
         }
         return $qt;
