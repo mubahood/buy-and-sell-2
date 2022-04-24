@@ -61,7 +61,7 @@ foreach ($banners_all as $key => $value) {
         @if (request()->segment(1) != 'dashboard')
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                 <a href="{{ url('/') }}">
-                    <img alt="Logo" src="{{ url('/') }}/assets/media/logos/logo-1.svg" class="h-20px h-lg-30px" />
+                    <img alt="Logo" src="{{ url('/') }}/logo.png" class="h-30px h-lg-30px" />
                 </a>
             </div>
         @endif

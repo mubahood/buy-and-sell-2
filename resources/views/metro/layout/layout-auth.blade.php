@@ -6,7 +6,7 @@
             style="background-color: #F5F6F8">
             <div class="d-flex flex-center flex-column flex-column-fluid p-5 pb-md-10">
                 <a href="{{ url("/") }}" class="mb-12">
-                    <img alt="Logo" src="{{url('/')}}/assets/media/logos/logo-1.svg" class="h-40px" />
+                    <img alt="Logo" src="{{ url('/') }}/logo.png" class="h-40px" />
                 </a>
                 <div class="w-md-600px bg-body rounded shadow-lg p-5 py-md-15 px-md-10 mx-auto">
                     @yield('content')

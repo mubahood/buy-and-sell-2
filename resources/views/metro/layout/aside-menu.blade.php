@@ -16,8 +16,8 @@ $menu_items = MenuItem::where([])
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="{{ url('/') }}">
-            <img alt="Logo" src="{{ url('/') }}/assets/media/logos/logo-1.svg" class="h-25px logo" />
+        <a href="{{ url('/') }}" class="">
+            <img alt="Logo" src="{{ url('/') }}/logo.png" class="h-50px logo" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
