@@ -263,7 +263,6 @@ class Utils
                         continue; 
                     } 
 
-                    dd($path);
                     
                     $path_not_optimized =  "./" . $path;
                     $file_name = str_replace("public/storage/", "", $path);
