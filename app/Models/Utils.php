@@ -254,12 +254,16 @@ class Utils
                     $img['size'] = $files['size'][$i];
                     $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
 
+
+
                     $path = 'public/storage/' . time() . "-" .Utils:: make_slug($img['name']).".".$ext;
 
                     $res = move_uploaded_file($img['tmp_name'], $path);
                     if(!$res){
                         continue; 
                     } 
+
+                    dd($path);
                     
                     $path_not_optimized =  "./" . $path;
                     $file_name = str_replace("public/storage/", "", $path);
@@ -269,7 +273,7 @@ class Utils
                     $file_name = str_replace("public", "", $file_name);
                     $file_name = str_replace("/", "", $file_name);
 
-                    $path_optimized = "./public/storage/thumb_" . $file_name;
+                    $path_optimized = "./public/storage/thumb_" . $file_name; 
 
                     $thumbnail = Utils::create_thumbail(
                         array(
