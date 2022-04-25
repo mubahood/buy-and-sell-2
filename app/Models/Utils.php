@@ -219,7 +219,7 @@ class Utils
 
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
         return $path;
-    }
+    } 
     public static function upload_images($files)
     {
 
