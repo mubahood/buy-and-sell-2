@@ -21,8 +21,102 @@ class MainController extends Controller
 {
     public function index()
     {
+        /*
+
+        $string = file_get_contents("./public/products.json");
+        $json_a = json_decode($string,true);
+
+        $i = 0;
+        $cats = [1,2,3,5];
+        $imgs = [];
+
+        for ($i=2; $i < 20; $i++) { 
+            $img['src'] = $i.'.jpeg';
+            $img['thumbnail'] = $i.'.jpeg';
+            $img['user_id'] = 1;
+            $imgs[] = $img;
+        }
+ 
+        
+        $i = 0;
+        foreach ($json_a as $key => $value){
+            $i++;
+            //copy($value['image_url'], 'public/temp/thumb/'.$i.'.jpg');
+            shuffle($cats);
+            shuffle($imgs);
+        
+            $pro = new Product();
+            $pro->name = $value['products_name'];
+            $pro->price = $value['products_price'];
+            $pro->description = "Details of ".$value['products_name'];
+            $pro->category_id = $cats[2];
+            $pro->sub_category_id = $cats[2];
+            shuffle($cats);
+            $pro->user_id = $cats[2];
+            $pro->quantity = $cats[2];
+            $pro->country_id = 1;
+            $pro->city_id = 1;
+            $pro->status = 1;
+            $pro->attributes = '[]';
+            $pro->images = json_encode($imgs);
+
+            $img['src'] = $i.'.jpeg';
+            $img['thumbnail'] = $i.'.jpeg';
+            $img['user_id'] = 1;
+            $img['fixed_price'] = 'Fixed price';
+            $img['nature_of_offer'] = 'For sale';
+            $pro->thumbnail = json_encode($img);
+            $pro->save();
+        }
+ 
+        
+    
+   
+[{"src":"1650824556-image-1.","thumbnail":"thumb_1650824556-image-1.","user_id":1}]
+{"src":"1650823807-ebe983c1c4182de27cf35f0a5db91123jpeg.jpeg","thumbnail":".\/public\/storage\/thumb_1650823807-ebe983c1c4182de27cf35f0a5db91123jpeg.jpeg","user_id":1}
+thumbnail
 
 
+
+
+
+
+
+
+              "products_id": 1936572,
+                "products_model": "SKUJ08155",
+                "": "Japanese Style Cat Print T-Shirts",
+                "image_url": "https://imgaz1.chiccdn.com/thumb/wap/oaupload/newchic/images/A7/A7/5abe58be-ef1e-4f9a-b42c-5bb97840811a.jpg?s=240x320",
+                "url": "https://www.newchic.com/charmkpr-t-shirts-12208/p-1936572.html",
+                "": 14.99,
+                "final_price": 14.99,
+                "list_type": 1,
+                "products_sale_price": 14.99,
+                "format_products_price": "",
+                "actListType": 0,
+                "format_final_price": "US$14.99",
+                "discount": 0,
+                "cat_id": 12208,
+                "categories_name": null,
+                "brand_info": {
+                    "products_id": "1936572",
+                    "brand_id": "39",
+                    "brand_name": "ChArmkpR",
+                    "is_product_detail": "1"
+                },
+                "isCod": null,
+                "codCountry": "AE,ID,MY,PH,SA,SG,TH,VN",
+                "sizeType": 1,
+                "isNewarrival": false,
+                "isRecommendActivity": 0,
+                "brand_name": "ChArmkpR",
+                "brand_url": "https://www.newchic.com/charmkpr-brand-39.html",
+                "showColor": 1
+
+
+
+*/
+ 
 
         // $size = filesize('public/test/1.jpeg');
         // $size = ($size/1000000)." MB";
