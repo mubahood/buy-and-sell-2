@@ -173,7 +173,7 @@ class ApiProductsController
     public function create(Request $request)
     {
 
-        dd("ankane");
+        return "romina";
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
