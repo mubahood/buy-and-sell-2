@@ -173,7 +173,7 @@ class ApiProductsController
     public function create(Request $request)
     {
 
-        return "romina";
+
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
@@ -266,6 +266,8 @@ class ApiProductsController
                     $images['images'] = $raw_images;
 
                     $uploaded_images = Utils::upload_images($images['images']);
+
+                    return $uploaded_images;
                 }
             }
         }
