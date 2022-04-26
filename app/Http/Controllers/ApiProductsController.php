@@ -254,7 +254,6 @@ class ApiProductsController
                                 (strlen($img['size']) > 0) &&
                                 ($img['error'] == 0)
                             ) {
-                                return $img['name'];
                                 $raw_images['name'][] = $img['name'];
                                 $raw_images['type'][] = 'image/png';
                                 $raw_images['tmp_name'][] = $img['tmp_name'];
