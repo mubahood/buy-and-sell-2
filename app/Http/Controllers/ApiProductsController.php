@@ -254,6 +254,7 @@ class ApiProductsController
                                 (strlen($img['size']) > 0) &&
                                 ($img['error'] == 0)
                             ) {
+                                return $img['name'];
                                 $raw_images['name'][] = $img['name'];
                                 $raw_images['type'][] = 'image/png';
                                 $raw_images['tmp_name'][] = $img['tmp_name'];
@@ -263,7 +264,6 @@ class ApiProductsController
                         }
                     }
 
-                    return $raw_images;
                     $images['images'] = $raw_images;
 
                     $uploaded_images = Utils::upload_images($images['images']);
