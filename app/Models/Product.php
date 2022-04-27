@@ -14,7 +14,7 @@ use Psy\CodeCleaner\ValidConstructorPass;
 use function PHPUnit\Framework\fileExists;
 
 class Product extends Model
-{ 
+{  
     use HasFactory;
 
 

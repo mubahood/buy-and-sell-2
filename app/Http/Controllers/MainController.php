@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
@@ -21,23 +23,66 @@ class MainController extends Controller
 {
     public function index()
     {
+
+
+
+
+
+
+
+        // $string = file_get_contents("./public/products.json");
+        // $json_a = json_decode($string,true);
         /*
 
-        $string = file_get_contents("./public/products.json");
-        $json_a = json_decode($string,true);
+  $pros = Category::all();
+        $i = 0;
+        foreach ($pros as $key => $p) {
+            $i++;
+            $p->image = "banner_".(($i%16)+1).".png";
+            $p->save();
+        }
 
+        dd("food");
+        
         $i = 0;
         $cats = [1,2,3,5];
         $imgs = [];
 
-        for ($i=2; $i < 20; $i++) { 
-            $img['src'] = $i.'.jpeg';
-            $img['thumbnail'] = $i.'.jpeg';
+        for ($i=2; $i < 100; $i++) { 
+            $img['src'] = $i.'.jpg';
+            $img['thumbnail'] = $i.'.jpg';
             $img['user_id'] = 1;
             $imgs[] = $img;
         }
  
-        
+        $pros = Product::all();
+
+        $gallery = [];
+        for ($i=2; $i < 18; $i++) { 
+            $img['src'] = $i.'.jpeg';
+            $img['thumbnail'] = $i.'.jpeg';
+            $img['user_id'] = 1;
+            $gallery[] = $img;
+        }
+
+        $i = 0;
+        foreach ($pros as $key => $p) {
+            $i++;
+            $x = $i%98;
+            $_img = $imgs[$x];
+            $__img = json_encode($_img);
+            shuffle($gallery);
+            $gal = json_encode($gallery);
+
+            $p->thumbnail = $__img;
+            $p->images = $gal;
+            
+            $p->save();
+            print("<hr> {$p->images}");
+            # code...
+        }
+        dd(count($pros));
+            
         $i = 0;
         foreach ($json_a as $key => $value){
             $i++;
@@ -116,7 +161,7 @@ thumbnail
 
 
 */
- 
+
 
         // $size = filesize('public/test/1.jpeg');
         // $size = ($size/1000000)." MB";
@@ -194,23 +239,23 @@ thumbnail
     {
 
         if (
-            isset($_POST['key']) && 
-            isset($_POST['new_password'])  
-            ) {
+            isset($_POST['key']) &&
+            isset($_POST['new_password'])
+        ) {
             $k = trim($_POST['key']);
             $new_password = trim($_POST['new_password']);
-            if(strlen($k)>2){
+            if (strlen($k) > 2) {
                 $u = User::where('remember_token', $k)->first();
-                if($u!=null){
-                    $hash = password_hash($new_password,PASSWORD_DEFAULT);
+                if ($u != null) {
+                    $hash = password_hash($new_password, PASSWORD_DEFAULT);
                     $u->password = $hash;
                     $u->save();
-                    
+
                     $_u['email'] = $u->email;
                     $_u['password'] = $new_password;
 
-                    if (Auth::attempt($_u, true)) { 
-                        header("Location: ".url("dashboard"));
+                    if (Auth::attempt($_u, true)) {
+                        header("Location: " . url("dashboard"));
                         die();
                     } else {
                         $errors['password'] = "Failed to log you in.";
@@ -247,11 +292,11 @@ thumbnail
 
             // the message
             $message = "Hello,\nPlease click on link below to reset your password.\n\n{$url}";
-            $message = wordwrap($message, 70); 
-              
+            $message = wordwrap($message, 70);
+
             $headers = 'From: info@goprint.ug'       . "\r\n" .
-                         'Reply-To: info@goprint.ug' . "\r\n" .
-                         'X-Mailer: PHP/' . phpversion(); 
+                'Reply-To: info@goprint.ug' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
 
             if (mail($email_address, "GO-PRINT PASSWORD RESET", $message, $headers)) {
                 return redirect('password-reset?success=success');
@@ -368,7 +413,7 @@ thumbnail
             $pro->user_id = $users->id;
             $pro->save();
 
-                
+
             $credentials['email'] = $u['email'];
             $credentials['password'] = $request->input("password");
 
