@@ -66,7 +66,7 @@ $cat = Category::where('slug',$seg)->first();
 if($cat != null){
 $conds['category_id'] = $cat->id;
 }
-
+ 
 $city = City::where('name',$seg)->first();
 if($city != null){
 $conds['city_id'] = $city->id;
