@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiUsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
+Route::get('farmers-goups', [ApiUsersController::class, 'farmers_goups']);
 
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('upload-temp-file', [ApiProductsController::class, 'upload_temp_file']);

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Hash;
 
 class ApiUsersController
 {
+    public function farmers_goups(Request $request){
+        return "romina";
+    }
+
+
     public function index(Request $request)
     {
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
