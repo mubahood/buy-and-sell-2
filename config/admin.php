@@ -188,7 +188,7 @@ return [
         'permissions_model' => Encore\Admin\Auth\Database\Permission::class,
 
         // Menu table and model.
-        'menu_table' => 'admin_menu',
+        'menu_table' => 'admin_menu_1',
         'menu_model' => Encore\Admin\Auth\Database\Menu::class,
 
         // Pivot table for table above.
