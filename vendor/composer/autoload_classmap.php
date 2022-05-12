@@ -44,6 +44,7 @@ return array(
     'App\\Models\\City' => $baseDir . '/app/Models/City.php',
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
     'App\\Models\\FarmersGroup' => $baseDir . '/app/Models/FarmersGroup.php',
+    'App\\Models\\FarmersGroupHasAgent' => $baseDir . '/app/Models/FarmersGroupHasAgent.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Location' => $baseDir . '/app/Models/Location.php',
     'App\\Models\\MenuItem' => $baseDir . '/app/Models/MenuItem.php',
