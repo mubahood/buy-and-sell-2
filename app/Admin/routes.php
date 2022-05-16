@@ -13,5 +13,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('farmers-groups', FarmersGroupController::class);
+    $router->resource('gardens', GardenController::class);
+    $router->resource('crop-categories', CropCategoryController::class);
     
 });

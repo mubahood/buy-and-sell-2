@@ -7,8 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Admin\\Controllers\\AuthController' => $baseDir . '/app/Admin/Controllers/AuthController.php',
+    'App\\Admin\\Controllers\\CropCategoryController' => $baseDir . '/app/Admin/Controllers/CropCategoryController.php',
     'App\\Admin\\Controllers\\ExampleController' => $baseDir . '/app/Admin/Controllers/ExampleController.php',
     'App\\Admin\\Controllers\\FarmersGroupController' => $baseDir . '/app/Admin/Controllers/FarmersGroupController.php',
+    'App\\Admin\\Controllers\\GardenController' => $baseDir . '/app/Admin/Controllers/GardenController.php',
     'App\\Admin\\Controllers\\HomeController' => $baseDir . '/app/Admin/Controllers/HomeController.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\DataTables\\ProductsDataTable' => $baseDir . '/app/DataTables/ProductsDataTable.php',
@@ -43,8 +45,10 @@ return array(
     'App\\Models\\Chat' => $baseDir . '/app/Models/Chat.php',
     'App\\Models\\City' => $baseDir . '/app/Models/City.php',
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
+    'App\\Models\\CropCategory' => $baseDir . '/app/Models/CropCategory.php',
     'App\\Models\\FarmersGroup' => $baseDir . '/app/Models/FarmersGroup.php',
     'App\\Models\\FarmersGroupHasAgent' => $baseDir . '/app/Models/FarmersGroupHasAgent.php',
+    'App\\Models\\Garden' => $baseDir . '/app/Models/Garden.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Location' => $baseDir . '/app/Models/Location.php',
     'App\\Models\\MenuItem' => $baseDir . '/app/Models/MenuItem.php',

@@ -1,12 +1,14 @@
 git rm /config/app.php --cached
 php artisan make:migration create_banners_table
 php artisan make:migration create_posts_table
+php artisan make:migration create_crop_category_activities_table
 php artisan make:migration create_post_comments_table
 php artisan make:migration create_post_categories_table
 php artisan make:model Banner
 php artisan make:model Post
 php artisan make:model FarmersGroup
 php artisan make:model FarmersGroupHasAgent
+php artisan make:model CropCategoryActivity
 
 
 php artisan make:migration create_farmers_group_has_agent_table
@@ -14,8 +16,4 @@ php artisan make:migration create_farmers_group_has_agent_table
 php artisan admin:controller --model=App\
 
 php artisan admin:make FarmersGroupController --model=App\\
-php artisan admin:make FarmersGroupController --model=App\\Models\\FarmersGroupHasAgent 
-
-oLD pASS
-$P$B.siHTPuhpAp26D6SoMXDk775q.Bz3/
-
+php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory 
