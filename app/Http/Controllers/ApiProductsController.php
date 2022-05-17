@@ -18,7 +18,6 @@ use Illuminate\Http\Request;
 class ApiProductsController
 {
     public function create_garden(Request $r){
-        return $_POST;
         if (!isset($_POST['administrator_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
