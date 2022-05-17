@@ -87,14 +87,6 @@ class ApiProductsController
             return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
         }
         
-        //$g->image_1 = $r->details;
-
-
-
-        die("create staff....");
-/*
-I/flutter (13908): {: 21, name: Test g, plant_date: 2022-05-17 00:00:00.000, harvest_date: 2022-05-17 00:00:00.000, size: 25, details: simple details about the same as last, crop_category_id: 2, location_id: 4, image_1: Instance of 'MultipartFile'}
-*/
     }
     
     public function upload_temp_file(Request $request)
