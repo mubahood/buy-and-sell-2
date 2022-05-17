@@ -21,6 +21,7 @@ class ApiProductsController
         if (!isset($_POST['administrator_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
+        return $_POST;
 
         $g = new Garden();
         $g->administrator_id = $r->administrator_id;
