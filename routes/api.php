@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
 Route::post('products', [ApiProductsController::class, 'create']);
-Route::post('crop-categories', [ApiProductsController::class, 'create_garden']);
+Route::post('gardens', [ApiProductsController::class, 'create_garden']);
 Route::get('crop-categories', function () {
     return CropCategory::all();
 });
