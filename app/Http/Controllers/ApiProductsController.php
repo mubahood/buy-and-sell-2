@@ -38,44 +38,6 @@ class ApiProductsController
         $g->crop_category_id = $r->crop_category_id;
         $g->location_id = $r->location_id;
 
-        $images = [];
-        $uploaded_images = [];
-        if (isset($_FILES)) {
-            if ($_FILES != null) {
-                if (count($_FILES) > 0) {
-
-                    foreach ($_FILES as $img) {
-                        if (
-                            (isset($img['name'])) &&
-                            (isset($img['type'])) &&
-                            (isset($img['tmp_name'])) &&
-                            (isset($img['error'])) &&
-                            (isset($img['size']))
-                        ) {
-                            if (
-                                (strlen($img['name']) > 2) &&
-                                (strlen($img['type']) > 2) &&
-                                (strlen($img['tmp_name']) > 2) &&
-                                (strlen($img['size']) > 0) &&
-                                ($img['error'] == 0)
-                            ) {
-                                $raw_images['name'][] = $img['name'];
-                                $raw_images['type'][] = 'image/png';
-                                $raw_images['tmp_name'][] = $img['tmp_name'];
-                                $raw_images['error'][] = $img['error'];
-                                $raw_images['size'][] = $img['size'];
-                            }
-                        }
-                    }
-
-                    $images['images'] = $raw_images;
-
-                    $uploaded_images = Utils::upload_images($images['images']);
-                }
-            }
-        }
-        
-   
 
 
         if($g->save()){
