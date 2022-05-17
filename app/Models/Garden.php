@@ -44,8 +44,30 @@ class Garden extends Model
 
         });
 
-        self::updated(function ($model) {
-            // ... code here
+        self::creating(function ($model) {
+            $my_colors = [
+                '#BA0A1E',
+                '#EE2908',
+                '#542889',
+                '#35A9B9',
+                '#273A85',
+                '#35A9B9',
+                '#273988',
+                '#219847',
+                '#FE9F23',
+                '#7C00FF',
+                '#FC4E51',
+                '#AA2754',
+                '#186986',
+                '#FFAE00',
+                '#44372E',
+                '#000000',
+                '#3E51A1',
+              ];
+              shuffle($my_colors);
+ 
+            $model->color = $my_colors[0];
+            return $model;
         });
 
         self::deleting(function ($model) {
