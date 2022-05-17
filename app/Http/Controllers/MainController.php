@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\CropCategory;
+use App\Models\Garden;
+use App\Models\GardenActivity;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Utils;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,11 +28,7 @@ class MainController extends Controller
     public function index()
     {
 
-
-
-
-
-
+  
 
         // $string = file_get_contents("./public/products.json");
         // $json_a = json_decode($string,true);

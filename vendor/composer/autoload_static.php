@@ -689,6 +689,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
         'App\\Models\\CropCategory' => __DIR__ . '/../..' . '/app/Models/CropCategory.php',
+        'App\\Models\\CropCategoryActivity' => __DIR__ . '/../..' . '/app/Models/CropCategoryActivity.php',
         'App\\Models\\FarmersGroup' => __DIR__ . '/../..' . '/app/Models/FarmersGroup.php',
         'App\\Models\\FarmersGroupHasAgent' => __DIR__ . '/../..' . '/app/Models/FarmersGroupHasAgent.php',
         'App\\Models\\Garden' => __DIR__ . '/../..' . '/app/Models/Garden.php',

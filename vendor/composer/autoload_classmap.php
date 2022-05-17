@@ -46,6 +46,7 @@ return array(
     'App\\Models\\City' => $baseDir . '/app/Models/City.php',
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
     'App\\Models\\CropCategory' => $baseDir . '/app/Models/CropCategory.php',
+    'App\\Models\\CropCategoryActivity' => $baseDir . '/app/Models/CropCategoryActivity.php',
     'App\\Models\\FarmersGroup' => $baseDir . '/app/Models/FarmersGroup.php',
     'App\\Models\\FarmersGroupHasAgent' => $baseDir . '/app/Models/FarmersGroupHasAgent.php',
     'App\\Models\\Garden' => $baseDir . '/app/Models/Garden.php',
