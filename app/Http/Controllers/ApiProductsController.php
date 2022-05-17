@@ -19,6 +19,25 @@ class ApiProductsController
 {
     public function create_garden(Request $r){
 
+        
+
+
+        if (!isset($_POST['administrator_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        $g = new Garden();
+        $g->administrator_id = $r->administrator_id;
+        $g->name = $r->name;
+        $g->image = '';
+        $g->images = '';
+        $g->plant_date = $r->plant_date;
+        $g->harvest_date = $r->harvest_date;
+        $g->size = $r->size;
+        $g->details = $r->details;
+        $g->crop_category_id = $r->crop_category_id;
+        $g->location_id = $r->location_id;
+
         $images = [];
         $uploaded_images = [];
         if (isset($_FILES)) {
@@ -55,23 +74,12 @@ class ApiProductsController
                 }
             }
         }
-
-        return $uploaded_images;
-
-
-        if (!isset($_POST['administrator_id'])) {
-            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $g->image = json_encode($uploaded_images[0]);
+            $g->images = json_encode($uploaded_images);
         }
 
-        $g = new Garden();
-        $g->administrator_id = $r->administrator_id;
-        $g->name = $r->name;
-        $g->plant_date = $r->plant_date;
-        $g->harvest_date = $r->harvest_date;
-        $g->size = $r->size;
-        $g->details = $r->details;
-        $g->crop_category_id = $r->crop_category_id;
-        $g->location_id = $r->location_id;
 
         if($g->save()){
             return Utils::response(['message' => 'Garden created successfully.', 'status' => 1]);
