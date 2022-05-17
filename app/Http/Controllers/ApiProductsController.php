@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Garden;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\PostCategory;
@@ -16,6 +17,37 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
+    public function create_garden(Request $r){
+        if (!isset($_POST['administrator_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        $g = new Garden();
+        $g->administrator_id = $r->administrator_id;
+        $g->name = $r->name;
+        $g->plant_date = $r->plant_date;
+        $g->harvest_date = $r->harvest_date;
+        $g->size = $r->size;
+        $g->details = $r->details;
+        $g->crop_category_id = $r->crop_category_id;
+        $g->location_id = $r->location_id;
+
+        if($g->save()){
+            return Utils::response(['message' => 'Garden created successfully.', 'status' => 1]);
+        }else{
+            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+        
+        //$g->image_1 = $r->details;
+
+
+
+        die("create staff....");
+/*
+I/flutter (13908): {: 21, name: Test g, plant_date: 2022-05-17 00:00:00.000, harvest_date: 2022-05-17 00:00:00.000, size: 25, details: simple details about the same as last, crop_category_id: 2, location_id: 4, image_1: Instance of 'MultipartFile'}
+*/
+    }
+    
     public function upload_temp_file(Request $request)
     {
 
