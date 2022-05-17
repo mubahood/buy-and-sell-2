@@ -75,10 +75,7 @@ class ApiProductsController
             }
         }
         
-        if ($uploaded_images != null && count($uploaded_images) > 0) {
-            $g->image = json_encode($uploaded_images[0]);
-            $g->images = json_encode($uploaded_images);
-        }
+   
 
 
         if($g->save()){
