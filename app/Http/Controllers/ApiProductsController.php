@@ -29,14 +29,13 @@ class ApiProductsController
         $g = new Garden();
         $g->administrator_id = $r->administrator_id;
         $g->name = $r->name;
-        $g->image = '';
-        $g->images = '';
         $g->plant_date = $r->plant_date;
         $g->harvest_date = $r->harvest_date;
         $g->size = $r->size;
         $g->details = $r->details;
         $g->crop_category_id = $r->crop_category_id;
         $g->location_id = $r->location_id;
+        
 
 
 
