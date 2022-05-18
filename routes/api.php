@@ -7,9 +7,10 @@ use App\Models\CropCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
-Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']); 
-Route::post('gardens', [ApiProductsController::class, 'create_garden']);
 Route::post('products', [ApiProductsController::class, 'create']);
+Route::post('gardens', [ApiProductsController::class, 'create_garden']);
+Route::get('gardens', [ApiProductsController::class, 'gardens']);
+Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);
 Route::get('crop-categories', function () {
     return CropCategory::all();
 });
