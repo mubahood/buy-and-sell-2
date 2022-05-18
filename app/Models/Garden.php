@@ -25,6 +25,7 @@ class Garden extends Model
                         $g_activity->administrator_id = $g->administrator_id;
                         $g_activity->person_responsible = $g->administrator_id;
                         $g_activity->done_by = 0;
+                        $g_activity->garden_id = $g->id;
                         $g_activity->done_details = "";
                         $g_activity->done_images = "";
                         $g_activity->done_status = "Not done.";
