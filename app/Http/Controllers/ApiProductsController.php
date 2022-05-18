@@ -17,10 +17,15 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
+    public function gardens(Request $r){
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return Garden::where(['administrator_id'=>$administrator_id])->get();
+    }
+
     public function create_garden(Request $r){
-
-        
-
 
         if (!isset($_POST['administrator_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
