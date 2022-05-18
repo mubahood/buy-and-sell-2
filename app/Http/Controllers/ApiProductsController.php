@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Garden;
+use App\Models\GardenActivity;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\PostCategory;
@@ -17,6 +18,16 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
+    public function garden_activities(Request $r){
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return GardenActivity::where(['administrator_id'=>$administrator_id])
+        ->where(['person_responsible'=>$administrator_id])
+        ->get();
+    }
+   
     public function gardens(Request $r){
         if (!isset($_GET['user_id'])) {
             return [];
