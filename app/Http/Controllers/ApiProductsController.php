@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\Garden;
 use App\Models\GardenActivity;
 use App\Models\Image;
+use App\Models\PestCase;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostComment;
@@ -18,6 +19,92 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
+
+
+
+    public function pest_cases_create(Request $r)
+    {
+
+        if (!isset($_POST['garden_id'])) {
+            return Utils::response(['message' => 'Garden ID is required.', 'status' => 0]);
+        }
+
+        $garden_id = ((int)($_POST['garden_id']));
+        $g = Garden::find($garden_id);
+
+        if ($g == null) {
+            return Utils::response(['message' => 'Garden not found.', 'status' => 0]);
+        }
+
+        $items = PestCase::where([
+            'garden_id' => $garden_id,
+            'pest_id' => ((int)($r->pest_id)),
+        ])->get();
+
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'You have already reported this pest case on this garden.', 'status' => 0]);
+        }
+
+
+        $case = new PestCase();
+        $case->garden_id = $g->id;
+        $case->administrator_id = $g->administrator_id;
+        $case->location_id = $g->location_id;
+        $case->pest_id = ((int)($r->pest_id));
+        $case->description = $r->description;
+        $case->images = '';
+
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $case->images = json_encode($uploaded_images);
+        }
+
+        if ($case->save()) {
+            return Utils::response(['message' => 'Case created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+
+
     public function garden_activities(Request $r)
     {
         if (!isset($_GET['user_id'])) {
@@ -63,14 +150,13 @@ class ApiProductsController
         $act->garden_id = $g->id;
         $act->done_status = 0;
         $act->done_details = "";
-        $act->done_images = ""; 
+        $act->done_images = "";
 
         if ($act->save()) {
             return Utils::response(['message' => 'Garden activity created successfully.', 'status' => 1]);
         } else {
             return Utils::response(['message' => 'Failed to create garden activity. Please try again.', 'status' => 0]);
         }
-
     }
 
     public function create_garden(Request $r)
