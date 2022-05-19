@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route; //new staff
 
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('gardens', [ApiProductsController::class, 'create_garden']);
+Route::post('garden-activities', [ApiProductsController::class, 'garden_activities_create']);
 Route::get('gardens', [ApiProductsController::class, 'gardens']);
 Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);
 Route::get('crop-categories', function () {

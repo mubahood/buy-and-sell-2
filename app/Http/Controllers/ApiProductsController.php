@@ -18,25 +18,63 @@ use Illuminate\Http\Request;
 
 class ApiProductsController
 {
-    public function garden_activities(Request $r){
+    public function garden_activities(Request $r)
+    {
         if (!isset($_GET['user_id'])) {
             return [];
         }
         $administrator_id = ((int)($_GET['user_id']));
-        return GardenActivity::where(['administrator_id'=>$administrator_id])
-        ->where(['person_responsible'=>$administrator_id])
-        ->get();
-    }
-   
-    public function gardens(Request $r){
-        if (!isset($_GET['user_id'])) {
-            return [];
-        }
-        $administrator_id = ((int)($_GET['user_id']));
-        return Garden::where(['administrator_id'=>$administrator_id])->get();
+        return GardenActivity::where(['administrator_id' => $administrator_id])
+            ->where(['person_responsible' => $administrator_id])
+            ->get();
     }
 
-    public function create_garden(Request $r){
+    public function gardens(Request $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return Garden::where(['administrator_id' => $administrator_id])->get();
+    }
+
+    public function garden_activities_create(Request $r)
+    {
+        if (!isset($_POST['administrator_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+        $garden_id = ((int)($_POST['garden_id']));
+        $g = Garden::find($garden_id);
+
+        if ($g == null) {
+            return Utils::response(['message' => 'Garden not found.', 'status' => 0]);
+        }
+
+        $act = new GardenActivity();
+        $act->name = $r->name;
+        $act->due_date = $r->due_date;
+        $act->details = $r->details;
+        $act->administrator_id = $g->administrator_id;
+        $act->person_responsible = $g->administrator_id;
+        $act->done_by = 0;
+        $act->is_generated = 0;
+        $act->is_done = 0;
+        $act->position = 0;
+        $act->garden_id = $g->id;
+        $act->done_status = 0;
+        $act->done_details = "";
+        $act->done_images = ""; 
+
+        if ($act->save()) {
+            return Utils::response(['message' => 'Garden activity created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create garden activity. Please try again.', 'status' => 0]);
+        }
+
+    }
+
+    public function create_garden(Request $r)
+    {
 
         if (!isset($_POST['administrator_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
@@ -89,22 +127,20 @@ class ApiProductsController
                 }
             }
         }
-        
+
         if ($uploaded_images != null && count($uploaded_images) > 0) {
             $g->image = json_encode($uploaded_images[0]);
             $g->images = json_encode($uploaded_images);
         }
 
 
-        if($g->save()){
+        if ($g->save()) {
             return Utils::response(['message' => 'Garden created successfully.', 'status' => 1]);
-        }else{
+        } else {
             return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
         }
-        
- 
     }
-    
+
     public function upload_temp_file(Request $request)
     {
 
