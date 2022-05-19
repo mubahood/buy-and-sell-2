@@ -10,6 +10,7 @@ php artisan make:model FarmersGroup
 php artisan make:model FarmersGroupHasAgent
 php artisan make:model CropCategoryActivity
 php artisan make:model GardenActivity
+php artisan make:model Pest
 
 
 php artisan make:migration create_farmers_group_has_agent_table
@@ -19,8 +20,7 @@ php artisan make:migration create_pests_table
 php artisan migrate --path=/database/migrations/2022_05_19_044143_create_pests_table.php
 
 
-
-php artisan admin:controller --model=App\
-
+ 
 php artisan admin:make FarmersGroupController --model=App\\
 php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory 
+php artisan admin:make PestController --model=App\\Models\\Pest 

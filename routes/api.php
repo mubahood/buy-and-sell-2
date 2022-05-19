@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiChatsController;
 use App\Http\Controllers\ApiProductsController;
 use App\Http\Controllers\ApiUsersController;
 use App\Models\CropCategory;
+use App\Models\Pest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
@@ -14,6 +15,9 @@ Route::get('gardens', [ApiProductsController::class, 'gardens']);
 Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);
 Route::get('crop-categories', function () {
     return CropCategory::all();
+});
+Route::get('pests', function () {
+    return Pest::all();
 });
 
 Route::get('farmers-goups', [ApiUsersController::class, 'farmers_goups']);

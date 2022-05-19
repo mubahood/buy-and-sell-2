@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\CropCategory;
 use App\Models\Garden;
 use App\Models\GardenActivity;
+use App\Models\Pest;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
@@ -28,11 +29,29 @@ class MainController extends Controller
     public function index()
     {
 
+        /*
+        $m = new Pest();
+        $m->name = 'Slaters';
+        $m->description = 'Slaters or woodlice are small crustaceans that hide in damp situations in the garden. Slaters feed on organic matter, but at high densities they can damage new seedlings and ripe fruit such as melons, strawberries and the roots of pot plants.
+
+        Slaters on a piece of timber.
+        Slaters on a piece of timber.';
+
+        $m->cause = $m->description;
+        $m->cure = $m->description;
+        $m->image = 'no_image.jpg';
+        $m->video = 'https://www.youtube.com/watch?v=g9uPh00uhoE';
+
+        $m->save();
+
+        dd("pests");*/
+
   
 
         // $string = file_get_contents("./public/products.json");
         // $json_a = json_decode($string,true);
-        /*
+        /* 					
+
 
   $pros = Category::all();
         $i = 0;

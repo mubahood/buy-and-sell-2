@@ -15,5 +15,6 @@ Route::group([
     $router->resource('farmers-groups', FarmersGroupController::class);
     $router->resource('gardens', GardenController::class);
     $router->resource('crop-categories', CropCategoryController::class);
+    $router->resource('pests', PestController::class);
     
 });
