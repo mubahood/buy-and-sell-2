@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\FarmersGroup;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\User;
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Hash;
 
 class ApiUsersController
 {
+    public function farmers_goups(Request $request){
+        return FarmersGroup::all();
+    }
+
+
     public function index(Request $request)
     {
         $user_id = (int) ($request->user_id ? $request->user_id : 0);

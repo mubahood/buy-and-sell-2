@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\CropCategory;
+use App\Models\Garden;
+use App\Models\GardenActivity;
+use App\Models\Pest;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Utils;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,15 +29,29 @@ class MainController extends Controller
     public function index()
     {
 
+        /*
+        $m = new Pest();
+        $m->name = 'Slaters';
+        $m->description = 'Slaters or woodlice are small crustaceans that hide in damp situations in the garden. Slaters feed on organic matter, but at high densities they can damage new seedlings and ripe fruit such as melons, strawberries and the roots of pot plants.
 
+        Slaters on a piece of timber.
+        Slaters on a piece of timber.';
 
+        $m->cause = $m->description;
+        $m->cure = $m->description;
+        $m->image = 'no_image.jpg';
+        $m->video = 'https://www.youtube.com/watch?v=g9uPh00uhoE';
 
+        $m->save();
 
+        dd("pests");*/
 
+  
 
         // $string = file_get_contents("./public/products.json");
         // $json_a = json_decode($string,true);
-        /*
+        /* 					
+
 
   $pros = Category::all();
         $i = 0;
@@ -82,7 +101,7 @@ class MainController extends Controller
             # code...
         }
         dd(count($pros));
-            
+                
         $i = 0;
         foreach ($json_a as $key => $value){
             $i++;
@@ -184,6 +203,7 @@ thumbnail
         // echo('<img width="400" src="'.$thumbnail.'" />');
 
         // die("");
+        return view('metro.main.product-listing');
         return view('metro.main.index');
         //return view('metro.index');
     }

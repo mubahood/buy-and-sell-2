@@ -14,6 +14,11 @@ class Category extends Model
         return $this->hasMany(Attribute::class);
     }
 
+    public function kids()
+    {
+        return $this->hasMany(category::class, "parent");
+    }
+
     public function sub_categories()
     {
         return $this->hasMany(category::class, "parent");
