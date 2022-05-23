@@ -13,6 +13,7 @@ Route::post('gardens', [ApiProductsController::class, 'create_garden']);
 
 Route::post('garden-activities', [ApiProductsController::class, 'garden_activities_create']);
 Route::post('pest-cases', [ApiProductsController::class, 'pest_cases_create']);
+Route::post('workers', [ApiProductsController::class, 'workers_create']);
 
 Route::get('gardens', [ApiProductsController::class, 'gardens']);
 Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);

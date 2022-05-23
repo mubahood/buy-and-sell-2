@@ -15,10 +15,108 @@ use App\Models\PostCategory;
 use App\Models\PostComment;
 use App\Models\Product;
 use App\Models\Utils;
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ApiProductsController
 {
+
+
+
+    public function workers_create(Request $r)
+    {
+
+        if (!isset($_POST['owner_id'])) {
+            return Utils::response(['message' => 'Owner is required.', 'status' => 0]);
+        }
+
+        $owner_id = ((int)($_POST['owner_id']));
+        $phone_number = ((String)($_POST['phone_number']));
+
+        $items = Administrator::where([
+            'phone_number' => $phone_number,
+        ])->get();
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'User with same phone number already exist.', 'status' => 0]);
+        }
+
+        $items = Administrator::where([
+            'email' => $phone_number,
+        ])->get();
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'User with same phone number already exist.', 'status' => 0]);
+        }
+
+        $items = Administrator::where([
+            'username' => $phone_number,
+        ])->get();
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'User with same phone number already exist.', 'status' => 0]);
+        }
+
+
+        $user = new Administrator();
+        $user->owner_id = $owner_id;
+        $user->avatar = 'no_image.jpg';
+        $user->user_type = 'worker';
+        $user->phone_number = $phone_number;
+        $user->username = $phone_number;
+        $user->email = $phone_number;
+        $user->about = ((String)($r->about));
+        $user->name = ((String)($r->name));
+        $user->password = Hash::make(trim($r->password));
+ 
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $user->avatar = json_encode($uploaded_images);
+        }
+ 
+        if ($user->save()) {
+            return Utils::response(['message' => 'Case created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
 
 
 
