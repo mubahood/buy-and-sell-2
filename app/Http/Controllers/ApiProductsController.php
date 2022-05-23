@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Garden;
 use App\Models\GardenActivity;
+use App\Models\GardenProductionRecord;
 use App\Models\Image;
 use App\Models\PestCase;
 use App\Models\Post;
@@ -41,7 +42,7 @@ class ApiProductsController
         }
 
         $owner_id = ((int)($_POST['owner_id']));
-        $phone_number = ((String)($_POST['phone_number']));
+        $phone_number = ((string)($_POST['phone_number']));
 
         $items = Administrator::where([
             'phone_number' => $phone_number,
@@ -75,10 +76,10 @@ class ApiProductsController
         $user->phone_number = $phone_number;
         $user->username = $phone_number;
         $user->email = $phone_number;
-        $user->about = ((String)($r->about));
-        $user->name = ((String)($r->name));
+        $user->about = ((string)($r->about));
+        $user->name = ((string)($r->name));
         $user->password = Hash::make(trim($r->password));
- 
+
         $images = [];
         $uploaded_images = [];
         if (isset($_FILES)) {
@@ -118,11 +119,105 @@ class ApiProductsController
         if ($uploaded_images != null && count($uploaded_images) > 0) {
             $user->avatar = json_encode($uploaded_images);
         }
- 
+
         if ($user->save()) {
             return Utils::response(['message' => 'Case created successfully.', 'status' => 1]);
         } else {
             return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+
+
+    public function garden_production_record_create(Request $r)
+    {
+
+        if (!isset($_POST['garden_id'])) {
+            return Utils::response(['message' => 'Garden ID is required.', 'status' => 0]);
+        }
+
+        if (!isset($_POST['created_by_id'])) {
+            return Utils::response(['message' => 'Created by id is required.', 'status' => 0]);
+        }
+
+        $garden_id = ((int)($_POST['garden_id']));
+        $g = Garden::find($garden_id);
+
+        if ($g == null) {
+            return Utils::response(['message' => 'Garden not found.', 'status' => 0]);
+        }
+
+        $new_record = new GardenProductionRecord();
+        $new_record->created_by_id = ((int)($r->created_by_id));
+        $new_record->administrator_id = $g->administrator_id;
+        $new_record->garden_id = $g->id;
+        $new_record->description = $r->description; 
+        $new_record->images = '[]';
+
+
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $new_record->images = json_encode($uploaded_images);
+        }
+
+        if ($new_record->save()) {
+
+            if(
+                isset($r->activity_id) &&
+                isset($r->done_status)
+            
+            ){
+                $activity_id = ((int)($r->activity_id));
+                if($activity_id>0){
+                    $act = GardenActivity::find($activity_id);
+                    if($act!=null){
+                        $act->is_done = true;
+                        $act->done_status = $r->done_status;
+                        $act->done_by = $new_record->created_by_id;
+                        $act->garden_production_record_id = $new_record->id;
+                        $act->save(); 
+                    }
+                }
+            }
+            return Utils::response(['message' => 'Production record created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create Production recoed. Please try again.', 'status' => 0]);
         }
     }
 
