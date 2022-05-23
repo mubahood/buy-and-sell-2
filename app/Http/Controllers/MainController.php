@@ -203,7 +203,7 @@ thumbnail
         // echo('<img width="400" src="'.$thumbnail.'" />');
 
         // die("");
-        return view('metro.main.product-listing');
+        //return view('metro.main.product-listing');
         return view('metro.main.index');
         //return view('metro.index');
     }
@@ -243,6 +243,11 @@ thumbnail
         }
 
         $seg = request()->segment(1);
+ 
+        if($seg == 'product-listing'){
+            return view('metro.main.product-listing');
+        }
+ 
         $profile = Profile::where('username', $seg)->first();
         if ($profile) {
             return view('main.display-profile');
@@ -252,7 +257,18 @@ thumbnail
         if ($pro) {
             return view('metro.main.products-details');
         }
-        return view('main.index');
+        
+        $pro = Product::where('id', $seg)->first();
+        if ($pro) {
+            return view('metro.main.products-details');
+        }
+
+        $cat = Category::where('slug', $seg)->first();
+        if ($cat) {
+            return view('metro.main.product-listing');
+        }
+
+        return view('metro.main.index');
     }
 
     public function password_reset(Request  $request)

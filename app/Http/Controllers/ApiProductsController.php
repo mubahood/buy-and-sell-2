@@ -16,6 +16,7 @@ use App\Models\PostComment;
 use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Http\Request;
+use Nette\Utils\Strings;
 
 class ApiProductsController
 {
@@ -24,7 +25,6 @@ class ApiProductsController
 
     public function pest_cases_create(Request $r)
     {
-
         if (!isset($_POST['garden_id'])) {
             return Utils::response(['message' => 'Garden ID is required.', 'status' => 0]);
         }
@@ -517,9 +517,17 @@ class ApiProductsController
 
     public function index(Request $request)
     {
-        $per_page = (int) ($request->per_page ? $request->per_page : 200);
+
+        $per_page = (int) ($request->per_page ? $request->per_page : 10);
+        $s = "";
+        if(isset($_GET['term'])){
+            $s = trim((string) ($_GET['term']) );
+            $items = Product::where('name', 'like', "%" . $s . "%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
+            return $items;
+        }
+
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
-        $s = trim((string) ($request->s ? $request->s : ""));
+
         $cat_id = (int) ($request->cat_id ? $request->cat_id : 0);
 
 

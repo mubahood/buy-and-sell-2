@@ -7,7 +7,16 @@ $top_categories = Category::get_top_categories(8);
 
 $products = [];
 $conds = [];
-$per_page = 21;
+$per_page = 24;
+
+$seg = request()->segment(1);
+$cat = Category::where('slug', $seg)->first();
+if ($cat) {
+    if ($cat->id != null) {
+        $conds['category_id'] = $cat->id;
+    }
+}
+
 $products = Product::where($conds)
     ->orderBy('id', 'desc')
     ->paginate($per_page)

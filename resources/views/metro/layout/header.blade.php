@@ -140,8 +140,6 @@ foreach ($banners_all as $key => $value) {
                                         data-control="select2" data-placeholder="Search for products & sellers"
                                         id="select-search">
                                         <option></option>
-                                        <option value="0" data-kt-select2-user="avatars/300-6.jpg">Emma Smith</option>
-                                        <option value="1" data-kt-select2-user="avatars/300-1.jpg">Max Smith</option>
                                     </select>
                                 </div>
                             </div>
@@ -157,7 +155,7 @@ foreach ($banners_all as $key => $value) {
                 <div class="d-none d-md-flex align-items-center ms-1 ms-lg-3">
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 
-                        <a href="#" class="btn btn-outline btn-outline-primary btn-sm">Sign up | Login</a>
+                        <a href="{{ url('register') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up | Login</a>
                         <a href="#" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell now</a>
                         <a href="#" class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
                             style="margin-left: .7rem">
@@ -202,13 +200,14 @@ foreach ($banners_all as $key => $value) {
     <script>
         $(document).ready(function() {
 
-
+            var base_url = '{{ url('')}}';
+ 
             $('#select-search').select2({
                 ajax: {
-                    url: 'http://localhost:8888/buy-and-sell-2/api/products',
+                    url: base_url+'/api/products',
 
                     processResults: function(data) {
-                        return {
+                        return { 
                             results: data
                         };
                     },
@@ -218,20 +217,18 @@ foreach ($banners_all as $key => $value) {
                 templateResult: function(item) {
                     return format(item);
                 }
+            }).on('change', function(e){
+                var val = $('#select-search').val();
+                window.location.href = base_url+"/"+val;
             });
 
             // // Format options
             const format = (item) => {
 
-                // if (!item.id) {
-                //     return item.name;
-                // }
-
-                var url = 'assets/images/logo.png';
                 var img = $("<img>", {
-                    class: "rounded-circle me-2",
-                    width: 26,
-                    src: url
+                    class: "rounded me-2",
+                    width: 40,
+                    src: item.img
                 });
                 var span = $("<span>", {
                     text: " " + item.name

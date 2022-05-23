@@ -139,7 +139,7 @@ foreach ($products as $key => $pro) {
         </div>
 
         <div class="text-center py-10">
-            <a href="#" class="btn btn-primary btn-sm">SEE MORE</a>
+            <a href="{{ url('product-listing') }}" class="btn btn-primary btn-sm">SEE MORE</a>
         </div>
 
 

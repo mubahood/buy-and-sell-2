@@ -7,12 +7,24 @@ use App\Models\Category;
 use App\Models\Chat;
 
 $slug = request()->segment(1);
-$pro = Product::where('slug', $slug)->firstOrFail();
+$pro = Product::where('slug', $slug)->first();
+
+if ($pro == null) {
+    $pro = Product::where('id', $slug)->first();
+}
+
+if ($pro == null) {
+    die("Product not found. Maybe it's already deleted.");
+}
+
 if ($pro) {
     if (!$pro->user) {
         dd('User not found.');
     }
+}else {
+    die("Product not found. Maybe it's already deleted.");
 }
+
 $products = [];
 $conds['category_id'] = $pro->category->id;
 $products = Product::where($conds)->paginate(4);

@@ -14,7 +14,7 @@ use Psy\CodeCleaner\ValidConstructorPass;
 use function PHPUnit\Framework\fileExists;
 
 class Product extends Model
-{  
+{
     use HasFactory;
 
 
@@ -36,7 +36,7 @@ class Product extends Model
         return number_format((int)($value));
     }
 
-   
+
 
 
     public static function boot()
@@ -46,7 +46,7 @@ class Product extends Model
         self::creating(function ($p) {
             $p->slug = Utils::make_slug($p->name);
             $p->status = 1;
-            
+
             return $p;
         });
 
@@ -115,12 +115,12 @@ class Product extends Model
     public function get_thumbnail()
     {
 
-        $thumbnail = url( 'no_image.png');
+        $thumbnail = url('no_image.png');
         if ($this->thumbnail != null) {
             if (strlen($this->thumbnail) > 3) {
                 $thumb = json_decode($this->thumbnail);
                 if (isset($thumb->thumbnail)) {
-                    $thumbnail = url( '/storage/'.$thumb->thumbnail);
+                    $thumbnail = url('/storage/' . $thumb->thumbnail);
                 }
             }
         }
@@ -134,8 +134,8 @@ class Product extends Model
             if (strlen($this->images) > 3) {
                 $images_json = json_decode($this->images);
                 foreach ($images_json as $key => $img) {
-                    $img->src = url('/storage/'.$img->src);
-                    $img->thumbnail = url( '/storage/'.$img->thumbnail);
+                    $img->src = url('/storage/' . $img->src);
+                    $img->thumbnail = url('/storage/' . $img->thumbnail);
                     $images[] = $img;
                 }
             }
@@ -146,10 +146,29 @@ class Product extends Model
 
     protected $appends = [
         'seller_name',
-        'seller_phone', 
+        'seller_phone',
         'category_name',
         'city_name',
+        'img',
     ];
+
+    public function getImgAttribute($v)
+    {
+        if ($this->images == null) {
+            return url('/no_image.jpg');
+        }
+        if (strlen($this->images) < 2) {
+            return url('/no_image.jpg');
+        }
+        $img = json_decode($this->thumbnail);
+        if (isset($img->thumbnail)) {
+            if ($img->thumbnail != null) {
+                $url = url('storage/' . $img->thumbnail);
+                return $url;
+            }
+        }
+        return url('/no_image.jpg');
+    }
 
     public function getCityNameAttribute($value)
     {
@@ -190,7 +209,7 @@ class Product extends Model
 
     public function getSellerNameAttribute()
     {
-        $u = User::find($this->user_id); 
+        $u = User::find($this->user_id);
         if ($u == null) {
             $u = new User();
         }
@@ -200,14 +219,14 @@ class Product extends Model
             return $u->company_name;
         }
     }
-  
+
     public function getSellerPhoneAttribute()
     {
         $u = User::find($this->user_id);
         if ($u == null) {
             $u = new User();
         }
- 
+
         if ($u->phone_number != null || (strlen($u->phone_number) > 2)) {
             return $u->phone_number;
         } else {
@@ -236,7 +255,7 @@ class Product extends Model
         $att->name = 'Quantity available';
         $att->units = '';
         $att->value = $this->quantity;
-        if($att->value == 0){
+        if ($att->value == 0) {
             $att->value = 1;
         }
         $attributes[] = $att;
@@ -275,13 +294,16 @@ class Product extends Model
         $this->attributes['attributes'] =  json_encode($attributes);
     }
 
-    public function get_price(){
-        return ((int)( str_replace(',','',$this->price) ));
+    public function get_price()
+    {
+        return ((int)(str_replace(',', '', $this->price)));
     }
 
-    public function get_quantity(){
-        return ((int)( str_replace(',','',$this->quantity) ));
+    public function get_quantity()
+    {
+        return ((int)(str_replace(',', '', $this->quantity)));
     }
+
 
     protected $fillable = [
         'name',
