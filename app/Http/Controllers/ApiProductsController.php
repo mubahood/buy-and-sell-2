@@ -24,6 +24,15 @@ class ApiProductsController
 
 
 
+    public function workers(Request $r)
+    {
+        if (!isset($_GET['owner_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['owner_id']));
+        return Administrator::where(['owner_id' => $administrator_id])->get();
+    }
+
     public function workers_create(Request $r)
     {
 
