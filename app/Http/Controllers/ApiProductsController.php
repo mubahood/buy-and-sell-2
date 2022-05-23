@@ -249,7 +249,7 @@ class ApiProductsController
         $act->due_date = $r->due_date;
         $act->details = $r->details;
         $act->administrator_id = $g->administrator_id;
-        $act->person_responsible = $r->person_responsible;
+        $act->person_responsible = ((int)($r->person_responsible));
         //$g_activity->person_responsible = $g->;
         $act->done_by = 0;
         $act->is_generated = 0;
