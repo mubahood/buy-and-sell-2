@@ -23,7 +23,7 @@ class Garden extends Model
                         $g_activity->name = $v->name;
                         $g_activity->details = $v->details;
                         $g_activity->administrator_id = $g->administrator_id;
-                        $g_activity->person_responsible = $g->person_responsible;
+                        $g_activity->person_responsible = $g->administrator_id;
                         $g_activity->done_by = 0;
                         $g_activity->garden_id = $g->id;
                         $g_activity->done_details = "";
