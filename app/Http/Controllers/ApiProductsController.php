@@ -261,7 +261,7 @@ class ApiProductsController
         $act->done_images = "";
 
         if ($act->save()) {
-            return Utils::response(['message' => 'Garden activity created successfully.', 'status' => 1]);
+            return Utils::response(['message' => 'Activity created successfully.', 'status' => 1]);
         } else {
             return Utils::response(['message' => 'Failed to create garden activity. Please try again.', 'status' => 0]);
         }
