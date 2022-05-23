@@ -1,278 +1,159 @@
-@extends('layouts.layout')
-
-@section('title', config('app.domain') )
-
-@section('sidebar')
-@parent
-
-<p>This is appended to the master sidebar.</p>
-@endsection
-
-@section('content')
-
-
-
-
-@php
-use Illuminate\Support\Facades\Auth;
+@extends('metro.layout.layout-main')
+<?php
 use App\Models\Product;
-use App\Models\Profile;
-use App\Models\City;
 use App\Models\Category;
-$cats = Category::all();
 
-$this_url = url('/');
-if (isset($_SERVER['PATH_INFO'])) {
-$this_url = url($_SERVER['PATH_INFO']);
-}
-
-$seg = "";
-$is_searching = false;
-$show_products = false;
-$key_word = '';
-$search_title = '';
-$product_tab = ' _tab ';
-$supplier_tab = ' _tab ';
-
-$product_tab = ' active_tab ';
-if ('products' == request()->segment(1)) {
-$product_tab = ' active_tab ';
-$supplier_tab = ' _tab ';
-} elseif ('suppliers' == request()->segment(1)) {
-$supplier_tab = ' active_tab ';
-$product_tab = ' _tab ';
-}
-
-if (isset($_GET['search'])) {
-if (strlen(isset($_GET['search'])) > 0) {
-$key_word = trim($_GET['search']);
-$is_searching = true;
-}
-}
+$top_categories = Category::get_top_categories(8);
 
 $products = [];
-$profiles = [];
-if (str_contains($product_tab, 'active_tab')) {
-$show_products = true;
-if ($is_searching) {
-$products = Product::where('name', 'LIKE', "%$key_word%")->paginate(2)->withQueryString();;
-$search_title = 'Found ' . count($products) . " search results for \"" . $key_word . "\"";
-} else {
-
-$conds['status'] = 0;
-$seg = strtolower(request()->segment(1));
-if($seg!=null){
-$cat = Category::where('slug',$seg)->first();
-if($cat != null){
-$conds['category_id'] = $cat->id;
-}
- 
-$city = City::where('name',$seg)->first();
-if($city != null){
-$conds['city_id'] = $city->id;
-}
-
-}
-
-$per_page = 21;
-$products = Product::where($conds)->orderBy('id','desc')->paginate($per_page)->withQueryString();
-
-}
-} else {
-$show_products = false;
-$profiles = Profile::where('status', 1)->paginate(2)->withQueryString();
-}
-
-$cities = City::all();
-
-@endphp
-<style>
-    .product-widget-dropitem {
-        margin: 0px;
-        margin-top: .6rem;
+$products = Product::all();
+$popular = [];
+$just_in = [];
+$recomended = [];
+foreach ($products as $key => $pro) {
+    if (count($popular) < 5) {
+        $popular[] = $pro;
+        continue;
     }
-
-    .product-widget-dropdown {
-        padding: 0px;
-        margin: 0px;
+    if (count($just_in) < 11) {
+        $just_in[] = $pro;
+        continue;
     }
-
-    .product-widget-dropdown li a {
-        padding: 0px;
-        margin: 0px;
-        margin-left: 1.5rem;
+    if (count($recomended) < 18) {
+        $recomended[] = $pro;
+        continue;
     }
+}
+?>
+@section('main-content')
+    <div class="row" style="background-image: url(assets/images/bg-1.jpeg);     background-size:     cover;                      /* <------ */
+                        background-repeat:   no-repeat;
+                        background-position: center center; ">
+        <div class="col-6 col-md-3 m-20  p-0">
+            <div class="card card-flush shadow-sm py-10">
+                <div class="card-body py-5">
+                    <p class="display-5 fw-normal lh-sm">Ready to declutter your closet?</p>
 
-    .product-widget-dropdown li a:hover {
-        background-color: white;
-    }
-</style>
-<section class="inner-section ad-list-part mt-0   mb-0 mb-md-3 ">
-    <div class="container ">
-
-        <div class="row content-reverse">
-            <div class="col-lg-4 col-xl-3 d-none d-md-block">
-                <div class="row">
-                    <div class="col-md-6 col-lg-12 pt-4">
-                        <div class="product-widget pr-4 ">
-                            <h6 class="product-widget-title">Categories</h6>
-                            <form action="{{ $this_url }}" class="product-widget-form">
-                                <ul class="product-widget-list ">
-                                    @foreach ($cats as $item)
-                                    @php
-                                    if ($item->parent == null) {
-                                    $parent = 0;
-                                    } else {
-                                    $parent = (int) $item->parent;
-                                    }
-
-                                    if ($parent >= 1) {
-                                    continue;
-                                    }
-                                    @endphp
-                                    <li class="product-widget-dropitem active"><button type="button" class="product-widget-link active">
-                                            <img width="20" src="{{url("".$item->image)}}" alt="{{ $item->name
-                                            }}">
-                                            {{ $item->name }}
-                                        </button>
-                                        <ul class="product-widget-dropdown" style="display: block;">
-                                            @foreach ($item->sub_categories as $sub_item)
-                                            <li>
-                                                <a class="  {{ (strtolower($sub_item->slug) == $seg) ? ' text-primary ' : ' text-secondary ' }} " href="{{ url($sub_item->slug) }}">{{ $sub_item->name }}
-                                                    <span class="text-dark">({{count($sub_item->products)}})</span></a>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    @endforeach
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-12">
-
-                        
-
-                        <div class="product-widget">
-                            <h6 class="product-widget-title">Top cities</h6>
-                            <form class="product-widget-form">
-                                <ul class="product-widget-list ">
-
-                                    @foreach (City::all() as $item)
-
-                                    <li class="product-widget-item ">
-                                        <div class="product-widget-checkbox"><input readonly {{ (strtolower($item->name)
-                                            == $seg) ? ' checked ' : ' ' }} type="checkbox" id="chcek9">
-                                        </div><a href="{{ url($item->name) }}" class="product-widget-label {{ (strtolower($item->name) == $seg) ? ' text-primary ' : ' text-secondary ' }} " for="chcek9"><span class="product-widget-text">{{$item->name.",
-                                                ".$item->country->name}}</span><span class="product-widget-number">({{count($item->products)}})</span></a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </form>
-                        </div>
-                    </div>
+                    <a href="{{ url('/dashboard') }}" class="btn btn-md mt-10 d-block btn-block  btn-primary">
+                        Sell now
+                    </a>
+                    <a class="mb-10 d-block mt-5" href="#">Learn how it works</a>
                 </div>
             </div>
-            <div class="col-lg-10 col-xl-9">
-                <div class="row">
-                    <div class="col-12 col-md-12  ">
-                        <div class="bg-primary row pt-5 pb-5 d-md-none">
-                            <div class="col-12">
-                                <div class="header-search pl-3">
-                                    <input name="search" type="search" value="{{$key_word}}"
-                                        placeholder="Search, Whatever you need...">
-                                    <button type="submit" title="Search Submit "><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row ">
-                            <div class="col-lg-12  pt-4 pl-1">
-                                <div class="header-filter mt-0  m-0 mb-2 ">
-                                    <div class="filter-action">
-                                        <a href="{{ url('products') }}" title="Clear search"
-                                            class="{{ $product_tab }}">Product
-                                            List</a>
-                                        <a href="{{ url('suppliers') }}" class="{{ $supplier_tab }} ml-2">Supplier
-                                            List</a>
-                                    </div>
-                                    <div class="header-filter" style="margin-bottom: -7px">
-                                        {{ $search_title }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                            <div class="row ad-standard pl-3"> 
-                            @if ($show_products)
-                            @foreach ($products as $item)
-                            <div class="col-6 col-md-4  pl-2 mt-3" style="padding-right: 1.8rem;">
-                                <x-product3 :item="$item" />
-                            </div>
-                            @endforeach
-                            @endif
-
-                            @if (!$show_products)
-                            @foreach ($profiles as $item)
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-                                <x-supplier :item="$item" />
-                            </div>
-                            @endforeach
-                            @endif
-
-
-
-
-                        </div>
-                        <div class="row ">
-                            <div class="col-lg-12">
-                                <div class="footer-pagection border-0">
-
-
-                                    @if ($products!=null)
-
-                                    <p class="page-info">Showing {{$products->count()}} of {{$products->total()}}
-                                        Results</p>
-                                    {{
-                                    $products->onEachSide(2)->links('main.pagination')
-                                    }}
-                                    @endif
-
-                                    @if ($profiles!=null)
-
-                                    <p class="page-info">Showing {{$profiles->count()}} of {{$profiles->total()}}
-                                        Results</p>
-                                    {{
-                                    $profiles->onEachSide(2)->links('main.pagination')
-                                    }}
-                                    @endif
-
-
-                                    {{-- <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#"><i
-                                                    class="fas fa-long-arrow-alt-left"></i></a></li>
-                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">...</li>
-                                        <li class="page-item"><a class="page-link" href="#">67</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><i
-                                                    class="fas fa-long-arrow-alt-right"></i></a></li>
-                                    </ul> --}}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                     
-
-                </div>
-            </div>
-
-
         </div>
     </div>
-</section>
+    <div class="row">
+
+        <div class="d-flex d-flex align-items-stretch justify-content-between pt-4">
+            <h2 class="my-6 h1 fw-bold">Popular items</h2>
+            <a class="mb-10 d-block mt-6" href="#">See all</a>
+        </div>
+
+        <div class="row mt-2">
+            @foreach ($popular as $item)
+                <div class="col-6 col-md-2">
+                    @include('metro.components.product-item', [
+                        'item' => $item,
+                    ])
+                </div>
+            @endforeach
+            <div class="col-6 col-md-2  p-0">
+                <div class="card card-flush shadow-sm">
+                    <div class="card-header">
+                        <h3 class="card-title">Sell yours</h3>
+                    </div>
+                    <div class="card-body py-5">
+                        Do you want your item to be listed too? click on <span class="lead text-dark">sell now</span> button
+                        to get started
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url('/dashboard') }}" class="btn btn-sm d-block btn-block  btn-primary">
+                            Sell now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
+        <h2 class="my-6 h1 fw-bold">Browse By Category</h2>
+        <div class="row  g-2">
+            @foreach ($top_categories as $cat)
+                <div class="col">
+                    <a href="#" class="card card-border card-stretch border border-1 border-secondary">
+                        <div class="card-body py-5 px-2">
+                            <h2 class="card-text fw-normal text-center " style="font-size: 16px">{{ $cat->name }}</h2>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+
+
+        <div class="d-flex d-flex align-items-stretch justify-content-between pt-4">
+            <h2 class="my-6 h1 fw-bold">Just in</h2>
+            <a class="mb-10 d-block mt-6" href="#">See all</a>
+        </div>
+
+        <div class="row mt-2">
+            @foreach ($just_in as $item)
+                <div class="col-6 col-md-2">
+                    @include('metro.components.product-item', [
+                        'item' => $item,
+                    ])
+                </div>
+            @endforeach
+            <div class="col-6 col-md-2  p-0">
+                <div class="card card-flush shadow-sm">
+                    <div class="card-header">
+                        <h3 class="card-title">Sell yours</h3>
+                    </div>
+                    <div class="card-body py-5">
+                        Do you want your item to be listed too? click on <span class="lead text-dark">sell now</span> button
+                        to get started
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url('/dashboard') }}" class="btn btn-sm d-block btn-block  btn-primary">
+                            Sell now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex d-flex align-items-stretch justify-content-between pt-4">
+            <h2 class="my-6 h1 fw-bold">Recomended</h2>
+            <a class="mb-10 d-block mt-6" href="#">See all</a>
+        </div>
+
+        <div class="row mt-2">
+            @foreach ($recomended as $item)
+                <div class="col-6 col-md-2">
+                    @include('metro.components.product-item', [
+                        'item' => $item,
+                    ])
+                </div>
+            @endforeach
+        </div>
+
+        <div class="text-center py-10">
+            <a href="{{ url('product-listing') }}" class="btn btn-primary btn-sm">SEE MORE</a>
+        </div>
+
+
+        {{-- <h2 class="text-center my-10 h1">Browse By Category</h2>
+        <div class="row mt-2">
+            @for ($i = 1; $i < 13; $i++)
+                <div class="col-3 col-md-2">
+                    @include('metro.components.category-item', [
+                        'name' => 'Title here',
+                        'img' => "assets/images/slides/$i.png",
+                        'link' => '#',
+                    ])
+                </div>
+            @endfor
+        </div> --}}
+    </div>
 @endsection
