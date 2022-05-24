@@ -10,6 +10,16 @@ class Garden extends Model
 {
     use HasFactory;
 
+    public function getLocationNameAttribute()
+    {
+        $loc = Location::find($this->location_id);
+        if ($loc != null) {
+            return $this->loc->name;
+        } else {
+            return "-";
+        }
+    }
+
     public function getCropCategoryNameAttribute()
     {
         if ($this->crop_category != null) {
@@ -42,9 +52,10 @@ class Garden extends Model
 
     protected $appends = [
         'crop_category_name',
-        'production_activities_all',
+        'production_activities_all', 
         'production_activities_done',
         'production_activities_remaining',
+        'location_name',
     ];
 
     public function crop_category()
