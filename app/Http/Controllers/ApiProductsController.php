@@ -307,6 +307,18 @@ class ApiProductsController
 
 
 
+    public function get_garden_production_record(Request $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return GardenProductionRecord::where(['administrator_id' => $administrator_id])
+            ->orWhere(['created_by_id' => $administrator_id])
+            ->get();
+    } 
+
+
     public function garden_activities(Request $r)
     {
         if (!isset($_GET['user_id'])) {
@@ -314,9 +326,9 @@ class ApiProductsController
         }
         $administrator_id = ((int)($_GET['user_id']));
         return GardenActivity::where(['administrator_id' => $administrator_id])
-            ->where(['person_responsible' => $administrator_id])
+            ->orWhere(['person_responsible' => $administrator_id])
             ->get();
-    }
+    } 
 
     public function gardens(Request $r)
     {
