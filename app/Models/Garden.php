@@ -14,7 +14,7 @@ class Garden extends Model
     {
         $loc = Location::find($this->location_id);
         if ($loc != null) {
-            return $this->loc->name;
+            return $loc->name;
         } else {
             return "-";
         }
