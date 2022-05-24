@@ -9,6 +9,49 @@ use Illuminate\Database\Eloquent\Model;
 class Garden extends Model
 {
     use HasFactory;
+
+    public function getCropCategoryNameAttribute()
+    {
+        if ($this->crop_category != null) {
+            return $this->crop_category->name;
+        } else {
+            return "-";
+        }
+    }
+
+    public function getProductionActivitiesAllAttribute()
+    {
+        return GardenActivity::where('garden_id', $this->id)->count();
+    }
+
+    public function getProductionActivitiesDoneAttribute()
+    {
+        return GardenActivity::where([
+            'garden_id' => $this->id,
+            'is_done' => 1
+        ])->count();
+    }
+ 
+    public function getProductionActivitiesRemainingAttribute()
+    {
+        return GardenActivity::where([
+            'garden_id' => $this->id,
+            'is_done' => 0
+        ])->count();
+    }
+
+    protected $appends = [
+        'crop_category_name',
+        'production_activities_all',
+        'production_activities_done',
+        'production_activities_remaining',
+    ];
+
+    public function crop_category()
+    {
+        return $this->belongsTo(CropCategory::class, 'crop_category_id');
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -64,9 +107,9 @@ class Garden extends Model
                 '#44372E',
                 '#000000',
                 '#3E51A1',
-              ];
-              shuffle($my_colors);
- 
+            ];
+            shuffle($my_colors);
+
             $model->color = $my_colors[0];
             return $model;
         });

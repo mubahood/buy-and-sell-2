@@ -29,6 +29,9 @@ class MainController extends Controller
     public function index()
     {
 
+        // $g = Garden::find(1);
+        // dd($g->production_activities_remaining);
+        // dd("Romina");
         /*
         $m = new Pest();
         $m->name = 'Slaters';
