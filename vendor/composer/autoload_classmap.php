@@ -53,6 +53,7 @@ return array(
     'App\\Models\\FarmersGroupHasAgent' => $baseDir . '/app/Models/FarmersGroupHasAgent.php',
     'App\\Models\\Garden' => $baseDir . '/app/Models/Garden.php',
     'App\\Models\\GardenActivity' => $baseDir . '/app/Models/GardenActivity.php',
+    'App\\Models\\GardenProductionRecord' => $baseDir . '/app/Models/GardenProductionRecord.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Location' => $baseDir . '/app/Models/Location.php',
     'App\\Models\\MenuItem' => $baseDir . '/app/Models/MenuItem.php',

@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\FinancialRecord;
 use App\Models\Garden;
 use App\Models\GardenActivity;
 use App\Models\GardenProductionRecord;
@@ -33,6 +34,32 @@ class ApiProductsController
         $administrator_id = ((int)($_GET['owner_id']));
         return Administrator::where(['owner_id' => $administrator_id])->get();
     }
+
+    public function financial_records_create(Request $r)
+    {
+        if (!isset($_POST['garden_id'])) {
+            return Utils::response(['message' => 'Garden is required.', 'status' => 0]);
+        }
+        if (!isset($_POST['created_by'])) {
+            return Utils::response(['message' => 'Created by is required.', 'status' => 0]);
+        }
+        if (!isset($_POST['amount'])) {
+            return Utils::response(['message' => 'amount by is required.', 'status' => 0]);
+        }
+
+        $f = new FinancialRecord();
+        $f->garden_id = ((int)($r->garden_id));
+        $f->created_by = ((int)($r->created_by));
+        $f->amount = ((int)($r->amount));
+        $f->description = $r->description;
+
+        if ($f->save()) {
+            return Utils::response(['message' => 'Financial record created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create financial record. Please try again.', 'status' => 0]);
+        }
+    }
+
 
     public function workers_create(Request $r)
     {
@@ -152,7 +179,7 @@ class ApiProductsController
         $new_record->created_by_id = ((int)($r->created_by_id));
         $new_record->administrator_id = $g->administrator_id;
         $new_record->garden_id = $g->id;
-        $new_record->description = $r->description; 
+        $new_record->description = $r->description;
         $new_record->images = '[]';
 
 
@@ -198,20 +225,20 @@ class ApiProductsController
 
         if ($new_record->save()) {
 
-            if(
+            if (
                 isset($r->activity_id) &&
                 isset($r->done_status)
-            
-            ){
+
+            ) {
                 $activity_id = ((int)($r->activity_id));
-                if($activity_id>0){
+                if ($activity_id > 0) {
                     $act = GardenActivity::find($activity_id);
-                    if($act!=null){
+                    if ($act != null) {
                         $act->is_done = true;
                         $act->done_status = $r->done_status;
                         $act->done_by = $new_record->created_by_id;
                         $act->garden_production_record_id = $new_record->id;
-                        $act->save(); 
+                        $act->save();
                     }
                 }
             }
@@ -316,7 +343,7 @@ class ApiProductsController
         return GardenProductionRecord::where(['administrator_id' => $administrator_id])
             ->orWhere(['created_by_id' => $administrator_id])
             ->get();
-    } 
+    }
 
 
     public function garden_activities(Request $r)
@@ -328,7 +355,7 @@ class ApiProductsController
         return GardenActivity::where(['administrator_id' => $administrator_id])
             ->orWhere(['person_responsible' => $administrator_id])
             ->get();
-    } 
+    }
 
     public function gardens(Request $r)
     {
