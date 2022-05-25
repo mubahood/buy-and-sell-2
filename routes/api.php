@@ -5,6 +5,7 @@ use App\Http\Controllers\ApiProductsController;
 use App\Http\Controllers\ApiUsersController;
 use App\Models\CropCategory;
 use App\Models\Pest;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
@@ -28,6 +29,9 @@ Route::get('crop-categories', function () {
 });
 Route::get('pests', function () {
     return Pest::all();
+});
+Route::get('questions', function () {
+    return Question::all();
 });
 
 Route::get('farmers-goups', [ApiUsersController::class, 'farmers_goups']);
