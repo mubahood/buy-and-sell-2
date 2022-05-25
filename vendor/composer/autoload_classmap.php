@@ -51,6 +51,7 @@ return array(
     'App\\Models\\CropCategoryActivity' => $baseDir . '/app/Models/CropCategoryActivity.php',
     'App\\Models\\FarmersGroup' => $baseDir . '/app/Models/FarmersGroup.php',
     'App\\Models\\FarmersGroupHasAgent' => $baseDir . '/app/Models/FarmersGroupHasAgent.php',
+    'App\\Models\\FinancialRecord' => $baseDir . '/app/Models/FinancialRecord.php',
     'App\\Models\\Garden' => $baseDir . '/app/Models/Garden.php',
     'App\\Models\\GardenActivity' => $baseDir . '/app/Models/GardenActivity.php',
     'App\\Models\\GardenProductionRecord' => $baseDir . '/app/Models/GardenProductionRecord.php',

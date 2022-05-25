@@ -15,6 +15,7 @@ php artisan make:model Pest
 php artisan make:model PestCase
 php artisan make:model GardenProductionRecord
 php artisan make:model FinancialRecord
+php artisan make:model Question
 
 
 php artisan make:migration create_farmers_group_has_agent_table
@@ -22,11 +23,13 @@ php artisan make:migration create_garden_activities_table
 php artisan make:migration create_garden_production_records_table
 php artisan make:migration create_pests_table
 php artisan make:migration create_pest_cases_table
+php artisan make:migration create_questions_table
 
 php artisan migrate --path=/database/migrations/2022_05_19_044143_create_pests_table.php
 php artisan migrate --path=/database/migrations/2022_05_19_091643_create_pest_cases_table.php
 php artisan migrate --path=/database/migrations/2022_05_23_231838_create_garden_production_records_table.php
 php artisan migrate --path=/database/migrations/2022_05_24_220406_create_financial_records_table.php
+php artisan migrate --path=/database/migrations/2022_05_25_132531_create_questions_table.php
 
 
  

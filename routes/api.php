@@ -13,6 +13,7 @@ Route::post('gardens', [ApiProductsController::class, 'create_garden']);
 
 Route::post('garden-activities', [ApiProductsController::class, 'garden_activities_create']);
 Route::post('pest-cases', [ApiProductsController::class, 'pest_cases_create']);
+Route::post('questions', [ApiProductsController::class, 'question_create']);
 Route::post('garden-production-record', [ApiProductsController::class, 'garden_production_record_create']);
 Route::post('workers', [ApiProductsController::class, 'workers_create']);
 Route::post('financial-records', [ApiProductsController::class, 'financial_records_create']);

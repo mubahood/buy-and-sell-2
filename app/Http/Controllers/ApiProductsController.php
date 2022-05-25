@@ -16,6 +16,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostComment;
 use App\Models\Product;
+use App\Models\Question;
 use App\Models\Utils;
 use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
@@ -326,6 +327,80 @@ class ApiProductsController
 
         if ($case->save()) {
             return Utils::response(['message' => 'Case created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+
+
+
+    public function question_create(Request $r)
+    {
+
+        if (!isset($r->user_id )) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        if (!isset($_POST['category_id'])) {
+            return Utils::response(['message' => 'Category is required.', 'status' => 0]);
+        }
+
+
+        $q = new Question();
+        $q->category_id = ((int)($r->category_id));
+        $q->administrator_id = ((int)($r->user_id));
+        $q->answered_by = 0;
+        $q->is_answered = 0;
+        $q->question = $r->question;
+        $q->answer = '';
+        $q->answer_images = '[]';
+        $q->question_images = '[]';
+        						
+ 
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $q->question_images = json_encode($uploaded_images);
+        }
+
+        if ($q->save()) {
+            return Utils::response(['message' => 'Qustion submitted successfully.', 'status' => 1]);
         } else {
             return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
         }
