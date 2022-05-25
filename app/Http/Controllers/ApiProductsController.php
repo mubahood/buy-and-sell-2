@@ -334,6 +334,19 @@ class ApiProductsController
 
 
 
+    public function get_financial_records(Request $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return FinancialRecord::where(['administrator_id' => $administrator_id])
+            ->orWhere(['created_by' => $administrator_id])
+            ->get();
+    }
+
+
+
     public function get_garden_production_record(Request $r)
     {
         if (!isset($_GET['user_id'])) {
