@@ -455,12 +455,14 @@ class ApiProductsController
     }
 
     public function garden_activities_delete(Request $r){
-        $activity_id = ((int)($r->id));
-        $item = GardenActivity::find($activity_id);
+        $id = ((int)($r->id));
+        $item = GardenActivity::find($id);
         if($item!=null){
             $item->delete();
+        }else{
+            return Utils::response(['message' => 'Activity not found.', 'status' => 0]);            
         }
-        return Utils::response(['message' => 'Activity deleted.', 'status' => 0]);
+        return Utils::response(['message' => 'Activity deleted.', 'status' => 1]);
     }
     public function garden_activities_create(Request $r)
     {
