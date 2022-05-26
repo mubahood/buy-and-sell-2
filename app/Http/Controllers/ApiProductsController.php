@@ -460,7 +460,7 @@ class ApiProductsController
         if($item!=null){
             $item->delete();
         }else{
-            return Utils::response(['message' => 'Activity not found.', 'status' => 0]);            
+            return Utils::response(['message' => "Activity {$id} not found.", 'status' => 0]);            
         }
         return Utils::response(['message' => 'Activity deleted.', 'status' => 1]);
     }
