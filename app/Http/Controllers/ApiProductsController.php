@@ -454,6 +454,14 @@ class ApiProductsController
         return Garden::where(['administrator_id' => $administrator_id])->get();
     }
 
+    public function garden_activities_delete(Request $r){
+        $activity_id = ((int)($r->id));
+        $item = GardenActivity::find($activity_id);
+        if($item!=null){
+            $item->delete();
+        }
+        return Utils::response(['message' => 'Activity deleted.', 'status' => 0]);
+    }
     public function garden_activities_create(Request $r)
     {
         if (!isset($_POST['administrator_id'])) {
