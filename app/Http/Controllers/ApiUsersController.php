@@ -62,6 +62,15 @@ class ApiUsersController
             }
         }
 
+        if($u == null ){
+            return Utils::response([
+                'status' => 0,
+                'message' => "Wrong username or email.",
+                'data' => null
+            ]);
+        }
+
+
         if(password_verify($password,$u->password)){
             return Utils::response([
                 'status' => 0,
