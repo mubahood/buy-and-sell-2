@@ -78,6 +78,7 @@ class ApiUsersController
             ]);
         }
         
+        $u->status = $u->user_type;
         return Utils::response([
             'status' => 1,
             'message' => "Logged successfully.",
