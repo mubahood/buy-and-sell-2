@@ -60,11 +60,11 @@
 <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
 <script>
     $(function() {
-        var no_image = '{{url("no_image.jpg")}}';
+ 
         $('.lazy').Lazy({
             // your configuration goes here
             scrollDirection: 'vertical',
-            placeholder:    no_image ,
+            placeholder:    '{{url("no_image.jpg")}}' ,
             effect: 'fadeIn',
             visibleOnly: true,
             onError: function(element) {
