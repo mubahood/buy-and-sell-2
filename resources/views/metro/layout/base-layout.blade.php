@@ -32,8 +32,9 @@
             border-bottom: var(--bs-blue) 5px solid;
             background-color: rgb(235, 235, 235);
         }
-        .menu-link{
-            border-radius: 0px!important;
+
+        .menu-link {
+            border-radius: 0px !important;
         }
 
     </style>
@@ -48,10 +49,8 @@
 <script src="{{ url('/') }}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $(function() {
-            $('.lazy').Lazy();
-        });
+    $(function() {
+        $('.lazy').Lazy();
     });
 </script>
 
