@@ -46,6 +46,14 @@
 <script src="{{ url('/') }}/assets/js/scripts.bundle.js"></script>
 <script src="{{ url('/') }}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <script src="{{ url('/') }}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(function() {
+            $('.lazy').Lazy();
+        });
+    });
+</script>
 
 {{-- <script src="{{ url('/') }}/assets/js/widgets.bundle.js"></script>
 <script src="{{ url('/') }}/assets/js/custom/widgets.js"></script>

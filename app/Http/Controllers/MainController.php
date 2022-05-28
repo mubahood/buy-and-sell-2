@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use function PHPUnit\Framework\fileExists;
+
 /*
  if(isset($img_size[0]) && isset($img_size[1])){
             $width = $img_size[0];
@@ -28,6 +30,16 @@ class MainController extends Controller
 {
     public function index()
     {
+
+        // $p['source'] = 'public/test/1.jpeg';
+        // $p['target'] = 'public/test/anjane.jpeg';
+        // Utils::create_thumbail($p);
+
+
+       
+        
+         
+        // dd("time to fight");
 
         /*
         $m = new Pest();
