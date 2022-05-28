@@ -50,7 +50,15 @@
 <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
 <script>
     $(function() {
-        $('.lazy').Lazy();
+        $('.lazy').Lazy({
+        // your configuration goes here
+        scrollDirection: 'vertical',
+        effect: 'fadeIn',
+        visibleOnly: true,
+        onError: function(element) {
+            console.log('error loading ' + element.data('src'));
+        }
+    });
     });
 </script>
 
