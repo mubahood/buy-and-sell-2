@@ -37,6 +37,16 @@
             border-radius: 0px !important;
         }
 
+        img.lazy {
+            /* width: 700px;
+            height: 467px;
+            display: block;
+ 
+            background-image: url('images/loading.gif');
+            background-repeat: no-repeat;
+            background-position: 50% 50%; */
+        }
+
     </style>
 </head>
 
@@ -50,15 +60,17 @@
 <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
 <script>
     $(function() {
+        var no_image = '{{url("no_image.jpg")}}';
         $('.lazy').Lazy({
-        // your configuration goes here
-        scrollDirection: 'vertical',
-        effect: 'fadeIn',
-        visibleOnly: true,
-        onError: function(element) {
-            console.log('error loading ' + element.data('src'));
-        }
-    });
+            // your configuration goes here
+            scrollDirection: 'vertical',
+            placeholder:    no_image ,
+            effect: 'fadeIn',
+            visibleOnly: true,
+            onError: function(element) {
+                console.log('error loading ' + element.data('src'));
+            }
+        });
     });
 </script>
 
