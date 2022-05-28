@@ -173,7 +173,7 @@ class ApiProductsController
         $g = Garden::find($garden_id);
 
         if ($g == null) {
-            return Utils::response(['message' => 'Garden not found.', 'status' => 0]);
+            return Utils::response(['message' => 'Garden not #'.$garden_id.' found.', 'status' => 0]);
         }
 
         $new_record = new GardenProductionRecord();
