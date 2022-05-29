@@ -21,6 +21,8 @@ $banners_2_tab_active = '';
 $banners_1_tab_active = '';
 
 $tab_seg = (int) request()->segment(2);
+$seg_1 = request()->segment(1);
+$seg_2 = request()->segment(2);
 
 foreach ($banners_all as $key => $value) {
     if ($value->id < 17) {
@@ -43,20 +45,18 @@ foreach ($banners_all as $key => $value) {
     }
 }
 
-/*
-    "id" => 1
-    "created_at" => "2022-02-25 14:04:35"
-    "updated_at" => "2022-03-02 16:28:32"
-    "section" => "Section #1"
-    "position" => "1"
-    "name" => "Branding"
-    "sub_title" => "Trending Travel Mug"
-    "type" => "Category"
-    "category_id" => "1"
-    "product_id" => "1"
-    "image" => "public/storage/slide_1.png"
-    "clicks" => "1"
-    */
+$is_dashboard = false;
+$is_logged_in = false;
+$dashboard_segs = ['dashboard'];
+
+if (Auth::check()) {
+    $is_logged_in = true;
+} else {
+    $is_logged_in = false;
+}
+if (in_array($seg_1, $dashboard_segs)) {
+    $is_dashboard = true;
+}
 
 ?>
 <div id="kt_header" style="" class="header align-items-stretch">
@@ -73,80 +73,86 @@ foreach ($banners_all as $key => $value) {
 
             <div class="d-none d-md-flex align-items-stretch" id="kt_header_nav">
 
-                <div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu"
-                    data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-                    data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end"
-                    data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true"
-                    data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
-                    <!--begin::Menu-->
-                    <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
-                        id="#kt_header_menu" data-kt-menu="true">
+                @if (!$is_dashboard)
 
-                        <div data-kt-menu-trigger="hover" data-kt-menu-placement="bottom-start"
-                            class="menu-item menu-lg-down-accordion me-lg-1  bg-hover-white bg-white">
-                            <span class="menu-link py-3  bg-hover-white bg-white">
-                                <span class="menu-title fw-normal fs-5 lh-1 text-dark">Browse by categories</span>
-                                <span class="menu-arrow d-lg-none"></span>
-                                <span><i class="bi bi-chevron-down fs-3 ms-3 fw-bold h4"></i></span>
-                            </span>
-                            <div
-                                class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown w-100 w-lg-600px p-5 p-lg-5 rounded-0">
-                                <!--begin:Row-->
-                                <div class="row" data-kt-menu-dismiss="true">
+                    <div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu"
+                        data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+                        data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end"
+                        data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true"
+                        data-kt-swapper-mode="prepend"
+                        data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
+                        <!--begin::Menu-->
+                        <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
+                            id="#kt_header_menu" data-kt-menu="true">
 
-                                    @foreach ($categories as $cat)
-                                        @php
-                                            $p_id = (int) $cat->parent;
-                                        @endphp
-                                        @if ($p_id == 0)
-                                            <div class="col-lg-4 border-left-lg-1">
-                                                <div class="menu-inline menu-column menu-active-bg">
-                                                    <div
-                                                        class="menu-item border border-3 border-right-0 border-top-0 border-bottom-0 border-primary p-0">
-                                                        <a href="{{ url($cat->slug) }}"
-                                                            class="menu-link fw-bolder bg-hover=white bg-white text-hover-primary text-dark $cat->slug">{{ $cat->name }}</a>
-                                                    </div>
+                            <div data-kt-menu-trigger="hover" data-kt-menu-placement="bottom-start"
+                                class="menu-item menu-lg-down-accordion me-lg-1  bg-hover-white bg-white">
+                                <span class="menu-link py-3  bg-hover-white bg-white">
+                                    <span class="menu-title fw-normal fs-5 lh-1 text-dark">Browse by categories</span>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                    <span><i class="bi bi-chevron-down fs-3 ms-3 fw-bold h4"></i></span>
+                                </span>
+                                <div
+                                    class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown w-100 w-lg-600px p-5 p-lg-5 rounded-0">
+                                    <!--begin:Row-->
+                                    <div class="row" data-kt-menu-dismiss="true">
 
-                                                    @foreach ($cat->kids as $kid)
-                                                        <div class="menu-item py-1 bg-white">
-                                                            <a href="{{ $cat->slug }}"
-                                                                class="menu-link p-0 bg-white">
-                                                                <span class="menu-bullet bg-white">
-                                                                    <span class="bullet bullet-dot"></span>
-                                                                </span>
-                                                                <span class="menu-title">{{ $kid->name }}</span>
-                                                            </a>
+                                        @foreach ($categories as $cat)
+                                            @php
+                                                $p_id = (int) $cat->parent;
+                                            @endphp
+                                            @if ($p_id == 0)
+                                                <div class="col-lg-4 border-left-lg-1">
+                                                    <div class="menu-inline menu-column menu-active-bg">
+                                                        <div
+                                                            class="menu-item border border-3 border-right-0 border-top-0 border-bottom-0 border-primary p-0">
+                                                            <a href="{{ url($cat->slug) }}"
+                                                                class="menu-link fw-bolder bg-hover=white bg-white text-hover-primary text-dark $cat->slug">{{ $cat->name }}</a>
                                                         </div>
-                                                    @endforeach
 
+                                                        @foreach ($cat->kids as $kid)
+                                                            <div class="menu-item py-1 bg-white">
+                                                                <a href="{{ $cat->slug }}"
+                                                                    class="menu-link p-0 bg-white">
+                                                                    <span class="menu-bullet bg-white">
+                                                                        <span class="bullet bullet-dot"></span>
+                                                                    </span>
+                                                                    <span
+                                                                        class="menu-title">{{ $kid->name }}</span>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                            @endif
+                                        @endforeach
 
 
 
+                                    </div>
+                                    <!--end:Row-->
                                 </div>
-                                <!--end:Row-->
                             </div>
-                        </div>
-                        <div class="menu-item" style="   flex-grow: 0;
+                            <div class="menu-item" style="   flex-grow: 0;
                     flex-shrink: 0;
                     flex-basis: 80%;">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text"><i class="bi bi-search fs-4"></i></span>
-                                <div class="overflow-hidden flex-grow-1">
-                                    <select data-allow-clear="true" class="form-select form-select-md rounded-start-0 "
-                                        data-control="select2" data-placeholder="Search for products & sellers"
-                                        id="select-search">
-                                        <option></option>
-                                    </select>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text"><i class="bi bi-search fs-4"></i></span>
+                                    <div class="overflow-hidden flex-grow-1">
+                                        <select data-allow-clear="true"
+                                            class="form-select form-select-md rounded-start-0 " data-control="select2"
+                                            data-placeholder="Search for products & sellers" id="select-search">
+                                            <option></option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                </div>
+                @endif
             </div>
 
             <div class="d-flex align-items-stretch flex-shrink-0">
@@ -155,11 +161,25 @@ foreach ($banners_all as $key => $value) {
                 <div class="d-none d-md-flex align-items-center ms-1 ms-lg-3">
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 
-                        <a href="{{ url('register') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up | Login</a>
-                        <a href="#" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell now</a>
-                        <a href="#" class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
-                            style="margin-left: .7rem">
-                            <i class="bi bi-info fs-4"></i></a>
+                        @if ($is_logged_in)
+                            <a href="{{ url('dashboard/products') }}" class="btn btn-outline btn-outline-primary btn-sm">My Products</a>
+                        @else
+                            <a href="{{ url('register') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up
+                                |
+                                Login</a>
+                        @endif
+
+
+                        <a href="{{url('dashboard/products/create')}}" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell now</a>
+                        <a href="{{ url('/dashboard/chats') }}" class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
+                            style="margin-left: .7rem"
+
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" 
+                            data-bs-dismiss-="click" 
+                            title="My chats"
+                            >
+                            <i class="bi bi-chat fs-4 text-primary"></i></a>
 
 
                     </div>
@@ -200,14 +220,14 @@ foreach ($banners_all as $key => $value) {
     <script>
         $(document).ready(function() {
 
-            var base_url = '{{ url('')}}';
- 
+            var base_url = '{{ url('') }}';
+
             $('#select-search').select2({
                 ajax: {
-                    url: base_url+'/api/products',
+                    url: base_url + '/api/products',
 
                     processResults: function(data) {
-                        return { 
+                        return {
                             results: data
                         };
                     },
@@ -217,9 +237,9 @@ foreach ($banners_all as $key => $value) {
                 templateResult: function(item) {
                     return format(item);
                 }
-            }).on('change', function(e){
+            }).on('change', function(e) {
                 var val = $('#select-search').val();
-                window.location.href = base_url+"/"+val;
+                window.location.href = base_url + "/" + val;
             });
 
             // // Format options

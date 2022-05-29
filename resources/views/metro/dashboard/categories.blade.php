@@ -26,6 +26,7 @@ if ($edit_item == null) {
     <link rel="stylesheet" href="{{ url('assets/css/vendor/nestable.css') }}">
 @endsection
 
+@section('toolbar-title','Categories')
 @section('footer')
     <script src="{{ url('assets/js/vendor/nestable.js') }}"></script>
     <script>

@@ -13,9 +13,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BannersController;
 use App\Http\Middleware\Authenticate;
-
-
-
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 Route::resource('dashboard/users', UsersController::class)->middleware(Authenticate::class);
 Route::resource('dashboard/banners', BannersController::class)->middleware(Authenticate::class);
@@ -23,7 +21,10 @@ Route::resource('dashboard/banners', BannersController::class)->middleware(Authe
 Route::get('/', [MainController::class, 'index']);
 Route::get('/banner/{id}', [MainController::class, 'index']);
 Route::get('dashboard/profile', [UsersController::class, 'edit'])->middleware(Authenticate::class);
-Route::get('/register', [AuthController::class, 'register'])->name("register");
+
+Route::get('/register', [AuthController::class, 'register'])->name("register")
+    ->middleware(RedirectIfAuthenticated::class);
+
 Route::post('/register', [AuthController::class, 'store']);
 Route::post('dashboard/profile', [AuthController::class, 'update_profile']);
 Route::get('/login', [AuthController::class, 'login'])->name("login");

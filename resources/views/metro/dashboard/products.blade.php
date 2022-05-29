@@ -3,8 +3,9 @@ use App\Models\Product;
 
 $users = [];
 $u = Auth::user();
-if ($u->user_type != 'admin') {
-    $users = Product::where('user_id', $u->id);
+
+if ($u->user_type != 'admin') { 
+    $users = Product::where('user_id', $u->id)->get();
 } else {
     $users = Product::all();
 }
@@ -44,6 +45,8 @@ foreach ($users as $key => $v) {
 
 
 
+
+@section('toolbar-title','My products')
 
 @section('dashboard-content')
     @include('metro.components.table')
