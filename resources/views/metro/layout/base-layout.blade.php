@@ -72,5 +72,6 @@
     });
 </script>
 @yield('footer')
+@yield('footer-2')
 
 </html>
