@@ -36,3 +36,7 @@ php artisan admin:make PestController --model=App\\Models\\Pest
 //jotrace nameservces
 us3.hostingbangladesh.com
 us4.hostingbangladesh.com
+
+//goprint nameservces
+us1.hostingbangladesh.com
+us2.hostingbangladesh.com
