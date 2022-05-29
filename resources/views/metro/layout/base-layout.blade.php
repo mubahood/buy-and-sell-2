@@ -19,9 +19,8 @@
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    
+
     <link href="{{ url('/') }}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="{{ url('/') }}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
 
     @yield('header')
@@ -36,10 +35,10 @@
             border-radius: 0px !important;
         }
 
-        .product:hover{
+        .product:hover {
             margin: 2px;
-            -webkit-box-shadow: 0px 0px 6px 2px #A6A6A6; 
-box-shadow: 0px 0px 6px 2px #A6A6A6;
+            -webkit-box-shadow: 0px 0px 6px 2px #A6A6A6;
+            box-shadow: 0px 0px 6px 2px #A6A6A6;
         }
 
         img.lazy {
@@ -59,15 +58,12 @@ box-shadow: 0px 0px 6px 2px #A6A6A6;
 
 
 <script src="{{ url('/') }}/assets/js/scripts.bundle.js"></script>
-{{-- <script src="{{ url('/') }}/assets/plugins/global/plugins.bundle.js"></script> --}}
-{{-- <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script> --}}
 <script>
     $(function() {
- 
         $('.lazy').Lazy({
             // your configuration goes here
             scrollDirection: 'vertical',
-            placeholder:    '{{url("no_image.jpg")}}' ,
+            placeholder: '{{ url('no_image.jpg') }}',
             effect: 'fadeIn',
             visibleOnly: true,
             onError: function(element) {
@@ -76,13 +72,6 @@ box-shadow: 0px 0px 6px 2px #A6A6A6;
         });
     });
 </script>
-
-{{-- <script src="{{ url('/') }}/assets/js/widgets.bundle.js"></script>
-<script src="{{ url('/') }}/assets/js/custom/widgets.js"></script>
-<script src="{{ url('/') }}/assets/js/custom/apps/chat/chat.js"></script>
-<script src="{{ url('/') }}/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-<script src="{{ url('/') }}/assets/js/custom/utilities/modals/create-app.js"></script>
-<script src="{{ url('/') }}/assets/js/custom/utilities/modals/users-search.js"></script> --}}
 @yield('footer')
 
 </html>
