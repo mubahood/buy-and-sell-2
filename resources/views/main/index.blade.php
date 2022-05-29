@@ -32,7 +32,7 @@ foreach ($products as $key => $pro) {
         <div class="col-6 col-md-3 m-20  p-0">
             <div class="card card-flush shadow-sm py-10">
                 <div class="card-body py-5">
-                    <p class="display-5 fw-normal lh-sm">Ready to declutter your closet?</p>
+                    <p class="display-5 fw-normal lh-sm">Ready to boost your business?</p>
 
                     <a href="{{ url('/dashboard') }}" class="btn btn-md mt-10 d-block btn-block  btn-primary">
                         Sell now
