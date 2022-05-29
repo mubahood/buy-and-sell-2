@@ -32,7 +32,7 @@ $products = Product::where($conds)
     $p['target'] = 'public/storage/'.$i.'_thumb.jpg'; 
     Utils::create_thumbail($p);
 } 
- */   
+
 $x = 5;
 foreach (Product::all() as $key => $p) {
     
@@ -43,9 +43,9 @@ foreach (Product::all() as $key => $p) {
     $d['thumbnail'] = $i.'_thumb.jpg';
     $d['user_id'] = 1;
     $p->thumbnail = json_encode($d);
-    $p->save();
     
-} 
+    
+}  */   
 ?>
 @section('main-content')
     <div class="row mt-5">
