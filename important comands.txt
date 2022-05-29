@@ -40,3 +40,6 @@ us4.hostingbangladesh.com
 //goprint nameservces
 us1.hostingbangladesh.com
 us2.hostingbangladesh.com
+-> new #269676
+-> old #009ef7
+-> new rgb(38, 150, 118)
