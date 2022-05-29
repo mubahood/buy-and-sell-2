@@ -37,6 +37,12 @@
             border-radius: 0px !important;
         }
 
+        .product:hover{
+            margin: 2px;
+            -webkit-box-shadow: 0px 0px 6px 2px #A6A6A6; 
+box-shadow: 0px 0px 6px 2px #A6A6A6;
+        }
+
         img.lazy {
             /* width: 700px;
             height: 467px;
