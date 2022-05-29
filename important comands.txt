@@ -22,6 +22,7 @@ php artisan make:migration create_pest_cases_table
 php artisan migrate --path=/database/migrations/2022_05_19_044143_create_pests_table.php
 php artisan migrate --path=/database/migrations/2022_05_19_091643_create_pest_cases_table.php
 
+composer remove htmlmin/htmlmin
 
  
 php artisan admin:make FarmersGroupController --model=App\\

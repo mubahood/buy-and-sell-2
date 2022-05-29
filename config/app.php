@@ -246,7 +246,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class, 
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
-        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class
     ],
 
 ];
