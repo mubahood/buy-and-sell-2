@@ -28,3 +28,7 @@ php artisan admin:make FarmersGroupController --model=App\\
 php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory 
 php artisan admin:make PestCaseController --model=App\\Models\\PestCase 
 php artisan admin:make PestController --model=App\\Models\\Pest 
+
+//jotrace nameservces
+us3.hostingbangladesh.com
+us4.hostingbangladesh.com

@@ -59,10 +59,8 @@ box-shadow: 0px 0px 6px 2px #A6A6A6;
 @yield('base-content')
 
 
-<script src="{{ url('/') }}/assets/plugins/global/plugins.bundle.js"></script>
 <script src="{{ url('/') }}/assets/js/scripts.bundle.js"></script>
-<script src="{{ url('/') }}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-<script src="{{ url('/') }}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="{{ url('/') }}/assets/plugins/global/plugins.bundle.js"></script>
 <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
 <script>
     $(function() {
