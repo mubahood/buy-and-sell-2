@@ -60,8 +60,8 @@ box-shadow: 0px 0px 6px 2px #A6A6A6;
 
 
 <script src="{{ url('/') }}/assets/js/scripts.bundle.js"></script>
-<script src="{{ url('/') }}/assets/plugins/global/plugins.bundle.js"></script>
-<script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script>
+{{-- <script src="{{ url('/') }}/assets/plugins/global/plugins.bundle.js"></script> --}}
+{{-- <script src="{{ url('/') }}/assets/js/jquery.lazy.min.js"></script> --}}
 <script>
     $(function() {
  
