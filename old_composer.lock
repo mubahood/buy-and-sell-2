@@ -7004,15 +7004,7 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "9.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Yajra\\DataTables\\DataTablesServiceProvider"
-                    ],
-                    "aliases": {
-                        "DataTables": "Yajra\\DataTables\\Facades\\DataTables"
-                    }
-                }
+                }, 
             },
             "autoload": {
                 "files": [
