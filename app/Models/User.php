@@ -98,20 +98,20 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
- 
-    public function getAvatarFacebook($avatar)
+
+    public function getFacebookAttribute()
     {
-       return 'romina';
+        return json_encode($this->original);
     }
- 
+
     public function getAvatarAttribute($avatar)
     {
-       return url('public/storage/'.$avatar);
+        return url('public/storage/' . $avatar);
     }
 
 
     protected $appends = [
-        'avatar', 
+        'avatar',
     ];
 
     /**
@@ -121,5 +121,5 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-    ]; 
+    ];
 }
