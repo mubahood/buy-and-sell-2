@@ -38,3 +38,5 @@ php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory
 php artisan admin:make PestCaseController --model=App\\Models\\PestCase 
 php artisan admin:make PestController --model=App\\Models\\Pest 
 php artisan admin:make PestController --model=App\\Models\\ProductionRecord 
+
+composer remove yajra/laravel-datatables-oracle
