@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '56eab969a645a04b9889d00f494ce5668a3ba87b',
+        'reference' => 'fea5ef1979cf3e43e98fac6d642b6d8ee7da992c',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -463,7 +463,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '56eab969a645a04b9889d00f494ce5668a3ba87b',
+            'reference' => 'fea5ef1979cf3e43e98fac6d642b6d8ee7da992c',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -500,6 +500,15 @@
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
             'aliases' => array(),
             'reference' => '09f0e9fb61829f628205b7c94906c28740ff9540',
+            'dev_requirement' => false,
+        ),
+        'laravel/tinker' => array(
+            'pretty_version' => 'v2.7.2',
+            'version' => '2.7.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/tinker',
+            'aliases' => array(),
+            'reference' => 'dff39b661e827dae6e092412f976658df82dbac5',
             'dev_requirement' => false,
         ),
         'laravel/ui' => array(
@@ -623,7 +632,7 @@
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
             'reference' => '210577fe3cf7badcc5814d99455df46564f3c077',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'nunomaduro/collision' => array(
             'pretty_version' => 'v5.11.0',
@@ -874,6 +883,15 @@
             'provided' => array(
                 0 => '1.0',
             ),
+        ),
+        'psy/psysh' => array(
+            'pretty_version' => 'v0.11.5',
+            'version' => '0.11.5.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psy/psysh',
+            'aliases' => array(),
+            'reference' => 'c23686f9c48ca202710dbb967df8385a952a2daf',
+            'dev_requirement' => false,
         ),
         'ralouphie/getallheaders' => array(
             'pretty_version' => '3.0.3',
