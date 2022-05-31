@@ -155,7 +155,8 @@ class ApiUsersController
         $u->production_scale = (string) ($request->production_scale ? $request->production_scale : "");
         $u->access_to_credit = (string) ($request->access_to_credit ? $request->access_to_credit : "");
         $u->district = (string) ($request->district ? $request->district : "");
-        $u->profile_is_complete = true;
+        $u->sector = (string) ($request->sector ? $request->sector : "");
+        $u->profile_is_complete = true; 
         
 
         unset($u->password);
