@@ -41,6 +41,15 @@ php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory
 php artisan admin:make PestCaseController --model=App\\Models\\PestCase 
 php artisan admin:make PestController --model=App\\Models\\Pest 
 php artisan admin:make PestController --model=App\\Models\\ProductionRecord 
+php artisan admin:make FarmController --model=App\\Models\\Farm 
+php artisan admin:make FinancialRecordController --model=App\\Models\\FinancialRecord 
+php artisan admin:make GardenProductionRecordController --model=App\\Models\\GardenProductionRecord 
+php artisan admin:make GardenActivityController --model=App\\Models\\GardenActivity 
+php artisan admin:make PestListingController --model=App\\Models\\Pest 
+php artisan admin:make PestCaseListingController --model=App\\Models\\PestCase 
+php artisan admin:make ProductController --model=App\\Models\\Product 
+php artisan admin:make ResourceSharingController --model=App\\Models\\Product 
+php artisan admin:make QuestionController --model=App\\Models\\Question 
 
 composer remove 
 
