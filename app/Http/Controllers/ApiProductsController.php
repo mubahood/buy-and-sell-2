@@ -10,7 +10,7 @@ use App\Models\Farm;
 use App\Models\FinancialRecord;
 use App\Models\Garden;
 use App\Models\GardenActivity;
-use App\Models\GardenProductionRecord;
+use App\Models\GardenProductionRecord; 
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\PestCase;
