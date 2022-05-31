@@ -590,7 +590,7 @@ class ApiProductsController
         $g->details = $r->details;
         $g->location_id = $r->location_id;
         $g->latitude = $r->latitude;
-        $g->longitude = $r->latitude;
+        $g->longitude = $r->longitude;
 
    
         if ($g->save()) {
