@@ -140,7 +140,12 @@ class ApiUsersController
     
   
         $u->name = (string) ($request->name ? $request->name : "");
-        $u->email = (string) ($request->email ? $request->email : "");
+        $email = (string) ($request->email ? $request->email : "");
+        if(strlen($email)>3){
+            $u->email = $email; 
+            $u->phone_number = $email; 
+            $u->username = $email; 
+        }
         $u->gender = (string) ($request->gender ? $request->gender : "");
         $u->date_of_birth = (string) ($request->date_of_birth ? $request->date_of_birth : "");
         $u->number_of_dependants = (string) ($request->number_of_dependants ? $request->number_of_dependants : "");
