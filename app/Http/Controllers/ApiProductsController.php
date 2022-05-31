@@ -12,6 +12,7 @@ use App\Models\Garden;
 use App\Models\GardenActivity;
 use App\Models\GardenProductionRecord;
 use App\Models\Image;
+use App\Models\Location;
 use App\Models\PestCase;
 use App\Models\Post;
 use App\Models\PostCategory;
@@ -949,6 +950,7 @@ class ApiProductsController
 
     public function locations(Request $request)
     {
+        return Location::all();
         return Utils::get_locations();
     }
 
