@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route; //new staff
 
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('gardens', [ApiProductsController::class, 'create_garden']);
+Route::post('farms', [ApiProductsController::class, 'create_farm']);
 
 Route::post('garden-activities', [ApiProductsController::class, 'garden_activities_create']);
 Route::delete('garden-activities', [ApiProductsController::class, 'garden_activities_delete']);
@@ -22,6 +23,7 @@ Route::post('financial-records', [ApiProductsController::class, 'financial_recor
 Route::get('workers', [ApiProductsController::class, 'workers']);
 
 Route::get('gardens', [ApiProductsController::class, 'gardens']);
+Route::get('farms', [ApiProductsController::class, 'farms']);
 Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);
 Route::get('garden-production-record', [ApiProductsController::class, 'get_garden_production_record']);
 Route::get('financial-records', [ApiProductsController::class, 'get_financial_records']);

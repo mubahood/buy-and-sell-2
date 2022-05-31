@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Farm;
 use App\Models\FinancialRecord;
 use App\Models\Garden;
 use App\Models\GardenActivity;
@@ -454,6 +455,15 @@ class ApiProductsController
         return Garden::where(['administrator_id' => $administrator_id])->get();
     }
 
+    public function farms(Farm $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return Farm::where(['administrator_id' => $administrator_id])->get();
+    }
+
     public function garden_activities_delete(Request $r){
         $id = ((int)($r->id));
         $item = GardenActivity::find($id);
@@ -564,6 +574,29 @@ class ApiProductsController
             return Utils::response(['message' => 'Garden created successfully.', 'status' => 1]);
         } else {
             return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
+    public function create_farm(Request $r)
+    {
+        
+        if (!isset($_POST['administrator_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        $g = new Farm();
+        $g->administrator_id = $r->administrator_id;
+        $g->name = $r->name;
+        $g->details = $r->details;
+        $g->location_id = $r->location_id;
+        $g->latitude = $r->latitude;
+        $g->longitude = $r->latitude;
+
+   
+        if ($g->save()) {
+            return Utils::response(['message' => 'Farm created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create farm. Please try again.', 'status' => 0]);
         }
     }
 
