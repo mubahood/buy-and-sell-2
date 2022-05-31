@@ -522,11 +522,12 @@ class ApiProductsController
         $g->image = '';
         $g->images = '';
         $g->plant_date = $r->plant_date;
-        $g->harvest_date = $r->harvest_date;
+        $g->harvest_date = '';
         $g->size = $r->size;
         $g->details = $r->details;
         $g->crop_category_id = $r->crop_category_id;
         $g->location_id = $r->location_id;
+        $g->farm_id = $r->farm_id;
 
         $images = [];
         $uploaded_images = [];
@@ -571,9 +572,9 @@ class ApiProductsController
 
 
         if ($g->save()) {
-            return Utils::response(['message' => 'Garden created successfully.', 'status' => 1]);
+            return Utils::response(['message' => 'Enterprise created successfully.', 'status' => 1]);
         } else {
-            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+            return Utils::response(['message' => 'Failed to create enterprise. Please try again.', 'status' => 0]);
         }
     }
 
