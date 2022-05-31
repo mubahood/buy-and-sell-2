@@ -187,10 +187,12 @@ class ApiUsersController
 
         $u->save();
 
+        $new_u = User::find($u->id);
+
         return Utils::response([
             'status' => 1,
             'message' => "Profile updated successfully.",
-            'data' => $u
+            'data' => $new_u
         ]);
     }
 
