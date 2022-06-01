@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\FinancialRecord;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -15,7 +16,7 @@ class FinancialRecordController extends AdminController
      *
      * @var string
      */
-    protected $title = 'FinancialRecord';
+    protected $title = 'Financial records';
 
     /**
      * Make a grid builder.
@@ -26,15 +27,37 @@ class FinancialRecordController extends AdminController
     {
         $grid = new Grid(new FinancialRecord());
 
-        $grid->column('id', __('Id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('garden_id', __('Garden id'));
-        $grid->column('administrator_id', __('Administrator id'));
-        $grid->column('created_by', __('Created by'));
+        if (
+            Admin::user()->isRole('administrator') ||
+            Admin::user()->isRole('admin')
+        ) {
+            /*$grid->actions(function ($actions) {
+                $actions->disableEdit();
+            });*/
+        } else {
+            //$grid->model()->where('administrator_id', Admin::user()->id);
+            $grid->disableRowSelector();
+        }
+
+ 
+        $grid->column('id', __('#Id'))->sortable(); 
+        $grid->column('created_at', __('Created'))->sortable(); 
+        $grid->column('garden_id', __('Enterprise'))->display(function () {
+            return $this->enterprise->name;
+        })->sortable(); 
+        
+        $grid->column('administrator_id', __('Owner'))->display(function(){
+            return $this->owner->name; 
+        })->sortable();
+        
+        
+        $grid->column('created_by', __('Created by'))->display(function(){
+            return $this->creator->name; 
+        })->sortable();
+         
         $grid->column('description', __('Description'));
         $grid->column('amount', __('Amount'));
-
+        
         return $grid;
     }
 

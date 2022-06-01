@@ -10,7 +10,7 @@ class Location extends Model
     use HasFactory;
 
 
-    public function get_subcounties()
+    public static function get_subcounties()
     {
         $items = [];
         foreach (Location::all() as $key => $v) {

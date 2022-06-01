@@ -38,14 +38,16 @@ class FarmController extends AdminController
             });*/
         } else {
             $grid->model()->where('administrator_id', Admin::user()->id);
+            $grid->disableRowSelector();
         }
         
-        $grid->disableRowSelector();
+
 
         //$grid->column('id', __('Id'));
         //$grid->column('updated_at', __('Updated at'));
-        $grid->column('created_at', __('Created'))->sortable();
+        $grid->column('created_at', __('Created'))->sortable(); 
         $grid->column('name', __('Farm Name'))->sortable();
+        
         $grid->column('administrator_id', __('Owner'))->display(function(){
             return $this->owner->name; 
         })->sortable();
@@ -101,10 +103,10 @@ class FarmController extends AdminController
         ->options(Location::get_subcounties())
         ->rules('required'); 
  
-        $form->text('name', __('Name'));
-        $form->text('latitude', __('Latitude'))->rules('required');
-        $form->text('longitude', __('Longitude'))->rules('required');
-        $form->textarea('details', __('Details'));
+        $form->text('name', __('Farm Name'))->rules('required'); 
+        $form->text('latitude', __('Latitude'))->rules('required')->default('0.00');
+        $form->text('longitude', __('Longitude'))->rules('required')->default('0.00');
+        $form->textarea('details', __('Details'))->help("Write something about this farm");
 
         return $form;
     }
