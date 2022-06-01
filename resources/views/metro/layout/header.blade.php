@@ -170,8 +170,8 @@ if (in_array($seg_1, $dashboard_segs)) {
                         @endif
 
 
-                        <a href="{{url('dashboard/products/create')}}" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell now</a>
-                        <a href="{{ url('/dashboard/chats') }}" class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
+                        <a href="{{url('admin')}}" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell now</a>
+                        <a href="{{ url('admin') }}" class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
                             style="margin-left: .7rem"
 
                             data-bs-toggle="tooltip"
