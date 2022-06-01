@@ -31,6 +31,7 @@ class MainController extends Controller
     public function index()
     {
 
+        /*
         foreach (Product::all() as $key => $p) {
             $imgs = [];
             for ($i = 1; $i < 8; $i++) {
@@ -44,7 +45,7 @@ class MainController extends Controller
             $p->images =   json_encode($imgs);
             $p->save();
         }
-        die("Done");
+        die("Done");*/
 
         // $p['source'] = 'public/test/1.jpeg';
         // $p['target'] = 'public/test/anjane.jpeg';
