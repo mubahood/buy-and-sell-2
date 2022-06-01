@@ -37,6 +37,7 @@ foreach ($users as $key => $v) {
 }
 
 ?>
+@section('toolbar-title','Banners')
 @extends('metro.layout.layout-dashboard')
 
 

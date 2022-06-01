@@ -38,6 +38,8 @@ if ($id != null) {
 $chat_threads = Chat::get_chat_threads($u->id);
 ?>@extends('metro.layout.layout-dashboard')
 
+
+@section('toolbar-title','My chats')
 @section('header')
 @endsection
 

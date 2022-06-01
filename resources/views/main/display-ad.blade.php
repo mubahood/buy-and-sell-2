@@ -1,4 +1,7 @@
-@php
+<?php 
+header('Location: '.url());
+die();
+?>@php
 use App\Models\Product;
 use App\Models\Utils;
 use Illuminate\Support\Str;

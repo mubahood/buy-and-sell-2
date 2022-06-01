@@ -220,7 +220,7 @@ class Utils
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
         return $path;
     } 
-    public static function upload_images($files)
+    public static function upload_images($files) 
     {
 
 
@@ -295,7 +295,7 @@ class Utils
         return $uploaded_images;
     }
 
-    public static function create_thumbail($params = array())
+    public static function create_thumbail($params = array()) 
     {
         ini_set('memory_limit', '-1');
 
@@ -328,15 +328,20 @@ class Utils
 
         $img_size = getimagesize($image->source_path); // returns an array that is filled with info
 
-        $width = 220;
-        $heigt = 380;
+        $width = 300;
+        $heigt = 300;
 
         if (isset($img_size[0]) && isset($img_size[1])) {
             $width = $img_size[0];
             $heigt = $img_size[1];
         }
-        $width = (0.72)  * $heigt;
+        //dd("W: $width \n H: $heigt");
 
+        if($width<$heigt){
+            $heigt = $width;
+        }else{
+            $width = $heigt;
+        }
 
         if (isset($params['width'])) {
             $width = $params['width'];
@@ -358,18 +363,24 @@ class Utils
     public static function get_jpeg_quality($_size)
     {
         $size = ($_size / 1000000);
+
         $qt = 50;
         if ($size > 5) {
-            $qt = 30;
+            $qt = 10;
         } else if ($size > 4) {
-            $qt = 40;
+            $qt = 13;
         } else if ($size > 2) {
-            $qt = 50;
+            $qt = 15;
         } else if ($size > 1) {
-            $qt = 60;
-        } else {
-            $qt = 70;
+            $qt = 17;
+        } else if ($size > 0.8) {
+            $qt = 50;
+        } else if ($size > .5) {
+            $qt = 80;
+        }else{
+            $qt = 90;
         }
+
         return $qt;
     }
 }

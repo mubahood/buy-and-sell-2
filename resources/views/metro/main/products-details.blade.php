@@ -7,12 +7,24 @@ use App\Models\Category;
 use App\Models\Chat;
 
 $slug = request()->segment(1);
-$pro = Product::where('slug', $slug)->firstOrFail();
+$pro = Product::where('slug', $slug)->first();
+
+if ($pro == null) {
+    $pro = Product::where('id', $slug)->first();
+}
+
+if ($pro == null) {
+    die("Product not found. Maybe it's already deleted.");
+}
+
 if ($pro) {
     if (!$pro->user) {
         dd('User not found.');
     }
+}else {
+    die("Product not found. Maybe it's already deleted.");
 }
+
 $products = [];
 $conds['category_id'] = $pro->category->id;
 $products = Product::where($conds)->paginate(4);
@@ -268,20 +280,41 @@ foreach ($products as $key => $pro) {
     </div>
 </div> 
 
+ 
 
-<h2 class="my-6 h1 fw-bold">You may also like</h2>
-<div class="row mt-2">
-    @foreach ($recomended as $item)
-        <div class="col-6 col-md-2">
-            @include('metro.components.product-item', [
-                'item' => $item,
-            ])
+
+<div class="row p-0 ">
+    <div class="col-12 p-0 m-0">
+        <div class="card shadow-sm mt-5"> 
+            <div class="card-header bg-primary">
+                <h3 class="card-title fs-1 text-white">You may also like</h3>
+                <div class="card-toolbar">
+                    <a href="{{ url('/product-listing')}}" type="button" class="btn btn-sm btn-light-primary">
+                        See all
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body">
+                
+
+                <div class="row mt-2">
+                    @foreach ($recomended as $item)
+                        <div class="col-6 col-md-2">
+                            @include('metro.components.product-item', [
+                                'item' => $item,
+                            ])
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
         </div>
-    @endforeach
+    </div>
 </div>
 
 
-
+ 
 <style>
     .fslightbox-absoluted {
         background-color: #414E4E;

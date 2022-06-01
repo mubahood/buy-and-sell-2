@@ -19,7 +19,7 @@ if ($edit_item == null) {
 }
 
 ?>@extends('metro.layout.layout-dashboard')
-
+@section('toolbar-title','Banners')
 @section('header')
     <link rel="stylesheet" href="{{ url('assets/css/vendor/nestable.css') }}">
 @endsection

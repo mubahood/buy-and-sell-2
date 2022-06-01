@@ -16,7 +16,7 @@ $all_users = User::count('id');
 
     </div>
 @endsection
-
+@section('toolbar-title','Main dashboard')
 @section('footer')
     {{-- <script src="{{ url('/') }}/assets/js/widgets.bundle.js"></script> --}}
     <script>

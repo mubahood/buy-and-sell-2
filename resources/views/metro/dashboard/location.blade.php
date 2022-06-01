@@ -25,7 +25,7 @@ if ($edit_item == null) {
 @section('header')
     <link rel="stylesheet" href="{{ url('assets/css/vendor/nestable.css') }}">
 @endsection
-
+@section('toolbar-title','Locations')
 @section('footer')
     <script src="{{ url('assets/js/vendor/nestable.js') }}"></script>
     <script>

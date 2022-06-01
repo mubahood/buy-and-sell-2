@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use function PHPUnit\Framework\fileExists;
+
 /*
  if(isset($img_size[0]) && isset($img_size[1])){
             $width = $img_size[0];
@@ -29,9 +31,16 @@ class MainController extends Controller
     public function index()
     {
 
-        // $g = Garden::find(1);
-        // dd($g->production_activities_remaining);
-        // dd("Romina");
+        // $p['source'] = 'public/test/1.jpeg';
+        // $p['target'] = 'public/test/anjane.jpeg';
+        // Utils::create_thumbail($p);
+
+
+       
+        
+         
+        // dd("time to fight");
+
         /*
         $m = new Pest();
         $m->name = 'Slaters';
@@ -206,7 +215,7 @@ thumbnail
         // echo('<img width="400" src="'.$thumbnail.'" />');
 
         // die("");
-        return view('metro.main.product-listing');
+        //return view('metro.main.product-listing');
         return view('metro.main.index');
         //return view('metro.index');
     }
@@ -246,6 +255,11 @@ thumbnail
         }
 
         $seg = request()->segment(1);
+ 
+        if($seg == 'product-listing'){
+            return view('metro.main.product-listing');
+        }
+ 
         $profile = Profile::where('username', $seg)->first();
         if ($profile) {
             return view('main.display-profile');
@@ -255,7 +269,18 @@ thumbnail
         if ($pro) {
             return view('metro.main.products-details');
         }
-        return view('main.index');
+        
+        $pro = Product::where('id', $seg)->first();
+        if ($pro) {
+            return view('metro.main.products-details');
+        }
+
+        $cat = Category::where('slug', $seg)->first();
+        if ($cat) {
+            return view('metro.main.product-listing');
+        }
+
+        return view('metro.main.index');
     }
 
     public function password_reset(Request  $request)

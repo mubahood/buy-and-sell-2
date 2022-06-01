@@ -14,7 +14,7 @@ $menu_items = MenuItem::where([])
     data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <!--begin::Brand-->
-    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
+    <div class="aside-logo flex-column-auto border" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="{{ url('/') }}" class="">
             <img alt="Logo" src="{{ url('/') }}/logo.png" class="h-50px logo" />
@@ -136,9 +136,8 @@ $menu_items = MenuItem::where([])
         </div>
     </div>
     <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-        <a href="javascript:;" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover"
-            data-bs-dismiss-="click" title="200+ in-house components and 3rd-party plugins">
-            <span class="btn-label">Help &amp; Support</span>
+        <a href="{{ url('logout') }}" class="btn btn-custom btn-primary w-100">
+            <span class="btn-label">Logout</span>
             <span class="svg-icon btn-icon svg-icon-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path opacity="0.3"
