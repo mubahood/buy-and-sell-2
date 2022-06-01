@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9260fbf4803f30b810e476518c43e2a80220c47a',
+        'reference' => 'd4aa68f961c5b96386ac50b60b013a4636685bf8',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -526,7 +526,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9260fbf4803f30b810e476518c43e2a80220c47a',
+            'reference' => 'd4aa68f961c5b96386ac50b60b013a4636685bf8',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -572,6 +572,15 @@
             'install_path' => __DIR__ . '/../laravel/tinker',
             'aliases' => array(),
             'reference' => 'dff39b661e827dae6e092412f976658df82dbac5',
+            'dev_requirement' => false,
+        ),
+        'laravel/ui' => array(
+            'pretty_version' => 'v3.4.6',
+            'version' => '3.4.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/ui',
+            'aliases' => array(),
+            'reference' => '65ec5c03f7fee2c8ecae785795b829a15be48c2c',
             'dev_requirement' => false,
         ),
         'laravelcollective/html' => array(
