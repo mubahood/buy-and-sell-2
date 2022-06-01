@@ -20,7 +20,7 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-image-optimizer": "^1.6",
-        "maatwebsite/excel": "~2.1.0",
+        "maatwebsite/excel": "^3.1",
         "stefangabos/zebra_image": "dev-master"
     },
     "require-dev": {
