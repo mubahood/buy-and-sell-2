@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a65565405e1db3c02233545d317469cbb085c74e',
+        'reference' => 'f879fa7aa224a29c0cf1675e977169a1104cf1a2',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
             'aliases' => array(),
             'reference' => 'de83130d029289e1b59f28b41c314ce1d157b4a0',
+            'dev_requirement' => false,
+        ),
+        'barryvdh/laravel-snappy' => array(
+            'pretty_version' => 'v1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../barryvdh/laravel-snappy',
+            'aliases' => array(),
+            'reference' => '2c18a3602981bc6f25b32908cf8aaa05952ab2f7',
             'dev_requirement' => false,
         ),
         'brick/math' => array(
@@ -451,6 +460,15 @@
                 0 => 'v8.83.15',
             ),
         ),
+        'knplabs/knp-snappy' => array(
+            'pretty_version' => 'v1.4.1',
+            'version' => '1.4.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../knplabs/knp-snappy',
+            'aliases' => array(),
+            'reference' => '5126fb5b335ec929a226314d40cd8dad497c3d67',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -508,7 +526,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a65565405e1db3c02233545d317469cbb085c74e',
+            'reference' => 'f879fa7aa224a29c0cf1675e977169a1104cf1a2',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(

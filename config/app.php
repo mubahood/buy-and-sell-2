@@ -2,21 +2,7 @@
 
 return [
 
-    'id' => env('id', 's'),
-    'currency' => env('currency', 'UGX'),
-    'domain' => env('domain', 'goprint.ug'),
-    'address' => env('address', 'Shop no. 123, <span>Nasser Road, Kampala, Uganda</span>'),
-    'phone_1' => env('phone_1', '+256783204665'),
-    'phone_2' => env('phone_2', '+256706638494'),
-    'developer_name' => env('developer_name', 'N. Sumayya'),
-    'developer_link' => env('developer_link', 'javascript:;'),
-    'facebook' => env('facebook', 'javascript:;'),
-    'twitter' => env('twitter', 'javascript:;'),
-    'youtube' => env('youtube', 'javascript:;'),
-    'instagram' => env('instagram', 'javascript:;'),
-
     /*
-    #test
     |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
@@ -27,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Goprint.ug'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://farmers.ugnews24.info/'),
+    'url' => env('APP_URL', 'http://127.0.0.1:8000/'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -175,9 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\Snappy\ServiceProvider::class,
         
-
 
 
         /*
@@ -193,7 +177,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
 
     ],
 
@@ -248,9 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
-        
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        //'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
