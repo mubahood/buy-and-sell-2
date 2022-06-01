@@ -162,9 +162,9 @@ if (in_array($seg_1, $dashboard_segs)) {
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 
                         @if ($is_logged_in)
-                            <a href="{{ url('dashboard/products') }}" class="btn btn-outline btn-outline-primary btn-sm">My Products</a>
+                            <a href="{{ url('admin') }}" class="btn btn-outline btn-outline-primary btn-sm">My Products</a>
                         @else
-                            <a href="{{ url('register') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up
+                            <a href="{{ url('admin') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up
                                 |
                                 Login</a>
                         @endif
