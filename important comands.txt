@@ -1,3 +1,7 @@
+#145A32
+#FF0000
+
+
 git rm /config/app.php --cached
 php artisan make:migration create_banners_table
 php artisan make:migration create_posts_table
@@ -17,7 +21,7 @@ php artisan make:model GardenProductionRecord
 php artisan make:model FinancialRecord
 php artisan make:model Question
 php artisan make:model Farm
-
+ 
 
 php artisan make:migration create_farmers_group_has_agent_table
 php artisan make:migration create_garden_activities_table

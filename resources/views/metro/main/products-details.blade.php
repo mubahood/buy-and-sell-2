@@ -26,7 +26,7 @@ if ($pro) {
 }
 
 $products = [];
-$conds['category_id'] = $pro->category->id;
+$conds['category_id'] = 1;
 $products = Product::where($conds)->paginate(4);
 
 $images = $pro->get_images();
