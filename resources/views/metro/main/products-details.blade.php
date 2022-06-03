@@ -68,23 +68,25 @@ $products = [];
 $products = Product::all();
 
 $recomended = [];
-foreach ($products as $key => $pro) {
+foreach ($products as $key => $p) {
  
     if (count($recomended) < 6) {
-        $recomended[] = $pro;
+        $recomended[] = $p;
         continue;
     }
 }
 
+ 
 
 @endphp
+ 
 @extends('metro.layout.layout-main')
 @section('main-content')
 @section('footer')
     <script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
 @endsection
   
-
+ 
 <div class="row  mt-5">
     <div class="col-md-4 bg-white py-5 ">
         <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel"
