@@ -6,7 +6,7 @@
         </div>
         <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
             <li class="menu-item">
-                <a href="javascript:;" class="menu-link px-2">About</a>
+                <a href="{{ url('about') }}" class="menu-link px-2">About</a>
             </li>
             <li class="menu-item">
                 <a href="javascript:;" class="menu-link px-2">Contact</a>
