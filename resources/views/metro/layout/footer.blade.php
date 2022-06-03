@@ -12,7 +12,7 @@
                 <a href="javascript:;" class="menu-link px-2">Contact</a>
             </li>
             <li class="menu-item">
-                <a href="javascript:;" class="menu-link px-2">Help & Support</a>
+                <a href="{{ url('privacy-policy') }}" class="menu-link px-2">Privacy policy</a>
             </li>
         </ul>
     </div>

@@ -480,6 +480,11 @@ thumbnail
         return view('metro.about_us'); 
     }
 
+    public function privacy()
+    {
+        return view('metro.privacy'); 
+    }
+
     public function sell_fast()
     {
         return view('about.sell_fast');
