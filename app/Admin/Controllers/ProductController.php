@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Category;
+use App\Models\Location;
 use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -25,6 +27,31 @@ class ProductController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Product());
+
+        $grid->filter(function ($filter) {
+            //$u = Auth::user();
+            $filter->like('name', 'Searh by keyword');
+            $filter->equal('nature_of_offer', __('Filter by nature of offer'))
+                ->select(
+                    [
+                        'For sale',
+                        'For hire',
+                        'Service',
+                    ]
+                );
+            $filter->equal('user_id','Search by owner')->select(url('api/users'));
+
+            $filter->equal('category_id', __('Filter by category'))
+                ->select(
+                    Category::get_subcategories()
+                );
+
+            $filter->equal('city_id', __('Filter by locations'))
+                ->select(
+                    Location::get_subcounties()
+                );
+        });
+
 
         //$grid->column('id', __('Id'));
         //$grid->column('updated_at', __('Updated at'));
@@ -52,9 +79,9 @@ class ProductController extends AdminController
                 return $category_id;
             }
             return $this->category->name;
-        })->sortable(); 
-       
-        
+        })->sortable();
+
+
         $grid->column('city_id', __('Location'))
             ->display(function ($city_id) {
                 if ($this->location == null) {

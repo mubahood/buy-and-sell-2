@@ -14,6 +14,21 @@ class Category extends Model
         return $this->hasMany(Attribute::class);
     }
 
+    public static function get_subcategories()
+    {
+        $items = [];
+        foreach (Category::all() as $key => $v) {
+            $parent = ((int)($v->parent));
+            $_name = "";
+            if ($parent < 1) {
+                continue;
+            }
+            $_name = $v->name;
+            $items[$v->id] = $_name;
+        }
+        return $items;
+    }
+
     public function kids()
     {
         return $this->hasMany(category::class, "parent");
