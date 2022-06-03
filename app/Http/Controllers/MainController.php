@@ -477,7 +477,7 @@ thumbnail
 
     public function about()
     {
-        return view('about.about_us');
+        return view('metro.about_us'); 
     }
 
     public function sell_fast()
