@@ -40,6 +40,10 @@ Route::resource('/dashboard/chats', DashboardChatsControler::class)->middleware(
 Route::resource('/dashboard/products', DashboardProductsControler::class)->middleware(Authenticate::class);
 
 Route::get('/about', [MainController::class, 'about']);
+Route::get('/privacy', [MainController::class, 'privacy']);
+Route::get('/privacy-policy', [MainController::class, 'privacy']);
+Route::get('/privacy-policy.html', [MainController::class, 'privacy']);
+Route::get('/privacy.html', [MainController::class, 'privacy']);
 //Route::get('/register', [MainController::class, 'register'])->name("register");
 Route::match(['get', 'post'], '/password-reset', [MainController::class, 'password_reset'])->name("password-reset");
 //Route::match(['get', 'post'], '/login', [MainController::class, 'login'])->name("login");
