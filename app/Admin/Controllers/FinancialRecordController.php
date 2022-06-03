@@ -19,7 +19,7 @@ class FinancialRecordController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Financial records';
+    protected $title = 'My financial records';
 
     /**
      * Make a grid builder.
@@ -29,6 +29,18 @@ class FinancialRecordController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new FinancialRecord()); 
+
+        if (
+            Admin::user()->isRole('administrator') ||
+            Admin::user()->isRole('admin')
+        ) {
+            /*$grid->actions(function ($actions) {
+                $actions->disableEdit();
+            });*/
+        } else {
+            $grid->model()->where('administrator_id', Admin::user()->id);
+            $grid->disableRowSelector();
+        }
 
         $grid->filter(function ($filter) {
             $u = Auth::user();

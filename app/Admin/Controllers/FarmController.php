@@ -18,8 +18,8 @@ class FarmController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Farm';
-
+    
+    protected $title = 'My Farms';
     /**
      * Make a grid builder.
      *

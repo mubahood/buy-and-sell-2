@@ -57,7 +57,7 @@ class FinancialRecord extends Model
         }
         return $this->belongsTo(Garden::class, 'garden_id');
     }
-
+ 
 
     public function getCreatedAtAttribute($value)
     {
