@@ -42,7 +42,7 @@ php artisan migrate --path=/database/migrations/2022_05_31_091227_create_farms_t
  
 php artisan admin:make FarmersGroupController --model=App\\
 php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory 
-php artisan admin:make PestCaseController --model=App\\Models\\PestCase 
+php artisan admin:make TestPestCaseController --model=App\\Models\\PestCase 
 php artisan admin:make PestController --model=App\\Models\\Pest 
 php artisan admin:make PestController --model=App\\Models\\ProductionRecord 
 php artisan admin:make FarmController --model=App\\Models\\Farm 
@@ -51,9 +51,10 @@ php artisan admin:make GardenProductionRecordController --model=App\\Models\\Gar
 php artisan admin:make GardenActivityController --model=App\\Models\\GardenActivity 
 php artisan admin:make PestListingController --model=App\\Models\\Pest 
 php artisan admin:make PestCaseListingController --model=App\\Models\\PestCase 
-php artisan admin:make ProductController --model=App\\Models\\Product 
+php artisan admin:make ProductController --model=App\\Models\\Product
 php artisan admin:make ResourceSharingController --model=App\\Models\\Product 
 php artisan admin:make QuestionController --model=App\\Models\\Question 
+php artisan admin:make AgentUsersController --model=App\\Models\\User 
 
 composer remove 
 

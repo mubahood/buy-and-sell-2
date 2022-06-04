@@ -28,4 +28,6 @@ Route::group([
     $router->resource('resources', ResourceSharingController::class);
     $router->resource('questions', QuestionController::class);
 
+    $router->resource('agent-users', AgentUsersController::class);
+
 });
