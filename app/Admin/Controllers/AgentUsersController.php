@@ -4,12 +4,14 @@ namespace App\Admin\Controllers;
 
 use App\Models\FarmersGroup;
 use App\Models\FarmersGroupHasAgent;
+use App\Models\Location;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AgentUsersController extends AdminController
 {
@@ -18,7 +20,7 @@ class AgentUsersController extends AdminController
      *
      * @var string
      */
-    protected $title = 'User';
+    protected $title = 'Farmers';
 
     /**
      * Make a grid builder.
@@ -164,7 +166,65 @@ class AgentUsersController extends AdminController
      */
     protected function form()
     {
+        $u = Auth::user();
+        $group_id = 0;
+        foreach (FarmersGroupHasAgent::all() as $key => $g) {
+            if ($g->administrator_id == $u->id) {
+                $group_id = $g->farmers_group_id;
+            }
+        }
+
+        if ($group_id < 1) {
+            return "Your agent's account have not been assigned to any farmer's association yet. 
+            Please contact system administrators to do so.";
+        }
+
         $form = new Form(new User());
+
+        if ($form->isCreating()) {
+            $form->saving(function (Form $f) {
+                $u = new User();
+                $u->name = $f->name;
+                $u->email = $f->email;
+                $u->longitude = '0.00';
+                $u->latitude = '0.00';
+                $u->address = $f->address;
+                $u->username = $f->phone_number;
+                $u->category_id = $f->sector;
+                $u->sector = $f->sector;
+                $u->region = $f->location_id;
+                $u->location_id = $f->location_id;
+                $u->date_of_birth = $f->date_of_birth;
+                $u->user_type = $f->user_type;
+                $u->avatar = 'no_image.jpg';
+                $u->password = Hash::make(trim($f->password));
+                $u->marital_status = $f->marital_status;
+                $u->gender = $f->gender;
+                $u->group_id = $f->group_id;
+                $u->production_scale = $f->production_scale;
+                $u->number_of_dependants = $f->number_of_dependants;
+                $u->user_role = $f->user_role;
+                $u->access_to_credit = $f->access_to_credit;
+                $u->experience = $f->experience;
+                $u->profile_is_complete = false;
+
+                $u->save();
+            });
+        }
+
+        if ($form->isEditing()) {
+            if (isset($_POST['user_type'])) {
+                dd("editng...");
+            }
+        }
+
+        //http://localhost:8888/buy-and-sell-2/admin/agent-users/44/edit
+        //http://localhost:8888/buy-and-sell-2/admin/agent-users/44/edit
+
+        /*  	
+
+
+        */
         //$form->image('avatar', __('Avatar'));
         //$form->textarea('last_name', __('Last name'));
         //$form->textarea('company_name', __('Company name'));
@@ -182,35 +242,9 @@ class AgentUsersController extends AdminController
         // $form->textarea('cover_photo', __('Cover photo')); 
         // $form->number('owner_id', __('Owner id'));
 
-        $form->hidden('user_type', __('User type'))->default('farmer');
+        $form->text('user_type', __('User type'))->default('Farmer');
 
-        $form->text('username', __('Username'));
-        $form->password('password', __('Password'));
 
-        $form->divider();
-
-        $form->text('name', __('Full Name'))->required();
-        $form->text('email', __('Email'));
-        $form->text('phone_number', __('Phone number'));
-        $form->text('address', __('Address'));
-
-        $form->textarea('category_id', __('Sector')); 
-
-        $form->number('location_id', __('Location id'))->default(1);
-
-        $form->text('date_of_birth', __('Age'))->attribute('type', 'number'); 
-
-        $form->textarea('marital_status', __('Marital status'));
-        $form->textarea('gender', __('Gender'));
-        $form->textarea('group_id', __('Group id'));
-        $form->text('group_text', __('Group text'));
-        $form->textarea('sector', __('Sector'));
-        $form->textarea('production_scale', __('Production scale'));
-        $form->textarea('number_of_dependants', __('Number of dependants'));
-        $form->textarea('user_role', __('User role'));
-        $form->textarea('access_to_credit', __('Access to credit'));
-        $form->textarea('experience', __('Experience'));
-        $form->switch('profile_is_complete', __('Profile is complete'));
 
         return $form;
     }
