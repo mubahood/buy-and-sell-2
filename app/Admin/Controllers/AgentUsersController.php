@@ -207,19 +207,18 @@ class AgentUsersController extends AdminController
                 $u->access_to_credit = $f->access_to_credit;
                 $u->experience = $f->experience;
                 $u->profile_is_complete = false;
-
                 $u->save();
+                return redirect(url('admin/agent-users'));
             });
         }
 
+        $form->submitted(function (Form $f) {
+            dd("editng...");
+        });
         if ($form->isEditing()) {
-            if (isset($_POST['user_type'])) {
-                dd("editng...");
-            }
         }
 
-        //http://localhost:8888/buy-and-sell-2/admin/agent-users/44/edit
-        //http://localhost:8888/buy-and-sell-2/admin/agent-users/44/edit
+
 
         /*  	
 
@@ -244,6 +243,104 @@ class AgentUsersController extends AdminController
 
         $form->text('user_type', __('User type'))->default('Farmer');
 
+        $form->text('phone_number', __('Phone number'))
+            ->help('Phone number will act as username to  login.')
+            ->default('0728736222')
+            ->required();
+        $form->password('password', __('Password'))
+            ->default('4321')
+            ->required();
+
+        $form->divider();
+
+        $form->text('name', __('Full Name'))
+            ->default('Unfe farmer')
+            ->required();
+
+        $form->text('date_of_birth', __('Age'))
+            ->default(12)
+            ->attribute('type', 'number')
+            ->required();
+
+
+        $form->select('gender', __('Gender'))
+            ->default('Male')
+            ->options([
+                'Male' => 'Male',
+                'Female' => 'Female',
+            ])
+            ->required();
+
+
+        $form->select('marital_status', __('Marital status'))
+            ->default('Single')
+            ->options([
+                'Single' => 'Single',
+                'Married' => 'Married',
+            ])
+            ->required();
+
+
+        $form->text('email', __('Email'))
+            ->default('farmer1@gmail.com');
+
+
+        $form->select('location_id', __('Sub-county'))
+            ->options(Location::get_subcounties())
+            ->default(2275)
+            ->required();
+
+        $form->text('address', __('Address'))
+            ->default('Bwera, Kasese');
+
+
+        $form->select('group_id', __('Farmer\'s association'))
+            ->options(FarmersGroup::all()->pluck('name', 'id'))
+            ->default($group_id)
+            ->readOnly()
+            ->required();
+
+
+        $form->select('sector', __('Farming sector'))
+            ->default('Crop farming')
+            ->options([
+                'Crop farming' => 'Crop farming',
+                'Livestock farming' => 'Livestock farming',
+                'Fisheries' => 'Fisheries',
+            ])
+            ->required();
+
+        $form->text('experience', __('Experience (in years)'))->attribute('type', 'number')
+            ->default('12')
+            ->required();
+
+        $form->select('production_scale', __('Production scale'))
+            ->default('Subsistence production')
+            ->options([
+                'Subsistence production' => 'Subsistence production',
+                'Small Commercial Production' => 'Small Commercial Production',
+                'Large Commercial Production' => 'Large Commercial Production',
+            ])
+            ->required();
+
+
+        $form->text('number_of_dependants', __('Number of dependants'))->attribute('type', 'number')
+            ->default('16')
+            ->required();
+
+        $form->select('access_to_credit', __('Production scale'))
+            ->default('Bank')
+            ->options([
+                'No any access' => 'No any access',
+                'SACCO' => 'SACCO',
+                'Bank' => 'Bank',
+                'VSLA' => 'VSLA',
+                'Family' => 'Family',
+            ])
+            ->required();
+
+
+        $form->text('user_role', __('User role'))->default('Farmer')->readonly();
 
 
         return $form;
