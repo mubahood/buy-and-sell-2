@@ -135,7 +135,7 @@ class Product extends Model
     public function get_thumbnail()
     {
 
-        $thumbnail = url('no_image.png');
+        $thumbnail = url('no_image.jpg');
         if ($this->thumbnail != null) {
             if (strlen($this->thumbnail) > 3) {
                 $thumb = json_decode($this->thumbnail);

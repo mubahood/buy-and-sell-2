@@ -61,7 +61,7 @@ class DashboardCategoriesControler extends Controller
                     
                     $img = $_FILES['avatar'];
                     $raw_images = [];
-                    $item->image = 'no_image.png';
+                    $item->image = 'no_image.jpg';
                     $raw_images['name'][] = $img['name'];
                     $raw_images['type'][] = 'image/png';
                     $raw_images['tmp_name'][] = $img['tmp_name'];
