@@ -181,40 +181,44 @@ class AgentUsersController extends AdminController
 
         $form = new Form(new User());
 
+
         $form->saving(function (Form $f) {
-            $u = new User();
-            $u->name = $f->name;
-            $u->email = $f->email;
-            $u->longitude = '0.00';
-            $u->latitude = '0.00';
-            $u->address = $f->address;
-            $u->username = $f->phone_number;
-            $u->category_id = $f->sector;
-            $u->sector = $f->sector;
-            $u->region = $f->location_id;
-            $u->location_id = $f->location_id;
-            $u->date_of_birth = $f->date_of_birth;
-            $u->user_type = $f->user_type;
-            $u->avatar = 'no_image.jpg';
-            $u->password = Hash::make(trim($f->password));
-            $u->marital_status = $f->marital_status;
-            $u->gender = $f->gender;
-            $u->group_id = $f->group_id;
-            $u->production_scale = $f->production_scale;
-            $u->number_of_dependants = $f->number_of_dependants;
-            $u->user_role = $f->user_role;
-            $u->access_to_credit = $f->access_to_credit;
-            $u->experience = $f->experience;
-            $u->profile_is_complete = false;
-            $u->save();
-            return redirect(url('admin/agent-users'));
+            if (!$f->isEditing()) {
+
+                $u = new User();
+                $u->name = $f->name;
+                $u->email = $f->email;
+                $u->longitude = '0.00';
+                $u->latitude = '0.00';
+                $u->address = $f->address;
+                $u->username = $f->phone_number;
+                $u->category_id = $f->sector;
+                $u->sector = $f->sector;
+                $u->region = $f->location_id;
+                $u->location_id = $f->location_id;
+                $u->date_of_birth = $f->date_of_birth;
+                $u->user_type = $f->user_type;
+                $u->avatar = 'no_image.jpg';
+                $u->password = Hash::make(trim($f->password));
+                $u->marital_status = $f->marital_status;
+                $u->gender = $f->gender;
+                $u->group_id = $f->group_id;
+                $u->production_scale = $f->production_scale;
+                $u->number_of_dependants = $f->number_of_dependants;
+                $u->user_role = $f->user_role;
+                $u->access_to_credit = $f->access_to_credit;
+                $u->experience = $f->experience;
+                $u->profile_is_complete = false;
+                $u->save();
+                return redirect(url('admin/agent-users'));
+            } else {
+
+                die($f->id);
+                die("is editng...");
+            }
         });
-       /*  $form->submitted(function (Form $f) {
-            dd("editng...");
-        });
-        if ($form->isEditing()) {
-        }
- */
+
+
 
 
         /*  	
@@ -239,7 +243,7 @@ class AgentUsersController extends AdminController
         // $form->number('owner_id', __('Owner id'));
 
         $form->text('user_type', __('User type'))->default('Farmer');
-
+        $form->text('id', __('id'));
         $form->text('phone_number', __('Phone number'))
             ->help('Phone number will act as username to  login.')
             ->default('0728736222')
