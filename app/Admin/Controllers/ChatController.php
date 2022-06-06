@@ -3,7 +3,10 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Chat;
+use App\Models\Product;
+use App\Models\User;
 use App\Models\Utils;
+use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -16,7 +19,7 @@ class ChatController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Chat';
+    protected $title = 'Messages';
 
     /**
      * Make a grid builder.
@@ -25,6 +28,12 @@ class ChatController extends AdminController
      */
     protected function grid()
     {
+        return admin_info(
+            'Coming soon',
+            'Messaing feature is not available on web yet.  
+            <a target="_blank" href="https://play.google.com/store/apps/details?id=net.eighttechnologes.ict4farmers">Download ICT4Farmers mobile</a> to fully manage your messages & replies.'
+        );
+
         $grid = new Grid(new Chat());
 
         $grid->column('id', __('Id'));
@@ -98,30 +107,109 @@ class ChatController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Chat());
+
 
         Utils::session_start();
 
-        $form->textarea('body', __('Body'));
-        $form->number('sender', __('Sender'));
-        $form->number('receiver', __('Receiver'));
-        $form->number('product_id', __('Product id'));
-        $form->textarea('thread', __('Thread'));
-        $form->switch('received', __('Received'));
-        $form->switch('seen', __('Seen'));
-        $form->textarea('type', __('Type'));
-        $form->textarea('receiver_pic', __('Receiver pic'));
-        $form->textarea('sender_pic', __('Sender pic'));
-        $form->textarea('contact', __('Contact'));
-        $form->textarea('gps', __('Gps'));
-        $form->textarea('file', __('File'));
-        $form->textarea('image', __('Image'));
-        $form->textarea('audio', __('Audio'));
-        $form->textarea('receiver_name', __('Receiver name'));
-        $form->textarea('sender_name', __('Sender name'));
-        $form->textarea('product_name', __('Product name'));
-        $form->textarea('product_pic', __('Product pic'));
-        $form->number('unread_count', __('Unread count'));
+        $sender = 0;
+        $product_id = 0;
+        $receiver = 0;
+
+        if (
+            isset($_GET['sender']) &&
+            isset($_GET['product_id']) &&
+            isset($_GET['receiver'])
+        ) {
+            Utils::session_start();
+            $_SESSION['chat_create']['sender'] = trim($_GET['sender']);
+            $_SESSION['chat_create']['product_id'] = trim($_GET['product_id']);
+            $_SESSION['chat_create']['receiver'] = trim($_GET['receiver']);
+
+            $sender = (int)(trim($_GET['sender']));
+            $product_id = (int)(trim($_GET['product_id']));
+            $receiver = (int)(trim($_GET['receiver']));
+        }
+
+
+        if (isset($_SESSION['chat_create'])) {
+            if (
+                isset($_SESSION['chat_create']['sender']) &&
+                isset($_SESSION['chat_create']['product_id']) &&
+                isset($_SESSION['chat_create']['receiver'])
+            ) {
+                Utils::session_start();
+                $sender = (int)($_SESSION['chat_create']['sender']);
+                $product_id = (int)($_SESSION['chat_create']['product_id']);
+                $receiver = (int)($_SESSION['chat_create']['receiver']);
+            }
+        }
+
+        if (
+            $sender == 0 ||
+            $product_id == 0 ||
+            $receiver == 0
+        ) {
+            return redirect(url('admin/products'));
+            die("Can't initialize this caht. Please try again");
+        }
+
+        $s = Administrator::find($sender);
+        $r = Administrator::find($receiver);
+        $p = Product::find($product_id);
+
+        if (
+            $s == null ||
+            $r == null ||
+            $p == null
+        ) {
+            return redirect(url('admin/products'));
+            die("Failed to find product information. Please try again");
+        }
+
+        $form = new Form(new Chat());
+
+
+        $form->footer(function ($footer) {
+            $footer->disableReset();
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+            $footer->disableCreatingCheck();
+        });
+
+
+        $form->submitted(function () {
+            Utils::session_start();
+            session_destroy();
+            return admin_success(
+                'Success',
+                'Your message has been successfully sent. 
+                <a target="_blank" href="https://play.google.com/store/apps/details?id=net.eighttechnologes.ict4farmers">Download ICT4Farmers mobile</a> to fully manage your messages & replies.'
+            );
+        });
+
+        $form->display('Sending message to:')->value($r->name);
+        $form->display('About product:')->value($p->name);
+        $form->display('Product price: UGX')->value($p->price);
+        $form->textarea('body', __('Compose message'))
+            ->required()
+            ->help("TIP: Your messgae should be specific, precise and complete.");
+        $form->hidden('sender', __('Sender'))->readonly()->value($s->id);
+        $form->hidden('receiver')->readonly()->value($r->id);
+        $form->hidden('product_id')->readonly()->value($p->id);
+        $form->hidden('thread')->readonly()->value(Chat::get_chat_thread_id(
+            $s->id,
+            $r->id,
+            $p->id
+        ));
+        $form->hidden('received')->readonly()->value(0);
+        $form->hidden('receiver_name')->readonly()->value($r->name);
+        $form->hidden('sender_name')->readonly()->value($s->name);
+        $form->hidden('product_name')->readonly()->value($p->name);
+        $form->hidden('product_pic')->readonly()->value($p->get_thumbnail());
+        $form->hidden('seen')->readonly()->value(0);
+        $form->hidden('unread_count')->readonly()->value(1);
+        $form->hidden('type')->readonly()->value('text');
+        $form->hidden('contact')->readonly()->value($p->user->phone_number);
 
         return $form;
     }

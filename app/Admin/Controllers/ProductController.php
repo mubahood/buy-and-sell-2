@@ -9,6 +9,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends AdminController
 {
@@ -62,7 +63,6 @@ class ProductController extends AdminController
         });
 
 
-        //$grid->column('id', __('Id'));
         //$grid->column('updated_at', __('Updated at'));
         $grid->column('id', __('Photo'))->display(function ($id) {
             return '<img width="40" src="' . $this->get_thumbnail() . '" ?>';
@@ -108,6 +108,21 @@ class ProductController extends AdminController
         //$grid->column('images', __('Images'));
         //$grid->column('quantity', __('Quantity'));
         //$grid->column('description', __('Description'));
+
+        $grid->column('contact', __('Contact'))
+            ->display(function ($id) {
+                $u = Auth::user();
+                $link = url('admin/chats/create?product_id=' . $this->id);
+                $link .= "&sender=" . $u->id;
+                $link .= "&receiver=" . $this->user_id;
+                $call = '<a href="tel:0779755798" >Call 0779755798</a>';
+                $data = $call;
+                if ($this->user_id != $u->id) {
+                    $data .=  '<br>OR<br><a href="' . $link . '" >Send Message</a>';
+                }
+
+                return $data;
+            })->sortable();
         return $grid;
     }
 
