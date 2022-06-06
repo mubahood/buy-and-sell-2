@@ -25,9 +25,11 @@ Route::group([
     $router->resource('pests-listing', PestListingController::class); 
     $router->resource('pest-cases-listing', PestCaseListingController::class);
     $router->resource('products', ProductController::class); 
+    $router->resource('my–products', MyProductController::class); 
     $router->resource('resources', ResourceSharingController::class);
     $router->resource('questions', QuestionController::class);
 
     $router->resource('agent-users', AgentUsersController::class);
+    $router->resource('chats', ChatController::class);
 
 });

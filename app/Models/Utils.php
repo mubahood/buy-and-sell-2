@@ -42,6 +42,16 @@ class Utils
 
         return $locations;
     }
+
+    public static function session_start()
+    {
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
+
     public static function response($data = [])
     {
         $resp['status'] = "1";
@@ -219,8 +229,8 @@ class Utils
 
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
         return $path;
-    } 
-    public static function upload_images($files) 
+    }
+    public static function upload_images($files)
     {
 
 
@@ -267,16 +277,16 @@ class Utils
 
 
                     $thumn_name = 'thumb_' . $file_name;
-                    $path_optimized = 'public/storage/'.$thumn_name;
+                    $path_optimized = 'public/storage/' . $thumn_name;
 
                     $thumbnail = Utils::create_thumbail(
                         array(
-                            "source" => "./".$path,
+                            "source" => "./" . $path,
                             "target" => $path_optimized,
                         )
                     );
 
- 
+
                     $ready_image['src'] = $file_name;
                     $ready_image['thumbnail'] = $thumn_name;
 
@@ -295,7 +305,7 @@ class Utils
         return $uploaded_images;
     }
 
-    public static function create_thumbail($params = array()) 
+    public static function create_thumbail($params = array())
     {
         ini_set('memory_limit', '-1');
 
@@ -337,9 +347,9 @@ class Utils
         }
         //dd("W: $width \n H: $heigt");
 
-        if($width<$heigt){
+        if ($width < $heigt) {
             $heigt = $width;
-        }else{
+        } else {
             $width = $heigt;
         }
 
@@ -377,7 +387,7 @@ class Utils
             $qt = 50;
         } else if ($size > .5) {
             $qt = 80;
-        }else{
+        } else {
             $qt = 90;
         }
 

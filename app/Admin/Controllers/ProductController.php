@@ -28,6 +28,15 @@ class ProductController extends AdminController
     {
         $grid = new Grid(new Product());
 
+        $grid->disableActions();
+        $grid->disableCreateButton();
+        $grid->disableExport();
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+            $actions->disableEdit();
+            $actions->disableView();
+        });
+
         $grid->filter(function ($filter) {
             //$u = Auth::user();
             $filter->like('name', 'Searh by keyword');
@@ -39,7 +48,7 @@ class ProductController extends AdminController
                         'Service',
                     ]
                 );
-            $filter->equal('user_id','Search by owner')->select(url('api/users'));
+            $filter->equal('user_id', 'Search by owner')->select(url('api/users'));
 
             $filter->equal('category_id', __('Filter by category'))
                 ->select(
@@ -142,8 +151,10 @@ class ProductController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Product());
 
+        return "Download ICT4Farmers mobile App post your product.";
+
+        $form = new Form(new Product());
         $form->text('name', __('Name'));
         $form->number('category_id', __('Category id'));
         $form->number('user_id', __('User id'));
