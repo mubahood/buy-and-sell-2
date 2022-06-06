@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Category;
+use App\Models\Category; 
 use App\Models\Location;
 use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
@@ -28,6 +28,11 @@ class ProductController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Product());
+        
+        $grid->model()->where([
+            'type' => 'product',
+        ]);
+
 
         $grid->disableActions();
         $grid->disableCreateButton();
