@@ -160,7 +160,7 @@ return [
             'image' => 'public/',
             'file'  => 'files',
         ],
-    ], 
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -298,8 +298,12 @@ return [
     |
     | This value is used to set the background image of login page.
     |
+    background-image: url(http://localhost:8888/buy-and-sell-2/assets/images/bg/img_2.jpeg);     background-size:     cover;
+                                            background-repeat:   no-repeat;
+                                            background-position: center center; 
     */
-    'login_background_image' => '/assets/images/02.jpg',
+
+    'login_background_image' => '/assets/images/bg/img_' . rand(1, 5) . '.jpeg',
 
     /*
     |--------------------------------------------------------------------------
