@@ -22,6 +22,9 @@ class Category extends Model
         $this->setTitleColumn('name');
     }
 
+    
+
+    protected $fillable = ['parent', 'order', 'name',];
 
     public function attributes()
     {
