@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Banner; 
+use App\Models\Category;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Layout\Content;
@@ -31,7 +31,7 @@ class ProductsCategoryController extends AdminController
      */
     protected function tree()
     {
-        return Banner::tree(function (Tree $tree) {
+        return Category::tree(function (Tree $tree) {
 
             $tree->branch(function ($branch) {
                 return $branch['name'];
@@ -46,18 +46,31 @@ class ProductsCategoryController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Banner());
+        $form = new Form(new Category());
 
-        $form->display('id', 'ID');
+        
 
-        $form->select('parent_id')->options(Banner::selectOptions());
 
-        $form->text('title')->rules('required');
-        $form->textarea('desc')->rules('required');
-        $form->image('logo');
 
-        $form->display('created_at', 'Created At');
-        $form->display('updated_at', 'Updated At');
+
+
+
+        $form->text('name',"Category name")->rules('required');
+        
+        $form->hidden('type',"type")->default('product');
+        $form->text('unit',"Category measuring unit")->rules('required');
+        $form->textarea('description',"Category description")->rules('required');
+        $form->image('image',"Category photo");
+        //$form->select('parent')->options(Category::get_subcategories() );
+
+ 
+
+        // parent	
+        // slug	
+
+
+	
+
 
         return $form;
     }

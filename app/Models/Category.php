@@ -24,7 +24,7 @@ class Category extends Model
 
     
 
-    protected $fillable = ['parent', 'order', 'name',];
+
 
     public function attributes()
     {
@@ -103,7 +103,7 @@ class Category extends Model
 
     use HasFactory;
 
-    public static function boot()
+/*     public static function boot()
     {
         parent::boot();
         self::creating(function ($model) {
@@ -113,5 +113,5 @@ class Category extends Model
         self::updating(function ($model) {
             $model->slug =  Str::slug($model->name, '-');
         });
-    }
+    } */
 }
