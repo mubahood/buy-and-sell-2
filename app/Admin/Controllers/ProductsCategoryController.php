@@ -48,28 +48,28 @@ class ProductsCategoryController extends AdminController
     {
         $form = new Form(new Category());
 
-        
 
 
 
 
 
 
-        $form->text('name',"Category name")->rules('required');
-        
-        $form->hidden('type',"type")->default('product');
-        $form->text('unit',"Category measuring unit")->rules('required');
-        $form->textarea('description',"Category description")->rules('required');
-        $form->image('image',"Category photo");
+
+        $form->text('name', "Category name")->rules('required');
+
+        $form->hidden('type', "type")->default('product');
+        $form->text('unit', "Category measuring unit")->default('KGs')->rules('required');
+        $form->textarea('description', "Category description");
+        $form->image('image', "Category photo");
         //$form->select('parent')->options(Category::get_subcategories() );
 
- 
+
 
         // parent	
         // slug	
 
 
-	
+
 
 
         return $form;
