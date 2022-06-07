@@ -9,9 +9,9 @@ use Encore\Admin\Form;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Tree;
 
-class ProductsCategoryController extends AdminController
+class ResourcesCategoryController extends AdminController
 {
-    protected $title = 'Products categories';
+    protected $title = 'Resources categories';
 
     /**
      * Index interface.
@@ -36,7 +36,7 @@ class ProductsCategoryController extends AdminController
             $tree->branch(function ($branch) {
                 return $branch['name'];
             })->query(function ($model) {
-                return $model->where('type', 'product');
+                return $model->where('type', 'resource');
             });
         });
     }
@@ -60,7 +60,7 @@ class ProductsCategoryController extends AdminController
 
         $form->text('name', "Category name")->rules('required');
         $form->hidden('slug', "slug");
-        $form->hidden('type', "type")->default('product');
+        $form->hidden('type', "type")->default('resource');
         $form->text('unit', "Category measuring unit")->default('KGs')->rules('required');
         $form->textarea('description', "Category description");
         $form->image('image', "Category photo");
