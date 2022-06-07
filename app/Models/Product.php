@@ -19,6 +19,11 @@ class Product extends Model
 
 
 
+    public function getStatusAttribute()
+    {
+        return $this->category->type;
+    }
+
     public function getPriceTextAttribute()
     {
         return "UGX ".number_format( (int)($this->price) );
