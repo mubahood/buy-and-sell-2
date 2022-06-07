@@ -22,9 +22,7 @@ class Category extends Model
         $this->setTitleColumn('name');
     }
 
-    
-
-
+ 
 
     public function attributes()
     {
@@ -103,7 +101,7 @@ class Category extends Model
 
     use HasFactory;
 
-/*     public static function boot()
+    /*     public static function boot()
     {
         parent::boot();
         self::creating(function ($model) {

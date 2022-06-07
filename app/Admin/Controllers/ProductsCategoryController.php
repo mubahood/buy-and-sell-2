@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Category;
+use App\Models\Utils;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Layout\Content;
@@ -50,12 +51,16 @@ class ProductsCategoryController extends AdminController
 
 
 
-
+        $form->saving(function (Form $form) {
+            $form->slug = Utils::make_slug($form->name);
+            return $form;
+        });
 
 
 
 
         $form->text('name', "Category name")->rules('required');
+        $form->text('slug', "slug");
 
         $form->hidden('type', "type")->default('product');
         $form->text('unit', "Category measuring unit")->default('KGs')->rules('required');
