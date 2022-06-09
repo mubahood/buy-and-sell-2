@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Hash;
 
 class ApiUsersController
 {
-    public function farmers_goups(Request $request){
+    public function farmers_goups(Request $request)
+    {
         return FarmersGroup::all();
     }
 
@@ -23,11 +24,11 @@ class ApiUsersController
     public function index(Request $request)
     {
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
-        $per_page = isset($request->per_page)? $request->per_page:1000;
+        $per_page = isset($request->per_page) ? $request->per_page : 1000;
 
-        if($user_id>0){
+        if ($user_id > 0) {
             $items = User::where('id', $user_id)->paginate($per_page)->withQueryString()->items();
-        }else{
+        } else {
             $items = User::paginate($per_page)->withQueryString()->items();
         }
         return $items;
@@ -45,40 +46,40 @@ class ApiUsersController
                 'data' => null
             ]);
         }
-        
+
         $email = (string) ($request->email ? $request->email : "");
         $password = (string) ($request->password ? $request->password : "");
 
-        $_u = User::where('username',$email)->get();
+        $_u = User::where('username', $email)->get();
         $u = null;
-        if(isset($_u[0])){
+        if (isset($_u[0])) {
             $u = $_u[0];
         }
 
-        if($u == null){
-            $_u = User::where('email',$email)->get();
-            if(isset($_u[0])){
+        if ($u == null) {
+            $_u = User::where('email', $email)->get();
+            if (isset($_u[0])) {
                 $u = $_u[0];
             }
         }
 
-        if($u == null ){
+        if ($u == null) {
             return Utils::response([
                 'status' => 0,
-                'message' => "Wrong username or email.",
+                'message' => "User account not found.",
                 'data' => null
             ]);
         }
 
 
-        if(!password_verify($password,$u->password)){
+        if (password_verify($password, $u->password)) {
             return Utils::response([
                 'status' => 0,
                 'message' => "Wrong password.",
                 'data' => null
             ]);
-        } 
-        
+        }
+
         if ($u == null) {
             return Utils::response([
                 'status' => 0,
@@ -86,8 +87,7 @@ class ApiUsersController
                 'data' => null
             ]);
         }
-        
-        $u->linkedin = $u->user_type;
+
         return Utils::response([
             'status' => 1,
             'message' => "Logged successfully.",
@@ -96,110 +96,6 @@ class ApiUsersController
     }
 
     public function update(Request $request)
-    {
-
-        if (
-            $request->email == null ||
-            $request->name == null ||
-            $request->user_id == null
-        ) {
-            return Utils::response([
-                'status' => 0,
-                'message' => "You must provide Name, email and user id.",
-                'data' => null
-            ]);
-        }
-
-        $user_id = (int) ($request->user_id ? $request->user_id : 0);
-        $email = (string) ($request->email ? $request->email : "");
-        $u = User::find($user_id);
-        if ($u == null) {
-            return Utils::response([
-                'status' => 0,
-                'message' => "Failed to find account with ID {$user_id}",
-                'data' => null
-            ]);
-        }
-
-        $_u = User::where('email', $email)->get();
-        if (isset($_u['0'])) {
-            if ($_u['0']->id != $u->id) {
-                return Utils::response([
-                    'status' => 0,
-                    'message' => "Changes not saved because user with same email ({$user_id}) that you provided already exist.",
-                    'data' => null
-                ]);
-            }
-        }
-
-        $u->email = $email;
-        $u->email = $u->email;
-        $u->username = $u->email;
-
-
-    
-  
-        $u->name = (string) ($request->name ? $request->name : "");
-        $email = (string) ($request->email ? $request->email : "");
-        if(strlen($email)>3){
-            $u->email = $email; 
-            $u->phone_number = $email; 
-            $u->username = $email; 
-        }
-
-       /*  $u->gender = (string) ($request->gender ? $request->gender : "");
-        $u->date_of_birth = (string) ($request->date_of_birth ? $request->date_of_birth : "");
-        $u->number_of_dependants = (string) ($request->number_of_dependants ? $request->number_of_dependants : "");
-        $u->marital_status = (string) ($request->marital_status ? $request->marital_status : "");
-        $u->user_role = (string) ($request->user_role ? $request->user_role : "");
-        $u->experience = (string) ($request->experience ? $request->experience : "");
-        $u->production_scale = (string) ($request->production_scale ? $request->production_scale : "");
-        $u->access_to_credit = (string) ($request->access_to_credit ? $request->access_to_credit : "");
-        $u->district = (string) ($request->district ? $request->district : "");
-        $u->sector = (string) ($request->sector ? $request->sector : "");
-        $u->profile_is_complete = true;  */
-        
-
-        unset($u->password);
-        unset($u->status_comment);
-        unset($u->opening_hours);
-        unset($u->remember_token);
-        unset($u->cover_photo);
-        unset($u->youtube);
-        unset($u->last_seen);
-        unset($u->status);
-        unset($u->linkedin);
-        unset($u->facebook);
-
-        if (isset($_FILES)) {
-            if ($_FILES != null) {
-                if (count($_FILES) > 0) {
-
-                    if(isset($_FILES['profile_pic'])){
-                        if($_FILES['profile_pic']!=null){
-                            if(isset($_FILES['profile_pic']['tmp_name'])){
-                                $u->avatar = Utils::upload_file($_FILES['profile_pic']);
-                            };
-                        }
-                        unset($_FILES['audio']);
-                    }
-                }
-            }
-        }
- 
-
-        $u->save();
-
-        $new_u = User::find($u->id);
-
-        return Utils::response([
-            'status' => 1,
-            'message' => "Profile updated successfully.",
-            'data' => $new_u
-        ]);
-    }
-
-    public function update_old(Request $request)
     {
 
         if (
@@ -274,9 +170,9 @@ class ApiUsersController
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
 
-                    if(isset($_FILES['profile_pic'])){
-                        if($_FILES['profile_pic']!=null){
-                            if(isset($_FILES['profile_pic']['tmp_name'])){
+                    if (isset($_FILES['profile_pic'])) {
+                        if ($_FILES['profile_pic'] != null) {
+                            if (isset($_FILES['profile_pic']['tmp_name'])) {
                                 $u->avatar = Utils::upload_file($_FILES['profile_pic']);
                             };
                         }
@@ -285,7 +181,7 @@ class ApiUsersController
                 }
             }
         }
- 
+
 
         $u->save();
 
@@ -313,8 +209,8 @@ class ApiUsersController
 
 
         $u['name'] = $request->input("name");
-        $u['username'] = $request->input("email");
-        $u['email'] = $request->input("email");
+        $u['username'] = trim($request->input("email"));
+        $u['email'] = trim($request->input("email"));
 
         $old_user = User::where('username', $u['username'])->first();
         if ($old_user) {
@@ -324,7 +220,7 @@ class ApiUsersController
             ]);
         }
 
-        $u['password'] = Hash::make($request->input("password"));
+        $u['password'] = Hash::make(trim($request->input("password")));
         $user = User::create($u);
         $_user = User::find($user->id);
 
