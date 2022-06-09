@@ -189,7 +189,7 @@ class ChatController extends AdminController
 
         $form->display('Sending message to:')->value($r->name);
         $form->display('About product:')->value($p->name);
-        $form->display('Product price: UGX')->value($p->price);
+        $form->display('Product price: '. config('app.currency') . " " )->value($p->price);
         $form->textarea('body', __('Compose message'))
             ->required()
             ->help("TIP: Your messgae should be specific, precise and complete.");

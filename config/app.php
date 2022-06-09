@@ -2,6 +2,21 @@
 
 return [
 
+
+    'id' => env('id', 's'),
+    'currency' => env('currency', '$'),
+    'app_slogan' => env('app_slogan', 'Jotrace - Buy and sell your products & services in Turkey.'),
+    'domain' => env('domain', 'Jotrace'),
+    'address' => env('address', 'Shop no. 123, <span>Nasser Road, Kampala, Uganda</span>'),
+    'phone_1' => env('phone_1', '+256783204665'),
+    'phone_2' => env('phone_2', '+256706638494'),
+    'developer_name' => env('developer_name', 'N. Sumayya'),
+    'developer_link' => env('developer_link', 'javascript:;'),
+    'facebook' => env('facebook', 'javascript:;'),
+    'twitter' => env('twitter', 'javascript:;'),
+    'youtube' => env('youtube', 'javascript:;'),
+    'instagram' => env('instagram', 'javascript:;'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

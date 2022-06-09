@@ -21,7 +21,7 @@ class Product extends Model
 
     public function getPriceTextAttribute()
     {
-        return "UGX ".number_format( (int)($this->price) );
+        return config('app.currency') . " " . number_format((int)($this->price));
     }
 
     public function getCreatedAtAttribute($value)
@@ -86,7 +86,7 @@ class Product extends Model
     public function location()
     {
         $loc = Location::find($this->city_id);
-        if($loc == null){
+        if ($loc == null) {
             $this->city_id = 1;
             $this->save();
         }
@@ -97,8 +97,8 @@ class Product extends Model
     public function category()
     {
         $c = Category::find($this->category_id);
-        if($c == null){
-            $this->category_id = 1; 
+        if ($c == null) {
+            $this->category_id = 1;
             $this->save();
         }
         return $this->belongsTo(Category::class, "category_id");

@@ -262,7 +262,7 @@ $cities = City::all();
 
                                 <div class="col-md-12">
                                     <div class="form-group"><label class="form-label" for="price">
-                                            Price (in UGX)</label><input type="number" class="form-control" id="price" required
+                                            Price (in {{  config('app.currency') . " " . }})</label><input type="number" class="form-control" id="price" required
                                             name="price" placeholder="Enter your pricing amount">
                                         @error('price')
                                         <div class="alert alert-danger">{{ $message }}</div>
