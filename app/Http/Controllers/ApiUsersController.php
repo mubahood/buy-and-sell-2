@@ -146,7 +146,8 @@ class ApiUsersController
             $u->phone_number = $email; 
             $u->username = $email; 
         }
-        $u->gender = (string) ($request->gender ? $request->gender : "");
+
+       /*  $u->gender = (string) ($request->gender ? $request->gender : "");
         $u->date_of_birth = (string) ($request->date_of_birth ? $request->date_of_birth : "");
         $u->number_of_dependants = (string) ($request->number_of_dependants ? $request->number_of_dependants : "");
         $u->marital_status = (string) ($request->marital_status ? $request->marital_status : "");
@@ -156,7 +157,7 @@ class ApiUsersController
         $u->access_to_credit = (string) ($request->access_to_credit ? $request->access_to_credit : "");
         $u->district = (string) ($request->district ? $request->district : "");
         $u->sector = (string) ($request->sector ? $request->sector : "");
-        $u->profile_is_complete = true; 
+        $u->profile_is_complete = true;  */
         
 
         unset($u->password);
