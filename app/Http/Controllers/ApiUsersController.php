@@ -169,7 +169,6 @@ class ApiUsersController
         if (isset($_FILES)) {
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
-
                     if (isset($_FILES['profile_pic'])) {
                         if ($_FILES['profile_pic'] != null) {
                             if (isset($_FILES['profile_pic']['tmp_name'])) {
