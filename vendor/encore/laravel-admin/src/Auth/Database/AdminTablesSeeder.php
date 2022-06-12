@@ -15,7 +15,6 @@ class AdminTablesSeeder extends Seeder
     public function run()
     {
         // create a user.
-        //
         Administrator::truncate();
         Administrator::create([
             'username' => 'admin',
