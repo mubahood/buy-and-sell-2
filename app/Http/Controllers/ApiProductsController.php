@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Image;
+use App\Models\Order;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostComment;
@@ -170,6 +171,36 @@ class ApiProductsController
         return 'create_post';
     }
 
+    public function order_create(Request $r)
+    {
+        if (
+            (!isset($_POST['customer_name'])) ||
+            (!isset($_POST['customer_phone'])) ||
+            (!isset($_POST['customer_address'])) ||
+            (!isset($_POST['product_price'])) ||
+            (!isset($_POST['product_id'])) ||
+            (!isset($_POST['product_photos'])) ||
+            (!isset($_POST['product_name']))
+
+        ) {
+            return Utils::response(['message' => 'Issuficient information to create an order.', 'status' => 0]);
+        }
+
+        $order = new Order();
+        $order->customer_name = $r->customer_name;
+        $order->customer_phone = $r->customer_phone;
+        $order->customer_address = $r->customer_address;
+        $order->product_price = $r->product_price;
+        $order->product_name = $r->product_name;
+        $order->product_id = $r->product_id;
+        $order->product_photos = $r->product_photos;
+        if ($order->save()) {
+            return Utils::response(['message' => 'Order submitted successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to submit order. Please try again.', 'status' => 0]);
+        }
+    }
+
     public function create(Request $request)
     {
 
@@ -303,6 +334,13 @@ class ApiProductsController
         return $items;
     }
 
+
+    public function orders(Request $request)
+    {
+        $items = Order::where([])
+            ->orderBy('id', 'Desc')->get();
+        return $items;
+    }
 
     public function index(Request $request)
     {

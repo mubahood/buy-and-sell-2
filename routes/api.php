@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
 
+Route::post('orders', [ApiProductsController::class, 'order_create']);
+Route::get('orders', [ApiProductsController::class, 'orders']);
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('upload-temp-file', [ApiProductsController::class, 'upload_temp_file']);
 Route::post('products', [ApiProductsController::class, 'create']);
