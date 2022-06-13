@@ -13,11 +13,10 @@
  * Encore\Admin\Form::extend('php', PHPEditor::class);
  *
  * Or require js and css assets:
+ * Admin::css('/packages/prettydocs/css/styles.css');
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
- 
-use Encore\Admin\Facades\Admin;
 
 Admin::css('/assets/css/css.css');
 Admin::js('/assets/js/vendor/charts.js');
