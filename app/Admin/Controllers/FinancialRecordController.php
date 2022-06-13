@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\FinancialRecord;
 use App\Models\Garden;
+use Carbon\Carbon;
 use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
@@ -28,7 +29,62 @@ class FinancialRecordController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new FinancialRecord()); 
+
+        /* 
+        $amounts = [11000, 69000, 18000, 88000, 1300, 42000, 16000, 90000, 10000, 15000, 10000, 5000, 1500, 15900, 45000, 5000, 60000, 4000, 2000, 25000, 10000];
+        $gardens = [10,11];
+        for ($i = 0; $i < 650; $i++) {
+            $d = new Carbon();
+            $d->subDays(rand(1, 120));
+            shuffle($amounts);
+            shuffle($amounts);
+            shuffle($amounts);
+            shuffle($amounts);
+            shuffle($gardens);
+            $f = new FinancialRecord();
+            $f->garden_id = $gardens[0];
+            $f->created_at = $d->format('Y-m-d H:i:s');
+            $f->administrator_id = 44;
+            $f->created_by = 44;
+            $f->amount =  ($amounts[0]);
+            $f->description = 'Paid workers';
+            $f->save();
+        }
+        die("done"); 
+        $_descs = [
+            'Paid workers',
+            'Paid workers',
+            'Paid workers',
+            'Purchsed seeds',
+            'Purchsed pestsides',
+            'Paid wages',
+            'Paid electricity',
+            'Transportation fee',
+            'Taxes',
+            'Paid loan',
+            'Paid salary',
+            'Paid services',
+        ];
+        $descs = [
+            'Sold harvests',
+            'Sold 100KGs',
+            'Sold seed',
+            'Cash sales',
+        ];
+
+        foreach (FinancialRecord::all() as $key => $v) {
+            shuffle($descs);
+            shuffle($_descs);
+            if($v->amount < 1){
+                $v->description = $_descs[1];
+            }else{
+                $v->description = $descs[1];
+            }
+            $v->save();
+
+        } 
+*/
+        $grid = new Grid(new FinancialRecord());
 
         if (
             Admin::user()->isRole('administrator') ||
@@ -46,9 +102,9 @@ class FinancialRecordController extends AdminController
             $u = Auth::user();
             //$filter->equal('administrator_id', "Filter by user")->select(Administrator::all()->pluck('name', 'id'));
             $filter->select('garden_id', __('Select Enterprise'))
-            ->options(
-                Garden::where('administrator_id', $u->id)->get()->pluck('name', 'id')
-            );
+                ->options(
+                    Garden::where('administrator_id', $u->id)->get()->pluck('name', 'id')
+                );
         });
 
         if (
@@ -79,7 +135,10 @@ class FinancialRecordController extends AdminController
         })->sortable();
 
         $grid->column('description', __('Description'));
-        $grid->column('amount', __('Amount'));
+        $grid->column('amount', __('Amount'))->display(function () {
+            return $this->amount_text;
+        })->sortable();
+
 
         return $grid;
     }

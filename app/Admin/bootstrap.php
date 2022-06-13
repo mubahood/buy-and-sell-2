@@ -18,4 +18,5 @@
  *
  */
 
+Admin::js('/assets/js/vendor/charts.js');
 Encore\Admin\Form::forget(['map', 'editor']);

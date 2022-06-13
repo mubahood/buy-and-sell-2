@@ -64,8 +64,10 @@ class FinancialRecord extends Model
         return Carbon::parse($value)->format('d-m-Y g:i A');
     }
 
-    public function getAmountAttribute($v)
+
+    public function getAmountTextAttribute()
     {
-        return "".number_format($v);
+        return "UGX ".number_format($this->amount);
     }
+    protected $appends = ['amount_text'];
 }
