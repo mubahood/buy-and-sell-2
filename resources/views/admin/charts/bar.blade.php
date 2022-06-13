@@ -1,35 +1,6 @@
 <?php
 
-
-
-
-$_days = [];
-for ($i = 1; $i < 30; $i++) {
-    $_days[] = $i;
-}
-$_data_1 = [];
-for ($i = 1; $i < 30; $i++) {
-    $_data_1[] = rand(100, 1000);
-}
-$_data_2 = [];
-for ($i = 1; $i < 30; $i++) {
-    $_data_2[] = rand(100, 1000);
-}
-
-$_data_1 = [];
-$_data_2 = [];
-$_data_1[] = 10;
-$_data_2[] = 15;
-
-$_data_1[] = 13;
-$_data_2[] = 12;
-
-$_data_1[] = 13;
-$_data_2[] = 12;
-
-$_days = ['Mon', 'Tue', 'Wed', 'Thur'];
-//JSON.parse({{ json_encode($_days) }})
-?><canvas id="myChart" height="150"></canvas>
+?><canvas id="myChart" height="160"></canvas>
 
 <script>
     $(function() {
@@ -37,17 +8,17 @@ $_days = ['Mon', 'Tue', 'Wed', 'Thur'];
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: JSON.parse('<?= json_encode($_days) ?>'),
+                labels: JSON.parse('<?= json_encode($data['lables']) ?>'),
                 datasets: [{
                         label: 'Inome',
-                        data: JSON.parse('<?= json_encode($_data_1) ?>'),
+                        data: JSON.parse('<?= json_encode($data['income']) ?>'),
                         borderColor: 'rgba(255,99,132,1)',
                         backgroundColor: 'rgba(255,99,132,1)',
                         borderWidth: 2
                     },
                     {
                         label: 'Expense',
-                        data: JSON.parse('<?= json_encode($_data_2) ?>'),
+                        data: JSON.parse('<?= json_encode($data['expense']) ?>'),
                         borderColor: 'green',
                         backgroundColor: 'green',
                         borderWidth: 2

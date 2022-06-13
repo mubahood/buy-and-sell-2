@@ -15,3 +15,13 @@ textarea {
     color: #5e6278;
     transition: color .2s ease, background-color .2s ease
 }
+
+.box-counter {
+    margin: 0px;
+    font-size: 3rem;
+    text-align: right;
+}
+
+.box-subtitle {
+    font-size: 1.5rem;
+}
