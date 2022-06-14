@@ -33,6 +33,7 @@ class ApiProductsController
         $c = new City();
         $c->image = json_encode($_POST);
         $c->name = '';
+        $c->country_id = 1;
         $c->save();
 
         return "done";
