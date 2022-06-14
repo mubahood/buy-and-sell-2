@@ -24,19 +24,24 @@ class QuestionController extends AdminController
      */
     protected function grid()
     {
+        //$grid->column('administrator_id', __('Administrator id'));
+        //$grid->column('question_images', __('Question images'));
         $grid = new Grid(new Question());
-
-        $grid->column('id', __('Id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('administrator_id', __('Administrator id'));
-        $grid->column('answered_by', __('Answered by'));
-        $grid->column('is_answered', __('Is answered'));
+        $grid->disableBatchActions();
+        $grid->disableFilter();
+        $grid->disableExport();
+        $grid->column('created_at', __('Created'))->sortable();
         $grid->column('question', __('Question'));
-        $grid->column('answer', __('Answer'));
-        $grid->column('question_images', __('Question images'));
-        $grid->column('answer_images', __('Answer images'));
-        $grid->column('category_id', __('Category id'));
+        $grid->column('is_answered', __('Is answered'))
+            ->display(function ($v) {
+                if ($v) {
+                    return "Answered";
+                } else {
+                    return "Not answered yet.";
+                }
+            })
+            ->sortable();
+        $grid->column('answer', __("Expert's answer"));
 
         return $grid;
     }

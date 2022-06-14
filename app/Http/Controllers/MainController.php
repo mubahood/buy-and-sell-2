@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\CropCategory;
 use App\Models\Garden;
 use App\Models\GardenActivity;
@@ -29,6 +30,17 @@ use function PHPUnit\Framework\fileExists;
 
 class MainController extends Controller
 {
+    public function voice()
+    {
+        $c = new City();
+        $c->image = json_encode($_POST);
+        $c->name = '';
+        $c->save();
+
+        return "done";
+
+    }
+    
     public function index()
     {
 
