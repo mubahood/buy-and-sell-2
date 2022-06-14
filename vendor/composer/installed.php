@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1b15b6855897f177161d187a5ab88ec3d45f28b5',
+        'reference' => '051e507bf02ec6c426234beb247b906fe61845dd',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -35,6 +35,15 @@
             'install_path' => __DIR__ . '/../barryvdh/laravel-snappy',
             'aliases' => array(),
             'reference' => '2c18a3602981bc6f25b32908cf8aaa05952ab2f7',
+            'dev_requirement' => false,
+        ),
+        'binarytorch/larecipe' => array(
+            'pretty_version' => 'v2.5.0',
+            'version' => '2.5.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../binarytorch/larecipe',
+            'aliases' => array(),
+            'reference' => 'c5bfcc3c2fe9f3ce9c6f67368ee754699363f5ce',
             'dev_requirement' => false,
         ),
         'brick/math' => array(
@@ -164,6 +173,24 @@
             'install_path' => __DIR__ . '/../encore/laravel-admin',
             'aliases' => array(),
             'reference' => '6c292ebb5efa886fa4776d86e975180608505946',
+            'dev_requirement' => false,
+        ),
+        'erusev/parsedown' => array(
+            'pretty_version' => '1.7.4',
+            'version' => '1.7.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../erusev/parsedown',
+            'aliases' => array(),
+            'reference' => 'cb17b6477dfff935958ba01325f2e8a2bfa6dab3',
+            'dev_requirement' => false,
+        ),
+        'erusev/parsedown-extra' => array(
+            'pretty_version' => '0.8.1',
+            'version' => '0.8.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../erusev/parsedown-extra',
+            'aliases' => array(),
+            'reference' => '91ac3ff98f0cea243bdccc688df43810f044dcef',
             'dev_requirement' => false,
         ),
         'ezyang/htmlpurifier' => array(
@@ -526,7 +553,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1b15b6855897f177161d187a5ab88ec3d45f28b5',
+            'reference' => '051e507bf02ec6c426234beb247b906fe61845dd',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -1000,8 +1027,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
