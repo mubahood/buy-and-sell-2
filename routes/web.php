@@ -20,6 +20,8 @@ Route::resource('dashboard/banners', BannersController::class)->middleware(Authe
 
 Route::get('/', [MainController::class, 'index']);
 
+
+//voice
 Route::post('/voice', [MainController::class, 'voice']);
 
 Route::get('/banner/{id}', [MainController::class, 'index']);
