@@ -183,6 +183,9 @@ class FinancialRecordController extends AdminController
             ->rules('required');
 
         $form->hidden('created_by', __('created_by'))->default($u->id)->value($u->id);
+
+        $form->date('created_date', __('Transaction date'))->rules('required');
+
         $form->text('description', __('Description'))->rules('required');
         $form->text('amount', __('Amount'))
             ->attribute('type', 'number')
