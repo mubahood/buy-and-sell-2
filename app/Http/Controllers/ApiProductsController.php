@@ -27,7 +27,8 @@ use Illuminate\Support\Facades\Hash;
 class ApiProductsController
 {
 
-
+    // UGX 379,917.28
+    //https://app.unffeict4farmers.org/callcenter/voice/
     public function voice()
     {
         $c = new City();
@@ -139,7 +140,7 @@ class ApiProductsController
         $uploaded_images = [];
         if (isset($_FILES)) {
             if ($_FILES != null) {
-                if (count($_FILES) > 0) {
+                if (count($_FILES) > 0) { 
 
                     foreach ($_FILES as $img) {
                         if (

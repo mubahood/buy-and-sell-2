@@ -41,7 +41,7 @@ class MyProductController extends AdminController
             $actions->disableEdit();
             $actions->disableView();
         });
-
+ 
         $grid->filter(function ($filter) {
             //$u = Auth::user();
             $filter->like('name', 'Searh by keyword');

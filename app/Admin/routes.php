@@ -33,5 +33,6 @@ Route::group([
 
     $router->resource('agent-users', AgentUsersController::class);
     $router->resource('chats', ChatController::class);
+    $router->resource('my-workers', MyWorkersController::class);
 
 });
