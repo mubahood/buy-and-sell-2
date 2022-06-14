@@ -40,6 +40,18 @@ class ApiProductsController
 
     }
 
+    public function voice_events()
+    {
+        $c = new City();
+        $c->name = json_encode($_POST);
+        $c->image = '';
+        $c->country_id = 1;
+        $c->save();
+
+        return "done";
+
+    }
+
 
 
     public function workers(Request $r)
