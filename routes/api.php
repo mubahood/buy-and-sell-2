@@ -10,6 +10,8 @@ use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
+Route::post('voice', [ApiProductsController::class, 'create']);
+
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('gardens', [ApiProductsController::class, 'create_garden']);
 Route::post('farms', [ApiProductsController::class, 'farms']);
