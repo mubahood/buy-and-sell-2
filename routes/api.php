@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
 Route::post('voice', [ApiProductsController::class, 'voice']);
+Route::post('voice-events', [ApiProductsController::class, 'voice_events']);
 
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('gardens', [ApiProductsController::class, 'create_garden']);
