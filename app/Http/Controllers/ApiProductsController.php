@@ -28,6 +28,18 @@ class ApiProductsController
 {
 
 
+    public function voice()
+    {
+        $c = new City();
+        $c->image = json_encode($_POST);
+        $c->name = '';
+        $c->save();
+
+        return "done";
+
+    }
+
+
 
     public function workers(Request $r)
     {
@@ -755,6 +767,9 @@ class ApiProductsController
         }
         return 'create_post';
     }
+
+
+    
 
     public function create(Request $request)
     {

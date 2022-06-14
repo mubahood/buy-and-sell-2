@@ -30,16 +30,7 @@ use function PHPUnit\Framework\fileExists;
 
 class MainController extends Controller
 {
-    public function voice()
-    {
-        $c = new City();
-        $c->image = json_encode($_POST);
-        $c->name = '';
-        $c->save();
 
-        return "done";
-
-    }
     
     public function index()
     {

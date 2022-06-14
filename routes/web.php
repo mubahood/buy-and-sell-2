@@ -19,11 +19,6 @@ Route::resource('dashboard/users', UsersController::class)->middleware(Authentic
 Route::resource('dashboard/banners', BannersController::class)->middleware(Authenticate::class);
 
 Route::get('/', [MainController::class, 'index']);
-
-
-//voice
-Route::post('/voice', [MainController::class, 'voice']);
-
 Route::get('/banner/{id}', [MainController::class, 'index']);
 Route::get('dashboard/profile', [UsersController::class, 'edit'])->middleware(Authenticate::class);
 
