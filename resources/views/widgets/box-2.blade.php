@@ -1,8 +1,5 @@
 <ul class="products-list product-list-in-box">
-    <li class="item">
-        <div class="product-img">
-            <i class="fa fa-book fa-2x ext-icon"></i>
-        </div>
+    <li class="item">  
         <div class="product-info">
             <a href="#"  class="product-title">
                 Name 

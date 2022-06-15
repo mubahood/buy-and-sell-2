@@ -1,6 +1,7 @@
 <?php
 
-?><canvas id="myChart" height="160"></canvas>
+?><canvas id="myChart" height="165"></canvas>
+<a href="#">View All</a>
 
 <script>
     $(function() {
@@ -16,7 +17,7 @@
                         backgroundColor: 'rgba(255,99,132,1)',
                         borderWidth: 2
                     },
-                    {
+                    { 
                         label: 'Expense',
                         data: JSON.parse('<?= json_encode($data['expense']) ?>'),
                         borderColor: 'green',

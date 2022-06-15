@@ -25,3 +25,7 @@ textarea {
 .box-subtitle {
     font-size: 1.5rem;
 }
+.my-box-title{
+    margin: 0;
+    color: black;
+}
