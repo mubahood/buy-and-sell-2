@@ -27,8 +27,8 @@ foreach ($products as $key => $pro) {
 ?>
 @section('main-content')
     <div class="row" style="background-image: url(assets/images/bg-1.jpeg);     background-size:     cover;                      /* <------ */
-                        background-repeat:   no-repeat;
-                        background-position: center center; ">
+                            background-repeat:   no-repeat;
+                            background-position: center center; ">
         <div class="col-6 col-md-3 m-20  p-0">
             <div class="card card-flush shadow-sm py-10">
                 <div class="card-body py-5">
