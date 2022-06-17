@@ -31,16 +31,15 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '4e8671d7be9056dcd04ddd9e8e15f9cc' => __DIR__ . '/..' . '/encore/laravel-admin/src/helpers.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '4e8671d7be9056dcd04ddd9e8e15f9cc' => __DIR__ . '/..' . '/encore/laravel-admin/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'a1af1fc0cffb5f61cbaf64dbe030fdb9' => __DIR__ . '/..' . '/laravel/legacy-factories/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
-        '9be1c2bab389f876c8b9376199151a90' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Helpers/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -176,10 +175,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         ),
         'E' => 
         array (
-            'Encore\\Chartjs\\' => 15,
-            'Encore\\Admin\\Media\\' => 19,
-            'Encore\\Admin\\Latlong\\' => 21,
-            'Encore\\Admin\\Helpers\\' => 21,
             'Encore\\Admin\\' => 13,
             'Egulias\\EmailValidator\\' => 23,
         ),
@@ -209,7 +204,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'B' => 
         array (
             'Brick\\Math\\' => 11,
-            'BinaryTorch\\LaRecipe\\' => 21,
             'Barryvdh\\Snappy\\' => 16,
             'Barryvdh\\DomPDF\\' => 16,
         ),
@@ -553,22 +547,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         array (
             0 => __DIR__ . '/..' . '/facade/flare-client-php/src',
         ),
-        'Encore\\Chartjs\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel-admin-ext/chartjs/src',
-        ),
-        'Encore\\Admin\\Media\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel-admin-ext/media-manager/src',
-        ),
-        'Encore\\Admin\\Latlong\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src',
-        ),
-        'Encore\\Admin\\Helpers\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src',
-        ),
         'Encore\\Admin\\' => 
         array (
             0 => __DIR__ . '/..' . '/encore/laravel-admin/src',
@@ -649,10 +627,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'BinaryTorch\\LaRecipe\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/binarytorch/larecipe/src',
-        ),
         'Barryvdh\\Snappy\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src',
@@ -672,17 +646,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'ParsedownExtra' => 
-            array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown-extra',
-            ),
-            'Parsedown' => 
-            array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown',
-            ),
-        ),
         'M' => 
         array (
             'Mockery' => 
@@ -700,28 +663,17 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
     );
 
     public static $classMap = array (
-        'App\\Admin\\Controllers\\AgentUsersController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AgentUsersController.php',
         'App\\Admin\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AuthController.php',
-        'App\\Admin\\Controllers\\ChatController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ChatController.php',
         'App\\Admin\\Controllers\\CropCategoryController' => __DIR__ . '/../..' . '/app/Admin/Controllers/CropCategoryController.php',
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
-        'App\\Admin\\Controllers\\FarmController' => __DIR__ . '/../..' . '/app/Admin/Controllers/FarmController.php',
         'App\\Admin\\Controllers\\FarmersGroupController' => __DIR__ . '/../..' . '/app/Admin/Controllers/FarmersGroupController.php',
-        'App\\Admin\\Controllers\\FinancialRecordController' => __DIR__ . '/../..' . '/app/Admin/Controllers/FinancialRecordController.php',
-        'App\\Admin\\Controllers\\GardenActivityController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GardenActivityController.php',
         'App\\Admin\\Controllers\\GardenController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GardenController.php',
-        'App\\Admin\\Controllers\\GardenProductionRecordController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GardenProductionRecordController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
-        'App\\Admin\\Controllers\\MyProductController' => __DIR__ . '/../..' . '/app/Admin/Controllers/MyProductController.php',
         'App\\Admin\\Controllers\\PestCaseController' => __DIR__ . '/../..' . '/app/Admin/Controllers/PestCaseController.php',
-        'App\\Admin\\Controllers\\PestCaseListingController' => __DIR__ . '/../..' . '/app/Admin/Controllers/PestCaseListingController.php',
         'App\\Admin\\Controllers\\PestController' => __DIR__ . '/../..' . '/app/Admin/Controllers/PestController.php',
-        'App\\Admin\\Controllers\\PestListingController' => __DIR__ . '/../..' . '/app/Admin/Controllers/PestListingController.php',
-        'App\\Admin\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ProductController.php',
-        'App\\Admin\\Controllers\\ProductsCategoryController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ProductsCategoryController.php',
-        'App\\Admin\\Controllers\\QuestionController' => __DIR__ . '/../..' . '/app/Admin/Controllers/QuestionController.php',
-        'App\\Admin\\Controllers\\ResourceSharingController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ResourceSharingController.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DataTables\\ProductsDataTable' => __DIR__ . '/../..' . '/app/DataTables/ProductsDataTable.php',
+        'App\\DataTables\\UsersDataTable' => __DIR__ . '/../..' . '/app/DataTables/UsersDataTable.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ApiChatsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiChatsController.php',
         'App\\Http\\Controllers\\ApiProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiProductsController.php',
@@ -754,13 +706,10 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
         'App\\Models\\CropCategory' => __DIR__ . '/../..' . '/app/Models/CropCategory.php',
         'App\\Models\\CropCategoryActivity' => __DIR__ . '/../..' . '/app/Models/CropCategoryActivity.php',
-        'App\\Models\\Farm' => __DIR__ . '/../..' . '/app/Models/Farm.php',
         'App\\Models\\FarmersGroup' => __DIR__ . '/../..' . '/app/Models/FarmersGroup.php',
         'App\\Models\\FarmersGroupHasAgent' => __DIR__ . '/../..' . '/app/Models/FarmersGroupHasAgent.php',
-        'App\\Models\\FinancialRecord' => __DIR__ . '/../..' . '/app/Models/FinancialRecord.php',
         'App\\Models\\Garden' => __DIR__ . '/../..' . '/app/Models/Garden.php',
         'App\\Models\\GardenActivity' => __DIR__ . '/../..' . '/app/Models/GardenActivity.php',
-        'App\\Models\\GardenProductionRecord' => __DIR__ . '/../..' . '/app/Models/GardenProductionRecord.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
         'App\\Models\\Location' => __DIR__ . '/../..' . '/app/Models/Location.php',
         'App\\Models\\MenuItem' => __DIR__ . '/../..' . '/app/Models/MenuItem.php',
@@ -772,7 +721,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\ProductReview' => __DIR__ . '/../..' . '/app/Models/ProductReview.php',
         'App\\Models\\Profile' => __DIR__ . '/../..' . '/app/Models/Profile.php',
-        'App\\Models\\Question' => __DIR__ . '/../..' . '/app/Models/Question.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Utils' => __DIR__ . '/../..' . '/app/Models/Utils.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -801,28 +749,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Barryvdh\\Snappy\\PdfFaker' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfFaker.php',
         'Barryvdh\\Snappy\\PdfWrapper' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfWrapper.php',
         'Barryvdh\\Snappy\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/ServiceProvider.php',
-        'BinaryTorch\\LaRecipe\\Cache' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Cache.php',
-        'BinaryTorch\\LaRecipe\\Commands\\AssetCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/AssetCommand.php',
-        'BinaryTorch\\LaRecipe\\Commands\\GenerateDocumentationCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/GenerateDocumentationCommand.php',
-        'BinaryTorch\\LaRecipe\\Commands\\InstallCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/InstallCommand.php',
-        'BinaryTorch\\LaRecipe\\Commands\\ThemeCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/ThemeCommand.php',
-        'BinaryTorch\\LaRecipe\\Contracts\\MarkdownParser' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Contracts/MarkdownParser.php',
-        'BinaryTorch\\LaRecipe\\DocumentationRepository' => __DIR__ . '/..' . '/binarytorch/larecipe/src/DocumentationRepository.php',
-        'BinaryTorch\\LaRecipe\\Facades\\LaRecipe' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Facades/LaRecipe.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\Controller' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/Controller.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\DocumentationController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/DocumentationController.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\ScriptController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/ScriptController.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\SearchController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/SearchController.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\StyleController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/StyleController.php',
-        'BinaryTorch\\LaRecipe\\LaRecipe' => __DIR__ . '/..' . '/binarytorch/larecipe/src/LaRecipe.php',
-        'BinaryTorch\\LaRecipe\\LaRecipeServiceProvider' => __DIR__ . '/..' . '/binarytorch/larecipe/src/LaRecipeServiceProvider.php',
-        'BinaryTorch\\LaRecipe\\Models\\Documentation' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Models/Documentation.php',
-        'BinaryTorch\\LaRecipe\\Services\\ParseDownMarkdownParser' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Services/ParseDownMarkdownParser.php',
-        'BinaryTorch\\LaRecipe\\Traits\\HasBladeParser' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/HasBladeParser.php',
-        'BinaryTorch\\LaRecipe\\Traits\\HasDocumentationAttributes' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/HasDocumentationAttributes.php',
-        'BinaryTorch\\LaRecipe\\Traits\\HasMarkdownParser' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/HasMarkdownParser.php',
-        'BinaryTorch\\LaRecipe\\Traits\\Indexable' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/Indexable.php',
-        'BinaryTorch\\LaRecipe\\Traits\\RunProcess' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/RunProcess.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -1755,31 +1681,10 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Encore\\Admin\\Grid\\Tools\\QuickSearch' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/QuickSearch.php',
         'Encore\\Admin\\Grid\\Tools\\Selector' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/Selector.php',
         'Encore\\Admin\\Grid\\Tools\\TotalRow' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/TotalRow.php',
-        'Encore\\Admin\\Helpers\\Controllers\\RouteController' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Controllers/RouteController.php',
-        'Encore\\Admin\\Helpers\\Controllers\\ScaffoldController' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Controllers/ScaffoldController.php',
-        'Encore\\Admin\\Helpers\\Controllers\\TerminalController' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Controllers/TerminalController.php',
-        'Encore\\Admin\\Helpers\\Helpers' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Helpers.php',
-        'Encore\\Admin\\Helpers\\HelpersServiceProvider' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/HelpersServiceProvider.php',
-        'Encore\\Admin\\Helpers\\Scaffold\\ControllerCreator' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Scaffold/ControllerCreator.php',
-        'Encore\\Admin\\Helpers\\Scaffold\\MigrationCreator' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Scaffold/MigrationCreator.php',
-        'Encore\\Admin\\Helpers\\Scaffold\\ModelCreator' => __DIR__ . '/..' . '/laravel-admin-ext/helpers/src/Scaffold/ModelCreator.php',
-        'Encore\\Admin\\Latlong\\Extension' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Extension.php',
-        'Encore\\Admin\\Latlong\\Latlong' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Latlong.php',
-        'Encore\\Admin\\Latlong\\LatlongServiceProvider' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/LatlongServiceProvider.php',
-        'Encore\\Admin\\Latlong\\Map\\AbstractMap' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Map/AbstractMap.php',
-        'Encore\\Admin\\Latlong\\Map\\Amap' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Map/Amap.php',
-        'Encore\\Admin\\Latlong\\Map\\Baidu' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Map/Baidu.php',
-        'Encore\\Admin\\Latlong\\Map\\Google' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Map/Google.php',
-        'Encore\\Admin\\Latlong\\Map\\Tencent' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Map/Tencent.php',
-        'Encore\\Admin\\Latlong\\Map\\Yandex' => __DIR__ . '/..' . '/laravel-admin-ext/latlong/src/Map/Yandex.php',
         'Encore\\Admin\\Layout\\Buildable' => __DIR__ . '/..' . '/encore/laravel-admin/src/Layout/Buildable.php',
         'Encore\\Admin\\Layout\\Column' => __DIR__ . '/..' . '/encore/laravel-admin/src/Layout/Column.php',
         'Encore\\Admin\\Layout\\Content' => __DIR__ . '/..' . '/encore/laravel-admin/src/Layout/Content.php',
         'Encore\\Admin\\Layout\\Row' => __DIR__ . '/..' . '/encore/laravel-admin/src/Layout/Row.php',
-        'Encore\\Admin\\Media\\BootExtension' => __DIR__ . '/..' . '/laravel-admin-ext/media-manager/src/BootExtension.php',
-        'Encore\\Admin\\Media\\MediaController' => __DIR__ . '/..' . '/laravel-admin-ext/media-manager/src/MediaController.php',
-        'Encore\\Admin\\Media\\MediaManager' => __DIR__ . '/..' . '/laravel-admin-ext/media-manager/src/MediaManager.php',
-        'Encore\\Admin\\Media\\MediaServiceProvider' => __DIR__ . '/..' . '/laravel-admin-ext/media-manager/src/MediaServiceProvider.php',
         'Encore\\Admin\\Middleware\\Authenticate' => __DIR__ . '/..' . '/encore/laravel-admin/src/Middleware/Authenticate.php',
         'Encore\\Admin\\Middleware\\Bootstrap' => __DIR__ . '/..' . '/encore/laravel-admin/src/Middleware/Bootstrap.php',
         'Encore\\Admin\\Middleware\\LogOperation' => __DIR__ . '/..' . '/encore/laravel-admin/src/Middleware/LogOperation.php',
@@ -1817,8 +1722,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Encore\\Admin\\Widgets\\Tab' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Tab.php',
         'Encore\\Admin\\Widgets\\Table' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Table.php',
         'Encore\\Admin\\Widgets\\Widget' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Widget.php',
-        'Encore\\Chartjs\\Chartjs' => __DIR__ . '/..' . '/laravel-admin-ext/chartjs/src/Chartjs.php',
-        'Encore\\Chartjs\\ChartjsServiceProvider' => __DIR__ . '/..' . '/laravel-admin-ext/chartjs/src/ChartjsServiceProvider.php',
         'Facade\\FlareClient\\Api' => __DIR__ . '/..' . '/facade/flare-client-php/src/Api.php',
         'Facade\\FlareClient\\Concerns\\HasContext' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/HasContext.php',
         'Facade\\FlareClient\\Concerns\\UsesTime' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/UsesTime.php',
@@ -5153,8 +5056,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'PHPUnit\\Util\\Xml\\SuccessfulSchemaDetectionResult' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/SuccessfulSchemaDetectionResult.php',
         'PHPUnit\\Util\\Xml\\ValidationResult' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/ValidationResult.php',
         'PHPUnit\\Util\\Xml\\Validator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Validator.php',
-        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
-        'ParsedownExtra' => __DIR__ . '/..' . '/erusev/parsedown-extra/ParsedownExtra.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
