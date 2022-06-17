@@ -26,7 +26,7 @@ if ($pro) {
 }
 
 $products = [];
-$conds['category_id'] = $pro->category->id;
+$conds['category_id'] = 1;
 $products = Product::where($conds)->paginate(4);
 
 $images = $pro->get_images();
@@ -139,7 +139,7 @@ foreach ($products as $key => $p) {
 
         <h1 class=" h1" style="font-weight: 500;">{{ $pro->name }}</h1>
         <div class="separator my-5"></div>
-        <h2 class="ad-details-title display-5 text-dark h2">UGX {{ $pro->price }}</h2>
+        <h2 class="ad-details-title display-5 text-dark h2">{{ config('app.currency') . " " }} {{ $pro->price }}</h2>
         <div class="separator my-5"></div>
 
         <table class="table table-striped table-sm">

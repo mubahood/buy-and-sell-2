@@ -2,9 +2,10 @@
 
 return [
 
+
     'id' => env('id', 's'),
     'currency' => env('currency', '$'),
-    'app_slogan' => env('app_slogan', 'Jotrace - Buy and sell your products & services in uganda.'),
+    'app_slogan' => env('app_slogan', 'Jotrace - Buy and sell your products & services in Turkey.'),
     'domain' => env('domain', 'Jotrace'),
     'address' => env('address', 'Shop no. 123, <span>Nasser Road, Kampala, Uganda</span>'),
     'phone_1' => env('phone_1', '+256783204665'),
@@ -17,7 +18,6 @@ return [
     'instagram' => env('instagram', 'javascript:;'),
 
     /*
-    #test
     |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Goprint.ug'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://farmers.ugnews24.info/'),
+    'url' => env('APP_URL', 'http://127.0.0.1:8000/'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -176,8 +176,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\Snappy\ServiceProvider::class,
-
+        
 
 
         /*
@@ -192,7 +191,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class, 
-        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -206,6 +204,8 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+
+ 
 
     'aliases' => [
 
@@ -246,9 +246,10 @@ return [
         'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
-        'View' => Illuminate\Support\Facades\View::class, 
-        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'View' => Illuminate\Support\Facades\View::class,
+        //'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        //'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

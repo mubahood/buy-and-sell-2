@@ -31,14 +31,30 @@ class MainController extends Controller
     public function index()
     {
 
+        /*
+        foreach (Product::all() as $key => $p) {
+            $imgs = [];
+            for ($i = 1; $i < 8; $i++) {
+                $num = rand(1, 50);
+                $im['thumbnail'] = $num . '.jpg';
+                $im['src'] = $num . '.jpg';
+                $imgs[] = ($im);
+                echo $i."<br>";
+            } 
+
+            $p->images =   json_encode($imgs);
+            $p->save();
+        }
+        die("Done");*/
+
         // $p['source'] = 'public/test/1.jpeg';
         // $p['target'] = 'public/test/anjane.jpeg';
         // Utils::create_thumbail($p);
 
 
-       
-        
-         
+
+
+
         // dd("time to fight");
 
         /*
@@ -58,7 +74,7 @@ class MainController extends Controller
 
         dd("pests");*/
 
-  
+
 
         // $string = file_get_contents("./public/products.json");
         // $json_a = json_decode($string,true);
@@ -216,7 +232,8 @@ thumbnail
 
         // die("");
         //return view('metro.main.product-listing');
-        return view('metro.main.index');
+        return view('metro.main.product-listing');
+        //return view('metro.main.index');
         //return view('metro.index');
     }
 
@@ -255,11 +272,11 @@ thumbnail
         }
 
         $seg = request()->segment(1);
- 
-        if($seg == 'product-listing'){
+
+        if ($seg == 'product-listing') {
             return view('metro.main.product-listing');
         }
- 
+
         $profile = Profile::where('username', $seg)->first();
         if ($profile) {
             return view('main.display-profile');
@@ -269,7 +286,7 @@ thumbnail
         if ($pro) {
             return view('metro.main.products-details');
         }
-        
+
         $pro = Product::where('id', $seg)->first();
         if ($pro) {
             return view('metro.main.products-details');

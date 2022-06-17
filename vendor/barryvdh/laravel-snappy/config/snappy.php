@@ -33,13 +33,14 @@ return [
     |
     */
     
-    'pdf' => array(
+    'pdf' => [
         'enabled' => true,
-        'binary'  => '/usr/local/bin/wkhtmltopdf',
+        'binary'  => env('WKHTML_PDF_BINARY', '/usr/local/bin/wkhtmltopdf'),
         'timeout' => false,
-        'options' => array(),
-        'env'     => array(),
-    ),
+        'options' => [],
+        'env'     => [],
+    ],
+    
     'image' => [
         'enabled' => true,
         'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),
