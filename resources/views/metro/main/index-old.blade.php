@@ -12,7 +12,7 @@ $just_in = [];
 $recomended = [];
 foreach ($products as $key => $pro) {
     if (count($popular) < 5) {
-        $popular[] = $pro;
+        $popular[] = $pro; 
         continue;
     }
     if (count($just_in) < 5) {

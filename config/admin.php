@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'MOBIP Uganda',
+    'name' => 'ICT4Farmers',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>MOBIP</b>',
+    'logo' => '<b>ICT4Farmers</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>MOBIP</b>',
+    'logo-mini' => '<b>ICT4Farmers</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -157,7 +157,7 @@ return [
 
         // Image and file upload path under the disk above.
         'directory' => [
-            'image' => 'public/',
+            'image' => 'storage',
             'file'  => 'files',
         ],
     ],

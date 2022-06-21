@@ -1,9 +1,12 @@
 @extends('metro.layout.layout-main')
 <?php
 use App\Models\Product;
+use App\Models\Banner;
 use App\Models\Category;
 
 $top_categories = Category::get_top_categories(16);
+
+$slide_banners = Banner::whereBetween('id', [36, 40])->get();
 
 $products = [];
 $products = Product::all();
@@ -25,15 +28,32 @@ foreach ($products as $key => $pro) {
     }
 }
 //$bgs = [url('assets/images/bg/img_1.jpeg'), url('assets/images/bg/img_2.jpeg'), url('assets/images/bg/img_3.jpeg'), url('assets/images/bg/img_4.jpeg')];
-$bgs = [url('assets/images/bg/bg_3.jpeg')];
 
-$bgs = [url('assets/images/bg/bg_1.png'), url('assets/images/bg/bg_2.jpeg'), url('assets/images/bg/bg_3.jpeg'), url('assets/images/bg/04.png')];
+//$bgs = [url('assets/images/bg/bg_1.png'), url('assets/images/bg/bg_2.jpeg'), url('assets/images/bg/bg_3.jpeg'), url('assets/images/bg/04.png')];
+$bgs = [url('storage/6.jpg'), url('storage/6.jpg'), url('storage/6.jpg'), url('storage/6.jpg'), url('storage/6.jpg')];
 
 shuffle($bgs);
+/* 
+  "id" => 38
+        "created_at" => "2022-06-21 09:21:41"
+        "updated_at" => "2022-06-21 09:21:41"
+        "section" => "web"
+        "position" => null
+        "name" => "Slider 3"
+        "sub_title" => null
+        "type" => "1"
+        "category_id" => "5"
+        "product_id" => null
+        "image" => "storage/613b1628b657ad6aa323b1abb0969579.jpg"
+        "clicks" => "0"
+        "parent_id" => 0
+        "order" => 0
+        "title" => "0"
+*/
 ?>
 <style>
     .my-slider {
-        height: 26rem;
+        height: 25rem;
     }
 
     .my-banner {
@@ -63,33 +83,84 @@ shuffle($bgs);
             @endforeach
         </div>
         <div class="col-md-6">
-            <div class="  my-slider"
-                style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                                                    background-repeat:   no-repeat;
-                                                    background-position: center center; ">
+            <?php
+            $first_seen = false;
+            
+            ?>
+            <div class="carousel-inner slider-arrow">
+                <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel"
+                    data-bs-interval="3000">
+                    <div class="carousel-inner slider-arrow">
+                        @foreach ($slide_banners as $slide)
+                            @php
+                                $active = '';
+                                if (!$first_seen) {
+                                    $active = ' active ';
+                                    $first_seen = true;
+                                }
+                            @endphp
+                            <div class="carousel-item  <?= $active ?>  ">
+
+                                <a href="{{ $slide->link }}">
+                                    <div class="my-slider"
+                                        style="background-image: url({{ $slide->image }});     background-size:     cover;
+                                                                background-repeat:   no-repeat;
+                                                                background-position: center center; ">
+                                    </div>
+                                </a>
+
+
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="p-0 m-0 carousel-indicators carousel-indicators-dots bg-primary">
+                        @php
+                            $_count = 0;
+                            $active_class = 'active';
+                        @endphp
+                        @foreach ($slide_banners as $img)
+                            <div data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="{{ $_count }}"
+                                class="ms-{{ $_count }} {{ $active_class }}">
+                                {{-- <img class="d-block w-100" src="{{ $img->thumbnail }}" alt="details" alt="First slide"> --}}
+                            </div>
+                            @php
+                                $_count++;
+                                $active_class = '';
+                            @endphp
+                        @endforeach
+                    </div>
+                </div>
+
+
             </div>
+
+
+
+
+
+
+
+
+
             <div class="row ">
-                <div class="col-4 mt-4">
-                    <div class=" my-banner"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
+
+                @foreach (Banner::whereBetween('id', [41, 43])->get() as $item)
+                    <div class="col-4 mt-4">
+                        <a href="{{ $slide->link }}">
+                            <div class=" my-banner p-4"
+                                style="background-image: url({{ $item->image }});     background-size:     cover;
                                                         background-repeat:   no-repeat;
                                                         background-position: center center; ">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h3 class="fs-2  m-0  text-gray-900 ">{{ $item->name }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-4 mt-4">
-                    <div class=" my-banner"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                                                        background-repeat:   no-repeat;
-                                                        background-position: center center; ">
-                    </div>
-                </div>
-                <div class="col-4 mt-4">
-                    <div class=" my-banner"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                                                        background-repeat:   no-repeat;
-                                                        background-position: center center; ">
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
         <div class="d-none d-md-block col-md-3">
@@ -98,61 +169,26 @@ shuffle($bgs);
                 <h2 class="ps-0 h1">Promoted</h2>
             </div>
 
-            <div class="row mt-1 mb-5">
-                <div class="col-4">
-                    <div class="  my-banner-product"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                                                    background-repeat:   no-repeat;
-                                                    background-position: center center; ">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <h3 class="fs-4  m-0  text-gray-700 ">Water Pump</h3>
-                    <h4 class="fw-normal fs-4  m-0  text-gray-700 ">UGX 67,000</h4>
-                </div>
-            </div>
 
-            <div class="row mt-1 mb-5">
-                <div class="col-4">
-                    <div class="  my-banner-product"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                                                    background-repeat:   no-repeat;
-                                                    background-position: center center; ">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <h3 class="fs-4  m-0  text-gray-700 ">Water Pump</h3>
-                    <h4 class="fw-normal fs-4  m-0  text-gray-700 ">UGX 67,000</h4>
-                </div>
-            </div>
 
-            <div class="row mt-1 mb-5">
-                <div class="col-4">
-                    <div class="  my-banner-product"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
+            @foreach (Banner::whereBetween('id', [44, 47])->get() as $item)
+                <a href="{{ $slide->link }}">
+                    <div class="row mt-1 mb-5">
+                        <div class="col-4">
+                            <div class="  my-banner-product"
+                                style="background-image: url({{ $item->image }});     background-size:     cover;
                                                     background-repeat:   no-repeat;
                                                     background-position: center center; ">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h3 class="fs-4  m-0  text-gray-900 ">{{ $item->name }}</h3>
+                            <h4 class="fw-normal fs-4  m-0  text-gray-700 ">{{ $item->sub_title }}</h4>
+                        </div>
                     </div>
-                </div>
-                <div class="col-8">
-                    <h3 class="fs-4  m-0  text-gray-700 ">Water Pump</h3>
-                    <h4 class="fw-normal fs-4  m-0  text-gray-700 ">UGX 67,000</h4>
-                </div>
-            </div>
+                </a>
+            @endforeach
 
-            <div class="row mt-1 mb-5">
-                <div class="col-4">
-                    <div class="  my-banner-product"
-                        style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                                                    background-repeat:   no-repeat;
-                                                    background-position: center center; ">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <h3 class="fs-4  m-0  text-gray-700 ">Water Pump</h3>
-                    <h4 class="fw-normal fs-4  m-0  text-gray-700 ">UGX 67,000</h4>
-                </div>
-            </div>
 
             <div class="row mt-1 mb-5">
                 <div class="col-12 mt-2">
@@ -164,7 +200,26 @@ shuffle($bgs);
     </div>
 
 
+    @php
+    $banners = Banner::whereBetween('id', [48, 56])->get();
+    @endphp
+    @include('metro.components.section-grouped-banners', [
+        'items' => $banners,
+    ])
 
+    @php
+    $banners = Banner::whereBetween('id', [48, 56])->get();
+    @endphp
+    @include('metro.components.section-grouped-banners', [
+        'items' => $banners,
+    ])
+
+    @php
+    $banners = Banner::whereBetween('id', [48, 56])->get();
+    @endphp
+    @include('metro.components.section-grouped-banners', [
+        'items' => $banners,
+    ])
 
 
 
@@ -212,190 +267,5 @@ shuffle($bgs);
 
         </div>
 
-    </div>
-
-
-
-
-
-
-
-    <div class="row bg-white mt-8">
-        <div class="col-3"
-            style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-        background-repeat:   no-repeat;
-        background-position: center center; height: 28rem; ">
-        </div>
-        <div class="col-9">
-            <div class="row">
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[1] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[2] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[3] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[1] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[2] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[3] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row bg-white mt-8">
-        <div class="col-3"
-            style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-        background-repeat:   no-repeat;
-        background-position: center center; height: 28rem; ">
-        </div>
-        <div class="col-9">
-            <div class="row">
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[1] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[2] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[3] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[1] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[2] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[3] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row bg-white mt-8">
-        <div class="col-3"
-            style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-        background-repeat:   no-repeat;
-        background-position: center center; height: 28rem; ">
-        </div>
-        <div class="col-9">
-            <div class="row">
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[1] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[2] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[3] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[0] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[1] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[2] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-                <div class="col-3"
-                    style="background-image: url({{ $bgs[3] }});     background-size:     cover;
-                background-repeat:   no-repeat;
-                background-position: center center; height: 14rem; ">
-                </div>
-
-            </div>
-        </div>
     </div>
 @endsection
