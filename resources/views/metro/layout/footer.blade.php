@@ -1,7 +1,6 @@
 <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
     <div class="container">
         <div class="row">
-
             <div class="col-md-2">
                 <h2 class="mb-3  my-md-3">More from {{ env('APP_NAME') }}</h2>
                 <a href="javascript:;" class="d-block fs-3 text-gray-800 text-hover-primary py-1">Sell Fast</a>
