@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'ICT4Farmers',
+    'name' => 'Jotrace',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>ICT4Farmers</b>',
+    'logo' => '<b>Jotrace</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>ICT4Farmers</b>',
+    'logo-mini' => '<b>Jotrace</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -209,7 +209,7 @@ return [
     */
     'operation_log' => [
 
-        'enable' => true,
+        'enable' => false,
 
         /*
          * Only logging allowed methods in the list
