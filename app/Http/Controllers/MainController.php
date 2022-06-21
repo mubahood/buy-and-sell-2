@@ -31,21 +31,23 @@ class MainController extends Controller
     public function index()
     {
 
-        /*
+        
+       /*
         foreach (Product::all() as $key => $p) {
             $imgs = [];
             for ($i = 1; $i < 8; $i++) {
                 $num = rand(1, 50);
-                $im['thumbnail'] = $num . '.jpg';
                 $im['src'] = $num . '.jpg';
-                $imgs[] = ($im);
-                echo $i."<br>";
+                $im['thumbnail'] = $num . '_thumb.jpg';
+                $p->thumbnail = json_encode($im);
+                $p->save();
+
             } 
 
             $p->images =   json_encode($imgs);
-            $p->save();
+            //$p->save();
         }
-        die("Done");*/
+        die("Done"); */
 
         // $p['source'] = 'public/test/1.jpeg';
         // $p['target'] = 'public/test/anjane.jpeg';
