@@ -65,7 +65,7 @@ php artisan admin:make ResourceSharingController --model=App\\Models\\Product
 php artisan admin:make QuestionController --model=App\\Models\\Question 
 php artisan admin:make AgentUsersController --model=App\\Models\\User 
 php artisan admin:make ChatController --model=App\\Models\\Chat
-php artisan admin:make BannerController --model=App\\Models\\Banner
+php artisan admin:make BannerMobileController --model=App\\Models\\Banner
 
 composer remove 
 
