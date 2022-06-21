@@ -208,7 +208,7 @@ shuffle($bgs);
     ])
 
     @php
-    $banners = Banner::whereBetween('id', [48, 56])->get();
+    $banners = Banner::whereBetween('id', [57, 66])->get();
     @endphp
     @include('metro.components.section-grouped-banners', [
         'items' => $banners,
@@ -220,10 +220,6 @@ shuffle($bgs);
     @include('metro.components.section-grouped-banners', [
         'items' => $banners,
     ])
-
-
-
-
 
 
     <div class="row bg-white mt-8 p-10"
@@ -268,4 +264,50 @@ shuffle($bgs);
         </div>
 
     </div>
+
+    {{-- <h2 class="display-6 text-center fw-normal my-5 my-md-10">Sourcing Solutions & Tailored Services</h2>
+
+ <div class="row">
+        <div class="col-md-4 p-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="img-fluid p-4 bg-secondary"
+                        style="background-image: url({{ url('assets/images/solutions-pic1.jpeg') }});     background-size:     cover;
+                                        background-repeat:   no-repeat;
+                                        background-position: center center; height: 20rem;">
+                        <div class="row">
+                            <div class="col-md-10 p-3 p-md-5">
+                                <h3 class="display-5  m-0  text-white ">Source from Industry Hubs</h3>
+                                <div class="row">
+                                    <div class="col-10 fw-bold fs-3 com-mf-8 text-white">
+                                        Manufacturing Base,
+                                        Industry Competitiveness,
+                                        Original Products,
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bg-white py-6 px-5 mx-1">
+                <div class="col-4 mt-4 text-center">
+                    <img width="100%" class="img-fluid rounded-circle"
+                        src="{{ url('assets/images/Gifts-Sports.jpeg') }}" alt="">
+                    <p class="h4 fw-normal text-center mt-4">Gifts & Sports</p>
+                </div>
+                <div class="col-4 mt-4 text-center">
+                    <img width="100%" class="img-fluid rounded-circle"
+                        src="{{ url('assets/images/Gifts-Sports.jpeg') }}" alt="">
+                    <p class="h4 fw-normal text-center mt-4">Gifts & Sports</p>
+                </div>
+                <div class="col-4 mt-4 text-center">
+                    <img width="100%" class="img-fluid rounded-circle"
+                        src="{{ url('assets/images/Gifts-Sports.jpeg') }}" alt="">
+                    <p class="h4 fw-normal text-center mt-4">Gifts & Sports</p>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 @endsection
