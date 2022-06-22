@@ -31,9 +31,30 @@ class MainController extends Controller
     public function index()
     {
 
-        
-       /*
+
+        /*
         foreach (Product::all() as $key => $p) {
+
+            $f = \Faker\Factory::create();
+            $p->name = $f->sentence;
+            echo $p->name."<hr>";
+            $p->save();
+            continue;
+            $imgs = json_decode($p->images);
+
+            $_imgs = [];
+            echo "<pre>";
+            foreach ($imgs as $im) {
+                $im->thumbnail = rand(1, 10) . "_thumb.jpg";
+                $_imgs[] = $im;
+                # code...
+            }
+            $p->images = json_encode($_imgs);
+            $p->save();
+            continue;
+            dd($p->images);
+            print_r($_imgs);
+            die();
             $imgs = [];
             for ($i = 1; $i < 8; $i++) {
                 $num = rand(1, 50);
@@ -41,13 +62,12 @@ class MainController extends Controller
                 $im['thumbnail'] = $num . '_thumb.jpg';
                 $p->thumbnail = json_encode($im);
                 $p->save();
-
-            } 
+            }
 
             $p->images =   json_encode($imgs);
             //$p->save();
         }
-        die("Done"); */
+        die("Done");     */
 
         // $p['source'] = 'public/test/1.jpeg';
         // $p['target'] = 'public/test/anjane.jpeg';
@@ -496,12 +516,12 @@ thumbnail
 
     public function about()
     {
-        return view('metro.about_us'); 
+        return view('metro.about_us');
     }
 
     public function privacy()
     {
-        return view('metro.privacy'); 
+        return view('metro.privacy');
     }
 
     public function sell_fast()
