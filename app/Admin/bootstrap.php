@@ -18,4 +18,8 @@
  *
  */
 
+use Encore\Admin\Facades\Admin;
+
+Admin::css('/assets/css/css.css');
+Admin::js('/assets/js/vendor/charts.js');
 Encore\Admin\Form::forget(['map', 'editor']);
