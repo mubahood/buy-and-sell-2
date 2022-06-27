@@ -18,6 +18,11 @@
  *
  */
 
+<<<<<<< HEAD
+=======
+use Encore\Admin\Facades\Admin;
+
+>>>>>>> ict4farmers-new
 Admin::css('/assets/css/css.css');
 Admin::js('/assets/js/vendor/charts.js');
 Encore\Admin\Form::forget(['map', 'editor']);

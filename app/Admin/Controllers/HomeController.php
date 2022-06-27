@@ -91,9 +91,15 @@ class HomeController extends Controller
                         $recs = FinancialRecord::whereBetween('created_at', [$min, $max])->get();
                         foreach ($recs as $rec) {
                             if ($rec->amount < 0) {
+<<<<<<< HEAD
                                 $_income += ((-1) * ($rec->amount));
                             } else {
                                 $_expense += $rec->amount;
+=======
+                                $_income += ((-1) * ((int)($rec->amount)));
+                            } else {
+                                $_expense += ((int)($rec->amount));
+>>>>>>> ict4farmers-new
                             }
                         }
                         $expense[] = $_expense;
@@ -221,7 +227,11 @@ class HomeController extends Controller
                     $data = [];
                     foreach ($recs as $va) {
                         $_data['title'] = Str::limit($va->description, 16);
+<<<<<<< HEAD
                         $_data['sub_title'] = Str::limit("By ".$va->owner->name, 10);
+=======
+                        $_data['sub_title'] = Str::limit("By " . $va->owner->name, 10);
+>>>>>>> ict4farmers-new
                         $data[] = $_data;
                     }
                     $box  = new Box('Recent production records', view('widgets.box-4', ['data' => $data]));

@@ -35,8 +35,236 @@ class MainController extends Controller
     public function index()
     {
 
+<<<<<<< HEAD
         return view('metro.main.product-listing');
         //return view('metro.main.index');
+=======
+
+        /*
+        foreach (Product::all() as $key => $p) {
+
+            $f = \Faker\Factory::create();
+            $p->name = $f->sentence;
+            echo $p->name."<hr>";
+            $p->save();
+            continue;
+            $imgs = json_decode($p->images);
+
+            $_imgs = [];
+            echo "<pre>";
+            foreach ($imgs as $im) {
+                $im->thumbnail = rand(1, 10) . "_thumb.jpg";
+                $_imgs[] = $im;
+                # code...
+            }
+            $p->images = json_encode($_imgs);
+            $p->save();
+            continue;
+            dd($p->images);
+            print_r($_imgs);
+            die();
+            $imgs = [];
+            for ($i = 1; $i < 8; $i++) {
+                $num = rand(1, 50);
+                $im['src'] = $num . '.jpg';
+                $im['thumbnail'] = $num . '_thumb.jpg';
+                $p->thumbnail = json_encode($im);
+                $p->save();
+            }
+
+            $p->images =   json_encode($imgs);
+            //$p->save();
+        }
+        die("Done");     */
+
+        // $p['source'] = 'public/test/1.jpeg';
+        // $p['target'] = 'public/test/anjane.jpeg';
+        // Utils::create_thumbail($p);
+
+
+
+
+
+        // dd("time to fight");
+
+        /*
+        $m = new Pest();
+        $m->name = 'Slaters';
+        $m->description = 'Slaters or woodlice are small crustaceans that hide in damp situations in the garden. Slaters feed on organic matter, but at high densities they can damage new seedlings and ripe fruit such as melons, strawberries and the roots of pot plants.
+
+        Slaters on a piece of timber.
+        Slaters on a piece of timber.';
+
+        $m->cause = $m->description;
+        $m->cure = $m->description;
+        $m->image = 'no_image.jpg';
+        $m->video = 'https://www.youtube.com/watch?v=g9uPh00uhoE';
+
+        $m->save();
+
+        dd("pests");*/
+
+
+
+        // $string = file_get_contents("./public/products.json");
+        // $json_a = json_decode($string,true);
+        /* 					
+
+
+  $pros = Category::all();
+        $i = 0;
+        foreach ($pros as $key => $p) {
+            $i++;
+            $p->image = "banner_".(($i%16)+1).".png";
+            $p->save();
+        }
+
+        dd("food");
+        
+        $i = 0;
+        $cats = [1,2,3,5];
+        $imgs = [];
+
+        for ($i=2; $i < 100; $i++) { 
+            $img['src'] = $i.'.jpg';
+            $img['thumbnail'] = $i.'.jpg';
+            $img['user_id'] = 1;
+            $imgs[] = $img;
+        }
+ 
+        $pros = Product::all();
+
+        $gallery = [];
+        for ($i=2; $i < 18; $i++) { 
+            $img['src'] = $i.'.jpeg';
+            $img['thumbnail'] = $i.'.jpeg';
+            $img['user_id'] = 1;
+            $gallery[] = $img;
+        }
+
+        $i = 0;
+        foreach ($pros as $key => $p) {
+            $i++;
+            $x = $i%98;
+            $_img = $imgs[$x];
+            $__img = json_encode($_img);
+            shuffle($gallery);
+            $gal = json_encode($gallery);
+
+            $p->thumbnail = $__img;
+            $p->images = $gal;
+            
+            $p->save();
+            print("<hr> {$p->images}");
+            # code...
+        }
+        dd(count($pros));
+                
+        $i = 0;
+        foreach ($json_a as $key => $value){
+            $i++;
+            //copy($value['image_url'], 'public/temp/thumb/'.$i.'.jpg');
+            shuffle($cats);
+            shuffle($imgs);
+        
+            $pro = new Product();
+            $pro->name = $value['products_name'];
+            $pro->price = $value['products_price'];
+            $pro->description = "Details of ".$value['products_name'];
+            $pro->category_id = $cats[2];
+            $pro->sub_category_id = $cats[2];
+            shuffle($cats);
+            $pro->user_id = $cats[2];
+            $pro->quantity = $cats[2];
+            $pro->country_id = 1;
+            $pro->city_id = 1;
+            $pro->status = 1;
+            $pro->attributes = '[]';
+            $pro->images = json_encode($imgs);
+
+            $img['src'] = $i.'.jpeg';
+            $img['thumbnail'] = $i.'.jpeg';
+            $img['user_id'] = 1;
+            $img['fixed_price'] = 'Fixed price';
+            $img['nature_of_offer'] = 'For sale';
+            $pro->thumbnail = json_encode($img);
+            $pro->save();
+        }
+ 
+        
+    
+   
+[{"src":"1650824556-image-1.","thumbnail":"thumb_1650824556-image-1.","user_id":1}]
+{"src":"1650823807-ebe983c1c4182de27cf35f0a5db91123jpeg.jpeg","thumbnail":".\/public\/storage\/thumb_1650823807-ebe983c1c4182de27cf35f0a5db91123jpeg.jpeg","user_id":1}
+thumbnail
+
+
+
+
+
+
+
+
+              "products_id": 1936572,
+                "products_model": "SKUJ08155",
+                "": "Japanese Style Cat Print T-Shirts",
+                "image_url": "https://imgaz1.chiccdn.com/thumb/wap/oaupload/newchic/images/A7/A7/5abe58be-ef1e-4f9a-b42c-5bb97840811a.jpg?s=240x320",
+                "url": "https://www.newchic.com/charmkpr-t-shirts-12208/p-1936572.html",
+                "": 14.99,
+                "final_price": 14.99,
+                "list_type": 1,
+                "products_sale_price": 14.99,
+                "format_products_price": "",
+                "actListType": 0,
+                "format_final_price": "US$14.99",
+                "discount": 0,
+                "cat_id": 12208,
+                "categories_name": null,
+                "brand_info": {
+                    "products_id": "1936572",
+                    "brand_id": "39",
+                    "brand_name": "ChArmkpR",
+                    "is_product_detail": "1"
+                },
+                "isCod": null,
+                "codCountry": "AE,ID,MY,PH,SA,SG,TH,VN",
+                "sizeType": 1,
+                "isNewarrival": false,
+                "isRecommendActivity": 0,
+                "brand_name": "ChArmkpR",
+                "brand_url": "https://www.newchic.com/charmkpr-brand-39.html",
+                "showColor": 1
+
+
+
+*/
+
+
+        // $size = filesize('public/test/1.jpeg');
+        // $size = ($size/1000000)." MB";
+        // echo '<h5>'.$size.'</h5>';
+
+        // $thumbnail = Utils::create_thumbail(
+        //     array(
+        //         "source" => 'public/test/1.jpeg',
+        //         "target" => 'public/test/'.rand(1000,100000).'2.jpg',
+        //     )
+        // );
+
+
+
+        // $size = filesize($thumbnail);
+        // $size = ($size/1000000)." MB";
+        // echo '<h5>'.$size.'</h5>';
+
+        // echo('<img width="400" src="public/test/1.jpeg"/> <br> <br>');
+        // echo('<img width="400" src="'.$thumbnail.'" />');
+
+        // die("");
+        //return view('metro.main.product-listing');
+        //return view('metro.main.product-listing');
+        return view('metro.main.index');
+>>>>>>> ict4farmers-new
         //return view('metro.index');
     }
 
@@ -297,7 +525,12 @@ class MainController extends Controller
 
     public function about()
     {
-        return view('about.about_us');
+        return view('metro.about_us');
+    }
+
+    public function privacy()
+    {
+        return view('metro.privacy');
     }
 
     public function sell_fast()

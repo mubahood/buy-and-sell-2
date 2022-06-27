@@ -22,7 +22,29 @@ class Category extends Model
         $this->setTitleColumn('name');
     }
 
+<<<<<<< HEAD
  
+=======
+
+    public function getSlugAttribute($v)
+    {
+        if ($v == null) {
+            $c = Category::find($this->id);
+            if ($c != null) {
+                $c->slug = Utils::make_slug($c->name);
+                $c->save();
+                return $c->slug;
+            }
+        }
+
+        return $v;
+    }
+
+
+
+
+    protected $fillable = ['parent', 'order', 'name',];
+>>>>>>> ict4farmers-new
 
     public function attributes()
     {
@@ -46,12 +68,12 @@ class Category extends Model
 
     public function kids()
     {
-        return $this->hasMany(category::class, "parent");
+        return $this->hasMany(Category::class, "parent");
     }
 
     public function sub_categories()
     {
-        return $this->hasMany(category::class, "parent");
+        return $this->hasMany(Category::class, "parent");
     }
 
     public static function get_top_categories($max = 2)

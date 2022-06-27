@@ -1,1 +1,5 @@
 .env
+<<<<<<< HEAD
+=======
+config/app.php
+>>>>>>> ict4farmers-new

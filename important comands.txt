@@ -5,6 +5,10 @@
 #145A32
 #FF0000
 
+git reset 64d480a7440018f7dfb97d8f22e76c3c9853db48
+git revert 64d480a7440018f7dfb97d8f22e76c3c9853db48 b28da03633e09e1e8c4ba5e59e4c8e609b9d92fb
+
+
 
 git rm /config/app.php --cached
 php artisan make:migration create_banners_table
@@ -63,6 +67,7 @@ php artisan admin:make ResourceSharingController --model=App\\Models\\Product
 php artisan admin:make QuestionController --model=App\\Models\\Question 
 php artisan admin:make AgentUsersController --model=App\\Models\\User 
 php artisan admin:make ChatController --model=App\\Models\\Chat
+php artisan admin:make BannerMobileController --model=App\\Models\\Banner
 
 composer remove 
 

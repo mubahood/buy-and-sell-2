@@ -5,7 +5,11 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
+<<<<<<< HEAD
         'reference' => '051e507bf02ec6c426234beb247b906fe61845dd',
+=======
+        'reference' => 'e35e9930a0429dc0108f8c966ff44b201aabbbf8',
+>>>>>>> ict4farmers-new
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -17,15 +21,6 @@
             'install_path' => __DIR__ . '/../asm89/stack-cors',
             'aliases' => array(),
             'reference' => '73e5b88775c64ccc0b84fb60836b30dc9d92ac4a',
-            'dev_requirement' => false,
-        ),
-        'barryvdh/laravel-dompdf' => array(
-            'pretty_version' => 'v1.0.2',
-            'version' => '1.0.2.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
-            'aliases' => array(),
-            'reference' => 'de83130d029289e1b59f28b41c314ce1d157b4a0',
             'dev_requirement' => false,
         ),
         'barryvdh/laravel-snappy' => array(
@@ -86,12 +81,12 @@
             'dev_requirement' => false,
         ),
         'doctrine/dbal' => array(
-            'pretty_version' => '3.3.6',
-            'version' => '3.3.6.0',
+            'pretty_version' => '3.3.7',
+            'version' => '3.3.7.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/dbal',
             'aliases' => array(),
-            'reference' => '9e7f76dd1cde81c62574fdffa5a9c655c847ad21',
+            'reference' => '9f79d4650430b582f4598fe0954ef4d52fbc0a8a',
             'dev_requirement' => false,
         ),
         'doctrine/deprecations' => array(
@@ -502,42 +497,6 @@
                 0 => '*',
             ),
         ),
-        'laravel-admin-ext/chartjs' => array(
-            'pretty_version' => 'v1.0.0',
-            'version' => '1.0.0.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../laravel-admin-ext/chartjs',
-            'aliases' => array(),
-            'reference' => '3a12f9907c9d4ba59cdd1c9033e67325a337469f',
-            'dev_requirement' => false,
-        ),
-        'laravel-admin-ext/helpers' => array(
-            'pretty_version' => 'v2.0.2',
-            'version' => '2.0.2.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../laravel-admin-ext/helpers',
-            'aliases' => array(),
-            'reference' => 'b5ee6173794797d665b5baf7cc2713b523c2dd33',
-            'dev_requirement' => false,
-        ),
-        'laravel-admin-ext/latlong' => array(
-            'pretty_version' => 'v2.0.2',
-            'version' => '2.0.2.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../laravel-admin-ext/latlong',
-            'aliases' => array(),
-            'reference' => '01eeb930eea478dbfb4aeca274f238ee2d9dd477',
-            'dev_requirement' => false,
-        ),
-        'laravel-admin-ext/media-manager' => array(
-            'pretty_version' => 'v2.0.3',
-            'version' => '2.0.3.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../laravel-admin-ext/media-manager',
-            'aliases' => array(),
-            'reference' => '5460de965849a0723289f610beec479755d4ec1e',
-            'dev_requirement' => false,
-        ),
         'laravel/framework' => array(
             'pretty_version' => 'v8.83.16',
             'version' => '8.83.16.0',
@@ -553,7 +512,11 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+<<<<<<< HEAD
             'reference' => '051e507bf02ec6c426234beb247b906fe61845dd',
+=======
+            'reference' => 'e35e9930a0429dc0108f8c966ff44b201aabbbf8',
+>>>>>>> ict4farmers-new
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -1586,6 +1549,36 @@
             'install_path' => __DIR__ . '/../webmozart/assert',
             'aliases' => array(),
             'reference' => '11cb2199493b2f8a3b53e7f19068fc6aac760991',
+<<<<<<< HEAD
+=======
+            'dev_requirement' => false,
+        ),
+        'yajra/laravel-datatables-buttons' => array(
+            'pretty_version' => 'v4.13.3',
+            'version' => '4.13.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../yajra/laravel-datatables-buttons',
+            'aliases' => array(),
+            'reference' => '5c8fb97c26c14408c8933f68d86c6e4823d05740',
+            'dev_requirement' => false,
+        ),
+        'yajra/laravel-datatables-html' => array(
+            'pretty_version' => 'v4.41.1',
+            'version' => '4.41.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../yajra/laravel-datatables-html',
+            'aliases' => array(),
+            'reference' => '55895b55539cd776a8cd22dce874d1b6a7b9de8c',
+            'dev_requirement' => false,
+        ),
+        'yajra/laravel-datatables-oracle' => array(
+            'pretty_version' => 'v9.20.0',
+            'version' => '9.20.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../yajra/laravel-datatables-oracle',
+            'aliases' => array(),
+            'reference' => '4c22b09c8c664df5aad9f17d99c3823c0f2d84e2',
+>>>>>>> ict4farmers-new
             'dev_requirement' => false,
         ),
     ),

@@ -29,6 +29,7 @@ class FinancialRecordController extends AdminController
      */
     protected function grid()
     {
+<<<<<<< HEAD
 
         /* 
         $amounts = [11000, 69000, 18000, 88000, 1300, 42000, 16000, 90000, 10000, 15000, 10000, 5000, 1500, 15900, 45000, 5000, 60000, 4000, 2000, 25000, 10000];
@@ -84,6 +85,8 @@ class FinancialRecordController extends AdminController
 
         } 
 */
+=======
+>>>>>>> ict4farmers-new
         $grid = new Grid(new FinancialRecord());
 
         if (
@@ -176,12 +179,11 @@ class FinancialRecordController extends AdminController
 
         $form = new Form(new FinancialRecord());
         $u = Auth::user();
-        $form->select('garden_id', __('Select Enterprise'))
+        $form->select('garden_id', __('Enterprise'))
             ->options(
                 Garden::where('administrator_id', $u->id)->get()->pluck('name', 'id')
             )
             ->rules('required');
-
         $form->hidden('created_by', __('created_by'))->default($u->id)->value($u->id);
 
         $form->date('created_date', __('Transaction date'))->rules('required');
@@ -191,7 +193,6 @@ class FinancialRecordController extends AdminController
             ->attribute('type', 'number')
             ->help('Start with a negative (-) for expense transaction.')
             ->rules('required');
-
         return $form;
     }
 }

@@ -64,7 +64,7 @@ if (in_array($seg_1, $dashboard_segs)) {
         @if (request()->segment(1) != 'dashboard')
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                 <a href="{{ url('/') }}">
-                    <img alt="Logo" src="{{ url('/') }}/logo.png" class="h-30px h-lg-30px" />
+                    <img alt="Logo" src="{{ url('/assets/images/logo-2.png') }}" class="h-30px h-lg-50px" />
                 </a>
             </div>
         @endif
