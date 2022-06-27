@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '179fe0233ef93de774de49e0e1a2271192478c3a',
+        'reference' => 'acc12ad97b8b1b319aff98078bd0140473498c43',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -17,6 +17,15 @@
             'install_path' => __DIR__ . '/../asm89/stack-cors',
             'aliases' => array(),
             'reference' => '73e5b88775c64ccc0b84fb60836b30dc9d92ac4a',
+            'dev_requirement' => false,
+        ),
+        'barryvdh/laravel-dompdf' => array(
+            'pretty_version' => 'v1.0.2',
+            'version' => '1.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
+            'aliases' => array(),
+            'reference' => 'de83130d029289e1b59f28b41c314ce1d157b4a0',
             'dev_requirement' => false,
         ),
         'barryvdh/laravel-snappy' => array(
@@ -508,7 +517,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '179fe0233ef93de774de49e0e1a2271192478c3a',
+            'reference' => 'acc12ad97b8b1b319aff98078bd0140473498c43',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
