@@ -36,17 +36,17 @@ if (isset($items[0])) {
 }
 
 ?><div class="row bg-white mt-8">
-    <div class="col-3 p-5"
+    <div class=" d-md-block col-12 col-md-3 p-5"
         style="background-image: url({{ $main_item->image }});     background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center; height: 32rem; ">
         <h2 class="ps-0  display-5 fw-bolder">{{ $main_item->name }}</h2>
         <a class="btn btn-primary btn-sm mt-5" href="{{ $main_item->link }}">{{ $main_item->sub_title }}</a>
     </div>
-    <div class="col-9">
+    <div class="col-12 col-md-9">
         <div class="row">
             @foreach ($items as $item)
-                <a href="{{ $slide->link }}" class="col-3 border border-secondary"
+                <a href="{{ $slide->link }}" class="col-6 col-md-3 border border-secondary"
                     style="background-image: url({{ $item->image }});     background-size:     cover;
             background-repeat:   no-repeat;
             background-position: center center; height: 16rem; ">

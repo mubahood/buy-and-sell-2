@@ -84,8 +84,7 @@ shuffle($bgs);
         </div>
         <div class="col-md-6">
             <?php
-            $first_seen = false;
-            
+            $first_seen = false; 
             ?>
             <div class="carousel-inner slider-arrow">
                 <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel"
@@ -134,18 +133,11 @@ shuffle($bgs);
 
             </div>
 
-
-
-
-
-
-
-
-
+ 
             <div class="row ">
 
                 @foreach (Banner::whereBetween('id', [41, 43])->get() as $item)
-                    <div class="col-4 mt-4">
+                    <div class="col-6 col-md-4 mt-4">
                         <a href="{{ $slide->link }}">
                             <div class=" my-banner p-4"
                                 style="background-image: url({{ $item->image }});     background-size:     cover;
@@ -226,15 +218,15 @@ shuffle($bgs);
         style="background-image: url(https://www.micstatic.com/mic-search/img/home-2019/easy-sourcing.jpg?_v=1655724759401);     background-size:     cover;
         background-repeat:   no-repeat;
         background-position: center center; height: 34rem; ">
-        <div class="col-5 fw-bold fs-3 py-1 m-0 px-3 text-gray-900">
+        <div class="d-none d-md-block col-5  fw-bold fs-3 py-1 m-0 px-3 text-gray-900">
             <h2 class="h1 display-4 mb-4">EASY SOURCING</h2>
             <p>{{ env('APP_NAME') }} is Uganda's largest online Farmers marketplace, connecting buyers with farmers.</p>
             <p>One request, multiple quotes</p>
             <p>Verified suppliers matching</p>
             <p>Quotes comparison and sample request</p>
         </div>
-        <div class="col-1"></div>
-        <div class="col-6 bg-white p-10">
+        <div class="d-none d-md-block col-1"></div>
+        <div class="col-12 col-md-6 bg-white p-5 p-md-10">
             <h2 class="ps-0  display-6 fw-normal">Tell us what you need</h2>
             <form action="">
                 <div class="form-group">
