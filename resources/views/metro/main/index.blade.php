@@ -84,7 +84,7 @@ shuffle($bgs);
         </div>
         <div class="col-md-6">
             <?php
-            $first_seen = false; 
+            $first_seen = false;
             ?>
             <div class="carousel-inner slider-arrow">
                 <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel"
@@ -133,14 +133,14 @@ shuffle($bgs);
 
             </div>
 
- 
+
             <div class="row ">
 
                 @foreach (Banner::whereBetween('id', [41, 43])->get() as $item)
                     <div class="col-6 col-md-4 mt-4">
                         <a href="{{ $slide->link }}">
-                            <div class=" my-banner p-4"
-                                style="background-image: url({{ $item->image }});     background-size:     cover;
+                            <div class=" my-banner p-4 lazy" data-src="{{ $item->image }}"
+                                style="background-image: url({{ url('no_image.jpg') }});     background-size:     cover;
                                                         background-repeat:   no-repeat;
                                                         background-position: center center; ">
                                 <div class="row">
@@ -167,8 +167,8 @@ shuffle($bgs);
                 <a href="{{ $slide->link }}">
                     <div class="row mt-1 mb-5">
                         <div class="col-4">
-                            <div class="  my-banner-product"
-                                style="background-image: url({{ $item->image }});     background-size:     cover;
+                            <div class="  my-banner-product lazy" data-src="{{ $item->image }}"
+                                style="background-image: url({{ url('no_image.jpg') }});     background-size:     cover;
                                                     background-repeat:   no-repeat;
                                                     background-position: center center; ">
                             </div>
