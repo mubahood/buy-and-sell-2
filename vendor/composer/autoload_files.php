@@ -40,4 +40,5 @@ return array(
     '4e8671d7be9056dcd04ddd9e8e15f9cc' => $vendorDir . '/encore/laravel-admin/src/helpers.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
     'a1af1fc0cffb5f61cbaf64dbe030fdb9' => $vendorDir . '/laravel/legacy-factories/helpers.php',
+    '9be1c2bab389f876c8b9376199151a90' => $vendorDir . '/binarytorch/larecipe/src/Helpers/helpers.php',
 );
