@@ -4,9 +4,9 @@ return [
 
 
     'id' => env('id', 's'),
-    'currency' => env('currency', '$'),
-    'app_slogan' => env('app_slogan', 'Jotrace - Buy and sell your products & services in Turkey.'),
-    'domain' => env('domain', 'Jotrace'),
+    'currency' => env('currency', 'UGX'),
+    'app_slogan' => env('app_slogan', 'ICT4Farmers - Buy and sell your farm products & services in Uganda.'),
+    'domain' => env('domain', 'ICT4Farmers'),
     'address' => env('address', 'Shop no. 123, <span>Nasser Road, Kampala, Uganda</span>'),
     'phone_1' => env('phone_1', '+256783204665'),
     'phone_2' => env('phone_2', '+256706638494'),
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'JOTRACE.COM'),
+    'name' => env('APP_NAME', 'ICT4Farmers'),
 
     /*
     |--------------------------------------------------------------------------
@@ -176,7 +176,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+
 
 
         /*
@@ -190,7 +190,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class, 
+        App\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -205,7 +205,7 @@ return [
     |
     */
 
- 
+
 
     'aliases' => [
 

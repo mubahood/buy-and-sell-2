@@ -95,7 +95,7 @@ return [
     | If your page is going to be accessed via https, set it to `true`.
     |
     */
-    'https' => env('ADMIN_HTTPS', false),
+    'https' => env('ADMIN_HTTPS', FALSE),
 
     /*
     |--------------------------------------------------------------------------
@@ -150,14 +150,14 @@ return [
     | disk and upload path.
     |
     */
-    'upload' => [
+   'upload' => [
 
         // Disk in `config/filesystem.php`.
-        'disk' => 'public',
+        'disk' => 'admin',
 
         // Image and file upload path under the disk above.
         'directory' => [
-            'image' => 'storage',
+            'image' => '/storage',
             'file'  => 'files',
         ],
     ],
