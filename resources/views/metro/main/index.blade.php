@@ -53,7 +53,7 @@ shuffle($bgs);
 ?>
 <style>
     .my-slider {
-        height: 25rem;
+        height: 28rem;
     }
 
     .my-banner {
