@@ -13,10 +13,10 @@
     <meta property="og:type" content="article" />
     <meta property="og:title"
         content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-    <meta property="og:url" content="<?=  (url('logo_1.png')) ?>" />
+    <meta property="og:url" content="<?=  (url('assets/images/favicon.png')) ?>" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="<?=  (url('/')) ?>" />
-    <link rel="shortcut icon" href="<?=  (url('logo_1.png')) ?>" />
+    <link rel="shortcut icon" href="<?=  (url('assets/images/favicon.png')) ?>" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" async/>
 
     <link href="{{ url('/') }}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" async/>
