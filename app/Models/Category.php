@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Encore\Admin\Traits\AdminBuilder;
+use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -9,19 +11,65 @@ use Illuminate\Support\Str;
 class Category extends Model
 {
 
+    use ModelTree, AdminBuilder;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setParentColumn('parent');
+        $this->setOrderColumn('order');
+        $this->setTitleColumn('name');
+    }
+
+
+    public function getSlugAttribute($v)
+    {
+        if ($v == null) {
+            $c = Category::find($this->id);
+            if ($c != null) {
+                $c->slug = Utils::make_slug($c->name);
+                $c->save();
+                return $c->slug;
+            }
+        }
+
+        return $v;
+    }
+
+
+
+
+    protected $fillable = ['parent', 'order', 'name',];
+
     public function attributes()
     {
         return $this->hasMany(Attribute::class);
     }
 
+    public static function get_subcategories()
+    {
+        $items = [];
+        foreach (Category::all() as $key => $v) {
+            $parent = ((int)($v->parent));
+            $_name = "";
+            if ($parent < 1) {
+                continue;
+            }
+            $_name = $v->name;
+            $items[$v->id] = $_name;
+        }
+        return $items;
+    }
+
     public function kids()
     {
-        return $this->hasMany(category::class, "parent");
+        return $this->hasMany(Category::class, "parent");
     }
 
     public function sub_categories()
     {
-        return $this->hasMany(category::class, "parent");
+        return $this->hasMany(Category::class, "parent");
     }
 
     public static function get_top_categories($max = 2)

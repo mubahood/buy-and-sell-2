@@ -27,7 +27,7 @@ foreach ($countries as $key => $c) {
 }
 
 $chat_threads = Chat::get_chat_threads($u->id);
-$thumbnail = url( 'no_image.png');
+$thumbnail = url( 'no_image.jpg');
 
 $item = new Product();
 $id = ((int) Request::segment(3));

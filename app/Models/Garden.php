@@ -10,6 +10,16 @@ class Garden extends Model
 {
     use HasFactory;
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getPlantDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
     public function getLocationNameAttribute()
     {
         $loc = Location::find($this->location_id);
@@ -18,6 +28,27 @@ class Garden extends Model
         } else {
             return "-";
         }
+    }
+
+
+    public function location()
+    {
+        $o = Location::find($this->location_id);
+        if($o == null){
+            $this->location_id = 1;
+            $this->save();
+        }
+        return $this->belongsTo(Location::class,'location_id');
+    }
+
+    public function sector()
+    {
+        $o = CropCategory::find($this->crop_category_id);
+        if($o == null){
+            $this->crop_category_id = 1;
+            $this->save();
+        }
+        return $this->belongsTo(CropCategory::class,'crop_category_id');
     }
 
     public function getCropCategoryNameAttribute()

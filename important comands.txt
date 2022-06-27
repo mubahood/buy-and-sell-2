@@ -1,5 +1,13 @@
+->OLD ADMIN COLOR: #3C8DBC,#72afd2,#367fa9,#3b8ab8,#72afd2,#357ca5,#00acd6,
+
+->NEW ADMIN COLOR: #145A32,
+
 #145A32
 #FF0000
+
+git reset 64d480a7440018f7dfb97d8f22e76c3c9853db48
+git revert 64d480a7440018f7dfb97d8f22e76c3c9853db48 b28da03633e09e1e8c4ba5e59e4c8e609b9d92fb
+
 
 
 git rm /config/app.php --cached
@@ -10,6 +18,7 @@ php artisan make:migration create_post_comments_table
 php artisan make:migration create_post_categories_table
 php artisan make:migration create_financial_records_table
 php artisan make:model Banner
+php artisan make:model Test
 php artisan make:model Post
 php artisan make:model FarmersGroup
 php artisan make:model FarmersGroupHasAgent
@@ -42,7 +51,7 @@ php artisan migrate --path=/database/migrations/2022_05_31_091227_create_farms_t
  
 php artisan admin:make FarmersGroupController --model=App\\
 php artisan admin:make CropCategoryController --model=App\\Models\\CropCategory 
-php artisan admin:make PestCaseController --model=App\\Models\\PestCase 
+php artisan admin:make TestPestCaseController --model=App\\Models\\PestCase 
 php artisan admin:make PestController --model=App\\Models\\Pest 
 php artisan admin:make PestController --model=App\\Models\\ProductionRecord 
 php artisan admin:make FarmController --model=App\\Models\\Farm 
@@ -51,9 +60,12 @@ php artisan admin:make GardenProductionRecordController --model=App\\Models\\Gar
 php artisan admin:make GardenActivityController --model=App\\Models\\GardenActivity 
 php artisan admin:make PestListingController --model=App\\Models\\Pest 
 php artisan admin:make PestCaseListingController --model=App\\Models\\PestCase 
-php artisan admin:make ProductController --model=App\\Models\\Product 
+php artisan admin:make ProductController --model=App\\Models\\Product
 php artisan admin:make ResourceSharingController --model=App\\Models\\Product 
 php artisan admin:make QuestionController --model=App\\Models\\Question 
+php artisan admin:make AgentUsersController --model=App\\Models\\User 
+php artisan admin:make ChatController --model=App\\Models\\Chat
+php artisan admin:make BannerMobileController --model=App\\Models\\Banner
 
 composer remove 
 
@@ -156,3 +168,58 @@ composer remove
         dd("romina");
         return Utils::get_locations();
     }
+
+
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:8KSbIx2ioA9OCD1mSEALsy8fVFCaM3gnWwgPJWTXV1w=
+APP_DEBUG=true
+APP_URL=http://sst.8technologies.store
+
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=ict4farmers
+DB_PASSWORD=root
+DB_USERNAME=root
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DRIVER=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=localhost
+
+REDIS_HOST=localhost
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}" 
+alias php="/Applications/MAMP/bin/php/php8.0.8/bin/php" 

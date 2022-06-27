@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiUsersController;
 use App\Models\CropCategory;
 use App\Models\Pest;
 use App\Models\Question;
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; //new staff
 
@@ -27,9 +28,17 @@ Route::get('farms', [ApiProductsController::class, 'farms']);
 Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);
 Route::get('garden-production-record', [ApiProductsController::class, 'get_garden_production_record']);
 Route::get('financial-records', [ApiProductsController::class, 'get_financial_records']);
+
 Route::get('crop-categories', function () {
     return CropCategory::all(); 
 });
+
+Route::get('users-1', function () {
+    $users = Administrator::all();
+
+    return $users->pluck('name','id');
+});
+
 Route::get('pests', function () {
     return Pest::all();
 });

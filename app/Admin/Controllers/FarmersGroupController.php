@@ -17,7 +17,7 @@ class FarmersGroupController extends AdminController
      *
      * @var string
      */
-    protected $title = 'FarmersGroup';
+    protected $title = 'Farmers associations';
 
     /**
      * Make a grid builder.
@@ -27,10 +27,9 @@ class FarmersGroupController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new FarmersGroup());
-
+        
         $grid->column('id', __('Id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('created_at', __('Created'));
         $grid->column('name', __('Name'));
         $grid->column('details', __('Details'));
 
@@ -71,12 +70,14 @@ class FarmersGroupController extends AdminController
 
             $items = [];
             foreach (Administrator::all() as $key => $f) {
+                if (!$f->isRole('agent')) {
+                    continue;
+                }
                 $items[$f->id] = $f->name . ", ID #" . $f->id;
             }
             $form->select('administrator_id', __('Select Agent'))
                 ->options($items)
                 ->required();
-                 
         });
 
 

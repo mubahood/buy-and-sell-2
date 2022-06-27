@@ -107,9 +107,9 @@ foreach (Product::all() as $key => $p) {
                     <a class="m-0 d-block mt-0 fs-4 text-hover-primary text-dark" href="{{ url('product-listing') }}">Clear filter</a>
                 </div>
 
-                <div class="row mt-2">
+                <div class="row pt-0 m-0 p-0">
                     @foreach ($products as $item)
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-3 border border-1 p-2">
                             @include('metro.components.product-item', [
                                 'item' => $item,
                             ])

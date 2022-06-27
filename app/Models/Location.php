@@ -10,6 +10,34 @@ class Location extends Model
     use HasFactory;
 
 
+    public static function get_subcounties()
+    {
+        $items = [];
+        foreach (Location::all() as $key => $v) {
+            $parent = ((int)($v->parent));
+            $_name = "";
+            if ($parent < 1) {
+                continue;
+            }
+            $_name = $v->get_name();
+            $items[$v->id] = $_name;
+        }
+        return $items;
+    }
+
+    public function get_name()
+    {
+        $parent = ((int)($this->parent));
+        $_name = "";
+        if ($parent > 0) {
+            $p = Location::find($parent);
+            if ($p != null) {
+                $_name = $p->name . ", ";
+            }
+        }
+        return $_name . $this->name;
+    }
+
     public function kids()
     {
         return $this->hasMany(Location::class, 'parent');

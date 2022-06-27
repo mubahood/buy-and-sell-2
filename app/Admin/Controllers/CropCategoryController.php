@@ -16,7 +16,7 @@ class CropCategoryController extends AdminController
      *
      * @var string
      */
-    protected $title = 'CropCategory';
+    protected $title = 'Enterprise Categories';
   
 
     /**
@@ -29,12 +29,9 @@ class CropCategoryController extends AdminController
         $grid = new Grid(new CropCategory());
 
         $grid->column('id', __('Id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
         $grid->column('name', __('Name'));
         $grid->column('image', __('Image'));
-        $grid->column('details', __('Details'));
-
+        
         return $grid;
     }
 
@@ -79,8 +76,8 @@ class CropCategoryController extends AdminController
         
         $form->select('parent', __('Parent category'))
         ->options($parents);
-        $form->image('image', __('Image'))->required();
-        $form->textarea('details', __('Details'))->required(); 
+        $form->image('image', __('Image'));
+        $form->textarea('details', __('Details')); 
 
         
         $form->hasMany('activities', function (NestedForm $form) {

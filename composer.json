@@ -10,18 +10,20 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-snappy": "^1.0",
+        "dompdf/dompdf": "^1.2",
         "encore/laravel-admin": "1.*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/legacy-factories": "^1.1",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.7",
+        "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-image-optimizer": "^1.6",
-        "maatwebsite/excel": "~2.1.0",
-        "stefangabos/zebra_image": "dev-master"
+        "stefangabos/zebra_image": "dev-master",
+        "yajra/laravel-datatables-buttons": "^4.10",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -66,7 +68,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform-check": false
     },
     "minimum-stability": "dev",
     "prefer-stable": true

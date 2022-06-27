@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\GardenActivity;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -15,7 +16,7 @@ class GardenActivityController extends AdminController
      *
      * @var string
      */
-    protected $title = 'GardenActivity';
+    protected $title = 'Garden activities';
 
     /**
      * Make a grid builder.
@@ -24,26 +25,45 @@ class GardenActivityController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new GardenActivity());
+        $grid = new Grid(new GardenActivity()); 
 
-        $grid->column('id', __('Id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('name', __('Name'));
-        $grid->column('due_date', __('Due date'));
-        $grid->column('details', __('Details'));
-        $grid->column('administrator_id', __('Administrator id'));
-        $grid->column('person_responsible', __('Person responsible'));
-        $grid->column('done_by', __('Done by'));
-        $grid->column('is_generated', __('Is generated'));
-        $grid->column('is_done', __('Is done'));
-        $grid->column('done_status', __('Done status'));
-        $grid->column('done_details', __('Done details'));
-        $grid->column('done_images', __('Done images'));
-        $grid->column('position', __('Position'));
-        $grid->column('garden_id', __('Garden id'));
-        $grid->column('garden_production_record_id', __('Garden production record id'));
+        if (
+            Admin::user()->isRole('administrator') ||
+            Admin::user()->isRole('admin')
+        ) {
+            /*$grid->actions(function ($actions) {
+                $actions->disableEdit();
+            });*/
+        } else {
+            $grid->model()->where('administrator_id', Admin::user()->id);
+            $grid->disableRowSelector();
+        }
 
+        //$grid->column('id', __('Id'));
+        //$grid->column('details', __('Details'));
+        //$grid->column('administrator_id', __('Administrator id'));
+        //$grid->column('is_generated', __('Is generated'));
+        //$grid->column('done_by', __('Submitted'));
+        //$grid->column('is_done', __('Submitted'));
+        //$grid->column('done_details', __('Done details'));
+        //$grid->column('position', __('Position'));
+        //$grid->column('done_images', __('Done images'));
+        //$grid->column('garden_id', __('Enterprise'));
+        //$grid->column('garden_production_record_id', __('Garden production record id'));
+        
+        $grid->column('created_at', __('Created'));
+        $grid->column('garden_id', __('Enterprise'))->display(function () {
+            return $this->enterprise->name; 
+        })->sortable();
+        $grid->column('name', __('Activity'));
+        
+        $grid->column('person_responsible', __('Assigned to'))->display(function () {
+            return $this->assigned_to->name; 
+        })->sortable();
+
+        $grid->column('due_date', __('To be done before')); 
+        $grid->column('done_status', __('Is done')); 
+        
         return $grid;
     }
 

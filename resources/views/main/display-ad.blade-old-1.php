@@ -199,7 +199,7 @@ $message_link = "/messages/".$chat_thred;
                     <ul class="ad-details-specific">
                         <li>
                             <h6>Price:</h6>
-                            <p>UGX {{ ($pro->price) }}
+                            <p>{{config('app.currency') . " " }} {{ ($pro->price) }}
                                 @if ($pro->fixed_price)
                                 <small><i>Fixed price</i></small>
                                 @else

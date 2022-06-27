@@ -3,8 +3,13 @@
 namespace Encore\Admin\Grid\Exporters;
 
 use Illuminate\Support\Str;
-abstract class ExcelExporter extends AbstractExporter {
-  
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
+abstract class ExcelExporter extends AbstractExporter implements FromQuery, WithHeadings
+{
+    use Exportable;
 
     /**
      * @var string
@@ -58,7 +63,7 @@ abstract class ExcelExporter extends AbstractExporter {
      */
     public function export()
     {
-        return "1.xls";
+        $this->download($this->fileName)->prepare(request())->send();
 
         exit;
     }

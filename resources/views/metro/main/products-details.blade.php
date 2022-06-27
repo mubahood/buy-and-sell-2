@@ -21,7 +21,7 @@ if ($pro) {
     if (!$pro->user) {
         dd('User not found.');
     }
-}else {
+} else {
     die("Product not found. Maybe it's already deleted.");
 }
 
@@ -31,7 +31,6 @@ $products = Product::where($conds)->paginate(4);
 
 $images = $pro->get_images();
 $description = $pro->description;
-
 
 $pro->init_attributes();
 $attributes = json_decode($pro->attributes);
@@ -45,7 +44,7 @@ $is_logged_in = false;
 
 $user = Auth::user();
 $message_link = url('/register');
-$message_text = 'send message';
+$message_text = 'CHAT WITH SUPPLIER';
 if ($user != null) {
     if (isset($user->id)) {
         $is_logged_in = true;
@@ -60,31 +59,36 @@ if ($user != null) {
 }
 $first_seen = false;
 
-
-
-
-
 $products = [];
 $products = Product::all();
 
 $recomended = [];
-foreach ($products as $key => $pro) {
- 
+foreach ($products as $key => $p) {
     if (count($recomended) < 6) {
-        $recomended[] = $pro;
+        $recomended[] = $p;
         continue;
     }
 }
 
-
 @endphp
+
 @extends('metro.layout.layout-main')
 @section('main-content')
 @section('footer')
     <script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
 @endsection
-  
 
+
+<div class="row  mt-5">
+    <div class="col-12">
+        <ol class="breadcrumb text-muted fs-6 fw-bold">
+            <li class="breadcrumb-item pe-3"><a href="{{ url('') }}" class="pe-3">Home</a></li>
+            <li class="breadcrumb-item pe-3"><a href="{{ url($pro->category->slug) }}"
+                    class="pe-3">{{ $pro->category->name }}</a></li>
+            <li class="breadcrumb-item px-3 text-muted">{{ $pro->name }}</li>
+        </ol>
+    </div>
+</div>
 <div class="row  mt-5">
     <div class="col-md-4 bg-white py-5 ">
         <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel"
@@ -135,9 +139,10 @@ foreach ($products as $key => $pro) {
     </div>
     <div class="col-md-5 bg-white pt-5">
 
-        <h1 class=" h1" style="font-weight: 500;">{{ $pro->name }}</h1>
+        <h1 class=" h1" style="font-weight: 800;">{{ $pro->name }}</h1>
         <div class="separator my-5"></div>
-        <h2 class="ad-details-title display-5 text-dark h2">UGX {{ $pro->price }}</h2>
+        <h2 class="display-6 text-primary h2">{{ config('app.currency') . ' ' }} {{ $pro->price }}
+        </h2>
         <div class="separator my-5"></div>
 
         <table class="table table-striped table-sm">
@@ -203,32 +208,63 @@ foreach ($products as $key => $pro) {
         </table>
     </div>
     <div class="col-md-3 bg-white pt-5">
-        <div class="card  shadow-sm card-p-2 card-bordered">
+        <div class="card-body p-5 border">
+            <p class="text-justify" style="text-align: justify">Our system allows you send and recieve messages to
+                product suppliers. Press the <b>Chat with supplier</b> button to start a coversation with supplier of
+                this product.
+            </p>
 
-            <div class="card-body py-5">
-                Offered by: <b>{{ $pro->seller_name }}</b>
-                <div class="separator my-5"></div>
-                <a data-bs-toggle="modal" data-bs-target="#kt_modal_1"
-                    class="btn btn-block btn-outline btn-outline-dashed btn-outline-danger btn-active-light-primary btn-lg rounded-0 d-block">
-                    Show Phone Number
-                </a>
-                <div class="separator my-5"></div>
-                @if ($is_logged_in)
-                    <a href="{{ $message_link }}"
-                        class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
-                            class="las la-wallet fs-2 me-2"></i>
-                        {{ $message_text }}</a>
-                @else
-                    <a href="{{ url('register') }}"
-                        class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
-                            class="las la-wallet fs-2 me-2"></i>
-                        SEND MESSAGE</a>
-                @endif
+            @if ($is_logged_in)
+                <a href="{{ $message_link }}"
+                    class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
+                        class="las la-comment-dots fs-2 me-2"></i>
+                    {{ $message_text }}</a>
+            @else
+                <a href="{{ url('register') }}"
+                    class="btn  btn-danger btn-lg rounded-0 d-block btn-active-light-primary"><i
+                        class="las la-comment-dots fs-2 me-2"></i>
+                    CHAT WITH SUPPLIER</a>
+            @endif
+            <div class="my-5"></div>
 
-            </div>
+            <a data-bs-toggle="modal" data-bs-target="#kt_modal_1"
+                class="btn btn-block btn-outline btn-outline-dashed btn-outline-danger btn-active-light-primary btn-lg rounded-0 d-block">
+                Show Phone Number
+            </a>
         </div>
 
-        <div class="card shadow-sm mt-5 card-p-3">
+        <div class="card-body p-5 mt-5 border">
+            <h2>About the supplier</h2>
+            <div class="row">
+                <div class="col-3">
+                    <a href="javascript:;">
+                        <img class="img-fluid rounded-circle" src="{{ url('no_image.jpg') }}" alt="">
+                    </a>
+                </div>
+                <div class="col-9 p-0 m-0 pb-1">
+                    <p class="text-dark p-0 m-0 mt-2"><a href="javascript:;"
+                            class="text-dark  fs-5 text-hover-primary text-capitalize"
+                            style="line-height: 1.5rem;">{{ $pro->seller_name }}</a></p>
+                    <p class="text-gray-600 "><a href="javascript:;" class="text-gray-600  fs-5 text-hover-primary"
+                            style="line-height: .9rem;">{{ $pro->location->get_name() }}</a>
+                    </p>
+                </div>
+            </div>
+            <table class="table table-striped table-sm">
+                <tbody>
+                    <tr>
+                        <td class="ps-4 pt-4 pb-0">
+                            <p class="fs-4">A member since</p>
+                        </td>
+                        <td class="ps-4 pt-4 pb-0">
+                            <p class="fs-4"><span class="text-primary">11 June, 2022</span></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        {{-- <div class="card shadow-sm mt-5 card-p-3">
             <div class="card-body">
                 <ul class="list-group">
                     <li class="list-group-item active bg-dark border-dark">Stay safe!</li>
@@ -245,7 +281,7 @@ foreach ($products as $key => $pro) {
                 </ul>
             </div>
 
-        </div>
+        </div> --}}
 
     </div>
 
@@ -256,8 +292,9 @@ foreach ($products as $key => $pro) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Contact {{$pro->seller_name}}</h5>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title">Contact {{ $pro->seller_name }}</h5>
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
                     <span class="svg-icon svg-icon-2x"></span>
                 </div>
             </div>
@@ -278,25 +315,25 @@ foreach ($products as $key => $pro) {
         <h2>Description</h2>
         {!! $description !!}
     </div>
-</div> 
+</div>
 
- 
+
 
 
 <div class="row p-0 ">
     <div class="col-12 p-0 m-0">
-        <div class="card shadow-sm mt-5"> 
+        <div class="card shadow-sm mt-5">
             <div class="card-header bg-primary">
                 <h3 class="card-title fs-1 text-white">You may also like</h3>
                 <div class="card-toolbar">
-                    <a href="{{ url('/product-listing')}}" type="button" class="btn btn-sm btn-light-primary">
+                    <a href="{{ url('/product-listing') }}" type="button" class="btn btn-sm btn-light-primary">
                         See all
                     </a>
                 </div>
             </div>
 
             <div class="card-body">
-                
+
 
                 <div class="row mt-2">
                     @foreach ($recomended as $item)
@@ -314,11 +351,10 @@ foreach ($products as $key => $pro) {
 </div>
 
 
- 
+
 <style>
     .fslightbox-absoluted {
         background-color: #414E4E;
     }
-
 </style>
 @endsection
