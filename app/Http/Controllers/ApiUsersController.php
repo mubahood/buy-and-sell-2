@@ -155,6 +155,7 @@ class ApiUsersController
         $u->region = (string) ($request->region ? $request->region : "");
         $u->district = (string) ($request->district ? $request->district : "");
         $u->sub_county = (string) ($request->sub_county ? $request->sub_county : "");
+        $u->date_of_birth = (string) ($request->date_of_birth ? $request->date_of_birth : "");
 
         unset($u->password);
         unset($u->status_comment);
