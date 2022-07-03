@@ -156,6 +156,17 @@ class ApiUsersController
         $u->district = (string) ($request->district ? $request->district : "");
         $u->sub_county = (string) ($request->sub_county ? $request->sub_county : "");
         $u->date_of_birth = (string) ($request->date_of_birth ? $request->date_of_birth : "");
+        $u->gender = (string) ($request->gender ? $request->gender : "");
+        $u->marital_status = (string) ($request->marital_status ? $request->marital_status : "");
+        $u->number_of_dependants = (string) ($request->number_of_dependants ? $request->number_of_dependants : "");
+        $u->user_role = (string) ($request->user_role ? $request->user_role : "");
+        $u->experience = (string) ($request->experience ? $request->experience : "");
+        $u->production_scale = (string) ($request->production_scale ? $request->production_scale : "");
+        $u->access_to_credit = (string) ($request->access_to_credit ? $request->access_to_credit : "");
+        $u->district = (string) ($request->district ? $request->district : "");
+        $u->sector = (string) ($request->sector ? $request->sector : "");
+
+
 
         unset($u->password);
         unset($u->status_comment);
