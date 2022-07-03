@@ -34,7 +34,7 @@ Route::resource('/dashboard/categories', DashboardCategoriesControler::class)->m
 Route::resource('/dashboard/locations', DashboardLocationControler::class)->middleware(Authenticate::class);
 
 
-Route::get('/dashboard', [DashboardProductsControler::class, 'index'])->name("dashboard") ->middleware(Authenticate::class);
+Route::get('/dashboard', [DashboardProductsControler::class, 'index'])->name("dashboard")->middleware(Authenticate::class);
 Route::resource('/dashboard/menu', DashboardMenuControler::class)->middleware(Authenticate::class);
 Route::resource('/dashboard/chats', DashboardChatsControler::class)->middleware(Authenticate::class);
 Route::resource('/dashboard/products', DashboardProductsControler::class)->middleware(Authenticate::class);

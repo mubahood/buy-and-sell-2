@@ -27,7 +27,7 @@ class BannerWebController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Banner());
-        //$grid->disableCreateButton();
+        //$grid->disableCreateButton(); 
         $grid->disableExport();
 
         $grid->model()->where([

@@ -182,13 +182,21 @@ class ApiUsersController
         }
 
 
-        $u->save();
+        if ($u->save()) {
 
-        return Utils::response([
-            'status' => 1,
-            'message' => "Profile updated successfully.",
-            'data' => $u
-        ]);
+            return Utils::response([
+                'status' => 1,
+                'message' => "Profile updated successfully.",
+                'data' => $u
+            ]);
+        } else {
+
+            return Utils::response([
+                'status' => 0,
+                'message' => "Failed to update profile.",
+                'data' => $u
+            ]);
+        }
     }
 
     public function create_account(Request $request)
