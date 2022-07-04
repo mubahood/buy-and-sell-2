@@ -951,7 +951,7 @@ class ApiProductsController
     public function locations(Request $request)
     {
         return Location::all();
-        return Utils::get_locations();
+        //return Utils::get_locations();
     }
 
     public function categories(Request $request)
