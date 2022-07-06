@@ -27,7 +27,7 @@ foreach ($users as $key => $v) {
     $row[] = $v->id; 
 
     $row[] = '<span href="{{ $_link }}" class="symbol symbol-50px">
-                <span class="symbol-label" style="background-image:url('.url( 'storage/'.$v->image).');"></span>
+                <span class="symbol-label" style="background-image:url('.url( ''.$v->image).');"></span>
              </span>';
     $row[] = '<b class="text-dark">' . $v->name . '</b>';
     $row[] = $v->category_id;
