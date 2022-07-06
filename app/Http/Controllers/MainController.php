@@ -215,8 +215,8 @@ thumbnail
         // echo('<img width="400" src="'.$thumbnail.'" />');
 
         // die("");
-        //return view('metro.main.product-listing');
-        return view('metro.main.index');
+        return view('metro.main.product-listing');
+        //return view('metro.main.index');
         //return view('metro.index');
     }
 
