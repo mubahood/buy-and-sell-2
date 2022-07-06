@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+
+    public function getImageAttribute($img)
+    {
+        return 'storage/'.$img;
+    }
+
 }
