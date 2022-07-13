@@ -34,4 +34,6 @@ Route::group([
     $router->resource('chats', ChatController::class);
     $router->resource('mobile-app', BannerMobileController::class);
     $router->resource('web-app', BannerWebController::class);
+
+    $router->resource('pricings', PricingController::class);
 });
