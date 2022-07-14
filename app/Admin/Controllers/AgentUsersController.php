@@ -20,7 +20,7 @@ class AgentUsersController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Farmers';
+    protected $title = 'Our Farmers';
 
     /**
      * Make a grid builder.
@@ -41,57 +41,55 @@ class AgentUsersController extends AdminController
 
         $grid->model()->where('group_id', $group_id);
 
-        $grid->column('id', __('Id'));
-        $grid->column('username', __('Username'));
-        $grid->column('password', __('Password'));
+        $grid->column('id', __('Id'))->sortable();
+        //$grid->column('username', __('Username'));
+        //$grid->column('password', __('Password'));
+        //$grid->column('avatar', __('Avatar'));
+        //$grid->column('created_at', __('Created at'));
+        //$grid->column('company_name', __('Company'));
 
 
-        $grid->column('name', __('Name'));
-        $grid->column('avatar', __('Avatar'));
-        $grid->column('remember_token', __('Remember token'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('last_name', __('Last name'));
-        $grid->column('company_name', __('Company name'));
+        $grid->column('name', __('Name'))->sortable();
+        $grid->column('last_name', __('Last name'))->sortable();
         $grid->column('email', __('Email'));
         $grid->column('phone_number', __('Phone number'));
         $grid->column('address', __('Address'));
-        $grid->column('about', __('About'));
-        $grid->column('services', __('Services'));
-        $grid->column('longitude', __('Longitude'));
-        $grid->column('latitude', __('Latitude'));
-        $grid->column('division', __('Division'));
-        $grid->column('opening_hours', __('Opening hours'));
-        $grid->column('cover_photo', __('Cover photo'));
-        $grid->column('facebook', __('Facebook'));
-        $grid->column('twitter', __('Twitter'));
-        $grid->column('whatsapp', __('Whatsapp'));
-        $grid->column('youtube', __('Youtube'));
-        $grid->column('instagram', __('Instagram'));
-        $grid->column('last_seen', __('Last seen'));
-        $grid->column('status', __('Status'));
-        $grid->column('linkedin', __('Linkedin'));
-        $grid->column('category_id', __('Category id'));
-        $grid->column('status_comment', __('Status comment'));
-        $grid->column('country_id', __('Country id'));
-        $grid->column('region', __('Region'));
-        $grid->column('district', __('District'));
-        $grid->column('sub_county', __('Sub county'));
-        $grid->column('user_type', __('User type'));
-        $grid->column('location_id', __('Location id'));
-        $grid->column('owner_id', __('Owner id'));
+        $grid->column('about', __('About'))->hide();
+        $grid->column('services', __('Services'))->hide();
+        $grid->column('longitude', __('Longitude'))->hide();
+        $grid->column('latitude', __('Latitude'))->hide();
+        $grid->column('division', __('Division'))->hide();
+        $grid->column('opening_hours', __('Opening hours'))->hide();
+        $grid->column('cover_photo', __('Cover photo'))->hide();
+        $grid->column('facebook', __('Facebook'))->hide();
+        $grid->column('twitter', __('Twitter'))->hide();
+        $grid->column('whatsapp', __('Whatsapp'))->hide();
+        $grid->column('youtube', __('Youtube'))->hide();
+        $grid->column('instagram', __('Instagram'))->hide();
+        $grid->column('last_seen', __('Last seen'))->hide();
+        $grid->column('status', __('Status'))->hide();
+        $grid->column('linkedin', __('Linkedin'))->hide();
+        $grid->column('category_id', __('Category id'))->hide();
+        $grid->column('status_comment', __('Status comment'))->hide();
+        $grid->column('country_id', __('Country id'))->hide();
+        $grid->column('region', __('Region'))->hide();
+        $grid->column('district', __('District'))->hide();
+        $grid->column('sub_county', __('Sub county'))->hide();
+        $grid->column('user_type', __('User type'))->hide();
+        $grid->column('location_id', __('Location id'))->hide();
+        $grid->column('owner_id', __('Owner id'))->hide();
         $grid->column('date_of_birth', __('Date of birth'));
         $grid->column('marital_status', __('Marital status'));
         $grid->column('gender', __('Gender'));
-        $grid->column('group_id', __('Group id'));
-        $grid->column('group_text', __('Group text'));
+        $grid->column('group_id', __('Group id'))->hide();
+        $grid->column('group_text', __('Group'));
         $grid->column('sector', __('Sector'));
         $grid->column('production_scale', __('Production scale'));
         $grid->column('number_of_dependants', __('Number of dependants'));
-        $grid->column('user_role', __('User role'));
+        //$grid->column('user_role', __('User role'));
         $grid->column('access_to_credit', __('Access to credit'));
         $grid->column('experience', __('Experience'));
-        $grid->column('profile_is_complete', __('Profile is complete'));
+        //$grid->column('profile_is_complete', __('Profile is complete'));
 
         return $grid;
     }
@@ -242,30 +240,25 @@ class AgentUsersController extends AdminController
         // $form->textarea('cover_photo', __('Cover photo')); 
         // $form->number('owner_id', __('Owner id'));
 
-        $form->text('user_type', __('User type'))->default('Farmer');
-        $form->text('id', __('id'));
+        $form->hidden('user_type', __('User type'))->default('Farmer');
+        $form->hidden('id', __('id'));
         $form->text('phone_number', __('Phone number'))
             ->help('Phone number will act as username to  login.')
-            ->default('0728736222')
             ->required();
         $form->password('password', __('Password'))
-            ->default('4321')
             ->required();
 
         $form->divider();
 
         $form->text('name', __('Full Name'))
-            ->default('Unfe farmer')
             ->required();
 
         $form->text('date_of_birth', __('Age'))
-            ->default(12)
             ->attribute('type', 'number')
             ->required();
 
 
         $form->select('gender', __('Gender'))
-            ->default('Male')
             ->options([
                 'Male' => 'Male',
                 'Female' => 'Female',
@@ -274,7 +267,6 @@ class AgentUsersController extends AdminController
 
 
         $form->select('marital_status', __('Marital status'))
-            ->default('Single')
             ->options([
                 'Single' => 'Single',
                 'Married' => 'Married',
@@ -282,17 +274,14 @@ class AgentUsersController extends AdminController
             ->required();
 
 
-        $form->text('email', __('Email'))
-            ->default('farmer1@gmail.com');
+        $form->text('email', __('Email'));
 
 
         $form->select('location_id', __('Sub-county'))
             ->options(Location::get_subcounties())
-            ->default(2275)
             ->required();
 
-        $form->text('address', __('Address'))
-            ->default('Bwera, Kasese');
+        $form->text('address', __('Address'));
 
 
         $form->select('group_id', __('Farmer\'s association'))
@@ -303,7 +292,6 @@ class AgentUsersController extends AdminController
 
 
         $form->select('sector', __('Farming sector'))
-            ->default('Crop farming')
             ->options([
                 'Crop farming' => 'Crop farming',
                 'Livestock farming' => 'Livestock farming',
@@ -312,11 +300,9 @@ class AgentUsersController extends AdminController
             ->required();
 
         $form->text('experience', __('Experience (in years)'))->attribute('type', 'number')
-            ->default('12')
             ->required();
 
         $form->select('production_scale', __('Production scale'))
-            ->default('Subsistence production')
             ->options([
                 'Subsistence production' => 'Subsistence production',
                 'Small Commercial Production' => 'Small Commercial Production',
@@ -326,11 +312,9 @@ class AgentUsersController extends AdminController
 
 
         $form->text('number_of_dependants', __('Number of dependants'))->attribute('type', 'number')
-            ->default('16')
             ->required();
 
         $form->select('access_to_credit', __('Production scale'))
-            ->default('Bank')
             ->options([
                 'No any access' => 'No any access',
                 'SACCO' => 'SACCO',
@@ -341,7 +325,7 @@ class AgentUsersController extends AdminController
             ->required();
 
 
-        $form->text('user_role', __('User role'))->default('Farmer')->readonly();
+        $form->hidden('user_role', __('User role'))->default('Farmer')->readonly();
 
 
         return $form;
