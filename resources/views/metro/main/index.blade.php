@@ -214,7 +214,7 @@ shuffle($bgs);
     ])
 
 
-    <div class="row bg-white mt-8 p-10"
+    {{-- <div class="row bg-white mt-8 p-10"
         style="background-image: url(https://www.micstatic.com/mic-search/img/home-2019/easy-sourcing.jpg?_v=1655724759401);     background-size:     cover;
         background-repeat:   no-repeat;
         background-position: center center; height: 34rem; ">
@@ -255,7 +255,7 @@ shuffle($bgs);
 
         </div>
 
-    </div>
+    </div> --}}
 
     {{-- <h2 class="display-6 text-center fw-normal my-5 my-md-10">Sourcing Solutions & Tailored Services</h2>
 
