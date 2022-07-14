@@ -16,6 +16,7 @@ $id = ((int) Request::segment(3));
 if ($id > 0) {
     $edit_item = Category::find($id);
 }
+ 
 if ($edit_item == null) {
     $edit_item = new Category();
 }
@@ -175,7 +176,7 @@ if ($edit_item == null) {
                     <div class="card-body">
                         @include('metro.components.input-select', [
                             'label' => 'Parent Category',
-                            'value' => $edit_item->parent,
+                            'value' => 1, 
                             'options' => $_options,
                             'attributes' => [
                                 'name' => 'parent',

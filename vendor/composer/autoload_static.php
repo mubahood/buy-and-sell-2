@@ -671,6 +671,8 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
     public static $classMap = array (
         'App\\Admin\\Controllers\\AgentUsersController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AgentUsersController.php',
         'App\\Admin\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AuthController.php',
+        'App\\Admin\\Controllers\\BannerMobileController' => __DIR__ . '/../..' . '/app/Admin/Controllers/BannerMobileController.php',
+        'App\\Admin\\Controllers\\BannerWebController' => __DIR__ . '/../..' . '/app/Admin/Controllers/BannerWebController.php',
         'App\\Admin\\Controllers\\ChatController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ChatController.php',
         'App\\Admin\\Controllers\\CropCategoryController' => __DIR__ . '/../..' . '/app/Admin/Controllers/CropCategoryController.php',
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',

@@ -15,7 +15,7 @@ class Category extends Model
 
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
+      
 
         $this->setParentColumn('parent');
         $this->setOrderColumn('order');
@@ -60,6 +60,11 @@ class Category extends Model
             $items[$v->id] = $_name;
         }
         return $items;
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, "parent");
     }
 
     public function kids()
@@ -121,7 +126,6 @@ class Category extends Model
 
     public static function boot()
     {
-        parent::boot();
         self::creating(function ($model) {
             $model->slug =  Str::slug($model->name, '-');
         });
