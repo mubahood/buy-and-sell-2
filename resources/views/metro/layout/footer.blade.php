@@ -36,13 +36,9 @@
             <div class="col-md-4 mt-2">
                 <h2 class="mb-3 my-md-5">Download our app</h2>
                 <div class="row">
+
                     <div class="col-6  ">
-                        <a href="javascript:;">
-                            <img class="img-fluid" src="{{ url('assets/images/download-apple.png') }}" alt="">
-                        </a>
-                    </div>
-                    <div class="col-6  ">
-                        <a href="javascript:;">
+                        <a href="https://play.google.com/store/apps/details?id=jotrace.com" target="_blank">
                             <img class="img-fluid" src="{{ url('assets/images/download-android.webp') }}"
                                 alt="">
                         </a>
