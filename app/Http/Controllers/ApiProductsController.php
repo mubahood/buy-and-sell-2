@@ -756,10 +756,10 @@ class ApiProductsController
         return 'create_post';
     }
 
+
     public function create(Request $request)
     {
-
-
+ 
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
