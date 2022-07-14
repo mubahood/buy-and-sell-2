@@ -214,13 +214,13 @@ shuffle($bgs);
     ])
 
 
-    {{-- <div class="row bg-white mt-8 p-10"
+    <div class="row bg-white mt-8 p-10"
         style="background-image: url(https://www.micstatic.com/mic-search/img/home-2019/easy-sourcing.jpg?_v=1655724759401);     background-size:     cover;
         background-repeat:   no-repeat;
         background-position: center center; height: 34rem; ">
         <div class="d-none d-md-block col-5  fw-bold fs-3 py-1 m-0 px-3 text-gray-900">
             <h2 class="h1 display-4 mb-4">EASY SOURCING</h2>
-            <p>{{ env('APP_NAME') }} is Uganda's largest online Farmers marketplace, connecting buyers with farmers.</p>
+            <p>{{ env('APP_NAME') }} is Replace it with jotrace is your suitable trusted source bridging the gap between manucfactures and consumers.</p>
             <p>One request, multiple quotes</p>
             <p>Verified suppliers matching</p>
             <p>Quotes comparison and sample request</p>
@@ -255,7 +255,7 @@ shuffle($bgs);
 
         </div>
 
-    </div> --}}
+    </div>
 
     {{-- <h2 class="display-6 text-center fw-normal my-5 my-md-10">Sourcing Solutions & Tailored Services</h2>
 
