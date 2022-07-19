@@ -34,6 +34,26 @@ class ApiUsersController
         return $items;
     }
 
+    public function users_profile(Request $request)
+    {
+
+        $id = (string) ($request->id ? $request->id : "0");
+        $u = User::find('id', $id);
+        if ($u == null) {
+            return Utils::response([
+                'status' => 0,
+                'message' => "User account not found.",
+                'data' => null
+            ]);
+        }
+
+        return Utils::response([
+            'status' => 1,
+            'message' => "Logged successfully.",
+            'data' => $u
+        ]);
+    }
+
     public function login(Request $request)
     {
         if (

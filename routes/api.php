@@ -30,13 +30,13 @@ Route::get('garden-production-record', [ApiProductsController::class, 'get_garde
 Route::get('financial-records', [ApiProductsController::class, 'get_financial_records']);
 
 Route::get('crop-categories', function () {
-    return CropCategory::all(); 
+    return CropCategory::all();
 });
 
 Route::get('users-1', function () {
     $users = Administrator::all();
 
-    return $users->pluck('name','id');
+    return $users->pluck('name', 'id');
 });
 
 Route::get('pests', function () {
@@ -61,9 +61,12 @@ Route::post('get-chats', [ApiChatsController::class, 'index']);
 Route::post('chats', [ApiChatsController::class, 'send_message']);
 Route::post('threads', [ApiChatsController::class, 'threads']);
 
+
+//User related end points
 Route::get('users', [ApiUsersController::class, 'index']);
 Route::post('users-update', [ApiUsersController::class, 'update']);
 Route::post('users-login', [ApiUsersController::class, 'login']);
+Route::get('users-profile', [ApiUsersController::class, 'users_profile']);
 
 Route::get('posts', [ApiProductsController::class, 'posts']);
 Route::get('post-categories', [ApiProductsController::class, 'post_categories']);
