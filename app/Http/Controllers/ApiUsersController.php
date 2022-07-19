@@ -37,8 +37,8 @@ class ApiUsersController
     public function users_profile(Request $request)
     {
 
-        $id = (string) ($request->id ? $request->id : "0");
-        $u = User::find('id', $id);
+        $id = (int) ($request->id ? $request->id : "0");
+        $u = User::find($id);
         if ($u == null) {
             return Utils::response([
                 'status' => 0,
