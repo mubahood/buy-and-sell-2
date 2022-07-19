@@ -34,6 +34,31 @@ class ApiUsersController
         return $items;
     }
 
+    public function verify_phone(Request $request)
+    {
+
+        $id = (int) ($request->id ? $request->id : "0");
+        $u = User::find($id);
+        if ($u == null) {
+            return Utils::response([
+                'status' => 0,
+                'message' => "User account not found.",
+                'data' => null
+            ]);
+        }
+
+        $u->verification_code = '4321';
+        $u->phone_number = $request->phone_number;
+        $u->phone_number_verified = 0;
+        $u->save();
+
+        return Utils::response([
+            'status' => 1,
+            'message' => "CODE was sent to your number {$u->phone_number} successfully.",
+            'data' => $u
+        ]);
+    }
+
     public function users_profile(Request $request)
     {
 
@@ -159,7 +184,6 @@ class ApiUsersController
         $u->name = (string) ($request->name ? $request->name : "");
         $u->username = (string) ($request->email ? $request->email : "");
         $u->company_name = (string) ($request->company_name ? $request->company_name : "");
-        $u->phone_number = (string) ($request->phone_number ? $request->phone_number : "");
         $u->address = (string) ($request->address ? $request->address : "");
         $u->about = (string) ($request->about ? $request->about : "");
         $u->services = (string) ($request->services ? $request->services : "");

@@ -67,6 +67,7 @@ Route::get('users', [ApiUsersController::class, 'index']);
 Route::post('users-update', [ApiUsersController::class, 'update']);
 Route::post('users-login', [ApiUsersController::class, 'login']);
 Route::get('users-profile', [ApiUsersController::class, 'users_profile']);
+Route::post('verify-phone', [ApiUsersController::class, 'verify_phone']);
 
 Route::get('posts', [ApiProductsController::class, 'posts']);
 Route::get('post-categories', [ApiProductsController::class, 'post_categories']);
