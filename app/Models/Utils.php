@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Client;
 use Hamcrest\Arrays\IsArray;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,51 @@ use function PHPUnit\Framework\fileExists;
 
 class Utils
 {
+    public static function send_sms($data)
+    {
+
+        if (
+            !isset($data['to'])
+        ) {
+            return false;
+        }
+
+        $client = new Client();
+        $response = $client->post('https://api.africastalking.com/version1/messaging', [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'apiKey' => '88afa91724fdcd5150d211b496cd1ad1fa56f8d4c88a1293dc79cedce12636ff',
+                'username' => 'farmerict',
+            ],
+            'form_params' => [
+                'apiKey' => '88afa91724fdcd5150d211b496cd1ad1fa56f8d4c88a1293dc79cedce12636ff',
+                'username' => 'farmerict',
+                'to' => $data['to'],
+                'message' => $data['message'],
+            ],
+        ]);
+
+
+
+        $resp = json_decode($response->getBody(), true);
+        if (isset($resp['SMSMessageData'])) {
+            if (isset($resp['SMSMessageData']['Recipients'])) {
+                if (isset($resp['SMSMessageData']['Recipients'][0])) {
+                    $d = $resp['SMSMessageData']['Recipients'][0];
+                    $statusCode = ((int)($d['statusCode']));
+                    if ($statusCode < 300) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+
     public static function get_locations()
     {
         $locations = [];

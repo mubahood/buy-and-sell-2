@@ -32,31 +32,12 @@ use function PHPUnit\Framework\fileExists;
 class MainController extends Controller
 {
     public function index()
-    {
+    { 
 
+
+
+    
         /* 
-        
-        $client = new Client();
-
-        $response = $client->post('https://api.africastalking.com/version1/messaging', [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'apiKey' => '88afa91724fdcd5150d211b496cd1ad1fa56f8d4c88a1293dc79cedce12636ff',
-                'username' => 'farmerict',
-            ],
-            'form_params' => [
-                'apiKey' => '88afa91724fdcd5150d211b496cd1ad1fa56f8d4c88a1293dc79cedce12636ff',
-                'username' => 'farmerict',
-                'to' => '+256726133871',
-                'message' => 'Romina', 
-
-            ],
-        ]);
-
-
-
-        $responseBody = json_decode($response->getBody(), true);
 
 
 

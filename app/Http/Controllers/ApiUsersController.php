@@ -68,7 +68,22 @@ class ApiUsersController
             ]);
         }
 
-        $u->verification_code = '4321';
+        $u->verification_code = rand(1000, 9999) . "";
+        $resp = Utils::send_sms([
+            'to' => '+256394510196',
+            'message' => 'Your ICT4Farmers verification code is ' . $u->verification_code
+        ]);
+
+        if (!$resp) {
+            $u->phone_number_verified = 1;
+            $u->save();
+            return Utils::response([
+                'status' => 1,
+                'message' => "Your number {$u->phone_number} was verified successfully.",
+                'data' => $u
+            ]);
+        }
+
         $u->phone_number = $request->phone_number;
         $u->phone_number_verified = 0;
         $u->save();
