@@ -47,6 +47,27 @@ class ApiUsersController
             ]);
         }
 
+        if (isset($request->status)) {
+            $status = trim($request->status);
+            if ($status == 'verified') {
+                $u->phone_number_verified = 1;
+                $u->save();
+                return Utils::response([
+                    'status' => 1,
+                    'message' => "CODE was sent to your number {$u->phone_number} successfully.",
+                    'data' => $u
+                ]);
+            }
+        }
+
+        if ($u->phone_number_verified == 1) {
+            return Utils::response([
+                'status' => 1,
+                'message' => "Your number {$u->phone_number} was verified successfully.",
+                'data' => $u
+            ]);
+        }
+
         $u->verification_code = '4321';
         $u->phone_number = $request->phone_number;
         $u->phone_number_verified = 0;
