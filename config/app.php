@@ -177,7 +177,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        NotificationChannels\OneSignal\OneSignalServiceProvider::class,
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
 
 
 
@@ -251,6 +251,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
 
         //'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 

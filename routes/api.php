@@ -23,8 +23,8 @@ Route::post('workers', [ApiProductsController::class, 'workers_create']);
 Route::post('financial-records', [ApiProductsController::class, 'financial_records_create']);
 Route::get('workers', [ApiProductsController::class, 'workers']);
 
-Route::get('gardens', [ApiProductsController::class, 'gardens']);
 Route::get('farms', [ApiProductsController::class, 'farms']);
+Route::get('gardens', [ApiProductsController::class, 'gardens']);
 Route::get('garden-activities', [ApiProductsController::class, 'garden_activities']);
 Route::get('garden-production-record', [ApiProductsController::class, 'get_garden_production_record']);
 Route::get('financial-records', [ApiProductsController::class, 'get_financial_records']);

@@ -16,7 +16,8 @@ use App\Models\Utils;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; 
+
 
 use function PHPUnit\Framework\fileExists;
 
@@ -31,6 +32,15 @@ class MainController extends Controller
     public function index()
     {
 
+        
+        \OneSignal::sendNotificationToAll(
+            "Some Message ahgsva", 
+            $url = null, 
+            $data = null, 
+            $buttons = null, 
+            $schedule = null
+        );
+        die("Romia");
 
         /*
         foreach (Product::all() as $key => $p) {

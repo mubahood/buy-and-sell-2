@@ -40,8 +40,8 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '9be1c2bab389f876c8b9376199151a90' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Helpers/helpers.php',
-        'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'a1af1fc0cffb5f61cbaf64dbe030fdb9' => __DIR__ . '/..' . '/laravel/legacy-factories/helpers.php',
+        'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -133,7 +133,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
-            'NotificationChannels\\OneSignal\\' => 31,
         ),
         'M' => 
         array (
@@ -454,10 +453,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
-        ),
-        'NotificationChannels\\OneSignal\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src',
         ),
         'MyCLabs\\Enum\\' => 
         array (
@@ -880,6 +875,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Carbon\\Exceptions\\BadFluentConstructorException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadFluentConstructorException.php',
         'Carbon\\Exceptions\\BadFluentSetterException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadFluentSetterException.php',
         'Carbon\\Exceptions\\BadMethodCallException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadMethodCallException.php',
+        'Carbon\\Exceptions\\EndLessPeriodException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/EndLessPeriodException.php',
         'Carbon\\Exceptions\\Exception' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/Exception.php',
         'Carbon\\Exceptions\\ImmutableException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/ImmutableException.php',
         'Carbon\\Exceptions\\InvalidArgumentException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidArgumentException.php',
@@ -4769,21 +4765,6 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-        'NotificationChannels\\OneSignal\\Exceptions\\CouldNotSendNotification' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Exceptions/CouldNotSendNotification.php',
-        'NotificationChannels\\OneSignal\\Exceptions\\InvalidConfiguration' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Exceptions/InvalidConfiguration.php',
-        'NotificationChannels\\OneSignal\\OneSignalButton' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalButton.php',
-        'NotificationChannels\\OneSignal\\OneSignalChannel' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalChannel.php',
-        'NotificationChannels\\OneSignal\\OneSignalMessage' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalMessage.php',
-        'NotificationChannels\\OneSignal\\OneSignalPayloadFactory' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalPayloadFactory.php',
-        'NotificationChannels\\OneSignal\\OneSignalServiceProvider' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalServiceProvider.php',
-        'NotificationChannels\\OneSignal\\OneSignalWebButton' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalWebButton.php',
-        'NotificationChannels\\OneSignal\\Traits\\Categories\\AppearanceHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/AppearanceHelpers.php',
-        'NotificationChannels\\OneSignal\\Traits\\Categories\\AttachmentHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/AttachmentHelpers.php',
-        'NotificationChannels\\OneSignal\\Traits\\Categories\\ButtonHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/ButtonHelpers.php',
-        'NotificationChannels\\OneSignal\\Traits\\Categories\\DeliveryHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/DeliveryHelpers.php',
-        'NotificationChannels\\OneSignal\\Traits\\Categories\\GroupingHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/GroupingHelpers.php',
-        'NotificationChannels\\OneSignal\\Traits\\Categories\\SilentHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/SilentHelpers.php',
-        'NotificationChannels\\OneSignal\\Traits\\Deprecated' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Deprecated.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\Commands\\TestCommand' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/Commands/TestCommand.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php',
@@ -5465,6 +5446,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'PhpOffice\\PhpSpreadsheet\\Cell\\StringValueBinder' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/StringValueBinder.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\Axis' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/Axis.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\Chart' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/Chart.php',
+        'PhpOffice\\PhpSpreadsheet\\Chart\\ChartColor' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/ChartColor.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\DataSeries' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/DataSeries.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\DataSeriesValues' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/DataSeriesValues.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\Exception' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/Exception.php',
