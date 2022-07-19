@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'onesignal' => [
+        'app_id' => env('51de22fc-e924-4731-a37f-f7a3276ab151'),
+        'rest_api_key' => env('NmI3OTEwNzgtOGUzYy00ZDgyLTg0OTAtNjBmNWU4MmFlNGIx'),
+        'guzzle_client_timeout' => env('ONESIGNAL_GUZZLE_CLIENT_TIMEOUT', 0),
+    ],
+
 ];

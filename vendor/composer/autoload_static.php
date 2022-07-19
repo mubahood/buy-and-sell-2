@@ -100,6 +100,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
             'Symfony\\Component\\DomCrawler\\' => 29,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'Svg\\' => 4,
             'Spatie\\LaravelImageOptimizer\\' => 29,
             'Spatie\\ImageOptimizer\\' => 22,
@@ -132,6 +133,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
+            'NotificationChannels\\OneSignal\\' => 31,
         ),
         'M' => 
         array (
@@ -212,6 +214,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         array (
             'Brick\\Math\\' => 11,
             'BinaryTorch\\LaRecipe\\' => 21,
+            'Berkayk\\OneSignal\\' => 18,
             'Barryvdh\\Snappy\\' => 16,
             'Barryvdh\\DomPDF\\' => 16,
         ),
@@ -367,6 +370,10 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Symfony\\Bridge\\PsrHttpMessage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
+        ),
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
@@ -447,6 +454,10 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
+        ),
+        'NotificationChannels\\OneSignal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src',
         ),
         'MyCLabs\\Enum\\' => 
         array (
@@ -649,6 +660,10 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         array (
             0 => __DIR__ . '/..' . '/binarytorch/larecipe/src',
         ),
+        'Berkayk\\OneSignal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/berkayk/onesignal-laravel/src',
+        ),
         'Barryvdh\\Snappy\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src',
@@ -710,6 +725,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Admin\\Controllers\\GardenController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GardenController.php',
         'App\\Admin\\Controllers\\GardenProductionRecordController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GardenProductionRecordController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
+        'App\\Admin\\Controllers\\MarketController' => __DIR__ . '/../..' . '/app/Admin/Controllers/MarketController.php',
         'App\\Admin\\Controllers\\MyProductController' => __DIR__ . '/../..' . '/app/Admin/Controllers/MyProductController.php',
         'App\\Admin\\Controllers\\PestCaseController' => __DIR__ . '/../..' . '/app/Admin/Controllers/PestCaseController.php',
         'App\\Admin\\Controllers\\PestCaseListingController' => __DIR__ . '/../..' . '/app/Admin/Controllers/PestCaseListingController.php',
@@ -762,6 +778,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Models\\GardenProductionRecord' => __DIR__ . '/../..' . '/app/Models/GardenProductionRecord.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
         'App\\Models\\Location' => __DIR__ . '/../..' . '/app/Models/Location.php',
+        'App\\Models\\Market' => __DIR__ . '/../..' . '/app/Models/Market.php',
         'App\\Models\\MenuItem' => __DIR__ . '/../..' . '/app/Models/MenuItem.php',
         'App\\Models\\Pest' => __DIR__ . '/../..' . '/app/Models/Pest.php',
         'App\\Models\\PestCase' => __DIR__ . '/../..' . '/app/Models/PestCase.php',
@@ -769,6 +786,7 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'App\\Models\\PostCategory' => __DIR__ . '/../..' . '/app/Models/PostCategory.php',
         'App\\Models\\PostComment' => __DIR__ . '/../..' . '/app/Models/PostComment.php',
         'App\\Models\\Pricing' => __DIR__ . '/../..' . '/app/Models/Pricing.php',
+        'App\\Models\\PricingItem' => __DIR__ . '/../..' . '/app/Models/PricingItem.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\ProductReview' => __DIR__ . '/../..' . '/app/Models/ProductReview.php',
         'App\\Models\\Profile' => __DIR__ . '/../..' . '/app/Models/Profile.php',
@@ -802,6 +820,9 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Barryvdh\\Snappy\\PdfFaker' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfFaker.php',
         'Barryvdh\\Snappy\\PdfWrapper' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfWrapper.php',
         'Barryvdh\\Snappy\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/ServiceProvider.php',
+        'Berkayk\\OneSignal\\OneSignalClient' => __DIR__ . '/..' . '/berkayk/onesignal-laravel/src/OneSignalClient.php',
+        'Berkayk\\OneSignal\\OneSignalFacade' => __DIR__ . '/..' . '/berkayk/onesignal-laravel/src/OneSignalFacade.php',
+        'Berkayk\\OneSignal\\OneSignalServiceProvider' => __DIR__ . '/..' . '/berkayk/onesignal-laravel/src/OneSignalServiceProvider.php',
         'BinaryTorch\\LaRecipe\\Cache' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Cache.php',
         'BinaryTorch\\LaRecipe\\Commands\\AssetCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/AssetCommand.php',
         'BinaryTorch\\LaRecipe\\Commands\\GenerateDocumentationCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/GenerateDocumentationCommand.php',
@@ -4748,6 +4769,21 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'NotificationChannels\\OneSignal\\Exceptions\\CouldNotSendNotification' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Exceptions/CouldNotSendNotification.php',
+        'NotificationChannels\\OneSignal\\Exceptions\\InvalidConfiguration' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Exceptions/InvalidConfiguration.php',
+        'NotificationChannels\\OneSignal\\OneSignalButton' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalButton.php',
+        'NotificationChannels\\OneSignal\\OneSignalChannel' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalChannel.php',
+        'NotificationChannels\\OneSignal\\OneSignalMessage' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalMessage.php',
+        'NotificationChannels\\OneSignal\\OneSignalPayloadFactory' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalPayloadFactory.php',
+        'NotificationChannels\\OneSignal\\OneSignalServiceProvider' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalServiceProvider.php',
+        'NotificationChannels\\OneSignal\\OneSignalWebButton' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/OneSignalWebButton.php',
+        'NotificationChannels\\OneSignal\\Traits\\Categories\\AppearanceHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/AppearanceHelpers.php',
+        'NotificationChannels\\OneSignal\\Traits\\Categories\\AttachmentHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/AttachmentHelpers.php',
+        'NotificationChannels\\OneSignal\\Traits\\Categories\\ButtonHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/ButtonHelpers.php',
+        'NotificationChannels\\OneSignal\\Traits\\Categories\\DeliveryHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/DeliveryHelpers.php',
+        'NotificationChannels\\OneSignal\\Traits\\Categories\\GroupingHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/GroupingHelpers.php',
+        'NotificationChannels\\OneSignal\\Traits\\Categories\\SilentHelpers' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Categories/SilentHelpers.php',
+        'NotificationChannels\\OneSignal\\Traits\\Deprecated' => __DIR__ . '/..' . '/laravel-notification-channels/onesignal/src/Traits/Deprecated.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\Commands\\TestCommand' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/Commands/TestCommand.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php',
@@ -6684,6 +6720,13 @@ class ComposerStaticInit6610ade2b3586dfbab7a590c0b52e757
         'Svg\\Tag\\StyleTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php',
         'Svg\\Tag\\Text' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Text.php',
         'Svg\\Tag\\UseTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\ArgumentValueResolver\\PsrServerRequestResolver' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/ArgumentValueResolver/PsrServerRequestResolver.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\EventListener\\PsrResponseListener' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/EventListener/PsrResponseListener.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\HttpFoundationFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/HttpFoundationFactory.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\PsrHttpFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/PsrHttpFactory.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\UploadedFile' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/UploadedFile.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\HttpFoundationFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpFoundationFactoryInterface.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\HttpMessageFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpMessageFactoryInterface.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
         'Symfony\\Component\\Console\\CI\\GithubActionReporter' => __DIR__ . '/..' . '/symfony/console/CI/GithubActionReporter.php',
