@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route; //new staff
 
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::post('gardens', [ApiProductsController::class, 'create_garden']);
-Route::post('farms', [ApiProductsController::class, 'farms']);
+Route::post('farms', [ApiProductsController::class, 'create_farm']);
 
 Route::post('garden-activities', [ApiProductsController::class, 'garden_activities_create']);
 Route::delete('garden-activities', [ApiProductsController::class, 'garden_activities_delete']);
