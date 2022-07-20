@@ -319,11 +319,14 @@ class ApiUsersController
         $u['phone_number'] = trim($request->input("email"));
         $u['email'] = '';
 
-        $old_user = User::where('username', $u['username'])->first();
+        $old_user = User::where('username', $u['username'])
+        ->orWhere('phone_number', $u['username'])
+        ->first();
+        
         if ($old_user != null) {
             return Utils::response([
                 'status' => 0,
-                'message' => "A account with same {$old_user->phone_number} you provided already exist."
+                'message' => "A account with same phone number you provided already exist."
             ]);
         }
 
