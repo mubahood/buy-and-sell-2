@@ -46,9 +46,6 @@ class Utils
 
 
         $resp = json_decode($response->getBody(), true);
-        echo "<pre>";
-        print_r($resp);
-        die();
         if (isset($resp['SMSMessageData'])) {
             if (isset($resp['SMSMessageData']['Recipients'])) {
                 if (isset($resp['SMSMessageData']['Recipients'][0])) {
