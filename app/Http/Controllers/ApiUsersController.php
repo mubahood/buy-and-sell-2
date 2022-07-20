@@ -37,6 +37,7 @@ class ApiUsersController
     public function verify_phone(Request $request)
     {
 
+        //sms verification added
         $id = (int) ($request->id ? $request->id : "0");
         $u = User::find($id);
         $u->phone_number_verified = '1';
