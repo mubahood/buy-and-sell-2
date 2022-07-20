@@ -85,7 +85,7 @@ class ApiUsersController
         }
 
         $u->phone_number = $request->phone_number;
-        $u->phone_number_verified = 0;
+        $u->phone_number_verified = 1;
         $u->save();
 
         return Utils::response([
@@ -320,9 +320,9 @@ class ApiUsersController
         $u['email'] = '';
 
         $old_user = User::where('username', $u['username'])
-        ->orWhere('phone_number', $u['username'])
-        ->first();
-        
+            ->orWhere('phone_number', $u['username'])
+            ->first();
+
         if ($old_user != null) {
             return Utils::response([
                 'status' => 0,
