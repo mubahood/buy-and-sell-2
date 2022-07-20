@@ -56,7 +56,7 @@ Route::post('delete-product', [ApiProductsController::class, 'delete']);
 Route::get('banners', [ApiProductsController::class, 'banners']);
 Route::get('categories', [ApiProductsController::class, 'categories']);
 Route::get('locations', [ApiProductsController::class, 'locations']);
-Route::post('users', [ApiUsersController::class, 'create_account']);
+
 Route::post('get-chats', [ApiChatsController::class, 'index']);
 Route::post('chats', [ApiChatsController::class, 'send_message']);
 Route::post('threads', [ApiChatsController::class, 'threads']);
@@ -68,6 +68,7 @@ Route::post('users-update', [ApiUsersController::class, 'update']);
 Route::post('users-login', [ApiUsersController::class, 'login']);
 Route::get('users-profile', [ApiUsersController::class, 'users_profile']);
 Route::post('verify-phone', [ApiUsersController::class, 'verify_phone']);
+Route::post('users', [ApiUsersController::class, 'create_account']);
 
 Route::get('posts', [ApiProductsController::class, 'posts']);
 Route::get('post-categories', [ApiProductsController::class, 'post_categories']);

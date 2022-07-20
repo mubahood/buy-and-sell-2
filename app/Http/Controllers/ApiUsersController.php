@@ -316,13 +316,14 @@ class ApiUsersController
 
         $u['name'] = $request->input("name");
         $u['username'] = trim($request->input("email"));
-        $u['email'] = trim($request->input("email"));
+        $u['phone_number'] = trim($request->input("email"));
+        $u['email'] = '';
 
         $old_user = User::where('username', $u['username'])->first();
         if ($old_user) {
             return Utils::response([
                 'status' => 0,
-                'message' => "User with same email address already exist."
+                'message' => "A account with same phone number you provided already exist."
             ]);
         }
 
