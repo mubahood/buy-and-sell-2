@@ -39,6 +39,8 @@ class ApiUsersController
 
         $id = (int) ($request->id ? $request->id : "0");
         $u = User::find($id);
+        $u->phone_number_verified = '1';
+        $u->save();
         if ($u == null) {
             return Utils::response([
                 'status' => 0,
