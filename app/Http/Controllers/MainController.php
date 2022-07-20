@@ -35,11 +35,12 @@ class MainController extends Controller
     public function index()
     {
 
-        \OneSignal::sendNotificationToAll(
-            "Some Message ahgsva", 
-            $url = null, 
-            $data = null, 
-            $buttons = null, 
+        \OneSignal::sendNotificationToExternalUser(
+            "Some Message",
+            '15360',
+            $url = null,
+            $data = null,
+            $buttons = null,
             $schedule = null
         );
         die("romina");
