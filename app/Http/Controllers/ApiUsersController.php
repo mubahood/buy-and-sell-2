@@ -160,7 +160,7 @@ class ApiUsersController
         }
 
 
-        if (password_verify($password, $u->password)) {
+        if (!password_verify($password, $u->password)) {
             return Utils::response([
                 'status' => 0,
                 'message' => "Wrong password.",
