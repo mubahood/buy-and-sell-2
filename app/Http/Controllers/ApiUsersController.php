@@ -70,7 +70,7 @@ class ApiUsersController
 
         $u->verification_code = rand(1000, 9999) . "";
         $resp = Utils::send_sms([
-            'to' => '+256394510196',
+            'to' => $u->phone_number,
             'message' => 'Your ICT4Farmers verification code is ' . $u->verification_code
         ]);
 
@@ -131,10 +131,17 @@ class ApiUsersController
         $email = (string) ($request->email ? $request->email : "");
         $password = (string) ($request->password ? $request->password : "");
 
-        $_u = User::where('username', $email)->get();
+        $_u = User::where('phone_number', $email)->get();
         $u = null;
         if (isset($_u[0])) {
             $u = $_u[0];
+        }
+
+        if ($u == null) {
+            $_u = User::where('username', $email)->get();
+            if (isset($_u[0])) {
+                $u = $_u[0];
+            }
         }
 
         if ($u == null) {
