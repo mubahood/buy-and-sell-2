@@ -39,6 +39,7 @@ class Utils
                 'apiKey' => '88afa91724fdcd5150d211b496cd1ad1fa56f8d4c88a1293dc79cedce12636ff',
                 'username' => 'farmerict',
                 'to' => $data['to'],
+                'from' => 'ICT4farmers',
                 'message' => $data['message'],
             ],
         ]);
