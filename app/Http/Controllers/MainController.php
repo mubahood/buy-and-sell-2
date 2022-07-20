@@ -14,6 +14,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Models\Utils;
 use Carbon\Carbon;
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,11 +35,30 @@ class MainController extends Controller
     public function index()
     {
 
-      
-        
-        
+
 
         /* 
+        
+        $u = Administrator::find(1);
+        $u->phone_number = "+256788329636";
+        $u->phone_number = "+256705133284";
+        $u->phone_number = "+256758589326";
+        $u->verification_code = rand(1000, 9999) . "";
+        $resp = Utils::send_sms([
+            'to' => $u->phone_number,
+            'from' => 'ICT4farmers',
+            'message' => 'Your ICT4Farmers verification code is ' . $u->verification_code
+        ]);
+        if ($resp) {
+            echo "Goood with {$u->phone_number}";
+        } else {
+            echo "Baaad with {$u->phone_number}";
+        }
+        die("");
+
+
+
+        
 
 
 

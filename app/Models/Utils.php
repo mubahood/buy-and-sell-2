@@ -39,7 +39,6 @@ class Utils
                 'apiKey' => '88afa91724fdcd5150d211b496cd1ad1fa56f8d4c88a1293dc79cedce12636ff',
                 'username' => 'farmerict',
                 'to' => $data['to'],
-                'from' => 'ICT4farmers',
                 'message' => $data['message'],
             ],
         ]);
@@ -47,6 +46,9 @@ class Utils
 
 
         $resp = json_decode($response->getBody(), true);
+        echo "<pre>";
+        print_r($resp);
+        die();
         if (isset($resp['SMSMessageData'])) {
             if (isset($resp['SMSMessageData']['Recipients'])) {
                 if (isset($resp['SMSMessageData']['Recipients'][0])) {
