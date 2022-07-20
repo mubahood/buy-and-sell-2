@@ -85,7 +85,7 @@ class ApiUsersController
         }
 
         $u->phone_number = $request->phone_number;
-        $u->phone_number_verified = 1;
+        $u->phone_number_verified = 0;
         $u->save();
 
         return Utils::response([
