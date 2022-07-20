@@ -35,6 +35,7 @@ class MainController extends Controller
     public function index()
     {
 
+        /* 
         \OneSignal::sendNotificationToExternalUser(
             "Some Message",
             '15360',
@@ -46,7 +47,7 @@ class MainController extends Controller
         die("romina");
 
 
-        /* 
+        
         
         $u = Administrator::find(1);
         $u->phone_number = "+256788329636";
