@@ -180,7 +180,6 @@ class ApiUsersController
             }
         }
 
-        return $u->avatar; 
         $u->save();
 
         return Utils::response([

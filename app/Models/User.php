@@ -127,6 +127,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($avatar)
     {
+        return $avatar;
         return url('public/storage/' . $avatar);
     }
 
