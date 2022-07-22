@@ -174,11 +174,13 @@ class ApiUsersController
                             if (isset($_FILES['profile_pic']['tmp_name'])) {
                                 $u->avatar = Utils::upload_file($_FILES['profile_pic']);
                             };
-                        } 
+                        }
+                        unset($_FILES['audio']);
                     }
                 }
             }
         }
+
 
         $u->save();
 
