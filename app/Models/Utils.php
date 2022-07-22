@@ -228,7 +228,7 @@ class Utils
         }
 
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
-        $path = str_replace('/public/storage','',$path);
+        $path = str_replace('public/storage/','',$path);
         return $path;
     }
     public static function upload_images($files)
