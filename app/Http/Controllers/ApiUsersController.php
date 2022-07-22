@@ -166,8 +166,8 @@ class ApiUsersController
         unset($u->status);
         unset($u->linkedin);
 
-        return $_FILES;
-        
+
+
         if (isset($_FILES)) {
             if ($_FILES != null) {
 
@@ -176,6 +176,7 @@ class ApiUsersController
                         if ($_FILES['profile_pic'] != null) {
                             if (isset($_FILES['profile_pic']['tmp_name'])) {
                                 $u->avatar = Utils::upload_file($_FILES['profile_pic']);
+                                return 'DONE AVATAVE';
                             };
                         }
                         unset($_FILES['audio']);
@@ -184,6 +185,7 @@ class ApiUsersController
             }
         }
 
+        return 'NO AVATAVE';
 
         $u->save();
 
