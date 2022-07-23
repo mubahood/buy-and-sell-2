@@ -127,7 +127,10 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($avatar)
     {
-        //return $avatar;
+        if($avatar == null){
+            return url('no_image.jpg');
+        }
+        //return $avatar; 
         return url( $avatar);
     }
 
