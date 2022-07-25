@@ -1,4 +1,2 @@
 .env
-.htaccess
-public/*
-/public/
+config/app.php 

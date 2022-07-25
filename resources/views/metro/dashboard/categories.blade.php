@@ -12,12 +12,14 @@ foreach ($menus as $key => $value) {
 }
 
 $edit_item = new Category();
+$edit_item->parent = 0;
 $id = ((int) Request::segment(3));
 if ($id > 0) {
     $edit_item = Category::find($id);
 }
 if ($edit_item == null) {
     $edit_item = new Category();
+    $edit_item->parent = 0;
 }
  
 ?>@extends('metro.layout.layout-dashboard')
@@ -26,7 +28,7 @@ if ($edit_item == null) {
     <link rel="stylesheet" href="{{ url('assets/css/vendor/nestable.css') }}">
 @endsection
 
-@section('toolbar-title','Categories')
+@section('toolbar-title', 'Categories')
 @section('footer')
     <script src="{{ url('assets/js/vendor/nestable.js') }}"></script>
     <script>
@@ -191,7 +193,7 @@ if ($edit_item == null) {
                                 'name' => 'name',
                                 'type' => 'text',
                             ],
-                        ]) 
+                        ])
 
                         @include('metro.components.input-text', [
                             'label' => 'Description',
@@ -203,27 +205,27 @@ if ($edit_item == null) {
                                 'type' => 'text',
                             ],
                         ])
-                        
-                        
+
+
                         <div class="image-input image-input-empty image-input-outline mb-3 mt-5" data-kt-image-input="true"
-                        style="background-image: url({{ url('storage/'.$edit_item->image) }})">
-                        <label for="avatar" class="mb-2">Thumbnail</label>
-                        <div class="image-input-wrapper w-150px h-150px"></div>
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-                            <input id="avatar" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="avatar_remove" />
-                        </label>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                    </div>
+                            style="background-image: url({{ url('storage/' . $edit_item->image) }})">
+                            <label for="avatar" class="mb-2">Thumbnail</label>
+                            <div class="image-input-wrapper w-150px h-150px"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input id="avatar" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
 
 
                     </div>

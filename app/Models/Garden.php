@@ -9,6 +9,91 @@ use Illuminate\Database\Eloquent\Model;
 class Garden extends Model
 {
     use HasFactory;
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getPlantDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getLocationNameAttribute()
+    {
+        $loc = Location::find($this->location_id);
+        if ($loc != null) {
+            return $loc->name;
+        } else {
+            return "-";
+        }
+    }
+
+
+    public function location()
+    {
+        $o = Location::find($this->location_id);
+        if($o == null){
+            $this->location_id = 1;
+            $this->save();
+        }
+        return $this->belongsTo(Location::class,'location_id');
+    }
+
+    public function sector()
+    {
+        $o = CropCategory::find($this->crop_category_id);
+        if($o == null){
+            $this->crop_category_id = 1;
+            $this->save();
+        }
+        return $this->belongsTo(CropCategory::class,'crop_category_id');
+    }
+
+    public function getCropCategoryNameAttribute()
+    {
+        if ($this->crop_category != null) {
+            return $this->crop_category->name;
+        } else {
+            return "-";
+        }
+    }
+
+    public function getProductionActivitiesAllAttribute()
+    {
+        return GardenActivity::where('garden_id', $this->id)->count();
+    }
+
+    public function getProductionActivitiesDoneAttribute()
+    {
+        return GardenActivity::where([
+            'garden_id' => $this->id,
+            'is_done' => 1
+        ])->count();
+    }
+ 
+    public function getProductionActivitiesRemainingAttribute()
+    {
+        return GardenActivity::where([
+            'garden_id' => $this->id,
+            'is_done' => 0
+        ])->count();
+    }
+
+    protected $appends = [
+        'crop_category_name',
+        'production_activities_all', 
+        'production_activities_done',
+        'production_activities_remaining',
+        'location_name',
+    ];
+
+    public function crop_category()
+    {
+        return $this->belongsTo(CropCategory::class, 'crop_category_id');
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -64,9 +149,9 @@ class Garden extends Model
                 '#44372E',
                 '#000000',
                 '#3E51A1',
-              ];
-              shuffle($my_colors);
- 
+            ];
+            shuffle($my_colors);
+
             $model->color = $my_colors[0];
             return $model;
         });

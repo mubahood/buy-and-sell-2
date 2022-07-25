@@ -31,14 +31,52 @@ class MainController extends Controller
     public function index()
     {
 
+
+        /*
+        foreach (Product::all() as $key => $p) {
+
+            $f = \Faker\Factory::create();
+            $p->name = $f->sentence;
+            echo $p->name."<hr>";
+            $p->save();
+            continue;
+            $imgs = json_decode($p->images);
+
+            $_imgs = [];
+            echo "<pre>";
+            foreach ($imgs as $im) {
+                $im->thumbnail = rand(1, 10) . "_thumb.jpg";
+                $_imgs[] = $im;
+                # code...
+            }
+            $p->images = json_encode($_imgs);
+            $p->save();
+            continue;
+            dd($p->images);
+            print_r($_imgs);
+            die();
+            $imgs = [];
+            for ($i = 1; $i < 8; $i++) {
+                $num = rand(1, 50);
+                $im['src'] = $num . '.jpg';
+                $im['thumbnail'] = $num . '_thumb.jpg';
+                $p->thumbnail = json_encode($im);
+                $p->save();
+            }
+
+            $p->images =   json_encode($imgs);
+            //$p->save();
+        }
+        die("Done");     */
+
         // $p['source'] = 'public/test/1.jpeg';
         // $p['target'] = 'public/test/anjane.jpeg';
         // Utils::create_thumbail($p);
 
 
-       
-        
-         
+
+
+
         // dd("time to fight");
 
         /*
@@ -58,7 +96,7 @@ class MainController extends Controller
 
         dd("pests");*/
 
-  
+
 
         // $string = file_get_contents("./public/products.json");
         // $json_a = json_decode($string,true);
@@ -215,8 +253,9 @@ thumbnail
         // echo('<img width="400" src="'.$thumbnail.'" />');
 
         // die("");
-        return view('metro.main.product-listing');
-        //return view('metro.main.index');
+        //return view('metro.main.product-listing');
+        //return view('metro.main.product-listing');
+        return view('metro.main.index');
         //return view('metro.index');
     }
 
@@ -225,7 +264,6 @@ thumbnail
         //echo "<pre>"; 
         //dd($request);
         //die();
-        //
         if (
             isset($_POST['reason']) &&
             isset($_POST['product_id']) &&
@@ -256,11 +294,11 @@ thumbnail
         }
 
         $seg = request()->segment(1);
- 
-        if($seg == 'product-listing'){
+
+        if ($seg == 'product-listing') {
             return view('metro.main.product-listing');
         }
- 
+
         $profile = Profile::where('username', $seg)->first();
         if ($profile) {
             return view('main.display-profile');
@@ -270,7 +308,7 @@ thumbnail
         if ($pro) {
             return view('metro.main.products-details');
         }
-        
+
         $pro = Product::where('id', $seg)->first();
         if ($pro) {
             return view('metro.main.products-details');
@@ -478,7 +516,12 @@ thumbnail
 
     public function about()
     {
-        return view('about.about_us');
+        return view('metro.about_us');
+    }
+
+    public function privacy()
+    {
+        return view('metro.privacy');
     }
 
     public function sell_fast()

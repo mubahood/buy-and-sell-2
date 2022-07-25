@@ -50,7 +50,18 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        self::creating(function ($model) {
+        self::creating(function ($m) {
+            if ($m != null) {
+                if ($m->location_id != null) {
+                    $loc = Location::find($m->location_id);
+                    if ($loc != null) {
+                        if ($loc->parent != null) {
+                            $m->district = $loc->parent;
+                        }
+                    }
+                }
+            }
+            return $m;
         });
 
         self::created(function ($model) {
@@ -58,8 +69,18 @@ class User extends Authenticatable
             //Profile::create($pro);
         });
 
-        self::updating(function ($model) {
-            // ... code here
+        self::updating(function ($m) {
+            if ($m != null) {
+                if ($m->location_id != null) {
+                    $loc = Location::find($m->location_id);
+                    if ($loc != null) {
+                        if ($loc->parent != null) {
+                            $m->district = $loc->parent;
+                        }
+                    }
+                }
+            }
+            return $m;
         });
 
         self::updated(function ($model) {
@@ -98,16 +119,25 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
- 
+
+    public function getFacebookAttribute()
+    {
+        return json_encode($this->original);
+    }
+
     public function getAvatarAttribute($avatar)
     {
-       return url('public/storage/'.$avatar);
+        if($avatar == null){
+            return url('no_image.jpg');
+        }
+        //return $avatar; 
+        return url( $avatar);
     }
 
 
-    protected $appends = [
-        'avatar', 
-    ];
+/*     protected $appends = [
+        'avatar',
+    ]; */
 
     /**
      * The attributes that should be cast.

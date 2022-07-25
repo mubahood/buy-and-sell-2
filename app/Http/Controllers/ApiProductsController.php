@@ -6,25 +6,257 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Farm;
+use App\Models\FinancialRecord;
 use App\Models\Garden;
 use App\Models\GardenActivity;
+use App\Models\GardenProductionRecord; 
 use App\Models\Image;
+use App\Models\Location;
 use App\Models\PestCase;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostComment;
 use App\Models\Product;
+use App\Models\Question;
 use App\Models\Utils;
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
-use Nette\Utils\Strings;
+use Illuminate\Support\Facades\Hash;
 
 class ApiProductsController
 {
 
 
 
+    public function workers(Request $r)
+    {
+        if (!isset($_GET['owner_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['owner_id']));
+        return Administrator::where(['owner_id' => $administrator_id])->get();
+    }
+
+    public function financial_records_create(Request $r)
+    {
+        if (!isset($_POST['garden_id'])) {
+            return Utils::response(['message' => 'Garden is required.', 'status' => 0]);
+        }
+        if (!isset($_POST['created_by'])) {
+            return Utils::response(['message' => 'Created by is required.', 'status' => 0]);
+        }
+        if (!isset($_POST['amount'])) {
+            return Utils::response(['message' => 'amount by is required.', 'status' => 0]);
+        }
+
+        $f = new FinancialRecord();
+        $f->garden_id = ((int)($r->garden_id));
+        $f->created_by = ((int)($r->created_by));
+        $f->amount = ((int)($r->amount));
+        $f->description = $r->description;
+
+        if ($f->save()) {
+            return Utils::response(['message' => 'Financial record created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create financial record. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+    public function workers_create(Request $r)
+    {
+
+        if (!isset($_POST['owner_id'])) {
+            return Utils::response(['message' => 'Owner is required.', 'status' => 0]);
+        }
+
+        $owner_id = ((int)($_POST['owner_id']));
+        $phone_number = ((string)($_POST['phone_number']));
+
+        $items = Administrator::where([
+            'phone_number' => $phone_number,
+        ])->get();
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'User with same phone number already exist.', 'status' => 0]);
+        }
+
+        $items = Administrator::where([
+            'email' => $phone_number,
+        ])->get();
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'User with same phone number already exist.', 'status' => 0]);
+        }
+
+        $items = Administrator::where([
+            'username' => $phone_number,
+        ])->get();
+
+        if (count($items) > 0) {
+            return Utils::response(['message' => 'User with same phone number already exist.', 'status' => 0]);
+        }
+
+
+        $user = new Administrator();
+        $user->owner_id = $owner_id;
+        $user->avatar = 'no_image.jpg';
+        $user->user_type = 'worker';
+        $user->phone_number = $phone_number;
+        $user->username = $phone_number;
+        $user->email = $phone_number;
+        $user->about = ((string)($r->about));
+        $user->name = ((string)($r->name));
+        $user->password = Hash::make(trim($r->password));
+
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $user->avatar = json_encode($uploaded_images);
+        }
+
+        if ($user->save()) {
+            return Utils::response(['message' => 'Case created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+
+
+    public function garden_production_record_create(Request $r)
+    {
+
+        if (!isset($_POST['garden_id'])) {
+            return Utils::response(['message' => 'Garden ID is required.', 'status' => 0]);
+        }
+
+        if (!isset($_POST['created_by_id'])) {
+            return Utils::response(['message' => 'Created by id is required.', 'status' => 0]);
+        }
+
+        $garden_id = ((int)($_POST['garden_id']));
+        $g = Garden::find($garden_id);
+
+        if ($g == null) {
+            return Utils::response(['message' => 'Garden not #'.$garden_id.' found.', 'status' => 0]);
+        }
+
+        $new_record = new GardenProductionRecord();
+        $new_record->created_by_id = ((int)($r->created_by_id));
+        $new_record->administrator_id = $g->administrator_id;
+        $new_record->garden_id = $g->id;
+        $new_record->description = $r->description;
+        $new_record->images = '[]';
+
+
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $new_record->images = json_encode($uploaded_images);
+        }
+
+        if ($new_record->save()) {
+
+            if (
+                isset($r->activity_id) &&
+                isset($r->done_status)
+
+            ) {
+                $activity_id = ((int)($r->activity_id));
+                if ($activity_id > 0) {
+                    $act = GardenActivity::find($activity_id);
+                    if ($act != null) {
+                        $act->is_done = true;
+                        $act->done_status = $r->done_status;
+                        $act->done_by = $new_record->created_by_id;
+                        $act->garden_production_record_id = $new_record->id;
+                        $act->save();
+                    }
+                }
+            }
+            return Utils::response(['message' => 'Production record created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create Production recoed. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+
+
     public function pest_cases_create(Request $r)
     {
+
         if (!isset($_POST['garden_id'])) {
             return Utils::response(['message' => 'Garden ID is required.', 'status' => 0]);
         }
@@ -105,6 +337,105 @@ class ApiProductsController
 
 
 
+
+    public function question_create(Request $r)
+    {
+
+        if (!isset($r->user_id )) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        if (!isset($_POST['category_id'])) {
+            return Utils::response(['message' => 'Category is required.', 'status' => 0]);
+        }
+
+
+        $q = new Question();
+        $q->category_id = ((int)($r->category_id));
+        $q->administrator_id = ((int)($r->user_id));
+        $q->answered_by = 0;
+        $q->is_answered = 0;
+        $q->question = $r->question;
+        $q->answer = '';
+        $q->answer_images = '[]';
+        $q->question_images = '[]';
+        						
+ 
+        $images = [];
+        $uploaded_images = [];
+        if (isset($_FILES)) {
+            if ($_FILES != null) {
+                if (count($_FILES) > 0) {
+
+                    foreach ($_FILES as $img) {
+                        if (
+                            (isset($img['name'])) &&
+                            (isset($img['type'])) &&
+                            (isset($img['tmp_name'])) &&
+                            (isset($img['error'])) &&
+                            (isset($img['size']))
+                        ) {
+                            if (
+                                (strlen($img['name']) > 2) &&
+                                (strlen($img['type']) > 2) &&
+                                (strlen($img['tmp_name']) > 2) &&
+                                (strlen($img['size']) > 0) &&
+                                ($img['error'] == 0)
+                            ) {
+                                $raw_images['name'][] = $img['name'];
+                                $raw_images['type'][] = 'image/png';
+                                $raw_images['tmp_name'][] = $img['tmp_name'];
+                                $raw_images['error'][] = $img['error'];
+                                $raw_images['size'][] = $img['size'];
+                            }
+                        }
+                    }
+
+                    $images['images'] = $raw_images;
+                    $uploaded_images = Utils::upload_images($images['images']);
+                }
+            }
+        }
+
+        if ($uploaded_images != null && count($uploaded_images) > 0) {
+            $q->question_images = json_encode($uploaded_images);
+        }
+
+        if ($q->save()) {
+            return Utils::response(['message' => 'Qustion submitted successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+        }
+    }
+
+
+
+
+    public function get_financial_records(Request $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return FinancialRecord::where(['administrator_id' => $administrator_id])
+            ->orWhere(['created_by' => $administrator_id])
+            ->get();
+    }
+
+
+
+    public function get_garden_production_record(Request $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return GardenProductionRecord::where(['administrator_id' => $administrator_id])
+            ->orWhere(['created_by_id' => $administrator_id])
+            ->get();
+    }
+
+
     public function garden_activities(Request $r)
     {
         if (!isset($_GET['user_id'])) {
@@ -112,7 +443,7 @@ class ApiProductsController
         }
         $administrator_id = ((int)($_GET['user_id']));
         return GardenActivity::where(['administrator_id' => $administrator_id])
-            ->where(['person_responsible' => $administrator_id])
+            ->orWhere(['person_responsible' => $administrator_id])
             ->get();
     }
 
@@ -125,6 +456,25 @@ class ApiProductsController
         return Garden::where(['administrator_id' => $administrator_id])->get();
     }
 
+    public function farms(Farm $r)
+    {
+        if (!isset($_GET['user_id'])) {
+            return [];
+        }
+        $administrator_id = ((int)($_GET['user_id']));
+        return Farm::where(['administrator_id' => $administrator_id])->get();
+    }
+
+    public function garden_activities_delete(Request $r){
+        $id = ((int)($r->id));
+        $item = GardenActivity::find($id);
+        if($item!=null){
+            $item->delete();
+        }else{
+            return Utils::response(['message' => "Activity {$id} not found.", 'status' => 0]);            
+        }
+        return Utils::response(['message' => 'Activity deleted.', 'status' => 1]);
+    }
     public function garden_activities_create(Request $r)
     {
         if (!isset($_POST['administrator_id'])) {
@@ -134,7 +484,7 @@ class ApiProductsController
         $g = Garden::find($garden_id);
 
         if ($g == null) {
-            return Utils::response(['message' => 'Garden not found.', 'status' => 0]);
+            return Utils::response(['message' => 'Garden #'.$garden_id.' not found.', 'status' => 0]);
         }
 
         $act = new GardenActivity();
@@ -142,7 +492,8 @@ class ApiProductsController
         $act->due_date = $r->due_date;
         $act->details = $r->details;
         $act->administrator_id = $g->administrator_id;
-        $act->person_responsible = $g->administrator_id;
+        $act->person_responsible = ((int)($r->person_responsible));
+        //$g_activity->person_responsible = $g->;
         $act->done_by = 0;
         $act->is_generated = 0;
         $act->is_done = 0;
@@ -153,7 +504,7 @@ class ApiProductsController
         $act->done_images = "";
 
         if ($act->save()) {
-            return Utils::response(['message' => 'Garden activity created successfully.', 'status' => 1]);
+            return Utils::response(['message' => 'Activity created successfully.', 'status' => 1]);
         } else {
             return Utils::response(['message' => 'Failed to create garden activity. Please try again.', 'status' => 0]);
         }
@@ -172,11 +523,12 @@ class ApiProductsController
         $g->image = '';
         $g->images = '';
         $g->plant_date = $r->plant_date;
-        $g->harvest_date = $r->harvest_date;
+        $g->harvest_date = '';
         $g->size = $r->size;
         $g->details = $r->details;
         $g->crop_category_id = $r->crop_category_id;
         $g->location_id = $r->location_id;
+        $g->farm_id = $r->farm_id;
 
         $images = [];
         $uploaded_images = [];
@@ -221,9 +573,32 @@ class ApiProductsController
 
 
         if ($g->save()) {
-            return Utils::response(['message' => 'Garden created successfully.', 'status' => 1]);
+            return Utils::response(['message' => 'Enterprise created successfully.', 'status' => 1]);
         } else {
-            return Utils::response(['message' => 'Failed to create garden. Please try again.', 'status' => 0]);
+            return Utils::response(['message' => 'Failed to create enterprise. Please try again.', 'status' => 0]);
+        }
+    }
+
+    public function create_farm(Request $r)
+    {
+        
+        if (!isset($_POST['administrator_id'])) {
+            return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
+        }
+
+        $g = new Farm();
+        $g->administrator_id = $r->administrator_id;
+        $g->name = $r->name;
+        $g->details = $r->details;
+        $g->location_id = $r->location_id;
+        $g->latitude = $r->latitude;
+        $g->longitude = $r->longitude;
+
+   
+        if ($g->save()) {
+            return Utils::response(['message' => 'Farm created successfully.', 'status' => 1]);
+        } else {
+            return Utils::response(['message' => 'Failed to create farm. Please try again.', 'status' => 0]);
         }
     }
 
@@ -381,10 +756,10 @@ class ApiProductsController
         return 'create_post';
     }
 
+
     public function create(Request $request)
     {
-
-
+ 
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
@@ -517,17 +892,9 @@ class ApiProductsController
 
     public function index(Request $request)
     {
-
-        $per_page = (int) ($request->per_page ? $request->per_page : 10);
-        $s = "";
-        if(isset($_GET['term'])){
-            $s = trim((string) ($_GET['term']) );
-            $items = Product::where('name', 'like', "%" . $s . "%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
-            return $items;
-        }
-
+        $per_page = (int) ($request->per_page ? $request->per_page : 200);
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
-
+        $s = trim((string) ($request->s ? $request->s : ""));
         $cat_id = (int) ($request->cat_id ? $request->cat_id : 0);
 
 
@@ -583,6 +950,7 @@ class ApiProductsController
 
     public function locations(Request $request)
     {
+        return Location::all();
         return Utils::get_locations();
     }
 

@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'MOBIP Uganda',
+    'name' => 'Jotrace',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>MOBIP</b>',
+    'logo' => '<b>Jotrace</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>MOBIP</b>',
+    'logo-mini' => '<b>Jotrace</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -157,10 +157,10 @@ return [
 
         // Image and file upload path under the disk above.
         'directory' => [
-            'image' => 'public/',
+            'image' => 'storage',
             'file'  => 'files',
         ],
-    ], 
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -209,7 +209,7 @@ return [
     */
     'operation_log' => [
 
-        'enable' => true,
+        'enable' => false,
 
         /*
          * Only logging allowed methods in the list
@@ -298,8 +298,12 @@ return [
     |
     | This value is used to set the background image of login page.
     |
+    background-image: url(http://localhost:8888/buy-and-sell-2/assets/images/bg/img_2.jpeg);     background-size:     cover;
+                                            background-repeat:   no-repeat;
+                                            background-position: center center; 
     */
-    'login_background_image' => '/assets/images/02.jpg',
+
+    'login_background_image' => '/assets/images/bg/img_' . rand(1, 5) . '.jpeg',
 
     /*
     |--------------------------------------------------------------------------
