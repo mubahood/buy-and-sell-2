@@ -27,7 +27,7 @@ foreach ($countries as $key => $c) {
 }
 
 $chat_threads = Chat::get_chat_threads($u->id);
-$thumbnail = url( 'no_image.png');
+$thumbnail = url( 'no_image.jpg');
 
 $item = new Product();
 $id = ((int) Request::segment(3));
@@ -46,6 +46,7 @@ if ($item == null || $item->id < 1) {
 ?>@extends('metro.layout.layout-dashboard')
 @section('header')
 @endsection
+@section('toolbar-title','Creating product')
 @section('dashboard-content')
     <form id="form" action="{{ url('dashboard/products') }}" class="form d-flex flex-column flex-lg-row" method="POST"
         enctype="multipart/form-data">

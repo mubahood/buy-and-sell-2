@@ -160,7 +160,7 @@
                                     style="line-height: 18px"
                                     ><a href="/{{$product->slug}}">{{ $product->name }}</a></h5>
                                     <span style="line-height: 15px" class="d-block mt-0 pt-0" style="line-height: 10xp">
-                                        UGX. {{($product->price)}}
+                                        {{config('app.currency') . " " }}{{($product->price)}}
                                     </span>
                                     <span style="line-height: 15px" class="d-block mt-0 pt-0">
                                         Chatinng with <a href="/{{$receiver->profile->username}}">{{$receiver->profile->company_name}}</a>

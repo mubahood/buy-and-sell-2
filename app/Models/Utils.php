@@ -42,6 +42,16 @@ class Utils
 
         return $locations;
     }
+
+    public static function session_start()
+    {
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
+
     public static function response($data = [])
     {
         $resp['status'] = "1";
@@ -219,7 +229,7 @@ class Utils
 
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
         return $path;
-    } 
+    }
     public static function upload_images($files)
     {
 
@@ -267,16 +277,16 @@ class Utils
 
 
                     $thumn_name = 'thumb_' . $file_name;
-                    $path_optimized = 'public/storage/'.$thumn_name;
+                    $path_optimized = 'public/storage/' . $thumn_name;
 
                     $thumbnail = Utils::create_thumbail(
                         array(
-                            "source" => "./".$path,
+                            "source" => "./" . $path,
                             "target" => $path_optimized,
                         )
                     );
 
- 
+
                     $ready_image['src'] = $file_name;
                     $ready_image['thumbnail'] = $thumn_name;
 
@@ -328,15 +338,20 @@ class Utils
 
         $img_size = getimagesize($image->source_path); // returns an array that is filled with info
 
-        $width = 220;
-        $heigt = 380;
+        $width = 300;
+        $heigt = 300;
 
         if (isset($img_size[0]) && isset($img_size[1])) {
             $width = $img_size[0];
             $heigt = $img_size[1];
         }
-        $width = (0.72)  * $heigt;
+        //dd("W: $width \n H: $heigt");
 
+        if ($width < $heigt) {
+            $heigt = $width;
+        } else {
+            $width = $heigt;
+        }
 
         if (isset($params['width'])) {
             $width = $params['width'];
@@ -358,18 +373,24 @@ class Utils
     public static function get_jpeg_quality($_size)
     {
         $size = ($_size / 1000000);
+
         $qt = 50;
         if ($size > 5) {
-            $qt = 30;
+            $qt = 10;
         } else if ($size > 4) {
-            $qt = 40;
+            $qt = 13;
         } else if ($size > 2) {
-            $qt = 50;
+            $qt = 15;
         } else if ($size > 1) {
-            $qt = 60;
+            $qt = 17;
+        } else if ($size > 0.8) {
+            $qt = 50;
+        } else if ($size > .5) {
+            $qt = 80;
         } else {
-            $qt = 70;
+            $qt = 90;
         }
+
         return $qt;
     }
 }

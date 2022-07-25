@@ -1,7 +1,7 @@
 @php
 $_title = isset($title) ? $title : 'No title';
 $_max = isset($max) ? $max : 15;
-$_img = isset($img) ? $img : url('no_image.png');
+$_img = isset($img) ? $img : url('no_image.jpg');
 $_link = isset($link) ? $link : 'javascript:;';
 
 $_title = Str::of($_title)->limit($_max);

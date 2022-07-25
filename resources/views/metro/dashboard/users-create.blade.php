@@ -46,6 +46,8 @@ $item = $u;
 	
 
 ?>@extends('metro.layout.layout-dashboard')
+
+@section('toolbar-title','My profile')
 @section('header')
 @endsection
 @section('dashboard-content')

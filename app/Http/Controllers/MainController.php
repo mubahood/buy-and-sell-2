@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\CropCategory;
+use App\Models\Garden;
+use App\Models\GardenActivity;
+use App\Models\Pest;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Utils;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+use function PHPUnit\Framework\fileExists;
 
 /*
  if(isset($img_size[0]) && isset($img_size[1])){
@@ -25,14 +32,76 @@ class MainController extends Controller
     {
 
 
+        /*
+        foreach (Product::all() as $key => $p) {
+
+            $f = \Faker\Factory::create();
+            $p->name = $f->sentence;
+            echo $p->name."<hr>";
+            $p->save();
+            continue;
+            $imgs = json_decode($p->images);
+
+            $_imgs = [];
+            echo "<pre>";
+            foreach ($imgs as $im) {
+                $im->thumbnail = rand(1, 10) . "_thumb.jpg";
+                $_imgs[] = $im;
+                # code...
+            }
+            $p->images = json_encode($_imgs);
+            $p->save();
+            continue;
+            dd($p->images);
+            print_r($_imgs);
+            die();
+            $imgs = [];
+            for ($i = 1; $i < 8; $i++) {
+                $num = rand(1, 50);
+                $im['src'] = $num . '.jpg';
+                $im['thumbnail'] = $num . '_thumb.jpg';
+                $p->thumbnail = json_encode($im);
+                $p->save();
+            }
+
+            $p->images =   json_encode($imgs);
+            //$p->save();
+        }
+        die("Done");     */
+
+        // $p['source'] = 'public/test/1.jpeg';
+        // $p['target'] = 'public/test/anjane.jpeg';
+        // Utils::create_thumbail($p);
 
 
+
+
+
+        // dd("time to fight");
+
+        /*
+        $m = new Pest();
+        $m->name = 'Slaters';
+        $m->description = 'Slaters or woodlice are small crustaceans that hide in damp situations in the garden. Slaters feed on organic matter, but at high densities they can damage new seedlings and ripe fruit such as melons, strawberries and the roots of pot plants.
+
+        Slaters on a piece of timber.
+        Slaters on a piece of timber.';
+
+        $m->cause = $m->description;
+        $m->cure = $m->description;
+        $m->image = 'no_image.jpg';
+        $m->video = 'https://www.youtube.com/watch?v=g9uPh00uhoE';
+
+        $m->save();
+
+        dd("pests");*/
 
 
 
         // $string = file_get_contents("./public/products.json");
         // $json_a = json_decode($string,true);
-        /*
+        /* 					
+
 
   $pros = Category::all();
         $i = 0;
@@ -82,7 +151,7 @@ class MainController extends Controller
             # code...
         }
         dd(count($pros));
-            
+                
         $i = 0;
         foreach ($json_a as $key => $value){
             $i++;
@@ -184,7 +253,8 @@ thumbnail
         // echo('<img width="400" src="'.$thumbnail.'" />');
 
         // die("");
-        return view('metro.main.product-listing');
+        //return view('metro.main.product-listing');
+        //return view('metro.main.product-listing');
         return view('metro.main.index');
         //return view('metro.index');
     }
@@ -224,6 +294,11 @@ thumbnail
         }
 
         $seg = request()->segment(1);
+
+        if ($seg == 'product-listing') {
+            return view('metro.main.product-listing');
+        }
+
         $profile = Profile::where('username', $seg)->first();
         if ($profile) {
             return view('main.display-profile');
@@ -233,7 +308,18 @@ thumbnail
         if ($pro) {
             return view('metro.main.products-details');
         }
-        return view('main.index');
+
+        $pro = Product::where('id', $seg)->first();
+        if ($pro) {
+            return view('metro.main.products-details');
+        }
+
+        $cat = Category::where('slug', $seg)->first();
+        if ($cat) {
+            return view('metro.main.product-listing');
+        }
+
+        return view('metro.main.index');
     }
 
     public function password_reset(Request  $request)
@@ -430,7 +516,12 @@ thumbnail
 
     public function about()
     {
-        return view('about.about_us');
+        return view('metro.about_us');
+    }
+
+    public function privacy()
+    {
+        return view('metro.privacy');
     }
 
     public function sell_fast()

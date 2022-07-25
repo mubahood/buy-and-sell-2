@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\FarmersGroup;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\User;
@@ -14,14 +15,20 @@ use Illuminate\Support\Facades\Hash;
 
 class ApiUsersController
 {
+    public function farmers_goups(Request $request)
+    {
+        return FarmersGroup::all();
+    }
+
+
     public function index(Request $request)
     {
         $user_id = (int) ($request->user_id ? $request->user_id : 0);
-        $per_page = isset($request->per_page)? $request->per_page:1000;
+        $per_page = isset($request->per_page) ? $request->per_page : 1000;
 
-        if($user_id>0){
+        if ($user_id > 0) {
             $items = User::where('id', $user_id)->paginate($per_page)->withQueryString()->items();
-        }else{
+        } else {
             $items = User::paginate($per_page)->withQueryString()->items();
         }
         return $items;
@@ -39,31 +46,40 @@ class ApiUsersController
                 'data' => null
             ]);
         }
-        
+
         $email = (string) ($request->email ? $request->email : "");
         $password = (string) ($request->password ? $request->password : "");
 
-        $_u = User::where('username',$email)->get();
+        $_u = User::where('username', $email)->get();
         $u = null;
-        if(isset($_u[0])){
+        if (isset($_u[0])) {
             $u = $_u[0];
         }
 
-        if($u == null){
-            $_u = User::where('email',$email)->get();
-            if(isset($_u[0])){
+        if ($u == null) {
+            $_u = User::where('email', $email)->get();
+            if (isset($_u[0])) {
                 $u = $_u[0];
             }
         }
 
-        if(password_verify($password,$u->password)){
+        if ($u == null) {
+            return Utils::response([
+                'status' => 0,
+                'message' => "User account not found.",
+                'data' => null
+            ]);
+        }
+
+
+        if (password_verify($password, $u->password)) {
             return Utils::response([
                 'status' => 0,
                 'message' => "Wrong password.",
                 'data' => null
             ]);
-        } 
-        
+        }
+
         if ($u == null) {
             return Utils::response([
                 'status' => 0,
@@ -71,7 +87,7 @@ class ApiUsersController
                 'data' => null
             ]);
         }
-        
+
         return Utils::response([
             'status' => 1,
             'message' => "Logged successfully.",
@@ -153,10 +169,9 @@ class ApiUsersController
         if (isset($_FILES)) {
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
-
-                    if(isset($_FILES['profile_pic'])){
-                        if($_FILES['profile_pic']!=null){
-                            if(isset($_FILES['profile_pic']['tmp_name'])){
+                    if (isset($_FILES['profile_pic'])) {
+                        if ($_FILES['profile_pic'] != null) {
+                            if (isset($_FILES['profile_pic']['tmp_name'])) {
                                 $u->avatar = Utils::upload_file($_FILES['profile_pic']);
                             };
                         }
@@ -165,7 +180,7 @@ class ApiUsersController
                 }
             }
         }
- 
+
 
         $u->save();
 
@@ -193,8 +208,8 @@ class ApiUsersController
 
 
         $u['name'] = $request->input("name");
-        $u['username'] = $request->input("email");
-        $u['email'] = $request->input("email");
+        $u['username'] = trim($request->input("email"));
+        $u['email'] = trim($request->input("email"));
 
         $old_user = User::where('username', $u['username'])->first();
         if ($old_user) {
@@ -204,7 +219,7 @@ class ApiUsersController
             ]);
         }
 
-        $u['password'] = Hash::make($request->input("password"));
+        $u['password'] = Hash::make(trim($request->input("password")));
         $user = User::create($u);
         $_user = User::find($user->id);
 

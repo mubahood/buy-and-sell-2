@@ -1,6 +1,7 @@
 @extends('metro.layout.base-layout')
 
 @section('base-content')
+
     <body id="kt_body"
         class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed"
         style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
@@ -36,4 +37,9 @@
             <!--end::Svg Icon-->
         </div>
     </body>
+@endsection
+
+
+@section('footer-2')
+    <script src="{{ url('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 @endsection
