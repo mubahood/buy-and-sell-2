@@ -267,7 +267,8 @@ class Utils
 
 
                     $file_name = time() . "-" . Utils::make_slug($img['name']) . "." . $ext;
-                    $path = 'storage/' . $file_name;
+                    $path = 'public/storage/' . $file_name;
+
 
                     $res = move_uploaded_file($img['tmp_name'], $path);
                     if (!$res) {
@@ -277,7 +278,7 @@ class Utils
 
 
                     $thumn_name = 'thumb_' . $file_name;
-                    $path_optimized = 'storage/' . $thumn_name;
+                    $path_optimized = 'public/storage/' . $thumn_name;
 
 
                     $thumbnail = Utils::create_thumbail(
@@ -287,9 +288,9 @@ class Utils
                         )
                     );
   
-                    
-                    $ready_image['src'] = $file_name;
-                    $ready_image['thumbnail'] = $path_optimized;
+                
+                    $ready_image['src'] = $path;
+                    $ready_image['thumbnail'] = $thumbnail;
  
                     $ready_image['user_id'] = Auth::id();
                     if (!$ready_image['user_id']) {
@@ -324,7 +325,7 @@ class Utils
         $image->target_path = "" . $params['target'];
 
 
-
+        
 
 
 
@@ -364,10 +365,11 @@ class Utils
 
         $image->jpeg_quality = 50;
         $image->jpeg_quality = Utils::get_jpeg_quality(filesize($image->source_path));
-        if (!$image->resize($width, $heigt, ZEBRA_IMAGE_CROP_CENTER)) {
+        if (!$image->resize($width, $heigt, ZEBRA_IMAGE_CROP_CENTER)) { 
             return $image->source_path;
-        } else {
+        } else { 
             return $image->target_path;
+            
         }
     }
 
