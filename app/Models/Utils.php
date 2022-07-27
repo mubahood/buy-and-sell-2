@@ -387,7 +387,7 @@ class Utils
             $qt = 50;
         } else if ($size > .5) {
             $qt = 80;
-        } else { //romina
+        } else {
             $qt = 90;
         }
 
