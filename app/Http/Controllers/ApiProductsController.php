@@ -820,10 +820,12 @@ class ApiProductsController
 
 
         $images = [];
+        $raw_images = [];
         $uploaded_images = [];
         if (isset($_FILES)) {
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
+                    
 
                     foreach ($_FILES as $img) {
                         if (
