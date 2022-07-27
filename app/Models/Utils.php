@@ -267,7 +267,7 @@ class Utils
 
 
                     $file_name = time() . "-" . Utils::make_slug($img['name']) . "." . $ext;
-                    $path = 'public/storage/' . $file_name;
+                    $path = 'storage/' . $file_name;
 
                     $res = move_uploaded_file($img['tmp_name'], $path);
                     if (!$res) {
@@ -277,7 +277,8 @@ class Utils
 
 
                     $thumn_name = 'thumb_' . $file_name;
-                    $path_optimized = 'public/storage/' . $thumn_name;
+                    $path_optimized = 'storage/' . $thumn_name;
+
 
                     $thumbnail = Utils::create_thumbail(
                         array(
@@ -285,11 +286,11 @@ class Utils
                             "target" => $path_optimized,
                         )
                     );
-
-
+  
+                    
                     $ready_image['src'] = $file_name;
-                    $ready_image['thumbnail'] = $thumn_name;
-
+                    $ready_image['thumbnail'] = $path_optimized;
+ 
                     $ready_image['user_id'] = Auth::id();
                     if (!$ready_image['user_id']) {
                         $ready_image['user_id'] = 1;

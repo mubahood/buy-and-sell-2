@@ -32,17 +32,6 @@ class MainController extends Controller
     {
 
 
-        $thumbnail = Utils::create_thumbail(
-            array(
-                "source" => 'public/test/1.jpeg',
-                "target" => 'public/test/' . rand(1000, 100000) . '2.jpg',
-            )
-        );
-        dd($thumbnail);
-
-
-        die("Romina");
-
         /*
         foreach (Product::all() as $key => $p) {
 
