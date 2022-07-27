@@ -757,16 +757,12 @@ class ApiProductsController
     }
 
 
-
     public function create(Request $request)
     {
-
-
+ 
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
-        
-        return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
 
         $p['sub_category_id'] = 1;
         $p['user_id'] = trim($_POST['user_id']);
@@ -873,7 +869,6 @@ class ApiProductsController
         $pro = Product::find($_pro->id);
         return Utils::response(['message' => 'Product uploaded successfully.', 'status' => 1, 'data' => $pro]);
     }
-
 
 
     public function post_categories(Request $request)
