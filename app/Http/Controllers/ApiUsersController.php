@@ -23,7 +23,7 @@ class ApiUsersController
 
     public function vendors(Request $request)
     {
-        return DB::select('select *,(SELECT count(id) FROM products WHERE user_id = users.id) as products_count from users ORDER BY products_count DESC LIMIT 200');
+        return DB::select('select *,(SELECT count(id) FROM products WHERE user_id = users.id) as products_count from users ORDER BY products_count DESC, ID DESC LIMIT 200');
     }
     public function index(Request $request)
     {
