@@ -62,6 +62,7 @@ Route::post('chats', [ApiChatsController::class, 'send_message']);
 Route::post('threads', [ApiChatsController::class, 'threads']);
 
 Route::get('users', [ApiUsersController::class, 'index']);
+Route::get('vendors', [ApiUsersController::class, 'vendors']);
 Route::post('users-update', [ApiUsersController::class, 'update']);
 Route::post('users-login', [ApiUsersController::class, 'login']);
 
