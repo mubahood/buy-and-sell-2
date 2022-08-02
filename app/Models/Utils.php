@@ -288,7 +288,7 @@ class Utils
             'user_id' => $user_id,
             'name' => 'processing',
         ])
-        ->orderBy('id','DESC')
+        ->orderBy('id','ASC')
         ->get();
     }
 

@@ -874,6 +874,10 @@ class ApiProductsController
             $p['thumbnail'] = json_encode($images[0]);
         }
         $p['images'] = json_encode($images);
+        foreach ($images as $img) {
+            $img->name = "";
+            $img->save();
+        }
          
 
         $_pro = Product::create($p);
