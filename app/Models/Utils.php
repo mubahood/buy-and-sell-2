@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Hamcrest\Arrays\IsArray;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -230,6 +231,67 @@ class Utils
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
         return $path;
     }
+
+
+    public static function do_background_process_pending_images($user_id)
+    {
+        $url = url('api/process-pending-images?user_id=' . $user_id);
+        $ctx = stream_context_create(['http' => ['timeout' => 2]]);
+
+        try {
+            $data =  file_get_contents($url, null, $ctx);
+            return $data;
+        } catch (Exception $x) {
+            return "Failed $url";
+        } 
+    }
+
+    
+    public static function process_pending_images($user_id)
+    {
+
+        ini_set('max_execution_time', -1); //unlimit
+        $imgs = Utils::get_image_processing($user_id); 
+
+        foreach ($imgs as $img) { 
+
+            if ($img->thumbnail == null || (strlen(($img->thumbnail) < 5))) {
+                
+                $name = str_replace("public/", "", $img->src);
+                $name = str_replace("storage/", "", $name);
+                $name = str_replace("/", "", $name);
+                $target = "public/storage/thumb_" . $name;
+                $thumbnail = Utils::create_thumbail(
+                    array(
+                        "source" => "./" . $img->src,
+                        "target" =>  $target,
+                    )
+                );
+                if ($thumbnail == null) { 
+                    continue;
+                }
+                if (strlen($thumbnail) < 5) { 
+                    continue;
+                }
+
+                $img->thumbnail = $thumbnail; 
+                $img->save();
+            }
+        }
+
+        return true;
+    }
+
+    public static function get_image_processing($user_id)
+    {
+        return Image::where([
+            'user_id' => $user_id,
+            'name' => 'processing',
+        ])
+        ->orderBy('id','DESC')
+        ->get();
+    }
+
     public static function upload_images($files)
     {
 
@@ -287,11 +349,11 @@ class Utils
                             "target" => $path_optimized,
                         )
                     );
-  
-                
+
+
                     $ready_image['src'] = $path;
                     $ready_image['thumbnail'] = $thumbnail;
- 
+
                     $ready_image['user_id'] = Auth::id();
                     if (!$ready_image['user_id']) {
                         $ready_image['user_id'] = 1;
@@ -325,7 +387,7 @@ class Utils
         $image->target_path = "" . $params['target'];
 
 
-        
+
 
 
 
@@ -365,11 +427,10 @@ class Utils
 
         $image->jpeg_quality = 50;
         $image->jpeg_quality = Utils::get_jpeg_quality(filesize($image->source_path));
-        if (!$image->resize($width, $heigt, ZEBRA_IMAGE_CROP_CENTER)) { 
+        if (!$image->resize($width, $heigt, ZEBRA_IMAGE_CROP_CENTER)) {
             return $image->source_path;
-        } else { 
+        } else {
             return $image->target_path;
-            
         }
     }
 

@@ -10,7 +10,7 @@ use App\Models\Farm;
 use App\Models\FinancialRecord;
 use App\Models\Garden;
 use App\Models\GardenActivity;
-use App\Models\GardenProductionRecord; 
+use App\Models\GardenProductionRecord;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\PestCase;
@@ -175,7 +175,7 @@ class ApiProductsController
         $g = Garden::find($garden_id);
 
         if ($g == null) {
-            return Utils::response(['message' => 'Garden not #'.$garden_id.' found.', 'status' => 0]);
+            return Utils::response(['message' => 'Garden not #' . $garden_id . ' found.', 'status' => 0]);
         }
 
         $new_record = new GardenProductionRecord();
@@ -341,7 +341,7 @@ class ApiProductsController
     public function question_create(Request $r)
     {
 
-        if (!isset($r->user_id )) {
+        if (!isset($r->user_id)) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
 
@@ -359,8 +359,8 @@ class ApiProductsController
         $q->answer = '';
         $q->answer_images = '[]';
         $q->question_images = '[]';
-        						
- 
+
+
         $images = [];
         $uploaded_images = [];
         if (isset($_FILES)) {
@@ -465,13 +465,14 @@ class ApiProductsController
         return Farm::where(['administrator_id' => $administrator_id])->get();
     }
 
-    public function garden_activities_delete(Request $r){
+    public function garden_activities_delete(Request $r)
+    {
         $id = ((int)($r->id));
         $item = GardenActivity::find($id);
-        if($item!=null){
+        if ($item != null) {
             $item->delete();
-        }else{
-            return Utils::response(['message' => "Activity {$id} not found.", 'status' => 0]);            
+        } else {
+            return Utils::response(['message' => "Activity {$id} not found.", 'status' => 0]);
         }
         return Utils::response(['message' => 'Activity deleted.', 'status' => 1]);
     }
@@ -484,7 +485,7 @@ class ApiProductsController
         $g = Garden::find($garden_id);
 
         if ($g == null) {
-            return Utils::response(['message' => 'Garden #'.$garden_id.' not found.', 'status' => 0]);
+            return Utils::response(['message' => 'Garden #' . $garden_id . ' not found.', 'status' => 0]);
         }
 
         $act = new GardenActivity();
@@ -581,7 +582,7 @@ class ApiProductsController
 
     public function create_farm(Request $r)
     {
-        
+
         if (!isset($_POST['administrator_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
@@ -594,7 +595,7 @@ class ApiProductsController
         $g->latitude = $r->latitude;
         $g->longitude = $r->longitude;
 
-   
+
         if ($g->save()) {
             return Utils::response(['message' => 'Farm created successfully.', 'status' => 1]);
         } else {
@@ -604,9 +605,6 @@ class ApiProductsController
 
     public function upload_temp_file(Request $request)
     {
-
-
-
         if (
             isset($_FILES['file']) &&
             isset($_GET['user_id']) &&
@@ -643,6 +641,55 @@ class ApiProductsController
         }
         die("0");
     }
+
+
+
+
+    public function process_pending_images(Request $request)
+    {
+        $user_id  = ((int)($_GET['user_id']));
+        Utils::process_pending_images($user_id);
+        return 1;
+    }
+    public function upload_temp_image(Request $request)
+    {
+        if (
+            isset($_FILES['file']) &&
+            isset($_GET['user_id']) &&
+            isset($_FILES['file']['error']) &&
+            ($_FILES['file']['error'] == 0)
+        ) {
+
+
+            ini_set('max_execution_time', -1); //unlimit
+            $img = $_FILES['file'];
+            $user_id  = ((int)($_GET['user_id']));
+
+
+            $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
+            $file_name = time() . "-" . Utils::make_slug($img['name']) . "." . $ext;
+            $path = 'public/storage/' . $file_name;
+            $res = move_uploaded_file($img['tmp_name'], $path);
+            if (!$res) {
+                return Utils::response(['message' => 'Failed to upload file.', 'status' => 0, 'data' => Utils::get_image_processing($user_id)]);
+            }
+
+            $new_img = new Image();
+            $new_img->src = $path;
+            $new_img->user_id = $user_id;
+            $new_img->thumbnail = '';
+            $new_img->name = 'processing';
+            $new_img->save();
+
+            Utils::do_background_process_pending_images($user_id);
+            return Utils::response(['message' => 'Uploaded file successfully.', 'status' => 0, 'data' => Utils::get_image_processing($user_id)]);
+        }
+
+
+        return Utils::response(['message' => 'All parameters were not set.', 'status' => 0, 'data' => null]);
+    }
+
+
     public function delete(Request $request)
     {
         $id = (int) ($request->id ? $request->id : 0);
@@ -759,7 +806,7 @@ class ApiProductsController
 
     public function create(Request $request)
     {
- 
+
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
@@ -825,7 +872,7 @@ class ApiProductsController
         if (isset($_FILES)) {
             if ($_FILES != null) {
                 if (count($_FILES) > 0) {
-                    
+
 
                     foreach ($_FILES as $img) {
                         if (

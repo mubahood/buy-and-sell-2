@@ -12,5 +12,7 @@ class Image extends Model
         'src',
         'thumbnail',
         'user_id',
-    ];
+    ]; 
+
+    
 }

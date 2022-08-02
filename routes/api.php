@@ -48,6 +48,8 @@ Route::get('questions', function () {
 
 Route::get('farmers-goups', [ApiUsersController::class, 'farmers_goups']);
 
+Route::get('process-pending-images', [ApiProductsController::class, 'process_pending_images']);
+Route::post('upload-temp-image', [ApiProductsController::class, 'upload_temp_image']);
 Route::post('upload-temp-file', [ApiProductsController::class, 'upload_temp_file']);
 Route::post('products', [ApiProductsController::class, 'create']);
 Route::get('upload', [ApiProductsController::class, 'upload']);
