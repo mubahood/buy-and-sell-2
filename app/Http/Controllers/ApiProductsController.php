@@ -682,7 +682,7 @@ class ApiProductsController
             $new_img->save();
 
             Utils::do_background_process_pending_images($user_id);
-            return Utils::response(['message' => 'Uploaded file successfully.', 'status' => 0, 'data' => Utils::get_image_processing($user_id)]);
+            return Utils::response(['message' => 'Uploaded file successfully.', 'status' => 1, 'data' => Utils::get_image_processing($user_id)]);
         }
 
 
