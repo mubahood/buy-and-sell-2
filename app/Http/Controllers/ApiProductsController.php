@@ -811,6 +811,7 @@ class ApiProductsController
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
 
+        $user_id = ((int)($p['user_id']));
         $p['sub_category_id'] = 1;
         $p['user_id'] = trim($_POST['user_id']);
         $p['category_id'] = 1;
@@ -865,54 +866,15 @@ class ApiProductsController
             }
         }
 
-
         $images = [];
-        $raw_images = [];
-        $uploaded_images = [];
-        if (isset($_FILES)) {
-            if ($_FILES != null) {
-                if (count($_FILES) > 0) {
-
-
-                    foreach ($_FILES as $img) {
-                        if (
-                            (isset($img['name'])) &&
-                            (isset($img['type'])) &&
-                            (isset($img['tmp_name'])) &&
-                            (isset($img['error'])) &&
-                            (isset($img['size']))
-                        ) {
-                            if (
-                                (strlen($img['name']) > 2) &&
-                                (strlen($img['type']) > 2) &&
-                                (strlen($img['tmp_name']) > 2) &&
-                                (strlen($img['size']) > 0) &&
-                                ($img['error'] == 0)
-                            ) {
-                                $raw_images['name'][] = $img['name'];
-                                $raw_images['type'][] = 'image/png';
-                                $raw_images['tmp_name'][] = $img['tmp_name'];
-                                $raw_images['error'][] = $img['error'];
-                                $raw_images['size'][] = $img['size'];
-                            }
-                        }
-                    }
-
-                    $images['images'] = $raw_images;
-
-                    $uploaded_images = Utils::upload_images($images['images']);
-                }
-            }
+        
+        Utils::process_pending_images($user_id);
+        $images = Utils::get_image_processing($user_id); 
+        if(!empty($images)){
+            $p['thumbnail'] = json_encode($images[0]);
         }
-
-
-
-
-        if ($uploaded_images != null && count($uploaded_images) > 0) {
-            $p['thumbnail'] = json_encode($uploaded_images[0]);
-            $p['images'] = json_encode($uploaded_images);
-        }
-
+        $p['images'] = json_encode($images);
+         
 
         $_pro = Product::create($p);
         $pro = Product::find($_pro->id);
