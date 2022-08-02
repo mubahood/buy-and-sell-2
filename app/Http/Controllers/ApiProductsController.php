@@ -811,7 +811,7 @@ class ApiProductsController
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
 
-        $user_id = ((int)($p['user_id']));
+        $user_id = ((int)($_POST['user_id']));
         $p['sub_category_id'] = 1;
         $p['user_id'] = trim($_POST['user_id']);
         $p['category_id'] = 1;
