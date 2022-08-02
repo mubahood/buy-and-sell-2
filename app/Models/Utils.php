@@ -243,20 +243,25 @@ class Utils
             return $data;
         } catch (Exception $x) {
             return "Failed $url";
-        } 
+        }
     }
 
-    
+
     public static function process_pending_images($user_id)
     {
 
         ini_set('max_execution_time', -1); //unlimit
-        $imgs = Utils::get_image_processing($user_id); 
+        $imgs = Utils::get_image_processing($user_id);
 
-        foreach ($imgs as $img) { 
+        foreach ($imgs as $img) {
 
             if ($img->thumbnail == null || (strlen(($img->thumbnail) < 5))) {
-                
+
+                if (!file_exists($img->src)) {
+                    $img->delete();
+                    continue;
+                }
+
                 $name = str_replace("public/", "", $img->src);
                 $name = str_replace("storage/", "", $name);
                 $name = str_replace("/", "", $name);
@@ -267,14 +272,14 @@ class Utils
                         "target" =>  $target,
                     )
                 );
-                if ($thumbnail == null) { 
+                if ($thumbnail == null) {
                     continue;
                 }
-                if (strlen($thumbnail) < 5) { 
+                if (strlen($thumbnail) < 5) {
                     continue;
                 }
 
-                $img->thumbnail = $thumbnail; 
+                $img->thumbnail = $thumbnail;
                 $img->save();
             }
         }
@@ -288,8 +293,8 @@ class Utils
             'user_id' => $user_id,
             'name' => 'processing',
         ])
-        ->orderBy('id','ASC')
-        ->get();
+            ->orderBy('id', 'ASC')
+            ->get();
     }
 
     public static function upload_images($files)
@@ -388,6 +393,9 @@ class Utils
 
 
 
+        if (!file_exists($image->source_path)) {
+            return $image->source_path;
+        }
 
 
 

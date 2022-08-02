@@ -807,6 +807,8 @@ class ApiProductsController
     public function create(Request $request)
     {
 
+        Utils::process_pending_images(1); 
+        die("done");
         if (!isset($_POST['user_id'])) {
             return Utils::response(['message' => 'User ID is required.', 'status' => 0]);
         }
