@@ -23,7 +23,7 @@ $banners_1_tab_active = '';
 $tab_seg = (int) request()->segment(2);
 $seg_1 = request()->segment(1);
 $seg_2 = request()->segment(2);
-$seg = request()->segment(1);
+$seg = request()->segment(1);//done
 
 foreach ($banners_all as $key => $value) {
     if ($value->id < 17) {
