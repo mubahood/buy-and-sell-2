@@ -86,7 +86,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                             id="#kt_header_menu" data-kt-menu="true">
 
                             <div data-kt-menu-trigger="hover" data-kt-menu-placement="bottom-start"
-                                class="menu-item menu-lg-down-accordion me-lg-1  bg-hover-white bg-white">
+                                class="menu-item menu-lg-down-accordion me-lg-1  bg-hover-white bg-white d-none d-md-block mt-3">
                                 <span class="menu-link py-3  bg-hover-white bg-white">
                                     <span class="menu-title fw-normal fs-5 lh-1 text-dark">Browse by categories</span>
                                     <span class="menu-arrow d-lg-none"></span>
@@ -117,8 +117,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                                                                     <span class="menu-bullet bg-white">
                                                                         <span class="bullet bullet-dot"></span>
                                                                     </span>
-                                                                    <span
-                                                                        class="menu-title">{{ $kid->name }}</span>
+                                                                    <span class="menu-title">{{ $kid->name }}</span>
                                                                 </a>
                                                             </div>
                                                         @endforeach
@@ -134,7 +133,8 @@ if (in_array($seg_1, $dashboard_segs)) {
                                     <!--end:Row-->
                                 </div>
                             </div>
-                            <div class="menu-item" style="   flex-grow: 0;
+                            <div class="menu-item d-none d-md-block mt-3"
+                                style="   flex-grow: 0;
                     flex-shrink: 0;
                     flex-basis: 80%;">
                                 <div class="input-group flex-nowrap">
@@ -148,6 +148,61 @@ if (in_array($seg_1, $dashboard_segs)) {
                                     </div>
                                 </div>
                             </div>
+                            <div class="menu-item d-md-none ms-3"> 
+                                <h2 class="m-1 p-1 ">Browse by categories</h2>
+                                <div class="accordion accordion-icon-toggle py-1 pt-0 mt-0" id="kt_accordion_2">
+                                    @foreach ($categories as $cat)
+                                        <?php
+                                        if ($cat->parent > 0) {
+                                            continue;
+                                        }
+                                        $kids = $cat->kids;
+                                        $collapsed = ' collapsed ';
+                                        $aria_expanded = 'false';
+                                        $show = '';
+                                        foreach ($kids as $k) {
+                                            if ($k->slug == $seg) {
+                                                $collapsed = '';
+                                                $aria_expanded = 'true';
+                                                $show = ' show ';
+                                            }
+                                        }
+                                        
+                                        ?>
+                                        <div class="mb-0">
+                                            <div class="accordion-header py-1 d-flex {{ $collapsed }}"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#menu_accordion_item_{{ $cat->id }}"
+                                                aria-expanded="{{ $aria_expanded }}">
+                                                <span class="accordion-icon">
+                                                    <i class="las la-angle-double-right fs-1"></i>
+                                                </span>
+                                                <h3 class="fs-4 fw-normal m-0 text-gray-800">{{ $cat->name }}</h3>
+                                            </div>
+                                            <div id="menu_accordion_item_{{ $cat->id }}"
+                                                class="fs-6 collapse  ps-10 {{ $show }}"
+                                                data-bs-parent="#kt_accordion_2">
+                                                @foreach ($kids as $kid)
+                                                    @php
+                                                        $active = ' text-gray-600  ';
+                                                        if ($kid->slug == $seg) {
+                                                            $active = ' text-primary ';
+                                                        }
+                                                    @endphp
+                                                    <a href="{{ url($kid->slug) }}">
+                                                        <h4
+                                                            class="fs-5 fw-normal m-0 my-1 text-hover-primary {{ $active }}">
+                                                            {{ $kid->name }}
+                                                        </h4>
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+
                         </div>
 
                     </div>
@@ -162,7 +217,8 @@ if (in_array($seg_1, $dashboard_segs)) {
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 
                         @if ($is_logged_in)
-                            <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">My Products</a>
+                            <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">My
+                                Products</a>
                         @else
                             <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up
                                 |
@@ -170,15 +226,13 @@ if (in_array($seg_1, $dashboard_segs)) {
                         @endif
 
 
-                        <a href="{{url('dashboard')}}" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell now</a>
-                        <a href="{{ url('dashboard') }}" class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
-                            style="margin-left: .7rem"
-
-                            data-bs-toggle="tooltip"
-                            data-bs-trigger="hover" 
-                            data-bs-dismiss-="click" 
-                            title="My chats"
-                            >
+                        <a href="{{ url('dashboard') }}" class="btn btn-primary btn-sm "
+                            style="margin-left: .8rem">Sell
+                            now</a>
+                        <a href="{{ url('dashboard') }}"
+                            class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
+                            style="margin-left: .7rem" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                            data-bs-dismiss-="click" title="My chats">
                             <i class="bi bi-chat fs-4 text-primary"></i></a>
 
 
@@ -208,6 +262,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                 </div>
                 <!--end::Header menu toggle-->
             </div>
+
 
             <!--end::Toolbar wrapper-->
         </div>
