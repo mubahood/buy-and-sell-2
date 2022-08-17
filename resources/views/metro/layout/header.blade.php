@@ -11,7 +11,7 @@ if ($u == null) {
 $acive_classes = ' active bg-light border-bottom border-5 fw-bolder border-primary rounded-0 ';
 
 $banners_all = Banner::all();
-$categories = Category::all();
+$header_categories = Category::all();
 
 $banners_1 = [];
 $banners_2 = [];
@@ -23,6 +23,7 @@ $banners_1_tab_active = '';
 $tab_seg = (int) request()->segment(2);
 $seg_1 = request()->segment(1);
 $seg_2 = request()->segment(2);
+$seg = request()->segment(1);
 
 foreach ($banners_all as $key => $value) {
     if ($value->id < 17) {
@@ -97,7 +98,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                                     <!--begin:Row-->
                                     <div class="row" data-kt-menu-dismiss="true">
 
-                                        @foreach ($categories as $cat)
+                                        @foreach ($header_categories as $cat)
                                             @php
                                                 $p_id = (int) $cat->parent;
                                             @endphp
@@ -151,7 +152,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                             <div class="menu-item d-md-none ms-3"> 
                                 <h2 class="m-1 p-1 ">Browse by categories</h2>
                                 <div class="accordion accordion-icon-toggle py-1 pt-0 mt-0" id="kt_accordion_2">
-                                    @foreach ($categories as $cat)
+                                    @foreach ($header_categories as $cat)
                                         <?php
                                         if ($cat->parent > 0) {
                                             continue;
@@ -161,7 +162,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                                         $aria_expanded = 'false';
                                         $show = '';
                                         foreach ($kids as $k) {
-                                            if ($k->slug == $seg) {
+                                            if ( $k->slug == $seg) {
                                                 $collapsed = '';
                                                 $aria_expanded = 'true';
                                                 $show = ' show ';
