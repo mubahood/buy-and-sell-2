@@ -36,8 +36,6 @@ class ProductController extends AdminController
         $grid->disableExport();
         $grid->actions(function ($actions) {
             $actions->disableDelete();
-            $actions->disableEdit();
-            $actions->disableView();
         });
 
         $grid->filter(function ($filter) {
