@@ -32,7 +32,6 @@ class ProductController extends AdminController
         $grid->model()->orderBy('id','Desc');
 
 
-        $grid->disableActions();
         $grid->disableCreateButton();
         $grid->disableExport();
         $grid->actions(function ($actions) {
