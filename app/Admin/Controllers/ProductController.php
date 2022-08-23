@@ -29,9 +29,7 @@ class ProductController extends AdminController
     {
         $grid = new Grid(new Product());
         
-        $grid->model()->where([
-            'type' => 'product',
-        ]);
+        $grid->model()->orderBy('id','Desc');
 
 
         $grid->disableActions();
