@@ -871,7 +871,7 @@ class ApiProductsController
         Utils::process_pending_images($user_id);
         $images = Utils::get_image_processing($user_id); 
         if(!empty($images)){
-            $p['thumbnail'] = json_encode($images[0]);
+            $p['thumbnail'] = $images[0];
         }
         $p['images'] = json_encode($images);
         foreach ($images as $img) {
