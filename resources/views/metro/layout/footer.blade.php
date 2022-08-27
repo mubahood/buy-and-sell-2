@@ -53,8 +53,10 @@
 
 </div>
 
-<div
-    class="container border-top border-primary pt-5 mt-5 d-flex flex-column flex-md-row align-items-center justify-content-between">
+<div class="  border-top border-primary pt-5 mt-5 d-flex flex-column flex-md-row align-items-center justify-content-between bg-white"
+    style="position: fixed;
+bottom: 0;
+width: 100%;">
 
 
     <div class="text-dark order-2 order-md-1">
