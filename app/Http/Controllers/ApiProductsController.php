@@ -867,21 +867,22 @@ class ApiProductsController
         }
 
         $images = [];
-        
+
         Utils::process_pending_images($user_id);
-        $images = Utils::get_image_processing($user_id); 
-        if(!empty($images)){
-            print_r($images);
-            die();
-            
-            $p['thumbnail'] = json_encode($images[0]);
-        }
+        $images = Utils::get_image_processing($user_id);
+
         $p['images'] = json_encode($images);
+        $is_first = true;
+        $p['thumbnail'] = "";
         foreach ($images as $img) {
+            if ($is_first) {
+                $p['thumbnail'] = json_encode($images[0]);
+                $is_first = false;
+            }
             $img->name = "";
             $img->save();
         }
-         
+
 
         $_pro = Product::create($p);
         $pro = Product::find($_pro->id);
