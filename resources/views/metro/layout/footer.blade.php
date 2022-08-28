@@ -52,14 +52,14 @@
 
 
 </div>
-
+{{-- system-ui --}}
 <div class="d-bloc d-lg-none " style="position: fixed;
 bottom: 0;
 width: 100%; ">
 
     <div class="row border-top border-primary    w-100 bg-white py-2">
         <div class="col-4 text-center ">
-            <a href="{{ url('about') }}" class="text-center">
+            <a href="{{ url('/') }}" class="text-center">
                 <i class="fa fa-home " style="font-size: 2rem"></i>
                 <span class="d-block" style="font-weight: 800">HOME</span></a>
         </div>
