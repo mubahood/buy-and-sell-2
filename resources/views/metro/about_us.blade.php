@@ -11,7 +11,7 @@
                                 style="background:white"><span style="line-height:30.0pt"><span
                                         style="font-family:Calibri,sans-serif"><b><span style="font-size:24.0pt"><span
                                                     style="font-family:&quot;Times New Roman&quot;,serif"><span
-                                                        style="color:#303a4b">Jotrace.com is the best place to sell anything
+                                                        style="color:#303a4b">Goprint.com is the best place to sell anything
                                                         to real people.</span></span></span></b></span></span></span></span>
                     </p>
 
@@ -30,14 +30,14 @@
                                 style="background:white"><span style="line-height:30.0pt"><span
                                         style="font-family:&quot;Times New Roman&quot;,serif"><span
                                             style="font-size:24.0pt"><span style="color:#303a4b">How to sell on
-                                                Jotrace.com?</span></span></span></span></span></span></h2>
+                                                Goprint.com?</span></span></span></span></span></span></h2>
 
                     <h3><span style="font-size:12pt"><span style="background:white"><span style="line-height:18.0pt"><span
                                         style="font-family:&quot;Calibri Light&quot;,sans-serif"><span
                                             style="color:#1f3763"><span style="font-weight:normal"><span
                                                     style="font-family:&quot;Times New Roman&quot;,serif"><span
                                                         style="color:#464b4f">1.&nbsp;</span></span><a
-                                                    href="https://jotrace.com/register"
+                                                    href="https://Goprint.com/register"
                                                     style="color:blue; text-decoration:underline"><span
                                                         style="font-family:&quot;Times New Roman&quot;,serif"><span
                                                             style="color:#3db83a"><span style="text-decoration:none"><span
@@ -73,7 +73,7 @@
                                             style="color:#1f3763"><span style="font-weight:normal"><span
                                                     style="font-family:&quot;Times New Roman&quot;,serif"><span
                                                         style="color:#464b4f">3. Press&nbsp;</span></span><a
-                                                    href="https://jotrace.com/dashboard"
+                                                    href="https://Goprint.com/dashboard"
                                                     style="color:blue; text-decoration:underline"><span
                                                         style="font-family:&quot;Times New Roman&quot;,serif"><span
                                                             style="color:#3db83a"><span style="text-decoration:none"><span
@@ -104,7 +104,7 @@
                                             style="font-size:13.5pt"><span style="line-height:107%"><span
                                                     style="font-family:&quot;Times New Roman&quot;,serif"><span
                                                         style="color:#464b4f">If everything is ok with your advert,
-                                                        it&rsquo;ll be on Jotrace in a couple of hours after sending to
+                                                        it&rsquo;ll be on Goprint in a couple of hours after sending to
                                                         moderation. We&rsquo;ll send you a letter and notification when your
                                                         advert goes live. Check your messages and be ready to earn
                                                         money!&nbsp;Do you want to sell like a
@@ -121,7 +121,7 @@
                                 style="background:white"><span style="line-height:30.0pt"><span
                                         style="font-family:&quot;Times New Roman&quot;,serif"><span
                                             style="font-size:24.0pt"><span style="color:#303a4b">How to buy on
-                                                Jotrace.com?</span></span></span></span></span></span></h2>
+                                                Goprint.com?</span></span></span></span></span></span></h2>
 
                     <h3><span style="font-size:12pt"><span style="background:white"><span style="line-height:18.0pt"><span
                                         style="font-family:&quot;Calibri Light&quot;,sans-serif"><span
@@ -150,7 +150,7 @@
                                     style="line-height:107%"><span style="font-family:Calibri,sans-serif"><span
                                             style="font-size:13.5pt"><span style="line-height:107%"><span
                                                     style="font-family:&quot;Times New Roman&quot;,serif"><span
-                                                        style="color:#464b4f">You may use chat on Jotrace.com or call them
+                                                        style="color:#464b4f">You may use chat on Goprint.com or call them
                                                         via phone. Discuss all the details, negotiate about the
                                                         price.</span></span></span></span></span></span></span></span></p>
 
@@ -211,7 +211,7 @@
                                                         style="color:#464b4f">We are highly focused on the security and can
                                                         solve any issues in short-terms. That&rsquo;s why we ask you,
                                                         kindly, to leave a review after purchasing. If you run into any
-                                                        problems with a seller, you can report us and Jotrace.com Team will
+                                                        problems with a seller, you can report us and Goprint.com Team will
                                                         check this seller as soon as
                                                         possible.</span></span></span></span></span></span></span></span>
                     </p>

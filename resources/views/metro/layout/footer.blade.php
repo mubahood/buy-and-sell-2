@@ -53,7 +53,7 @@
 
 </div>
 
-<div class=" " style="position: fixed;
+<div class="d-bloc d-lg-none " style="position: fixed;
 bottom: 0;
 width: 100%; ">
 
