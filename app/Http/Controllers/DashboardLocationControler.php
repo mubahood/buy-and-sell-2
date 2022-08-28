@@ -32,7 +32,7 @@ class DashboardLocationControler extends Controller
     }
 
     public function store(Request $r)
-    { 
+    {
         if (isset($_POST['delete'])) {
             $id = (int)($r->delete);
             $item = Location::find($id);
@@ -47,7 +47,7 @@ class DashboardLocationControler extends Controller
             $id = (int)($r->edit);
             if ($id == 0) {
                 die("new");
-            } else { 
+            } else {
                 $item = Location::find($id);
                 if ($item == null) {
                     dd("Item not found.");
@@ -65,6 +65,14 @@ class DashboardLocationControler extends Controller
             $item = new Location();
             $item->parent = $r->parent;
             $item->name = $r->name;
+            if ($item->parent == 0) {
+                $item->parent = 0;
+            }
+
+            $item->photo = 'no_image.png';
+            $item->details = '';
+            $item->order = '';
+
             $item->save();
             return redirect('dashboard/locations');
         }
