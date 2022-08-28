@@ -57,10 +57,10 @@
 bottom: 0;
 width: 100%; ">
 
-    <div class="row border-top border-primary    w-100 bg-white pt-2">
+    <div class="row border-top border-primary    w-100 bg-white py-2">
         <div class="col-4 text-center ">
             <a href="{{ url('about') }}" class="text-center">
-                <i class="fa fa-search text-dark" style="font-size: 2rem"></i>
+                <i class="fa fa-search " style="font-size: 2rem"></i>
                 <span class="d-block" style="font-weight: 800">SEARCH</span></a>
         </div>
         <div class="col-4 text-center ">
@@ -70,7 +70,7 @@ width: 100%; ">
         </div>
         <div class="col-4 text-center ">
             <a href="{{ url('about') }}" class="text-center">
-                <i class="fa fa-user text-dark" style="font-size: 2rem"></i>
+                <i class="fa fa-user " style="font-size: 2rem"></i>
                 <span class="d-block" style="font-weight: 800">My Account</span></a>
         </div>
     </div>
