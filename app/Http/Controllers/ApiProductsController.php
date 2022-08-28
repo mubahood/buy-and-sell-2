@@ -648,7 +648,7 @@ class ApiProductsController
     public function process_pending_images(Request $request)
     {
         $user_id  = ((int)($_GET['user_id']));
-        Utils::process_pending_images($user_id);
+        Utils::process_pending_images(1);
         return 1;
     }
     public function upload_temp_image(Request $request)
@@ -681,7 +681,7 @@ class ApiProductsController
             $new_img->name = 'processing';
             $new_img->save();
 
-            Utils::do_background_process_pending_images($user_id);
+            Utils::do_background_process_pending_images(1);
             return Utils::response(['message' => 'Uploaded file successfully.', 'status' => 1, 'data' => Utils::get_image_processing($user_id)]);
         }
 
@@ -868,30 +868,32 @@ class ApiProductsController
 
         $images = [];
 
-        Utils::process_pending_images($user_id);
-        Utils::process_pending_images($user_id);
-        Utils::process_pending_images($user_id);
-        $images = Utils::get_image_processing($user_id);
+        Utils::process_pending_images(1);
+        Utils::process_pending_images(1);
+        Utils::process_pending_images(1);
+
+        $images = Utils::get_image_processing(1);
 
         $image_found = false;
-
+    
 
 
 
         $p['images'] = json_encode($images);
         $is_first = true;
         $p['thumbnail'] = "";
-        die("Romina");
 
         foreach ($images as $img) {
             if ($is_first) {
                 $p['thumbnail'] = json_encode($img);
-                $image_found = true;
+                if (strlen($p['thumbnail']) > 4) {
+                    $image_found = true;
+                }
                 $is_first = false;
             }
 
             $img->name = "";
-            $img->save();
+            $img->save(); 
         }
 
 
