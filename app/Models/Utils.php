@@ -251,7 +251,7 @@ class Utils
     {
 
         ini_set('max_execution_time', -1); //unlimit
-        $imgs = Utils::get_image_processing($user_id); 
+        $imgs = Utils::get_image_processing($user_id);
 
         foreach ($imgs as $img) {
 

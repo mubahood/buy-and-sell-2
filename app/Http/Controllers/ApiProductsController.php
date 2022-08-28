@@ -874,7 +874,7 @@ class ApiProductsController
         $images = Utils::get_image_processing($user_id);
 
         $image_found = false;
-    
+
 
 
 
@@ -885,14 +885,12 @@ class ApiProductsController
         foreach ($images as $img) {
             if ($is_first) {
                 $p['thumbnail'] = json_encode($img);
-                if (strlen($p['thumbnail']) > 4) {
-                    $image_found = true;
-                }
+                $image_found = true;
                 $is_first = false;
             }
 
             $img->name = "";
-            $img->save(); 
+            $img->save();
         }
 
 
