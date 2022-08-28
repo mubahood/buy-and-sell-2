@@ -71,7 +71,7 @@ class DashboardLocationControler extends Controller
 
             $item->photo = 'no_image.png';
             $item->details = '';
-            $item->order = 1;
+            $item->order = Location::count();
 
             $item->save();
             return redirect('dashboard/locations');
