@@ -29378,7 +29378,7 @@ i[class*=" fonticon-"]:before {
   width: auto;
   background-color: #ffffff;
   box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
-  font-family: Poppins, Helvetica, "sans-serif";
+  font-family: system-ui, Helvetica, "sans-serif";
   z-index: 1000;
   border-radius: 0.475rem;
 }
@@ -30222,7 +30222,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
   text-indent: 0 !important;
   content: "+";
   color: #5E6278;
-  font-family: Poppins, Helvetica, "sans-serif";
+  font-family: system-ui, Helvetica, "sans-serif";
   background-color: #E4E6EF;
   border-radius: 0.475rem;
 }
@@ -30487,7 +30487,7 @@ table.dataTable > tbody > tr.child span.dtr-data {
 }
 
 .ql-toolbar {
-  font-family: Poppins, Helvetica, "sans-serif";
+  font-family: system-ui, Helvetica, "sans-serif";
 }
 .ql-toolbar.ql-snow {
   border: 1px solid #EFF2F5;
@@ -30850,7 +30850,7 @@ body.swal2-height-auto {
 .apexcharts-text,
 .apexcharts-title-text,
 .apexcharts-legend-text {
-  font-family: Poppins, Helvetica, "sans-serif" !important;
+  font-family: system-ui, Helvetica, "sans-serif" !important;
 }
 
 .apexcharts-title-text {
@@ -31022,7 +31022,7 @@ body.swal2-height-auto {
   box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, 0.075) !important;
 }
 .leaflet-container .leaflet-popup-content-wrapper .leaflet-popup-content {
-  font-family: Poppins, Helvetica, "sans-serif";
+  font-family: system-ui, Helvetica, "sans-serif";
   font-size: 1rem;
 }
 
