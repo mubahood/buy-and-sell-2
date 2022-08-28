@@ -874,13 +874,43 @@ class ApiProductsController
         $p['images'] = json_encode($images);
         $is_first = true;
         $p['thumbnail'] = "";
+        $image_found = false;
         foreach ($images as $img) {
             if ($is_first) {
                 $p['thumbnail'] = json_encode($images[0]);
+                if (strlen($p['thumbnail']) > 4) {
+                    $image_found = true;
+                }
                 $is_first = false;
             }
             $img->name = "";
             $img->save();
+        }
+
+        if (!$image_found) {
+            Utils::process_pending_images($user_id);
+        }
+
+        $images = Utils::get_image_processing($user_id);
+
+        $p['images'] = json_encode($images);
+        $is_first = true;
+        $p['thumbnail'] = "";
+        $image_found = false;
+        foreach ($images as $img) {
+            if ($is_first) {
+                $p['thumbnail'] = json_encode($images[0]);
+                if (strlen($p['thumbnail']) > 4) {
+                    $image_found = true;
+                }
+                $is_first = false;
+            }
+            $img->name = "";
+            $img->save();
+        }
+
+        if (!$image_found) {
+            return Utils::response(['message' => 'Product not uploaded because there was no image found. Please try again.', 'status' => 0, 'data' => "{}"]);
         }
 
 

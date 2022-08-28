@@ -275,7 +275,7 @@ class Utils
                 if ($thumbnail == null) {
                     continue;
                 }
-                if (strlen($thumbnail) < 5) {
+                if (strlen($thumbnail) < 3) {
                     continue;
                 }
 
