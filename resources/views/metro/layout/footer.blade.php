@@ -53,25 +53,27 @@
 
 </div>
 
-<div class="  border-top border-primary pt-5 mt-5 d-flex flex-column flex-md-row align-items-center justify-content-between bg-white"
-    style="position: fixed;
+<div class=" " style="position: fixed;
 bottom: 0;
-width: 100%;">
+width: 100%; ">
 
-
-    <div class="text-dark order-2 order-md-1">
-        <span class="text-muted fw-bold me-1">2022©</span>
-        <a href="javascript:;" class="text-gray-800 text-hover-primary">Focused Technologies</a>
+    <div class="row border-top border-primary    w-100 bg-white pt-2">
+        <div class="col-4 text-center ">
+            <a href="{{ url('about') }}" class="text-center">
+                <i class="fa fa-search text-dark" style="font-size: 2rem"></i>
+                <span class="d-block" style="font-weight: 800">SEARCH</span></a>
+        </div>
+        <div class="col-4 text-center ">
+            <a href="{{ url('about') }}" class="text-center">
+                <i class="fa fa-plus text-dark" style="font-size: 2rem"></i>
+                <span class="d-block" style="font-weight: 800">SELL NOW</span></a>
+        </div>
+        <div class="col-4 text-center ">
+            <a href="{{ url('about') }}" class="text-center">
+                <i class="fa fa-user text-dark" style="font-size: 2rem"></i>
+                <span class="d-block" style="font-weight: 800">My Account</span></a>
+        </div>
     </div>
-    <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
-        <li class="menu-item">
-            <a href="{{ url('about') }}" class="menu-link px-2">About</a>
-        </li>
-        <li class="menu-item">
-            <a href="javascript:;" class="menu-link px-2">Contact</a>
-        </li>
-        <li class="menu-item">
-            <a href="{{ url('privacy-policy') }}" class="menu-link px-2">Privacy policy</a>
-        </li>
-    </ul>
+
+
 </div>
