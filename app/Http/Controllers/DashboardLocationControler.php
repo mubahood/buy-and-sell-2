@@ -73,7 +73,7 @@ class DashboardLocationControler extends Controller
             $item->details = '';
             $item->order = Location::count();
 
-            $item->save();
+            $item->save(); 
             return redirect('dashboard/locations');
         }
 
