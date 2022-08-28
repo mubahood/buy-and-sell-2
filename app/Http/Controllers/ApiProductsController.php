@@ -881,6 +881,7 @@ class ApiProductsController
         $p['images'] = json_encode($images);
         $is_first = true;
         $p['thumbnail'] = "";
+        die("Romina");
 
         foreach ($images as $img) {
             if ($is_first) {
