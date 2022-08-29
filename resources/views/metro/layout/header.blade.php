@@ -23,7 +23,7 @@ $banners_1_tab_active = '';
 $tab_seg = (int) request()->segment(2);
 $seg_1 = request()->segment(1);
 $seg_2 = request()->segment(2);
-$seg = request()->segment(1);//done
+$seg = request()->segment(1); //done
 
 foreach ($banners_all as $key => $value) {
     if ($value->id < 17) {
@@ -60,8 +60,8 @@ if (in_array($seg_1, $dashboard_segs)) {
 }
 
 ?>
-<div id="kt_header" style="" class="header align-items-stretch">
-    <div class="container-xxl d-flex align-items-stretch justify-content-between">
+<div id="kt_header" style="" class="header d-block">
+    <div class="d-none d-md-flex container-xxl  align-items-stretch justify-content-between">
         @if (request()->segment(1) != 'dashboard')
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                 <a href="{{ url('/') }}">
@@ -76,11 +76,10 @@ if (in_array($seg_1, $dashboard_segs)) {
 
                 @if (!$is_dashboard)
 
-                    <div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu"
-                        data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-                        data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end"
-                        data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true"
-                        data-kt-swapper-mode="prepend"
+                    <div class="align-items-stretch" data-kt-drawer-activate="{default: true, lg: false}"
+                        data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}"
+                        data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle"
+                        data-kt-swapper="true" data-kt-swapper-mode="prepend"
                         data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
                         <!--begin::Menu-->
                         <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
@@ -149,8 +148,73 @@ if (in_array($seg_1, $dashboard_segs)) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="menu-item d-md-none ms-3"> 
-                                <h2 class="m-1 p-1 ">Browse by categories</h2>
+                        </div>
+
+                    </div>
+
+                @endif
+            </div>
+
+            <div class="d-flex align-items-stretch flex-shrink-0">
+
+                <!--begin::Theme mode-->
+                <div class="d-none d-md-flex align-items-center ms-1 ms-lg-3">
+                    <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
+
+                        @if ($is_logged_in)
+                            <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">My
+                                Products</a>
+                        @else
+                            <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up
+                                |
+                                Login</a>
+                        @endif
+
+
+                        <a href="{{ url('dashboard') }}" class="btn btn-primary btn-sm " style="margin-left: .8rem">Sell
+                            now</a>
+                        <a href="{{ url('dashboard') }}"
+                            class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
+                            style="margin-left: .7rem" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                            data-bs-dismiss-="click" title="My chats">
+                            <i class="bi bi-chat fs-4 text-primary"></i></a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="d-flex d-md-none container-xxl  align-items-stretch justify-content-between">
+        @if (request()->segment(1) != 'dashboard')
+            <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
+                <a href="{{ url('/') }}">
+                    <img alt="Logo" src="{{ url('/assets/images/logo-2.png') }}" class="h-30px h-lg-50px" />
+                </a>
+            </div>
+        @endif
+
+        <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+
+            <div class="d-none d-md-flex align-items-stretch" id="kt_header_nav">
+
+                @if (!$is_dashboard)
+
+                    <div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu"
+                        data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+                        data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end"
+                        data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true"
+                        data-kt-swapper-mode="prepend"
+                        data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
+                        <!--begin::Menu-->
+                        <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
+                            data-kt-menu="true">
+
+
+                            <div class="menu-item d-md-none ms-3">
+                                <h2 class="m-1 p-1 ">Browse by categories </h2>
                                 <div class="accordion accordion-icon-toggle py-1 pt-0 mt-0" id="kt_accordion_2">
                                     @foreach ($header_categories as $cat)
                                         <?php
@@ -162,7 +226,7 @@ if (in_array($seg_1, $dashboard_segs)) {
                                         $aria_expanded = 'false';
                                         $show = '';
                                         foreach ($kids as $k) {
-                                            if ( $k->slug == $seg) {
+                                            if ($k->slug == $seg) {
                                                 $collapsed = '';
                                                 $aria_expanded = 'true';
                                                 $show = ' show ';
@@ -213,63 +277,39 @@ if (in_array($seg_1, $dashboard_segs)) {
 
             <div class="d-flex align-items-stretch flex-shrink-0">
 
-                <!--begin::Theme mode-->
-                <div class="d-none d-md-flex align-items-center ms-1 ms-lg-3">
-                    <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
-
-                        @if ($is_logged_in)
-                            <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">My
-                                Products</a>
-                        @else
-                            <a href="{{ url('dashboard') }}" class="btn btn-outline btn-outline-primary btn-sm">Sign up
-                                |
-                                Login</a>
-                        @endif
-
-
-                        <a href="{{ url('dashboard') }}" class="btn btn-primary btn-sm "
-                            style="margin-left: .8rem">Sell
-                            now</a>
-                        <a href="{{ url('dashboard') }}"
-                            class="btn btn-icon btn-sm btn-secondary p-0 border border-primary rounded-circle"
-                            style="margin-left: .7rem" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                            data-bs-dismiss-="click" title="My chats">
-                            <i class="bi bi-chat fs-4 text-primary"></i></a>
-
-
-                    </div>
-                </div>
-
-
-
                 <!--begin::Header menu toggle-->
                 <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
-                    <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
-                        id="kt_header_menu_mobile_toggle">
-                        <!--begin::Svg Icon | path: icons/duotune/text/txt001.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <path
-                                    d="M13 11H3C2.4 11 2 10.6 2 10V9C2 8.4 2.4 8 3 8H13C13.6 8 14 8.4 14 9V10C14 10.6 13.6 11 13 11ZM22 5V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4V5C2 5.6 2.4 6 3 6H21C21.6 6 22 5.6 22 5Z"
-                                    fill="black" />
-                                <path opacity="0.3"
-                                    d="M21 16H3C2.4 16 2 15.6 2 15V14C2 13.4 2.4 13 3 13H21C21.6 13 22 13.4 22 14V15C22 15.6 21.6 16 21 16ZM14 20V19C14 18.4 13.6 18 13 18H3C2.4 18 2 18.4 2 19V20C2 20.6 2.4 21 3 21H13C13.6 21 14 20.6 14 20Z"
-                                    fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
+                    <div class="btn btn-icon btn-active-light-primary ">
+                        <i class="bi bi-envelope fs-3x text-dark"></i>
+                    </div>
+                    <div class="btn btn-icon btn-active-light-primary ms-1" id="kt_header_menu_mobile_toggle">
+                        <i class="bi bi-list fs-4x text-dark" style="font-weight: 900;"></i>
                     </div>
                 </div>
                 <!--end::Header menu toggle-->
             </div>
-
-
-            <!--end::Toolbar wrapper-->
         </div>
-        <!--end::Wrapper-->
+
     </div>
+
+
+    <div class="menu-item d-bloc d-md-none pt-2 px-4 bg-white pb-2"
+        style="   flex-grow: 0;
+                    flex-shrink: 0;
+                    flex-basis: 80%;">
+        <div class="input-group flex-nowrap ">
+            <span class="input-group-text border-primary"><i class="bi bi-search fs-4"></i></span>
+            <div class="overflow-hidden flex-grow-1 ">
+                <select data-allow-clear="true" class="form-select form-select-md rounded-start-0 border-primary"
+                    data-control="select2" data-placeholder="Search for products & sellers" id="select-search-2">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div> 
+
 </div>
+
 
 
 @section('footer')
@@ -278,7 +318,7 @@ if (in_array($seg_1, $dashboard_segs)) {
 
             var base_url = '{{ url('') }}';
 
-            $('#select-search').select2({
+            $('#select-search,#select-search-2').select2({
                 ajax: {
                     url: base_url + '/api/products',
 
