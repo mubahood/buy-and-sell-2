@@ -52,7 +52,7 @@ $slide_banners = Banner::whereBetween('id', [36, 40])->get();
 $first_seen = false;
 ?>
 @section('main-content')
-    <div class="carousel-inner slider-arrow">
+    <div class="carousel-inner d-none slider-arrow">
         <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner slider-arrow">
                 @foreach ($slide_banners as $slide)
@@ -98,7 +98,7 @@ $first_seen = false;
 
     </div>
     <div class="row mt-5">
-        <div class="col-md-3 bg-white p-5 border border-left-0 border-top-0 border-bottom-0  border-secondary">
+        <div class="col-md-3 bg-white p-5 border border-left-0 border-top-0 border-bottom-0  border-secondary d-none d-md-block">
             <h2 class="m-0 fs-3 fw-bold">Browse by category</h2>
             <div class="accordion accordion-icon-toggle py-1" id="kt_accordion_2">
                 @foreach ($all_cats as $cat)
