@@ -938,8 +938,7 @@ class ApiProductsController
         $cat = Category::find($cat_id);
 
         if ($cat != null) {
-            $cats = [];
-            $cats[] = 1;
+            $cats = []; 
             foreach ($cat->kids as $k) {
                 $cats[] = $k->id;
             }
