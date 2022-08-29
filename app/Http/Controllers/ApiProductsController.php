@@ -899,14 +899,17 @@ class ApiProductsController
         $cat_id = (int) ($request->cat_id ? $request->cat_id : 0);
 
         $cat = Category::find($cat_id);
+        $cats = [];
         if ($cat != null) {
-            $cat_id =  $cat->parent;
+            foreach ($cat->kids as $c) {
+                $cats[] = $c->id;
+            }
         }
 
 
         if ($cat_id) {
             $items = Product::where('category_id', $cat_id)
-                ->whereOr('sub_category_id', $cat_id)
+                ->whereOr('sub_category_id', 'in', $cats)
                 ->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
         } else if (!empty($s)) {
             $items = Product::where('name', 'like', "%" . $s . "%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
