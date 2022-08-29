@@ -875,7 +875,7 @@ class ApiProductsController
         $images = Utils::get_image_processing(1);
 
         $image_found = false;
-    
+
 
 
 
@@ -893,7 +893,7 @@ class ApiProductsController
             }
 
             $img->name = "";
-            $img->save(); 
+            $img->save();
         }
 
 
@@ -935,10 +935,15 @@ class ApiProductsController
         $s = trim((string) ($request->s ? $request->s : ""));
         $cat_id = (int) ($request->cat_id ? $request->cat_id : 0);
 
+        $cat = Category::find($cat_id);
 
-        if ($cat_id) {
-            $items = Product::where('category_id', $cat_id)
-                ->whereOr('sub_category_id', $cat_id)
+        if ($cat != null) {
+            $cats = [];
+            foreach ($cat->kids as $k) {
+                $cats[] = $k->id;
+            }
+            $items = Product::where('category_id', 'in', $cats)
+                ->whereOr('sub_category_id', 'in', $cats)
                 ->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
         } else if (!empty($s)) {
             $items = Product::where('name', 'like', "%" . $s . "%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
