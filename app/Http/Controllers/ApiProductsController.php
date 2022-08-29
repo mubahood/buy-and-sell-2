@@ -942,7 +942,7 @@ class ApiProductsController
             foreach ($cat->kids as $k) {
                 $cats[] = $k->id;
             }
-            $items = Product::whereIn('category_id',  $cats)
+            $items = Product::whereIn('sub_category_id',  $cats)
                 ->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
         } else if (!empty($s)) {
             $items = Product::where('name', 'like', "%" . $s . "%")->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
