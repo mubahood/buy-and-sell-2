@@ -812,9 +812,9 @@ class ApiProductsController
         }
 
         $user_id = ((int)($_POST['user_id']));
-        $p['sub_category_id'] = 1;
+        $p['sub_category_id'] = ((int)(trim($_POST['Category'])));
         $p['user_id'] = trim($_POST['user_id']);
-        $p['category_id'] = 1;
+        $p['category_id'] = ((int)(trim($_POST['Category'])));
         $p['price'] = 1;
         $p['country_id'] = 1;
         $p['quantity'] = 1;
@@ -938,7 +938,7 @@ class ApiProductsController
         $cat = Category::find($cat_id);
 
         if ($cat != null) {
-            $cats = []; 
+            $cats = [];
             foreach ($cat->kids as $k) {
                 $cats[] = $k->id;
             }
