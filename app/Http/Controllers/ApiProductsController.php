@@ -939,10 +939,10 @@ class ApiProductsController
 
         if ($cat != null) {
             $cats = [];
+            $cats[] = 1;
             foreach ($cat->kids as $k) {
                 $cats[] = $k->id;
             }
-            print_r($cat);
             $items = Product::whereIn('sub_category_id',  $cats)
                 ->orderBy('name', 'Asc')->paginate($per_page)->withQueryString()->items();
         } else if (!empty($s)) {
