@@ -203,7 +203,7 @@ if (in_array($seg_1, $dashboard_segs)) {
 
             <i class="mt-4 fa fa-arrow-left fs-4x text-primary"></i>
 
-            <h1 class="mt-4 ms-3">
+            <h1 class="mt-6 ms-3">
                 {{ $pro->name }}
             </h1>
         </div>
