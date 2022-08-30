@@ -28,7 +28,7 @@ $seg = request()->segment(1); //done
 
 $pro = new Product();
 $is_product = false;
-if ($seg_1 != null) {
+if ($seg != null) {
     $pro = Product::where('slug', $seg)->first();
     if ($pro != null) {
         $is_product = true;
@@ -201,8 +201,9 @@ if (in_array($seg_1, $dashboard_segs)) {
 
         <div class="d-flex d-md-none container-xxl ">
 
-            <i class="mt-4 fa fa-arrow-left fs-4x text-primary"></i>
-
+            <a href="{{ url('/') }}">
+                <i class="mt-4 fa fa-arrow-left fs-4x text-primary"></i>
+            </a>
             <h1 class="mt-6 ms-3">
                 {{ $pro->name }}
             </h1>

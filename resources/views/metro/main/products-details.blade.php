@@ -140,7 +140,7 @@ foreach ($products as $key => $p) {
     <div class="col-md-5 bg-white pt-5">
 
         <h2 class=" h1 d-none d-md-block" style="font-weight: 800;">{{ $pro->name }}</h2>
-        <h2 class="display-6 text-primary h3">{{ config('app.currency') . ' ' }} {{ $pro->price }}
+        <h2 class="display-6 text-primary h3">{{ config('app.currency') . ' ' }} {{ number_format(((int)($pro->price))) }}
         </h2>
 
         <table class="table table-striped table-sm">

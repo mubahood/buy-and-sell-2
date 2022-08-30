@@ -1,4 +1,17 @@
-<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
+<?php
+use App\Models\Product;
+
+$pro = new Product();
+$is_product = false;
+$seg = request()->segment(1); //done
+if ($seg != null) {
+    $pro = Product::where('slug', $seg)->first();
+    if ($pro != null) {
+        $is_product = true;
+    }
+}
+
+?><div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
     <div class="container">
         <div class="row">
             <div class="col-md-2 mt-2">
@@ -50,32 +63,57 @@
     </div>
     {{--  --}}
 
- 
+
 </div>
 {{-- system-ui --}}
- 
 
-<div class="d-bloc d-lg-none " style="position: fixed;
+
+<div class=" d-lg-none " style="position: fixed;
 bottom: 0;
 width: 100%; ">
 
-    <div class="row border-top border-primary    w-100 bg-white py-2">
-        <div class="col-4 text-center ">
-            <a href="{{ url('/') }}" class="text-center">
-                <i class="fa fa-home " style="font-size: 2rem"></i>
-                <span class="d-block" style="font-weight: 800">HOME</span></a>
+    @if ($is_product)
+        <div class="row     w-100 bg-white py-0">
+
+
+
+            <div class="col-6 p-0">
+                <a class="btn btn-danger btn-block d-block p-1 rounded-0" style="font-weight: 600; font-size: 2.3rem;"
+                    href="#">
+                    <i class="bi bi-telephone fs-3x text-white"></i>
+                    CALL
+                </a>
+            </div>
+
+            <div class="col-6 p-0">
+                <a class="btn btn-primary btn-block d-block p-1 rounded-0" style="font-weight: 600; font-size: 2.3rem;"
+                    href="#">
+
+                    CHAT
+                    <i class="bi bi-chat-right fs-3x text-white"></i>
+                </a>
+            </div>
         </div>
-        <div class="col-4 text-center ">
-            <a href="{{ url('dashboard/products/create') }}" class="text-center">
-                <i class="fa fa-plus text-dark" style="font-size: 2rem"></i>
-                <span class="d-block" style="font-weight: 800">SELL NOW</span></a>
+    @else
+        <div class="row border-top border-primary    w-100 bg-white py-2">
+            <div class="col-4 text-center ">
+                <a href="{{ url('/') }}" class="text-center">
+                    <i class="fa fa-home " style="font-size: 2rem"></i>
+                    <span class="d-block" style="font-weight: 800">HOME</span></a>
+            </div>
+            <div class="col-4 text-center ">
+                <a href="{{ url('dashboard/products/create') }}" class="text-center">
+                    <i class="fa fa-plus text-dark" style="font-size: 2rem"></i>
+                    <span class="d-block" style="font-weight: 800">SELL NOW</span>
+                </a>
+            </div>
+            <div class="col-4 text-center ">
+                <a href="{{ url('dashboard') }}" class="text-center">
+                    <i class="fa fa-user " style="font-size: 2rem"></i>
+                    <span class="d-block" style="font-weight: 800">My Account</span></a>
+            </div>
         </div>
-        <div class="col-4 text-center ">
-            <a href="{{ url('dashboard') }}" class="text-center">
-                <i class="fa fa-user " style="font-size: 2rem"></i>
-                <span class="d-block" style="font-weight: 800">My Account</span></a>
-        </div>
-    </div>
+    @endif
 
 
 </div>
