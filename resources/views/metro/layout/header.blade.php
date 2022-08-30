@@ -2,6 +2,7 @@
 use App\Models\Banner;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Product;
 $show_logo = true;
 $u = auth()->user();
 if ($u == null) {
@@ -24,6 +25,15 @@ $tab_seg = (int) request()->segment(2);
 $seg_1 = request()->segment(1);
 $seg_2 = request()->segment(2);
 $seg = request()->segment(1); //done
+
+$pro = new Product();
+$is_product = false;
+if ($seg_1 != null) {
+    $pro = Product::where('slug', $seg)->first();
+    if ($pro != null) {
+        $is_product = true;
+    }
+}
 
 foreach ($banners_all as $key => $value) {
     if ($value->id < 17) {
@@ -187,126 +197,143 @@ if (in_array($seg_1, $dashboard_segs)) {
 
     </div>
 
-    <div class="d-flex d-md-none container-xxl  align-items-stretch justify-content-between">
-        @if (request()->segment(1) != 'dashboard')
-            <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
-                <a href="{{ url('/') }}">
-                    <img alt="Logo" src="{{ url('/assets/images/logo-2.png') }}" class="h-30px h-lg-50px" />
-                </a>
-            </div>
-        @endif
+    @if ($is_product)
 
-        <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+        <div class="d-flex d-md-none container-xxl ">
 
-            <div class="d-none d-md-flex align-items-stretch" id="kt_header_nav">
+            <i class="mt-4 fa fa-arrow-left fs-4x text-primary"></i>
 
-                @if (!$is_dashboard)
+            <h1 class="mt-4 ms-3" style="font-size: 2rem">
+                {{ $pro->name }}
+            </h1>
+        </div>
+    @else
+        <div class="d-flex d-md-none container-xxl  align-items-stretch justify-content-between">
+            @if (request()->segment(1) != 'dashboard')
+                <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
+                    <a href="{{ url('/') }}">
+                        <img alt="Logo" src="{{ url('/assets/images/logo-2.png') }}" class="h-30px h-lg-50px" />
+                    </a>
+                </div>
+            @endif
 
-                    <div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu"
-                        data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-                        data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end"
-                        data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true"
-                        data-kt-swapper-mode="prepend"
-                        data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
-                        <!--begin::Menu-->
-                        <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
-                            data-kt-menu="true">
+            <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+
+                <div class="d-none d-md-flex align-items-stretch" id="kt_header_nav">
+
+                    @if (!$is_dashboard)
+
+                        <div class="header-menu align-items-stretch" data-kt-drawer="true"
+                            data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}"
+                            data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}"
+                            data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle"
+                            data-kt-swapper="true" data-kt-swapper-mode="prepend"
+                            data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
+                            <!--begin::Menu-->
+                            <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
+                                data-kt-menu="true">
 
 
-                            <div class="menu-item d-md-none ms-3">
-                                <h2 class="m-1 p-1 ">Browse by categories </h2>
-                                <div class="accordion accordion-icon-toggle py-1 pt-0 mt-0" id="kt_accordion_2">
-                                    @foreach ($header_categories as $cat)
-                                        <?php
-                                        if ($cat->parent > 0) {
-                                            continue;
-                                        }
-                                        $kids = $cat->kids;
-                                        $collapsed = ' collapsed ';
-                                        $aria_expanded = 'false';
-                                        $show = '';
-                                        foreach ($kids as $k) {
-                                            if ($k->slug == $seg) {
-                                                $collapsed = '';
-                                                $aria_expanded = 'true';
-                                                $show = ' show ';
+                                <div class="menu-item d-md-none ms-3">
+                                    <h2 class="m-1 p-1 ">Browse by categories </h2>
+                                    <div class="accordion accordion-icon-toggle py-1 pt-0 mt-0" id="kt_accordion_2">
+                                        @foreach ($header_categories as $cat)
+                                            <?php
+                                            if ($cat->parent > 0) {
+                                                continue;
                                             }
-                                        }
-                                        
-                                        ?>
-                                        <div class="mb-0">
-                                            <div class="accordion-header py-1 d-flex {{ $collapsed }}"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#menu_accordion_item_{{ $cat->id }}"
-                                                aria-expanded="{{ $aria_expanded }}">
-                                                <span class="accordion-icon">
-                                                    <i class="las la-angle-double-right fs-1"></i>
-                                                </span>
-                                                <h3 class="fs-4 fw-normal m-0 text-gray-800">{{ $cat->name }}</h3>
+                                            $kids = $cat->kids;
+                                            $collapsed = ' collapsed ';
+                                            $aria_expanded = 'false';
+                                            $show = '';
+                                            foreach ($kids as $k) {
+                                                if ($k->slug == $seg) {
+                                                    $collapsed = '';
+                                                    $aria_expanded = 'true';
+                                                    $show = ' show ';
+                                                }
+                                            }
+                                            
+                                            ?>
+                                            <div class="mb-0">
+                                                <div class="accordion-header py-1 d-flex {{ $collapsed }}"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#menu_accordion_item_{{ $cat->id }}"
+                                                    aria-expanded="{{ $aria_expanded }}">
+                                                    <span class="accordion-icon">
+                                                        <i class="las la-angle-double-right fs-1"></i>
+                                                    </span>
+                                                    <h3 class="fs-4 fw-normal m-0 text-gray-800">{{ $cat->name }}
+                                                    </h3>
+                                                </div>
+                                                <div id="menu_accordion_item_{{ $cat->id }}"
+                                                    class="fs-6 collapse  ps-10 {{ $show }}"
+                                                    data-bs-parent="#kt_accordion_2">
+                                                    @foreach ($kids as $kid)
+                                                        @php
+                                                            $active = ' text-gray-600  ';
+                                                            if ($kid->slug == $seg) {
+                                                                $active = ' text-primary ';
+                                                            }
+                                                        @endphp
+                                                        <a href="{{ url($kid->slug) }}">
+                                                            <h4
+                                                                class="fs-5 fw-normal m-0 my-1 text-hover-primary {{ $active }}">
+                                                                {{ $kid->name }}
+                                                            </h4>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                            <div id="menu_accordion_item_{{ $cat->id }}"
-                                                class="fs-6 collapse  ps-10 {{ $show }}"
-                                                data-bs-parent="#kt_accordion_2">
-                                                @foreach ($kids as $kid)
-                                                    @php
-                                                        $active = ' text-gray-600  ';
-                                                        if ($kid->slug == $seg) {
-                                                            $active = ' text-primary ';
-                                                        }
-                                                    @endphp
-                                                    <a href="{{ url($kid->slug) }}">
-                                                        <h4
-                                                            class="fs-5 fw-normal m-0 my-1 text-hover-primary {{ $active }}">
-                                                            {{ $kid->name }}
-                                                        </h4>
-                                                    </a>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
 
+
+                            </div>
 
                         </div>
 
-                    </div>
-
-                @endif
-            </div>
-
-            <div class="d-flex align-items-stretch flex-shrink-0">
-
-                <!--begin::Header menu toggle-->
-                <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
-                    <div class="btn btn-icon btn-active-light-primary ">
-                        <i class="bi bi-envelope fs-3x text-dark"></i>
-                    </div>
-                    <div class="btn btn-icon btn-active-light-primary ms-1" id="kt_header_menu_mobile_toggle">
-                        <i class="bi bi-list fs-4x text-dark" style="font-weight: 900;"></i>
-                    </div>
+                    @endif
                 </div>
-                <!--end::Header menu toggle-->
+
+                <div class="d-flex align-items-stretch flex-shrink-0">
+
+                    <!--begin::Header menu toggle-->
+                    <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
+                        <div class="btn btn-icon btn-active-light-primary ">
+                            <i class="bi bi-envelope fs-3x text-dark"></i>
+                        </div>
+                        <div class="btn btn-icon btn-active-light-primary ms-1" id="kt_header_menu_mobile_toggle">
+                            <i class="bi bi-list fs-4x text-dark" style="font-weight: 900;"></i>
+                        </div>
+                    </div>
+                    <!--end::Header menu toggle-->
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="menu-item d-bloc d-md-none pt-2 px-4 bg-white pb-2"
+            style="   flex-grow: 0;
+                flex-shrink: 0;
+                flex-basis: 80%;">
+            <div class="input-group flex-nowrap ">
+                <span class="input-group-text border-primary"><i class="bi bi-search fs-4"></i></span>
+                <div class="overflow-hidden flex-grow-1 ">
+                    <select data-allow-clear="true" class="form-select form-select-md rounded-start-0 border-primary"
+                        data-control="select2" data-placeholder="Search for products & sellers" id="select-search-2">
+                        <option></option>
+                    </select>
+                </div>
             </div>
         </div>
 
-    </div>
+    @endif
 
 
-    <div class="menu-item d-bloc d-md-none pt-2 px-4 bg-white pb-2"
-        style="   flex-grow: 0;
-                    flex-shrink: 0;
-                    flex-basis: 80%;">
-        <div class="input-group flex-nowrap ">
-            <span class="input-group-text border-primary"><i class="bi bi-search fs-4"></i></span>
-            <div class="overflow-hidden flex-grow-1 ">
-                <select data-allow-clear="true" class="form-select form-select-md rounded-start-0 border-primary"
-                    data-control="select2" data-placeholder="Search for products & sellers" id="select-search-2">
-                    <option></option>
-                </select>
-            </div>
-        </div>
-    </div> 
 
 </div>
 
