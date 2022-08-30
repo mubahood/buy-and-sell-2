@@ -79,7 +79,7 @@ foreach ($products as $key => $p) {
 @endsection
 
 
-<div class="row  mt-5">
+<div class="d-none d-md-block row  mt-5">
     <div class="col-12">
         <ol class="breadcrumb text-muted fs-6 fw-bold">
             <li class="breadcrumb-item pe-3"><a href="{{ url('') }}" class="pe-3">Home</a></li>
@@ -89,8 +89,8 @@ foreach ($products as $key => $p) {
         </ol>
     </div>
 </div>
-<div class="row  mt-5">
-    <div class="col-md-4 bg-white py-5 ">
+<div class="row mt-0  mt-12 mt-md-5">
+    <div class="col-md-4 bg-white p-0 py-md-5 ">
         <div id="kt_carousel_1_carousel" class="carousel carousel-custom " data-bs-ride="carousel"
             data-bs-interval="8000">
             <div class="carousel-inner slider-arrow">
@@ -139,11 +139,10 @@ foreach ($products as $key => $p) {
     </div>
     <div class="col-md-5 bg-white pt-5">
 
-        <h1 class=" h1" style="font-weight: 800;">{{ $pro->name }}</h1>
-        <div class="separator my-5"></div>
-        <h2 class="display-6 text-primary h2">{{ config('app.currency') . ' ' }} {{ $pro->price }}
+        <h2 class=" h1 d-none d-md-block" style="font-weight: 800;">{{ $pro->name }}</h2>
+        <h2 class="display-6 text-primary h3">{{ config('app.currency') . ' ' }} {{ $pro->price }}
         </h2>
-        <div class="separator my-5"></div>
+        <div class="separator my-3"></div>
 
         <table class="table table-striped table-sm">
             @foreach ($attributes as $item)
