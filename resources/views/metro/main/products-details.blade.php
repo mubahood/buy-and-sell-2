@@ -142,7 +142,6 @@ foreach ($products as $key => $p) {
         <h2 class=" h1 d-none d-md-block" style="font-weight: 800;">{{ $pro->name }}</h2>
         <h2 class="display-6 text-primary h3">{{ config('app.currency') . ' ' }} {{ $pro->price }}
         </h2>
-        <div class="separator my-3"></div>
 
         <table class="table table-striped table-sm">
             @foreach ($attributes as $item)
