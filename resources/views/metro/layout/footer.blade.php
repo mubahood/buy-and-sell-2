@@ -68,12 +68,12 @@ if ($seg != null) {
 {{-- system-ui --}}
 
 
-<div class=" d-lg-none " style="position: fixed;
+<div class=" d-lg-none  p-0" style="position: fixed;
 bottom: 0;
 width: 100%; ">
 
     @if ($is_product)
-        <div class="row     w-100 bg-white py-0">
+        <div class="row w-100 bg-white p-0 m-0 ">
 
 
 
