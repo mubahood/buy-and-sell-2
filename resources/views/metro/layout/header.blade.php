@@ -24,10 +24,19 @@ $banners_1_tab_active = '';
 $tab_seg = (int) request()->segment(2);
 $seg_1 = request()->segment(1);
 $seg_2 = request()->segment(2);
+$seg_3 = request()->segment(3);
 $seg = request()->segment(1); //done
 
 $pro = new Product();
 $is_product = false;
+$show_custom_mobile_header = false;
+
+$mobile_title = '-';
+if ($seg_3 == 'create') {
+    $mobile_title = 'Posting new product';
+    $show_custom_mobile_header = true;
+}
+
 if ($seg != null) {
     $pro = Product::where('slug', $seg)->first();
     if ($pro != null) {
@@ -143,6 +152,8 @@ if (in_array($seg_1, $dashboard_segs)) {
                                     <!--end:Row-->
                                 </div>
                             </div>
+
+
                             <div class="menu-item d-none d-md-block mt-3"
                                 style="   flex-grow: 0;
                     flex-shrink: 0;
@@ -198,9 +209,7 @@ if (in_array($seg_1, $dashboard_segs)) {
     </div>
 
     @if ($is_product)
-
         <div class="d-flex d-md-none container-xxl ">
-
             <a href="{{ url('/') }}">
                 <i class="mt-4 fa fa-arrow-left fs-4x text-primary"></i>
             </a>
@@ -298,39 +307,53 @@ if (in_array($seg_1, $dashboard_segs)) {
                     @endif
                 </div>
 
-                <div class="d-flex align-items-stretch flex-shrink-0">
+                @if (!$show_custom_mobile_header)
+                    <div class="d-flex align-items-stretch flex-shrink-0">
 
-                    <!--begin::Header menu toggle-->
-                    <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
-                        <div class="btn btn-icon btn-active-light-primary ">
-                            <i class="bi bi-envelope fs-3x text-dark"></i>
+                        <!--begin::Header menu toggle-->
+                        <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
+                            <div class="btn btn-icon btn-active-light-primary ">
+                                <i class="bi bi-envelope fs-3x text-dark"></i>
+                            </div>
+                            <div class="btn btn-icon btn-active-light-primary ms-1" id="kt_header_menu_mobile_toggle">
+                                <i class="bi bi-list fs-4x text-dark" style="font-weight: 900;"></i>
+                            </div>
                         </div>
-                        <div class="btn btn-icon btn-active-light-primary ms-1" id="kt_header_menu_mobile_toggle">
-                            <i class="bi bi-list fs-4x text-dark" style="font-weight: 900;"></i>
-                        </div>
+                        <!--end::Header menu toggle-->
                     </div>
-                    <!--end::Header menu toggle-->
-                </div>
+                @else
+                    <div class="d-flex d-md-none  ">
+                        <a href="{{ url('/dashboard') }}">
+                            <i class="mt-4 fa fa-arrow-left fs-4x text-primary"></i>
+                        </a>
+                        <h1 class="mt-5 ms-3">
+                            {{ $mobile_title }}
+                        </h1>
+                    </div>
+                @endif
             </div>
 
 
         </div>
 
-
-        <div class="menu-item d-bloc d-md-none pt-2 px-4 bg-white pb-2"
-            style="   flex-grow: 0;
+        @if (!$show_custom_mobile_header)
+            <div class="menu-item d-bloc d-md-none pt-2 px-4 bg-white pb-2"
+                style="   flex-grow: 0;
                 flex-shrink: 0;
                 flex-basis: 80%;">
-            <div class="input-group flex-nowrap ">
-                <span class="input-group-text border-primary"><i class="bi bi-search fs-4"></i></span>
-                <div class="overflow-hidden flex-grow-1 ">
-                    <select data-allow-clear="true" class="form-select form-select-md rounded-start-0 border-primary"
-                        data-control="select2" data-placeholder="Search for products & sellers" id="select-search-2">
-                        <option></option>
-                    </select>
+                <div class="input-group flex-nowrap ">
+                    <span class="input-group-text border-primary"><i class="bi bi-search fs-4"></i></span>
+                    <div class="overflow-hidden flex-grow-1 ">
+                        <select data-allow-clear="true"
+                            class="form-select form-select-md rounded-start-0 border-primary" data-control="select2"
+                            data-placeholder="Search for products & sellers" id="select-search-2">
+                            <option></option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
+
 
     @endif
 

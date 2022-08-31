@@ -25,7 +25,7 @@ if(
             class="form-label fw-normal text-dark fs-3  p-0 m-0 {{ $_required }}">{{ $_label }}</label>
     @endif
     {{-- form-control-solid --}}
-    <input id="{{ $_id }}" class="form-control form-control {{ $_classes }}"
+    <input id="{{ $_id }}" class="form-control  {{ $_classes }}"
         @foreach ($_attributes as $key => $value) {{ $key . '=' . $value }} @endforeach {{ $_required }}
         value="{{ $_value }}" />
     @error($_name)
@@ -33,8 +33,8 @@ if(
     @enderror
 
 
-    @if (!empty($_hint))
-        <div class="text-muted mt-09">{{ $_hint }}</div>
+    @if (strlen($_hint) >2 )
+        <div class="text-muted mt-9">{{ $_hint }}</div>
     @endif
 
 </div>
