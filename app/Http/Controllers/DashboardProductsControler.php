@@ -62,10 +62,10 @@ class DashboardProductsControler extends Controller
             $pro->name = $r->name;
             $pro->category_id = $r->category_id;
             $pro->sub_category_id = $r->category_id;
-            $pro->nature_of_offer = $r->nature_of_offer;
+            $pro->nature_of_offer = 'For sale';
             $pro->price = $r->price;
-            $pro->fixed_price = $r->fixed_price;
-            $pro->quantity = $r->quantity;
+            $pro->fixed_price = 'Fixed price';
+            $pro->quantity = 1;
             $pro->city_id = $r->city_id;
             $pro->description = trim($r->description);
             $pro->user_id = $u->id;

@@ -73,7 +73,7 @@ if ($item == null || $item->id < 1) {
                                     <!--end::Icon-->
                                     <!--begin::Info-->
                                     <div class="ms-4">
-                                        <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Add products photos.</h3>
+                                        <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Add product's photos.</h3>
                                         <span class="fs-7 fw-bold text-gray-400">Upload up to 10
                                             files</span>
                                     </div>
@@ -98,7 +98,6 @@ if ($item == null || $item->id < 1) {
 
 
                         <div class="row ">
-
                             <div class="col-md-6 mt-3 ">
                                 @include('metro.components.input-select', [
                                     'label' => 'Category',
@@ -111,8 +110,6 @@ if ($item == null || $item->id < 1) {
                                     ],
                                 ])
                             </div>
-
-
                             <div class="col-md-6 mt-3 ">
                                 @include('metro.components.input-text', [
                                     'label' => 'Price',
@@ -125,6 +122,40 @@ if ($item == null || $item->id < 1) {
                                     ],
                                 ])
                             </div>
+                        </div>
+
+
+                        <div class="row ">
+                            <div class="col-6 mt-5">
+                                @include('metro.components.input-select', [
+                                    'label' => 'Product Location',
+                                    'required' => 'required',
+                                    'value' => $item->city_id,
+                                    'options' => $_locations,
+                                    'classes' => ' form-select-sm mb-0 ',
+                                    'attributes' => [
+                                        'name' => 'city_id',
+                                    ],
+                                ])
+                            </div>
+
+                            <div class="col-6 mt-5">
+                                @include('metro.components.input-select', [
+                                    'label' => 'Nature of this offer',
+                                    'required' => 'required',
+                                    'value' => $item->nature_of_offer,
+                                    'options' => [
+                                        'For sale' => 'For sale',
+                                        'For hire' => 'For hire',
+                                        'Service' => 'Service',
+                                    ],
+                                    'classes' => ' form-select-sm mb-0 ',
+                                    'attributes' => [
+                                        'name' => 'nature_of_offer',
+                                    ],
+                                ])
+                            </div>
+
                         </div>
 
                         <div class="row">
