@@ -126,7 +126,7 @@ if ($item == null || $item->id < 1) {
 
 
                         <div class="row ">
-                            <div class="col-6 mt-5">
+                            <div class="col-6 mt-5"> {{-- ask --}}
                                 @include('metro.components.input-select', [
                                     'label' => 'Product Location',
                                     'required' => 'required',
