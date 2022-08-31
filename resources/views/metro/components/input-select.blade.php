@@ -10,13 +10,9 @@ $_name = $_attributes['name'];
 $_id = $_name;
 $_classes = isset($classes) && !empty($classes) ? $classes : '';
 
-if(
-    old($_name) != null  &&
-    strlen(old($_name)) > 0 
-){
+if (old($_name) != null && strlen(old($_name)) > 0) {
     $_value = old($_name);
 }
-
 
 @endphp
 <div class="form-group">
@@ -26,20 +22,20 @@ if(
             class="form-label fw-normal text-dark fs-3  p-0 m-0 {{ $_required }}">{{ $_label }}</label>
     @endif
 
-    <select id="{{ $_id }}" class="form-select form-control form-control-sm {{$_classes}}" data-control="select2"
-        data-placeholder="Select an option"
+    <select id="{{ $_id }}" class="form-select form-control form-control-lg {{ $_classes }}"
+        data-control="select2" data-placeholder="Select an option"
         @foreach ($_attributes as $key => $value) {{ $key . '=' . $value }} @endforeach {{ $_required }}
         value="{{ old($_name) }}">
         <option></option>
 
         @foreach ($_options as $key => $value)
             @php
-                $selected = "";
-                if($_value == $key){
-                    $selected = "selected";
+                $selected = '';
+                if ($_value == $key) {
+                    $selected = 'selected';
                 }
             @endphp
-            <option value="{{ $key }}" {{$selected}}>{{ $value }}</option>
+            <option value="{{ $key }}" {{ $selected }}>{{ $value }}</option>
         @endforeach
 
     </select>

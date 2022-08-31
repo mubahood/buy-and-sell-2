@@ -87,7 +87,7 @@ if ($item == null || $item->id < 1) {
                             @include('metro.components.input-text', [
                                 'label' => 'Product Name',
                                 'required' => 'required', 
-                                'classes' => ' form-control-sm mb-0 ',
+                                'classes' => '  mb-0 ',
                                 'value' => $item->name,
                                 'attributes' => [
                                     'name' => 'name',
@@ -98,80 +98,14 @@ if ($item == null || $item->id < 1) {
 
 
 
-                        <div class="row mt-5">
-                            <div class="col-md-4 mb-5">
+                        <div class="row ">
+                            
+                            <div class="col-md-6 mt-3 ">
                                 @include('metro.components.input-select', [
-                                    'label' => 'Nature of this offer',
-                                    'value' => $item->nature_of_offer,
-                                    'options' => [
-                                        'For sale' => 'For sale',
-                                        'For hire' => 'For hire',
-                                    ],
-                                    'hint' => 'For sale or for hire?',
-                                    'classes' => ' form-select-sm mb-0 ',
-                                    'attributes' => [
-                                        'name' => 'nature_of_offer',
-                                    ],
-                                ])
-                            </div>
-                            <div class="col-md-4 mb-5">
-                                @include('metro.components.input-text', [
-                                    'label' => 'Price',
-                                    'required' => 'required',
-                                    'hint' => 'Unit price',
-                                    'classes' => ' form-control-sm ',
-                                    'value' => $item->get_price(),
-                                    'attributes' => [
-                                        'name' => 'price',
-                                        'type' => 'number',
-                                    ],
-                                ])
-                            </div>
-
-                            <div class="col-md-4 mb-5">
-                                @include('metro.components.input-select', [
-                                    'label' => 'Nature of this price',
-                                    'required' => 'required',
-                                    'value' => $item->fixed_price,
-                                    'options' => [
-                                        'Fixed price' => 'Fixed price',
-                                        'Negotiable' => 'Negotiable',
-                                    ],
-                                    'hint' => 'For sale or for hire?',
-                                    'classes' => ' form-select-sm mb-0 ',
-                                    'attributes' => [
-                                        'name' => 'fixed_price',
-                                    ],
-                                ])
-                            </div>
-                        </div>
-
-
-                        <div class="row mt-0">
-
-                            <div class="col-md-4 mb-5">
-                                @include('metro.components.input-text', [
-                                    'label' => 'Quantity',
-                                    'required' => 'required',
-                                    'hint' => 'Unit quantity available',
-                                    'classes' => ' form-control-sm ',
-                                    'value' => $item->get_quantity(),
-                                    'attributes' => [
-                                        'name' => 'quantity',
-                                        'min' => '0',
-                                        'type' => 'number',
-                                    ],
-                                ])
-                            </div>
-
-
-                            <div class="col-md-4 mb-5">
-                                @include('metro.components.input-select', [
-                                    'label' => 'Specialized category',
+                                    'label' => 'Category',
                                     'value' => $item->category_id,
                                     'required' => 'required',
-                                    'options' => $_categories,
-                                    'hint' => 'Pick a right category',
+                                    'options' => $_categories, 
                                     'classes' => ' form-select-sm mb-0 ',
                                     'attributes' => [
                                         'name' => 'category_id',
@@ -180,23 +114,25 @@ if ($item == null || $item->id < 1) {
                             </div>
 
 
-                            <div class="col-md-4 mb-5">
-                                @include('metro.components.input-select', [
-                                    'label' => 'Product Location',
-                                    'required' => 'required',
-                                    'value' => $item->city_id,
-                                    'options' => $_locations,
-                                    'hint' => 'Where is this product?',
-                                    'classes' => ' form-select-sm mb-0 ',
+                            <div class="col-md-6 mt-3 ">
+                                @include('metro.components.input-text', [
+                                    'label' => 'Price',
+                                    'required' => 'required', 
+                                    'classes' => '  ',
+                                    'value' => $item->get_price(),
                                     'attributes' => [
-                                        'name' => 'city_id',
+                                        'name' => 'price',
+                                        'type' => 'number',
                                     ],
                                 ])
-                            </div>
+                            </div> 
                         </div>
 
-                        <div>
-                            <label class="form-label">Description</label>
+
+                        
+
+                        <div class="mt-3">
+                            <label class="form-label fw-normal text-dark fs-3  p-0 m-0 ">Description</label>
                             <div id="kt_ecommerce_add_product_description" name="kt_ecommerce_add_product_description"
                                 class="min-h-200px mb-2">
                                 {!! $item->description !!}
