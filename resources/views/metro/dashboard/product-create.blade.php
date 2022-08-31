@@ -48,7 +48,7 @@ if ($item == null || $item->id < 1) {
 @endsection
 @section('toolbar-title', 'Creating product')
 @section('dashboard-content')
-    <form id="form" action="{{ url('dashboard/products') }}" class="form d-flex flex-column flex-lg-row" method="POST"
+    <form id="form" action="{{ url('dashboard/products') }}" class="form" method="POST"
         enctype="multipart/form-data">
         @csrf
 
@@ -59,7 +59,7 @@ if ($item == null || $item->id < 1) {
             <input type="hidden" name="task" value="create">
         @endif
 
-        <div class="row  d-block w-100">
+        <div class="row">
             <div class="col-12 p-0">
                 <div class="card card-flush py-2">
                     <div class="card-body pt-3 pt-md-5  px-2 px-md-5">
@@ -126,7 +126,7 @@ if ($item == null || $item->id < 1) {
 
 
                         <div class="row ">
-                            <div class="col-6 mt-5"> {{-- ask --}}
+                            <div class="col-6 mt-5"> 
                                 @include('metro.components.input-select', [
                                     'label' => 'Product Location',
                                     'required' => 'required',
