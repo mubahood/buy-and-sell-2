@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Exception;
 use Hamcrest\Arrays\IsArray;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -231,72 +230,6 @@ class Utils
         $path = Storage::putFile('/public/storage', $file['tmp_name']);
         return $path;
     }
-
-
-    public static function do_background_process_pending_images($user_id)
-    {
-        $url = url('api/process-pending-images?user_id=' . $user_id);
-        $ctx = stream_context_create(['http' => ['timeout' => 2]]);
-
-        try {
-            $data =  file_get_contents($url, null, $ctx);
-            return $data;
-        } catch (Exception $x) {
-            return "Failed $url";
-        }
-    }
-
-
-    public static function process_pending_images($user_id)
-    {
-
-        ini_set('max_execution_time', -1); //unlimit
-        $imgs = Utils::get_image_processing($user_id);
-
-        foreach ($imgs as $img) {
-
-            if ($img->thumbnail == null || (strlen(($img->thumbnail) < 5))) {
-
-                if (!file_exists($img->src)) {
-                    $img->delete();
-                    continue;
-                }
-
-                $name = str_replace("public/", "", $img->src);
-                $name = str_replace("storage/", "", $name);
-                $name = str_replace("/", "", $name);
-                $target = "public/storage/thumb_" . $name;
-                $thumbnail = Utils::create_thumbail(
-                    array(
-                        "source" => "./" . $img->src,
-                        "target" =>  $target,
-                    )
-                );
-                if ($thumbnail == null) {
-                    continue;
-                }
-                if (strlen($thumbnail) < 5) {
-                    continue;
-                }
-
-                $img->thumbnail = $thumbnail;
-                $img->save();
-            }
-        }
-
-        return true;
-    }
-
-    public static function get_image_processing($user_id)
-    {
-        return Image::where([
-            'user_id' => $user_id,
-            'name' => 'processing',
-        ])
-            ->orderBy('id', 'ASC')
-            ->get();
-    }
-
     public static function upload_images($files)
     {
 
@@ -336,7 +269,6 @@ class Utils
                     $file_name = time() . "-" . Utils::make_slug($img['name']) . "." . $ext;
                     $path = 'public/storage/' . $file_name;
 
-
                     $res = move_uploaded_file($img['tmp_name'], $path);
                     if (!$res) {
                         continue;
@@ -347,7 +279,6 @@ class Utils
                     $thumn_name = 'thumb_' . $file_name;
                     $path_optimized = 'public/storage/' . $thumn_name;
 
-
                     $thumbnail = Utils::create_thumbail(
                         array(
                             "source" => "./" . $path,
@@ -356,8 +287,8 @@ class Utils
                     );
 
 
-                    $ready_image['src'] = $path;
-                    $ready_image['thumbnail'] = $thumbnail;
+                    $ready_image['src'] = $file_name;
+                    $ready_image['thumbnail'] = $thumn_name;
 
                     $ready_image['user_id'] = Auth::id();
                     if (!$ready_image['user_id']) {
@@ -393,9 +324,6 @@ class Utils
 
 
 
-        if (!file_exists($image->source_path)) {
-            return $image->source_path;
-        }
 
 
 
